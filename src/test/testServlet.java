@@ -34,10 +34,10 @@ public class testServlet extends HttpServlet {
 		
 		if(ts.testInsert() > 0) {
 			System.out.println("test insert 성공 ");
-			response.sendRedirect("/pickme");
+//			response.sendRedirect("/pickme");
 		}else {
 			System.out.println("test insert 실패 ");
-			response.sendRedirect("/pickme");
+//			response.sendRedirect("/pickme");
 		}
 	}
 
