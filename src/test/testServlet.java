@@ -26,8 +26,19 @@ public class testServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String test = request.getParameter("test-input");
+		
+		response.getWriter().append("한글 필터 체크 : " + test);
+		
+		TestService ts = new TestService();
+		
+		if(ts.testInsert() > 0) {
+			System.out.println("test insert 성공 ");
+			response.sendRedirect("/pickme");
+		}else {
+			System.out.println("test insert 실패 ");
+			response.sendRedirect("/pickme");
+		}
 	}
 
 	/**
