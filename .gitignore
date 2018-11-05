@@ -11,7 +11,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -22,7 +21,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# ½ÇÇàÆÄÀÏ Á¦¿Ü
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 *.com
 *.class
 *.dll
@@ -30,7 +29,7 @@ hs_err_pid*
 *.o
 *.so
 
-# ¹®¼­ÆÄÀÏ Á¦¿Ü
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 *.pptx
 *.docx
 *.ppt
