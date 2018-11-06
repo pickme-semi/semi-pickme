@@ -4,15 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-	footer{
-		background : blue;
-	}
-</style>
 </head>
 <body>
-	<footer>
-		<h1>푸터 부분</h1>
+	<footer align="center">
+		<hr />
+		<h4>Copyright © 뽑아조. All rights reserved.</h4>
+		<h6>서울특별시 강남구 테헤란로14길 6 남도빌딩 3층<br> H Class</h6>
 	</footer>
 </body>
 
