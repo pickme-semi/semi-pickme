@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="views/header.jsp"  %>
+	<%@ include file="views/common/header.jsp"  %>
 	<section>
 		<h1>first commit</h1>
 		<form action="test.do">
@@ -24,7 +24,7 @@
 			<button type="submit">테스트 전송</button>
 		</form>
 	</section>
-	<%@ include file="views/footer.jsp"  %>
+	<%@ include file="views/common/footer.jsp"  %>
 </body>
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script>
