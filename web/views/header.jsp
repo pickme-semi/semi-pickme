@@ -15,5 +15,10 @@
 		<h1>헤더 부분</h1>
 	</header>
 </body>
-
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function(){
+		//alert("header open");
+	});
+</script>
 </html>
