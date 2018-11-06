@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+* {margin: 0;padding: 0;}
+body {font-family: 나눔바른고딕, NanumBarunGothic, 'NanumBarunGothic', '나눔바른고딕', '돋움', Dotum, 
+    'Apple SD Gothic Neo', arial, sans-serif;font-size: 13px;font-weight: 400; color: #3a3635;}
+input, button, textarea, select { font-family: 나눔바른고딕, NanumBarunGothic, 'NanumBarunGothic', '나눔바른고딕', '돋움', 
+                              Dotum, 'Apple SD Gothic Neo', arial, sans-serif; vertical-align: middle;}
+html, body {height: 100%;}
+html {display: block;}
+div { display: block;}
+element.style {height: 1658px;}
+.mnHelpdesk .innerContainer { clear: both; width: 1026px; margin: 0 auto; padding: 0 40px;}
+.mnHelpdesk .innerContainer:after {content: "."; display: block; clear: both; visibility: hidden; height: 0;}
+
+/* 기본 레이아웃 설정 */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, 
+ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, 
+ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, 
+thead, tr, th, td, article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+margin: 0;
+padding: 0;
+font-size: 100%;
+vertical-align: baseline;
+word-break: break-all;
+word-wrap: break-word;
+word-wrap: normal\9;
+outline: 0;
+border: 0;
+background: transparent;
+}    
+
+#container.mnHelpdesk{padding-top: 50px; background-color: #eff1f6;}
+#container{position:relative; min-height: 470px; min-width: 1020px; padding-bottom: 50px; z-index: 1;}
+.mnHelpdesk.innerContainer{clear : both; width:1023px; margin: 0 auto; padding: 0 40px;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+
+/*기본 레이아웃 */
+
+
+/* 상단 메뉴 창 레이아웃 */
+.mnHelpdesk.pgHelpdeskHome .shortcuts > ul{height:206px;}
+
+ol, ul, ul li {list-style: none;}
+ul, menu, dir {display: block; list-style-type: disc; margin-block-start: 1em; margin-block-end: 1em;
+            margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 40px; }
+.mnHelpdesk .shortcuts {padding-bottom: 12px;}
+.mnHelpdesk .shortcuts > ul { height: 128px; width: 800px; margin-left: 186px; border-top: 1px solid #d9d9d9; border-right: 1px solid #d9d9d9; border-bottom: 1px solid #d9d9d9; background-color: #fff; }
+.mnHelpdesk.pgHelpdeskHome .shortcuts > p { display: block; float: left; height: 208px; width: 250px; text-indent: -100em; background-color: #ff5b51;}
+.mnHelpdesk .shortcuts > ul:after { content: ".";  display: block; clear: both; visibility: hidden; height: 0;}
+.mnHelpdesk .shortcuts > ul li {
+float: left;
+position: relative;
+width: 192px;
+margin-top: 20px;
+padding: 60px 0 8px;
+font-size: 16px;
+line-height: 20px;
+text-align: center;
+border-left: 1px solid #ececec;
+}
+.mnHelpdesk .shortcuts > ul li:first-child { border-left: 0;}
+li {display: list-item;text-align: -webkit-match-parent;}
+
+
+a:link, a:visited, a:active, a:focus {text-decoration: none;}
+a { margin: 0; padding: 0; color: #3a3635; vertical-align: baseline; background: transparent; }
+
+
+.mnHelpdesk.pgHelpdeskHome .shortcuts > ul li span {display: block; height: 60px; padding: 23px 0 0;
+                                                font-size: 13px;color: #757271;}
+.mnHelpdesk.pgHelpdeskHome .shortcuts > ul li span a { color: #757271;}
+
+
+
+/* 내부 레이아웃 */ 
+.mnHelpdesk .contentBody {border: 1px solid #d9d9d9; background-color: #fff; }
+.mnHelpdesk .content { padding: 35px 35px 80px;  }
+
+/* 질문 검색창 */
+.blind {display: block; position: absolute; top: 0; left: 0; overflow: hidden; visibility: hidden; height: 0;
+    width: 0; text-indent: -1000em;}
+.mnHelpdesk .content > .innerContent {width: 770px; margin: 0 auto; margin-top: 0px; margin-right: auto;
+                                    margin-bottom: 0px; margin-left: auto; }
+.pgHelpdeskHome .search label {display: inline-block; height: 32px; margin-right: 7px; font-size: 15px;
+                            color: #fff; line-height: 2.1;  cursor: default;}
+.pgHelpdeskHome .search { height: 87px; padding: 23px 0 0 35px; background-color: #99a0a4; }
+caption, legend { position: absolute; top: 0; left: 0; overflow: hidden; visibility: hidden; height: 0;
+              width: 1px; font-size: 0; line-height: 0; }
+
+legend {display: block; padding-inline-start: 2px; padding-inline-end: 2px; border-width: initial; border-style: none;
+    border-color: initial; border-image: initial; }
+
+.pgHelpdeskHome .search label { display: inline-block; height: 32px; margin-right: 7px; font-size: 15px; color: #fff;
+                             line-height: 2.1; cursor: default;}
+label { cursor: pointer; }
+.pgHelpdeskHome .search .sel { display: inline-block; height: 19px; width: 176px; padding: 6px 4px 7px 8px;
+                           line-height: 1.4; vertical-align: middle; border: 1px solid #99a0a4; background-color: #fff; }
+
+
+.pgHelpdeskHome .search .sel select {width: 100%; height: 19px; *height: 100%; margin: 0; padding: 0; font-size: 13px; line-height: 100%; border: 0;
+                                background: #fff  100% 50% no-repeat;}
+
+select { appearance: none; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; -o-appearance: none;  box-sizing: border-box; min-width: 80px;
+     padding: 8px 5px 8px 10px; font-size: 14px; color: #757271; border: 1px solid #c4c2c2; border-radius: 3px; background: #fff }
+select, input { vertical-align: middle; }
+select:not(:-internal-list-box) { overflow: visible !important; }     
+select { -webkit-appearance: menulist; box-sizing: border-box; align-items: center; white-space: pre; -webkit-rtl-ordering: logical;
+    color: black; background-color: white; cursor: default;  border-width: 1px; border-style: solid; border-color: initial; border-image: initial;} 
+select { border-radius: 5px;}  
+input, textarea, select, button { text-rendering: auto; color: initial; letter-spacing: normal; word-spacing: normal; text-transform: none;
+                             text-indent: 0px; text-shadow: none; display: inline-block; text-align: start; margin: 0em;
+                             margin-top: 0em; margin-right: 0em; margin-bottom: 0em; margin-left: 0em; font: 400 13.3333px Arial;}
+
+element.style {width: 289px;}
+.pgHelpdeskHome .search input[type=text] {height: 32px; margin-left: 3px; margin-right: 3px; padding: 0 0 0 20px; font-size: 13px; color: #666;
+                                        line-height: 1.4; border: 1px solid #99a0a4; border-radius: 0; background: #fff;}
+input[type=text], input[type=tel], input[type=password] { height: 33px; width: auto; padding: 1px 10px 0 10px; font-size: 13px; color: #3A3635;
+                                                      line-height: 33px; border: 1px solid #c4c2c2; border-radius: 3px; }
+select, input {vertical-align: middle;}
+input {padding: 1px 0px;}
+input { -webkit-appearance: textfield; background-color: white; -webkit-rtl-ordering: logical; cursor: text; padding: 1px;
+    border-width: 2px; border-style: inset; border-color: initial; border-image: initial;}
+
+
+
+.pgHelpdeskHome .search .btns { display: inline-block; width: 83px; height: 32px; margin: 1px 1px 0 0; color: #fff;
+                            vertical-align: top; background-color: #434648;}
+
+.pgHelpdeskHome .search .btns button { display: block; cursor: pointer; height: 100%; width: 100%; font-size: 13px; color: #fff;
+                                    line-height: 32px; text-align: center; text-decoration: none !important; }
+
+button { cursor: pointer; border: 0px none; background-color: transparent;}
+input[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button { padding: 1px 6px; }
+input[type="radio" i], input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    margin: 3px 0.5ex;
+    padding: initial;
+    border: initial;
+}
+input[type="radio" i] {
+    -webkit-appearance: radio;
+    box-sizing: border-box;
+}
+input[type="radio" i], input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    margin: 3px 0.5ex;
+    padding: initial;
+    border: initial;
+}
+
+/* 자주 묻는 질문 */
+.pgHelpdeskHome .innerContent h1 { padding: 48px 0 8px; font-size: 19px; font-weight: normal; text-indent: 5px; font-style: unset;}
+header, h1 { font-size: 100%; }
+h1 { display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;}
+
+.pgHelpdeskHome .tbList { margin-top: 0; margin-bottom: 0; padding-bottom: 25px;}
+.tbList { width: 100%; margin-top: 14px; margin-bottom: 20px; table-layout: fixed; border-top: 2px solid #4c4c4c; border-bottom: 1px solid #efefef;}
+table {border-collapse: collapse; border-spacing: 0; }
+caption { display: table-caption; text-align: -webkit-center;}
+table { display: table; border-collapse: separate; border-spacing: 2px; border-color: grey; }
+colgroup {display: table-column-group;}
+col {display: table-column;}
+
+thead { display: table-header-group; vertical-align: middle; border-color: inherit;}
+tr {display: table-row; vertical-align: inherit; border-color: inherit;}
+
+.pgHelpdeskHome .faq .tbList > thead th:first-child, .pgHelpdeskHome .faq .tbList > tbody td:first-child {padding-left: 25px; padding-bottom: 5px;}
+.pgHelpdeskHome .tbList > thead th.category { width: 175px; text-align: left;}
+.tbList > thead th {height: 38px; width: auto; font-size: 11px; font-weight: 400; color: #3a3635; line-height: 38px; vertical-align: middle;}
+.pgHelpdeskHome .tbList > thead th.category > span {width: 20px;background-position: 0 0;}
+.pgHelpdeskHome .tbList > thead th > span {height: 11px; }
+th, td { word-break: break-word; word-wrap: break-word;}
+th {font-weight: bold; text-align: -internal-center;}
+td, th {display: table-cell; vertical-align: inherit;}
+.tbList > thead th > span { display: inline-block; height: 9px; text-indent: -9999px; vertical-align: middle;
+                        background-image: url("bt주소");}
+
+.pgHelpdeskHome .tbList > thead th.question { width: 570px; text-align: left;}
+.pgHelpdeskHome .tbList > thead th.question > span {width: 20px; background-position: 0 -20px;}   
+.pgHelpdeskHome .tbList > thead th > span {height: 11px;}
+.pgHelpdeskHome .tbList > thead th.question {width: 570px; text-align: left;}   
+
+tbody {display: table-row-group; vertical-align: middle; border-color: inherit;}  
+
+
+#ex{margin-top: 5px; margin-left: 310px; font-size: 9pt; color: #d9d9d9;}               
+
+
+
+/* 게시글 작성 */
+
+.ess{font-size: 12px; text-align: right; color: #666;}
+.faq{font-size: 14px;}
+
+.btnAddFile{width: 40px; height: 25px;}
+.file.unstaged{width: 200px;}
+.qnaBt{font-size:18px; text-align: center; margin: auto;
+			display:table; margin-left:auto; margin-right:auto;}
+
+
+
+/* 게시글 보기 */
+.faqlist.table {width: 100%; border: 0; border-top: 2px solid #4c4c4c;}
+.mnHelpdesk.content>.innerContent { width: 770px; margin: 0 auto;}
+.faqlist table {width: 100%; border: 0; border-top: 2px solid #4c4c4c;}
+.faqlist thead th {
+    height: 38px;
+    font-size: 11px;
+    line-height: 38px;
+    text-align: left;
+    text-indent: 25px;
+    border-bottom: 1px solid #efefef;
+}
+
+.faqlist tbody td {
+    padding-left: 25px;
+    font-size: 12px;
+    color: #757271;
+    vertical-align: middle;
+    border-bottom: 1px solid #efefef;
+    background-color: #fff;
+}
+td {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.faqlist .faqTitle {
+    display: block;
+    margin: 22px 0 18px;
+    color: #757271;
+    line-height: 135%;
+}
+
+.faqlist tbody td.answer {
+    background-color: #f8f9fb;
+}
+
+a {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    color: #3a3635;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+.faqlist .answer .inner {
+    margin: 23px 0 19px;
+    font-family: 나눔바른고딕, 'NanumBarunGothic', 나눔고딕, 'NanumGothic', '돋움', Dotum, 'Apple SD Gothic Neo', sans-serif;
+    color: #757271;
+    line-height: 21px;
+}
+
+
+
+
+/* 만족도 조사 */
+.faqlist .faq_wrap {
+    width: 720px;
+    margin: 55px 0 56px;
+}
+.faqlist .rating {
+    overflow: hidden;
+}
+
+.faqlist .rating dt {
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    color: #757475;
+    line-height: 15px;
+}
+
+.faqlist .rating .score_area {
+    float: right;
+    line-height: 15px;
+}
+.faqlist .answer .lst_score {
+    overflow: hidden;
+}
+.faqlist .lst_score li {
+    float: left;
+    margin-left: 20px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+dd {
+    display: block;
+    margin-inline-start: 40px;
+}
+.faqlist .lst_score li {
+    float: left;
+    margin-left: 20px;
+}
+
+.faqlist .faq_wrap .textarea_wrap {
+    float: left;
+    width: 718px;
+    margin-top: 8px;
+    font-size: 0;
+}
+
+.faqlist .textarea_wrap .customer_feedback {
+    height: 98px;
+    width: 100%;
+    font-size: 12px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+}
+
+
+
+
+/* 하단 목록 숫자 */
+.paginate {
+    padding: 20px 0 40px;
+    text-align: center;
+}
+
+.paginate .prev {
+    padding-right: 14px;
+    padding-left: 21px;
+    background-position: 10px 9px;
+    background-repeat: no-repeat;
+}
+
+.paginate a {
+    color: #757271;
+    text-decoration: none;
+}
+
+.paginate strong, .paginate a {
+    display: inline-block;
+    height: 26px;
+    margin: 0 3px 0 4px;
+    padding: 0 10px 0 9px;
+    line-height: 28px;
+    vertical-align: text-top;
+    border: 1px solid #dad9d9;
+}
+
+.faqlist .faq_wrap .btn_wrap {
+    width: 100%;
+    text-align: center;
+}
+
+.faqlist .faq_wrap .btn_ok {
+    display: inline-block;
+    height: 29px;
+    width: 83px;
+    margin: 0 auto;
+    color: #fff;
+    line-height: 29px;
+    text-align: center;
+    background-color: #434648;
+}
+a:link, a:visited, a:active, a:focus {
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+/* 추가 중 */
+
+
