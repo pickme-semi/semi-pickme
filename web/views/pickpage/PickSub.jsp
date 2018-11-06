@@ -36,6 +36,20 @@ textarea {
 
 <body>
 	<%@ include file="../common/header.jsp"%>
+	
+	
+	<div class="row" align="center">
+		<div class="col-md-12" >
+			<h2>pick 제목	</h2>
+			<p>
+				이러고 저러고 어쩌고 저쩌고 해서 아무튼 이 둘중에 하나 골라주세요.
+			</p>			
+		<br>
+			
+		</div>
+	</div>
+	
+	
 
 	<div class="row">
 		<div class="col-md-6" align="center">
@@ -53,24 +67,16 @@ textarea {
 		</div>
 
 	</div>
-
+	
 	<br><br><br>
 	
-	<div class="row" align="center">
-		<div class="col-md-12" >
-			<h2>
-				pick 제목
-			</h2>
-			<p>
-				이러고 저러고 어쩌고 저쩌고 해서 아무튼 이 둘중에 하나 골라주세요.
-			</p>			
-			<br>
-				<div class="progress"> 
-					<div class="progress-bar w-50"> 마감까지 OO%
-				</div>
-			</div>
-		</div>
+	<div class="progress"> 
+				<div class="progress-bar w-50"> 마감까지 OO% </div>
 	</div>
+
+	
+	
+	
 
 	<br><br>
 	

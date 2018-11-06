@@ -31,7 +31,12 @@
 
 #category ul ul {display: none;}
 
+
 #category ul li.main:hover > ul {
 	position: absolute; 	
+	display:block;
+}
+
+#category li.main li.sub:hover >ul {
 	display:block;
 }

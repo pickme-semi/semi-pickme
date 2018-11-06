@@ -61,17 +61,16 @@
 #pick2 {
 	/*픽 이미지 2 크기 조절 */
 	width: 200px;
-	height: 200px;
-	
+	height: 200px;	
 }
     
-    </style>
-
+</style>
 
 
 </head>
 
 <body>
+
 <%@ include file="../common/header.jsp"%>
 
 <div class="outer" align="center">
@@ -88,7 +87,8 @@
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td colspan="3"><input type="hidden" name="userId" value="" />
+					<td colspan="3"><!-- %m.getusername % -->
+					<input type="hidden" name="userId" value="" />
 					</td>
 				</tr>
 				<tr>
@@ -113,90 +113,91 @@
 			<br><br>
 			<div id="category" style="display:inline-block; text-align: center;">
 				<ul>
-					<li class="main"><a href="#">카테고리1</a>
+					<li class="main"><a href="#">여행</a>
 						<ul>
-						<li class="sub"><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
+							<li class="sub"><a href="#">국내여행</a>
+								<ul>
+									<li><a href="#">서울</a></li>
+									<li><a href="#">제주도</a></li>
+								</ul>
+							</li>
+							<li class="sub"><a href="#">해외여행</a>
+								<ul>
+									<li><a href="#">일본</a></li>
+									<li><a href="#">중국</a></li>
+								</ul>
+							</li>	
+						</ul>
+					</li>
+					<li class="main"><a href="#">운동</a>
+					<ul>
+						<li class="sub"><a href="#">실내운동</a>
+							<ul>
+							<li><a href="#">탁구</a></li>
+							<li><a href="#">볼링</a></li>
+							</ul>
+						</li>	
+						<li class="sub"><a href="#">야외운동</a>
+							<ul>
+							<li><a href="#">축구</a></li>
+							<li><a href="#">등산</a></li>
+							</ul>
+						</li>						
 						</ul>
 						</li>
-					<li class="main"><a href="#">카테고리2</a>
+					<li class="main"><a href="#">요리</a>
 					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
+						<li class="sub"><a href="#">한식</a>
+							<ul>
+								<li><a href="#">떡볶이</a></li>
+								<li><a href="#">불고기</a></li>
+							</ul>
 						</li>
-					<li class="main"><a href="#">카테고리3</a>
-					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
+						<li class="sub"><a href="#">일식</a>
+							<ul>
+								<li><a href="#">초밥</a></li>								
+							</ul>
 						</li>
-					<li class="main"><a href="#">카테고리4</a>
-					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
-						</li>
-						<br><br>
-						
-					<li class="main"><a href="#">카테고리5</a>
-					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
-						</li>
-					<li class="main"><a href="#">카테고리6</a>
-					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
-						</li>
-					<li class="main"><a href="#">카테고리7</a>
-					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
-						</li>
-					<li class="main"><a href="#">카테고리8</a>
-					<ul>
-						<li><a href="#">서브카테고리1</a></li>
-						<li><a href="#">서브카테고리2</a></li>
-						<li><a href="#">서브카테고리3</a></li>
-						<li><a href="#">서브카테고리4</a></li>
-						<li><a href="#">서브카테고리5</a></li>
-						<li><a href="#">서브카테고리6</a></li>
-						</ul>
+						<li class="sub"><a href="#">중식</a>
+							<ul>
+								<li><a href="#">탕수육</a></li>								
+							</ul>
 						</li>
 					</ul>
+					</li>
+				
 				</div>
+				
+				<br><br>
+				<div>
+				 	<dl>
+						<dt><input type="radio" name="main" value="여행">여행</input></dt>
+						<dd id= "sub1" style= "display:none"><input type="checkbox"  value="국내" />국내여행</dd>
+						<dd id= "sub2" style= "display:none"><input type="checkbox"  value="해외" />해외여행</dd>
+					</dl>
+					<dl>
+						<dt><input type="radio" name="main" value="요리">요리</input></dt>
+					</dl>
+					<dl>
+						<dt><input type="radio" name="main" value="운동">운동</input></dt>
+					</dl>
+				</div>
+				
+				<script>
+				$("input:radio[name=main]").click(function(){
+					if($("input:radio[name=main]:checked").val()=='여행'){
+						$("#sub1").css("display",block);
+						$("#sub2").css("display",block);
+					}
+					
+				});
+				
+				</script>
+
+
+
+
+
 				
 				<br><br>				
 				
@@ -224,6 +225,8 @@
 	</div>
 	
 	<br><br>
+	
+	
 
 
 	<%@ include file="../common/footer.jsp"%>
