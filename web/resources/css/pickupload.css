@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+*{
+	margin:0px;
+	padding:0px;
+}
+
+#category ul{
+	list-style:none;
+}
+
+#category ul li{
+	background-color : wheat;
+	border: 1px solid #fff;
+	width : 140px;
+	height : auto;
+	line-height : auto;
+	text-align: center;
+	float: left;
+	
+}
+
+#category ul li a {
+	
+	text-decoration: none;
+	color: white;
+	display : block;	
+}
+
+#category ul li a:hover {background-color : green;}
+
+#category ul ul {display: none;}
+
+
+#category ul li.main:hover > ul {
+	position: absolute; 	
+	display:block;
+}
+
+#category li.main li.sub:hover >ul {
+	display:block;
+}
