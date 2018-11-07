@@ -8,15 +8,16 @@
 <title>My page</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../resources/css/style.css">
+<link rel="stylesheet" href="/pickme/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/pickme/resources/css/style.css">
 
 
 <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
-<script src="../../resources/js/modernizr.js" type="993585227198c70882fa5f41-text/javascript"></script>
+<link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
+<script src="/pickme/resources/js/modernizr.js" type="993585227198c70882fa5f41-text/javascript"></script>
 
 </head>
 
@@ -28,7 +29,7 @@
 
 <div class="row">
 <div class="col-md-12 text-center user">
-  <img src="../../resources/images/user.jpg" alt="Me" class="img-circle">
+  <img src="/pickme/resources/images/user.jpg" alt="Me" class="img-circle">
 <h1>아이디</h1>
 <h4>한 줄 소개</h4>
 <div class="social-icons">
@@ -56,7 +57,7 @@
 <!-- main > footer nav -->
 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav">
-<li><a href="followerList.jsp">Follower</a></li>
+<li><a onclick="goFollower()">Follower</a></li>
 <li><a href="followingList.jsp">Following</a></li>
 <li><a href="myPicks.jsp">My Picks</a></li>
 <li><a href="myPage.jsp">My Page</a></li>
@@ -68,8 +69,9 @@
 </div>
 </div>
 </header>
+	
 
-  <section class="works text-center">
+<section class="works text-center">
 
 <div class="container">
 <div class="row">
@@ -83,43 +85,36 @@
 </ul>
 </div>
 
-<div class="col-md-4 col-sm-6 web-development all" data-myorder="2">
-<div class="single-work">
-<img src="../../resources/images/1.jpg" alt="#">
-<div class="overlay">
+
+<section class="page-section page-section--vote">
+  <div class="page-section__content">
+    <header class="page-section__header">
+      <h2 class="page-section__header__title page-section__header__title--vote">
+        What's Your Pick?</header>
+        
+        <div class="live-swell">
+          <div class="live-swell__pics">
+            <div id="live-swell-img-a" class="live-swell__pics__pic live-swell__pics__pic--a">
+
+            </div>
+            <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
+              
+            </div>
+            <div class="live-swell__results">
+              <div id="live-swell-result-a" class="live-swell__results__result live-swell__results__result--a option option-a">
+              </div>
+              <div id="live-swell-result-b" class="live-swell__results__result live-swell__results__result--b option option-b">
+                57%</div>
+              </div>
+              <div class="live-swell__pics__or">
+                  or</div>
+                </div>
+                      </div>
+                    </div>
+                  </section>
 
 </div>
 </div>
-</div>
-
-<div class="col-md-4 col-sm-6 website-customization all" data-myorder="1">
-<div class="single-work">
-<img src="../../resources/images/2.jpg" alt="#">
-<div class="overlay">
-  
-</div>
-</div>
-</div>
-
-<div class="col-md-4 col-sm-6 web-design all" data-myorder="3">
-<div class="single-work">
-<img src="../../resources/images/3.jpg" alt="#">
-<div class="overlay">
-  
-      </div>
-      </div>
-      </div>
-
-
-<div class="col-md-4 col-sm-6 website-customization all" data-myorder="5">
-<div class="single-work">
-<img src="../../resources/images/4.jpg" alt="#">
-<div class="overlay">
-  
-      </div>
-      </div>
-      </div>
-
 </section>
 
 <footer class="footer">
@@ -184,14 +179,20 @@ Phone: +88-0-1723 511 340 <br>
 </div>
 </div>
 </div>
+
+<script>
+	function goFollower(){
+		location.href="/pickme/fList.pr";
+	}
+</script>
 </footer>
 
-<script data-cfasync="false" src="../../resources/js/jquery-2.1.1.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/rocket-loader.min.js" defer=""></script></body>
+<script data-cfasync="false" src="/pickme/resources/js/jquery-2.1.1.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/rocket-loader.min.js" defer=""></script></body>
 </html>
 
 </body>
