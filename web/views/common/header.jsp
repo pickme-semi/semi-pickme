@@ -28,6 +28,8 @@
         <div class="logo" style="width:33%" align="right">
 			<button>B1</button>
 			<button>B2</button>
+			
+				<button onclick="location.href='views/qna/qnaMain.jsp'">QNA 메인 테스트</button>
         </div>
       </div>
     </nav>

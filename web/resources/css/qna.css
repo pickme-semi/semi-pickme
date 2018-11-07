@@ -236,6 +236,12 @@ td {
     line-height: 135%;
 }
 
+.faqTitle.on td{
+	background-color: transparent;
+	background : transparent;
+	text-align: center;
+}
+
 .faqlist tbody td.answer {
     background-color: #f8f9fb;
 }
@@ -261,7 +267,7 @@ a {
 
 /* 만족도 조사 */
 .faqlist .faq_wrap {
-    width: 720px;
+    width: 700px;
     margin: 55px 0 56px;
 }
 .faqlist .rating {
@@ -374,5 +380,6 @@ a:link, a:visited, a:active, a:focus {
 
 
 /* 추가 중 */
+
 
 
