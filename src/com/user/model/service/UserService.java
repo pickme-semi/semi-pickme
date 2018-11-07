@@ -22,6 +22,7 @@ public class UserService {
 		
 		close(con);
 		
+		System.out.println("resulotservier : " + result);
 		return result;
 	}
 	
@@ -37,6 +38,18 @@ public class UserService {
 		return result;
 		
 		
+	}
+	
+	public int idDupCheck(String id) {
+		
+		Connection con = getConnection();
+		
+		int result = uDao.idDupCheck(con,id);
+		
+		close(con);
+		
+		return result;
+
 	}
 
 }

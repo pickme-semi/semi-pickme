@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
 <title>회원가입_[Pick Me]</title>
 <style>
 	.outer{
@@ -40,8 +41,12 @@
 	</tr>
 	<tr>
 		<td> 비밀번호 </td>
-		<td><input type="password" id="userPwd" name="userPass" required="required" ></td>
-		<td></td>
+		<td><input type="password" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
+		<td><label for="pswd1" class="lbl">
+				<span id="pswd1Span" class="step_txt"></span>
+			</label>
+			 <span class="error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+		</td>
 	</tr>
 	<tr>
 		<td> 비밀번호 확인 </td>
@@ -67,11 +72,7 @@
 	<p id="p1">이미 계정이 있으신가요? <a href="/pickme/views/user/UserLoginForm.jsp">로그인</a></p>
 
 	<br>
-	<!--
-	<a href="/pickme/views/user/UserIdSearchForm.jsp">아이디 찾기</a>
-	/
-	<a href="/pickme/views/user/UserPassSearchForm.jsp">비밀번호 찾기</a>
-	-->
+	
 	</div>
 
 	
@@ -81,6 +82,66 @@
 <br>
 
 </div>
+
+<script>
+		var idFlag = false;
+		var pwFlag = false;
+		
+
+		function insertMember() {
+			$("#joinform").submit();
+		}
+		
+		$("#joinform").submit(function(event){
+			if(/*$("#userPwd").val() == "" ||*/ $("#userId").val() == "") alert("아이디나 비밀번호는 필수 값입니다.");
+			else if($("#userPwd").val() != $("#userPwd2").val()) alert("비밀번호 확인 값과 다릅니다.");
+			else return;
+			event.preventDefault();
+		});
+		
+		$("#userPwd").blur(function(){
+			checkPswd1();
+		});
+		
+		
+		 function checkPswd1() {
+			 if($("#userPwd").val().length < 8)
+				 alert("비밀번호는 8자리 이상 입력하여야 합니다.")
+			 else if()
+		 }
+		
+
+		
+		
+		$('#idCheck').click(function(){
+			
+			$.ajax({
+				url : "/pickme/idDup.au",
+				type : "post",
+				data : { userId : $('#userId').val() },
+				success : function(data){
+					console.log(data);
+					if(data == 'no'){
+						alert("이미 사용중인 아이디 입니다.");
+						$('#userId').select();
+					} else {
+						alert("사용 가능한 아이디 입니다.");
+					}
+					
+					
+				}, error : function(request, status, error){
+					alert(request+"\n" 
+						  + status+"\n"
+						  + error);
+					console.log("에러 발생!");
+					
+				}
+				
+			});
+			
+		});
+
+</script>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
