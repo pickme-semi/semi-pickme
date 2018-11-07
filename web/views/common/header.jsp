@@ -13,7 +13,7 @@
 </head>
 <body>
 	<header>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-white bg-white">
       <div class="container">
       	<div class="logo" style="width:33%">
         	<a class="navbar-brand" href="#">PICK ME</a>
@@ -26,11 +26,12 @@
 	        </div>
         </div>
         <div class="logo" style="width:33%" align="right">
-			<button>B1</button>
-			<button>B2</button>
+			<img src="resources/icons/inbox.svg" alt="" style="width:33px;"/>
+			<img src="resources/icons/issue-opened.svg" alt="" style="width:33px;"/>
         </div>
       </div>
     </nav>
+    <hr />
 	</header>
 </body>
 
