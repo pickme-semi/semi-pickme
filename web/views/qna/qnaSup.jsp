@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="../../resources/css/qna.css">
         <script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 		<script src="../../resources/js/jquery-3.3.1.min.js"></script>
+		<script src="../../resources/js/qna.js"></script>
+		
 </head>
 <body>
 

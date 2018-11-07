@@ -28,6 +28,7 @@
         <div class="logo" style="width:33%" align="right">
 			<img src="resources/icons/inbox.svg" alt="" style="width:33px;"/>
 			<img src="resources/icons/issue-opened.svg" alt="" style="width:33px;"/>
+      <button onclick="location.href='views/qna/qnaMain.jsp'">QNA 메인 테스트</button>
         </div>
       </div>
     </nav>

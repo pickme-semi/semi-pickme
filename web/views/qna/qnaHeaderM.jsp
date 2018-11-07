@@ -10,40 +10,41 @@
 <script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="../../resources/js/jquery-3.3.1.min.js"></script>
 
+
 </head>
 <body>
 	<header>
 		      <nav class="shortcuts">
-            <p>고객센터 무엇이든 물어보세요</p>
+            <p>관리자 전용 QNA 페이지</p>
             
             <ul class="itemList">
           
                 <li class="item1">
-                    <a class="itemHead"><i class="icon"></i>회원정보</a>
+                    <a class="itemHead"><i class="icon"></i>문의 관리</a>
                     <span>
-                        <a id="qMember">가입/탈퇴</a><br>
-                        <a id="qLogin">로그인</a><br>
+                        <a id="qMember">문의 확인</a><br>
+                        <a id="qLogin">신고 확인</a><br>
                     </span>					
                 </li>
                 <li class="item2">
-                    <a   class="itemHead"><i class="icon"></i>PICK</a>
+                    <a   class="itemHead"><i class="icon"></i>QNA 관리</a>
                     <span>
-                        <a id="qPick">PICK 이용</a><br>
-                        <a id="qReport">신고제도</a><br>
+                        <a id="qPick">QNA 작성</a><br>
+                        <a id="qReport">QNA 삭제</a><br>
                     </span>				
                 </li>
                 <li class="item3">
-                    <a class="itemHead"><i class="icon"></i>POINT</a>
+                    <a class="itemHead"><i class="icon"></i>여기는</a>
                     <span>
-                        <a id="qPointE">포인트 적립</a><br>
-                        <a id="qPointU">포인트 사용</a><br>
+                        <a id="qPointE">아직</a><br>
+                        <a id="qPointU">고민 중</a><br>
                     </span>			
                 </li>
                 <li class="item4">
-                    <a class="itemReHead"><i class="icon"></i>1:1 문의</a>
+                    <a class="itemReHead"><i class="icon"></i>여기도</a>
                     <span>
-                        <a id="qReport">이용자/게시글 신고</a><br>
-                        <a id="qQna">1:1 문의</a><br>
+                        <a id="qReport">아직</a><br>
+                        <a id="qQna">고민 중</a><br>
                     </span>				
                 </li>
             </ul>
