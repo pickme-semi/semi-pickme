@@ -18,6 +18,7 @@ public class User implements Serializable{
 	private Date birthdate;
 	private String gender;
 	private String type;
+	private String profile;
 	
 	
 	public User() {
@@ -25,14 +26,19 @@ public class User implements Serializable{
 	}
 
 	
-
 	public User(String userId, String userPass) {
 		super();
 		this.userId = userId;
 		this.userPass = userPass;
 	}
 
-	
+
+	public User(int userNo, String profile) {
+		super();
+		this.userNo = userNo;
+		this.profile = profile;
+	}
+
 
 
 	public User(int userNo, String userId, String userPass, String userEmail, String userName) {
@@ -156,12 +162,28 @@ public class User implements Serializable{
 	}
 
 
+	public String getProfile() {
+		return profile;
+	}
+
+
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", userId=" + userId + ", userPass=" + userPass + ", userEmail=" + userEmail
-				+ ", userName=" + userName + ", birthdate=" + birthdate + ", gender=" + gender + ", type=" + type + "]";
+				+ ", userName=" + userName + ", birthdate=" + birthdate + ", gender=" + gender + ", type=" + type
+				+ ", profile=" + profile + "]";
 	}
+
+
+
+	
 	
 	
 	
