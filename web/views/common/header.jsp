@@ -16,7 +16,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
       	<div class="logo" style="width:33%">
-        	<a class="navbar-brand" href="#">PICK ME</a>
+        	<a class="navbar-brand" href="/pickme">PICK ME</a>
         </div>
 		<div class="search" style="width:33%" text-align="center">
 	        <div class="collapse navbar-collapse" id="navbarsExample07">
