@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.user.model.vo.User"%>
+<%
+	ArrayList<User> list = (ArrayList<User>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,15 +11,15 @@
 <title>My page</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../resources/css/style.css">
+<link rel="stylesheet" href="/pickme/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/pickme/resources/css/style.css">
 
 
 <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
-<script src="../../resources/js/modernizr.js" type="993585227198c70882fa5f41-text/javascript"></script>
+<script src="/pickme/resources/js/modernizr.js" type="993585227198c70882fa5f41-text/javascript"></script>
 
 
 </head>
@@ -29,7 +32,7 @@
 
 <div class="row">
 <div class="col-md-12 text-center user">
-  <img src="../../resources/images/user.jpg" alt="Me" class="img-circle">
+  <img src="/pickme/resources/images/user.jpg" alt="Me" class="img-circle">
 <h1>아이디</h1>
 <h4>한 줄 소개</h4>
 <div class="social-icons">
@@ -71,7 +74,21 @@
 </header>
 <section class="works text-center">
 
-<h2>Follower</h2>
+
+<div class="outer">
+	<h2 align="center">Follower</h2>
+		<div class="followerArea">
+			<% for (User followerList : list) { %>
+			<div class="follower-list" align="center">
+				<img src="<%=followerList.getProfile() %>" class="rounded-circle" width="200px" height="150px" /> &nbsp;
+				<%= followerList.getUserId() %> &nbsp;&nbsp;&nbsp; <button>follow</button>
+				
+			</div>
+			
+			<% } %>
+	</div>
+
+</div>
 
 
 
@@ -142,11 +159,11 @@ Phone: +88-0-1723 511 340 <br>
 </footer>
 
 <script data-cfasync="false" src="../../resources/js/jquery-2.1.1.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/rocket-loader.min.js" defer=""></script></body>
+<script src="/pickme/resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
+<script src="/pickme/resources/js/rocket-loader.min.js" defer=""></script></body>
 </html>
 
 </body>
