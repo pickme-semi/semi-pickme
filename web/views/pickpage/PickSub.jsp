@@ -9,8 +9,6 @@
    <!-- Bootstrap core CSS -->
     <link href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
 
 
 <style>
