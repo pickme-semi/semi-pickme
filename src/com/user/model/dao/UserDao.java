@@ -46,7 +46,11 @@ public class UserDao {
 			pstmt.setString(3, u.getUserEmail());
 			pstmt.setString(4, u.getUserName());
 			
+			
+			System.out.println( u.getUserId() + " " + u.getUserPass() + " " + u.getUserEmail() + " " + u.getUserName());
 			result = pstmt.executeUpdate();
+			
+			System.out.println("resulotdao : " + result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -86,6 +90,7 @@ public class UserDao {
 				result.setBirthdate(rset.getDate(6));
 				result.setGender(rset.getString(7));
 				result.setType(rset.getString(8));
+				result.setProfile(rset.getString(9));
 				
 				
 			}
@@ -96,6 +101,33 @@ public class UserDao {
 			close(rset);
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int idDupCheck(Connection con, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("idDupCheck");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) result = rset.getInt(1);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

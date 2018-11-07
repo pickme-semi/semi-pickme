@@ -33,7 +33,6 @@ public class UserJoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("userJoinServlet");
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String userId = request.getParameter("userId");
 		String userPass = request.getParameter("userPass");
 		String userEmail = request.getParameter("userEmail");
@@ -42,12 +41,12 @@ public class UserJoinServlet extends HttpServlet {
 		
 		UserService us = new UserService();
 		
-		User u = new User(userNo,userId, userPass, userEmail, userName);
+		User u = new User(userId, userPass, userEmail, userName);
 		
 		System.out.println("가입할 유저 정보 : " + u);
 		
 		try {
-			us.JoinUser(u);
+			 us.JoinUser(u);
 			System.out.println("회원가입 완료! : " + u );
 			response.sendRedirect("/pickme");
 		} catch (UserException e) {

@@ -20,6 +20,11 @@
 	.pickterm{
 		padding : 10px;
 	}
+	
+	.terms_chk_all{
+		padding :10px;
+		font-size : 20px;
+	}
 	.terms_box{
 		width : 500px;
 		height : 150px;
@@ -83,24 +88,27 @@
 
 <div id="container" role="main">
 	<form id="termform" action="" method="post">
+
 	<div class = "pickterm">
 		<h2 align="center">Pick Me 이용약관 동의서</h2>
 		<br />
-		<p class="terms_chk_all">
+		<p class="terms_chk_all" >
+		
 		<span>
 		 
 		 <label for="chk_all">
 		 	<input name="chk_all" id="check_all" type="checkbox" />
 		 	<span class="chk_all_txt">
-		 		이용약관, 개인정보 수집 및 이용, <br>프로모션 안내 메일 수신(선택)에 모두 동의합니다.
+		 		Pick Me 이용약관, 개인정보 수집 및 이용 및 <br> &nbsp 프로모션 안내 메일 수신(선택)에 모두 동의합니다.
 		 	</span>
 		 </label>
 		</span>
 		</p>
 		<ul class="terms_bx_list">
-			<li class="term_bx">
+			
+			<li class="terms_bx">
 				<span class="input_chk">
-				<input type="checkbox" id="termsService" name="termsService" class="chk" >
+				<input type="checkbox" id="termsService" name="chk" class="chk" >
 				<label for="termsService">Pick Me 이용약관 동의 <span class="terms_necessary">(필수)</span></label>
 				</span>
 				<div class="terms_box" tabindex="0" id="divService" >
@@ -391,7 +399,7 @@
 			<br>
 			<li class="terms_bx">
 				<span class="input_chk">
-					<input type="checkbox" id="termsPrivacy" name="termsPrivacy" class="chk">
+					<input type="checkbox" id="termsPrivacy" name="chk" class="chk">
 						<label for="termsPrivacy">개인정보 수집 및 이용에 대한 안내<span class="terms_necessary">(필수)</span></label>
 				</span>
                 <div class="terms_box" tabindex="0" id="divPrivacy">
@@ -466,7 +474,7 @@
         	<br>
         	<li class="terms_bx">
 				<span class="input_chk">
-					<input type="checkbox" id="termsEmail" name="termsEmail" value="Y" class="chk">
+					<input type="checkbox" id="termsEmail" name="chk" value="Y" class="chk">
 					<label for="termsEmail">이벤트 등 프로모션 알림 메일 수신<span class="terms_choice terms_no">(선택)</span></label>
 				</span>
             </li>
@@ -480,6 +488,7 @@
 	<!-- //약관동의 -->
 
                     <a name='agreeBottom'></a>
+                    
                     <div class="btn_area" align="center">
                         <div id="disAgreeBtn" onclick="disAgree()"> 비동의 </div>
                         <div id="agreeBtn" onclick="agree()"> 동의 </div>
@@ -488,6 +497,7 @@
                          <button> <a href="/pickme/views/user/UserJoinForm.jsp">동의</button>
                         -->
                     </div>
+ 
 	</form>
 	
 	
@@ -497,48 +507,55 @@
 
 <script>
 	
-	$(document).ready( function(){
-		/*
-		$("#chk_all").prop("checked",false);
-	      setTerms();
-	      
-	    $("#chk_all").click(function() {
-	      setTerms();
-	     })
-		*/
+$(document).ready(function(){
 		
-			$("#check_all").click(function(){
-				//$(".chk").prop("checked",this.checked);
-				 $("#termsService").prop("checked",this.checked);
-		         $("#termsPrivacy").prop("checked",this.checked);
-		         $("#termsEmail").prop("checked",this.checked);
-				
-			});
+	 $("#check_all").click(function(){
+         	$(".chk").prop("checked",this.checked);
+          	$("#termsService").prop("checked",this.checked);
+            $("#termsPrivacy").prop("checked",this.checked);
+            $("#termsEmail").prop("checked",this.checked);
+         	
+      });
+
 		
-		
-	});
-	/*
-	function setTerms() {
-        if ($("#chk_all").is(":checked")) {
-            $("#termsService").prop("checked",true);
-            $("#termsPrivacy").prop("checked",true);
-            $("#termsEmail").prop("checked",true);
-        } else {
-            $("#termsService").prop("checked",false);
-            $("#termsPrivacy").prop("checked",false);
-            $("#termsEmail").prop("checked",false);
-        }
-        return true;
-   }
-	*/
+    
+       $("#check_all").click(function(){
+         if($("#check_all").is(":checked")){
+        	 $(".chk").prop("chekced",true);
+         }
+         else{
+        	 $(".chk").prop("chekced",false);
+         }
+       });
+       
+       
+       $(".chk").click(function(){
+    	 	if($("input[name='chk']:checked").length==3){
+    	 		$("#check_all").prop("checked",true);
+    	 	}else{
+    	 		$("#check_all").prop("checked",false);
+    	 	}
+    	   
+       });
+       
+    
+    
+    
+ });
+
 	
 
 	function disAgree(){
-		location.href="/pickme/views/user/UserLoginForm.jsp";	
+			location.href="/pickme/views/user/UserLoginForm.jsp";
 	}
 	
 	function agree(){
-		location.href="/pickme/views/user/UserJoinForm.jsp";
+		if(($("#termsService").is(":checked")) && ($("#termsPrivacy").is(":checked"))){
+			location.href="/pickme/views/user/UserJoinForm.jsp";
+		}else{
+			alert("필수항목을 체크해주세요");
+		}
+		
 	}
 	
 	
