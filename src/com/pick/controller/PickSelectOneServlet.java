@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class PickSelectOne
  */
 @WebServlet("/pickview.pv")
-public class PickSelectOne extends HttpServlet {
+public class PickSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PickSelectOne() {
+    public PickSelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
