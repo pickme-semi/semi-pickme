@@ -13,16 +13,16 @@ import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
 
 /**
- * Servlet implementation class FollowerList
+ * Servlet implementation class FollowingListServlet
  */
-@WebServlet("/fList.pr")
-public class FollowerListServlet extends HttpServlet {
+@WebServlet("/fiList.pr")
+public class FollowingListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowerListServlet() {
+    public FollowingListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,23 +35,24 @@ public class FollowerListServlet extends HttpServlet {
 		ProfileService ps = new ProfileService();
 		int result = 0;
 		
-		list = ps.followerList();
+		list = new ProfileService().followingList();
 		
-		result = ps.followerCount();
+		result = ps.followingCount();
 		
 		System.out.println(list);
 		
 		String page = "";
 		
 		if(list != null){
-			page = "views/profile/followerList.jsp";
+			
+			page = "views/profile/followingList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("result", result);
+			
 		}else{
 			page = "views/common/errorPage.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**
