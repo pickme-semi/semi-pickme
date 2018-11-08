@@ -20,8 +20,9 @@
 }
 
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css">
+<script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
 <!-- 업로드 이미지 미리보기 구현. -->
 <script type="text/javascript">
 
