@@ -1,232 +1,136 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My page</title>
+<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
+<title>회원가입_[Pick Me]</title>
+<style>
+	.outer{
+		width : 600px;
+		height : 300px;
+		background : mistyrose;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:50px;
+	}
+	
+	.error_next_box{
+		color : red;
+		font-size : 10px;
+	}
+	
+	#p1{
+	 color : grey;
+	}
+	
+	.outer2{
+		width : 600px;
+		height : 300px;
+		background : darkgray;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:50px;
+	}
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../resources/css/style.css">
-
-
-<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-
-<script src="../../resources/js/modernizr.js" type="993585227198c70882fa5f41-text/javascript"></script>
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="form-validation.css" rel="stylesheet">
-    
+</style>
 </head>
-
 <body>
-<div class="banner" id="home"></div>
 
-<header class="header">
-<div class="top-nav"></div>
+<%@ include file="../common/header.jsp" %>
 
-<div class="row">
-<div class="col-md-12 text-center user">
-  <img src="../../resources/images/user.jpg" alt="Me" class="img-circle">
-<h1>아이디</h1>
-<h4>한 줄 소개</h4>
-<div class="social-icons">
-<a href="#"><i class="fa fa-facebook"></i></a>
-<a href="#"><i class="fa fa-twitter"></i></a>
-<a href="#"><i class="fa fa-instagram"></i></a>
-<a href="#"><i class="fa fa-linkedin"></i></a>
-<a href="#"><i class="fa fa-google-plus"></i></a>
-</div>
-</div>
-<!-- main nav -->
-<div class="col-md-12">
-<div class="main-nav">
-<nav class="navbar navbar-default">
-<div class="container-fluid">
-<!-- main > header nav -->
-<div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-</div>
-<!-- main > footer nav -->
-<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-<ul class="nav navbar-nav">
-<li><a href="followerList.jsp">Follower</a></li>
-<li><a href="followingList.jsp">Following</a></li>
-<li><a href="myPicks.jsp">My Picks</a></li>
-<li><a href="myPage.jsp">My Page</a></li>
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</div>
-</div>
-</header>
-<section class="works text-center">
-
-    <div class="container">
-      <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../resources/images/favicon-08051c4ab3.png" alt="" width="72" height="72">
-        <h2>My Page</h2>
-        <p class="lead"></p>
-      </div>
-      
-        <div class="col-md-8 order-md-1">
-        <hr>
-          <form class="needs-validation" novalidate>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="userId">ID</label>
-                
-                <input type="text" class="form-control" id="userId" placeholder="">
-              
-              </div>
-             
-            </div>
-            <br>
-
-            <div class="mb-3">
-              <label for="userPwd">Password</label>
-              <input type="password" class="form-control" id="userPwd" placeholder="">
-            </div>
-            <br>
-
-            <div class="mb-3">
-                    <label for="userPwd">Password checking</label>
-                    <input type="password" class="form-control" id="userPwd" placeholder="">
-                  </div>
-            <br>
-
-            <div class="mb-3">
-              <label for="userName">Username</label>
-              <!-- <div class="input-group"> -->
-                <input type="text" class="form-control" id="userName" placeholder="Username" required>
-              <!-- </div> -->
-            </div>
-            <br>
-
-            <div class="mb-3">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
-            </div>
-            <br>
-
-            <div class="mb-3">
-              <label for="birthday">Birthday</label>
-              <input type="date" class="form-control" id="birthday">
-            </div>
-            <br>
-            
-
-            <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="Category">Category</label>
-                <select class="custom-select category" name="category[]" multiple="multiple">
-                  <option value="united states">United States</option>
-                  <option value="united kingdom">United Kingdom</option>
-                  <option value="korea">Korea</option>
-                  <option value="vietnam">Vietname</option>
-                  <option value="thailand">thailand</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please select your interests
-                </div>
-              </div>
-
-            </div>
-
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-          </form>
-        </div>
-      </div>
-
-</section>
-
-<footer class="footer">
-<div class="container">
-<div class="row">
-<div class="col-md-12">
-<div class="col-md-4">
-<h3>about me</h3>
-<p>I'm a Professional Web Developer. I have a great experience for a long time about Front-end and Wordpress theme development. I try to give the best services.</p>
-<a href="about.html">Read full about me</a>
-<address>
-E-mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7119141d1d1e310219100114150519141c145f121e1c">[email&#160;protected]</a> <br>
-Phone: +88-0-1723 511 340 <br>
-239/2 NA, Dhaka 1206, BD
-</address>
-</div>
-<div class="col-md-4">
-<h3>Subscribe &amp; Follow</h3>
-<p>Enter your email address to subscribe to this blog and receive notifications.</p>
-<form action="?">
-<input type="email" placeholder="Enter your email">
-<input type="submit" value="SUBSCRIBE NOW">
+<div class = "outer">
+<br>
+<h2 align = "center"> 회원 정보 수정 </h2>
+<br />
+<form id = "joinform"  method="post">
+	<table align="center">
+	<tr>
+		<td width="120px"> 아이디 </td>
+		<td>
+		<input type="text" name="userId" id ="userId" class="int" required="required" maxlength="20"></td>
+		<td><!--   <button id="idCheck"> 중복확인</button> --></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class= "error_next_box" id="idMsg" style="display:none" role="alert"></span></td>
+	</tr>
+	<tr>
+		<td> 비밀번호 </td>
+		<td><input type="password" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class= "error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span></td>
+	</tr>
+	<tr>
+		<td> 비밀번호 확인 </td>
+		<td><input type="password" id="userPwd2" name="userPass2" ></td>
+		<td><label id="pwdResult"></label></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span></td>
+	</tr>
+	<tr>
+		<td> 이름 </td>
+		<td><input type="text" maxlength="5" id="userName" name="userName" required="required" ></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span></td>
+	</tr>
+	<tr>
+		<td> 이메일 <br /></td>
+		<td><input type="email" id="userEmail" name="userEmail" required="required" ></td>
+		<td></td>
+	</tr>
+	</table>
 </form>
-<div class="socials text-center">
-<a href="#"><i class="fa fa-facebook"></i></a>
-<a href="#"><i class="fa fa-twitter"></i></a>
-<a href="#"><i class="fa fa-instagram"></i></a>
-<a href="#"><i class="fa fa-linkedin"></i></a>
-<a href="#"><i class="fa fa-google-plus"></i></a>
 </div>
-</div>
-<div class="col-md-4 instagram-photos">
-<h3>Follow @ Instagram</h3>
+<div class = "outer2">
+<h2 align = "center"> 추가 정보 입력 </h2>
+<br />
+<form id = "joinUpForm"  method="post">
+	<table align="center">
+	<tr>
+		<td> 성별 <br /></td>
+	
+		<td><input type="checkbox" id="usesrGender" name="usesrGender">남
+			<input type="checkbox" id="usesrGender" name="usesrGender">여</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td> 나이 <br /></td>
+		<td><input type="date" id="usesrBirth" name="usesrBirth"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td> 관심 분야 <br /></td>
+		<td><span></span></td>
+		<td><select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+  		<option value="AL">Alabama</option>
+  		<option value="WY">Wyoming</option>
+		</select></td>
+	</tr>
+	
+	</table>
+</form>
 
-<a href="#"><img src="http://placehold.it/100x100" alt=""></a>
-<a href="#"><img src="http://placehold.it/100x100" alt=""></a>
-<a href="#"><img src="http://placehold.it/100x100" alt=""></a>
-<a href="#"><img src="http://placehold.it/100x100" alt=""></a>
-<a href="#"><img src="http://placehold.it/100x100" alt=""></a>
-<a href="#"><img src="http://placehold.it/100x100" alt=""></a>
 </div>
-</div>
-</div>
-</div>
-<div class="text-right">
-<a href="#home"><i class="fa fa-arrow-up"></i></a>
-</div>
-<div class="footer-bottom">
-<div class="container">
-<div class="row">
-<div class="col-md-6">
-<p>&copy; 2015 — Designed by <a href="https://www.behance.net/khalilkode">Md. Khalil Uddin</a> &amp; Developed by <a href="https://mostafizshamim.com/">Mostafiz Shamim</a></p>
-</div>
-<div class="col-md-6 footer-menu text-right">
-<ul class="list-inline">
-<li><a href="index.html">home</a></li>
-<li><a href="about.html">about</a></li>
-<li><a href="works.html">my works</a></li>
-<li><a href="contact.html">contact</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</footer>
 
-<script data-cfasync="false" src="../../resources/js/jquery-2.1.1.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="../../resources/js/rocket-loader.min.js" defer=""></script></body>
-</html>
+<script>
+
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
+
+</script>
 
 </body>
+
 </html>

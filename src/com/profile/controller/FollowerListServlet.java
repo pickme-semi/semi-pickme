@@ -32,8 +32,12 @@ public class FollowerListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<User> list = null;
+		ProfileService ps = new ProfileService();
+		int result = 0;
 		
-		list = new ProfileService().followerList();
+		list = ps.followerList();
+		
+		result = ps.followerCount();
 		
 		System.out.println(list);
 		
@@ -42,6 +46,7 @@ public class FollowerListServlet extends HttpServlet {
 		if(list != null){
 			page = "views/profile/followerList.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("result", result);
 		}else{
 			page = "views/common/errorPage.jsp";
 		}

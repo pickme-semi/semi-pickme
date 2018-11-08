@@ -7,8 +7,9 @@
 <title>픽 상세보기 페이지</title>
 </head>
    <!-- Bootstrap core CSS -->
-    <link href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet">
-
+   <link rel="stylesheet" href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css">
+<script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
 
 
 <style>

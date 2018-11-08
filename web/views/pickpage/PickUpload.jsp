@@ -5,11 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>픽 업로드 페이지</title>
-<link rel="stylesheet" type="text/css"
+<!-- <link rel="stylesheet" type="text/css"
 	href="../../resources/css/pickupload.css" />
-<!-- 제이쿼리 파일 -->
+제이쿼리 파일
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<link rel="stylesheet" href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css">
+<script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
+	
+	
+	
 <!-- 업로드 이미지 미리보기 구현. -->
 <script type="text/javascript">
 		<!-- 첫번째 사진 미리보기 -->
@@ -31,7 +37,7 @@
             }
         }
         
-        <!-- 두번째 사진 미리보기 -->       
+        <!-- 두번째 사진 미리보기  -->       
         
         $(function() {
             $("#up2").on('change', function(){
@@ -107,8 +113,9 @@
 		<br>
 		<h2 align="center">Pick 올리기</h2>
 		<div class="col-md-12">
-			<form action="<%=request.getContextPath()%>/pickup.pm/" method="post"
-				enctype="multipart/form-data">
+			<form action="<%= request.getContextPath() %>/pickup.pm" 
+			method="post" encType="multipart/form-data">
+			
 				<table>
 					<tr>
 						<td>제목</td>
@@ -151,47 +158,57 @@
 				<span id="viewTourCategory"> 여행 카테고리: 
 				<select	class="form-control tourMainCategory"
 				 name="tourtMainCategory" style="width: 200px">
-						<option value="1">국내여행</option>
-						<option value="2">해외여행</option>
+				 		<option value="1">전체</option>
+						<option value="2">국내여행</option>
+						<option value="3">해외여행</option>
 				</select>
 				</span>
 				<span id="viewSportCategory" style="display: none"> 스포츠 카테고리: 
 				<select class="form-control sportsMainCategory"
 				 name="sportsMainCategory" style="width: 200px">
-						<option value="1">실내운동</option>
-						<option value="2">야외운동</option>
+						<option value="1">전체</option>
+						<option value="2">실내운동</option>
+						<option value="3">야외운동</option>
 				</select>
 				</span> <span id="viewFoodCategory" style="display: none"> 음식 카테고리:
 				<select class="form-control foodMainCategory"
 				name="foodMainCategory" style="width: 200px">
-					<option value="1">한식</option>
-					<option value="2">일식</option>
-					<option value="3">중식</option>
+					<option value="1">전체</option>
+					<option value="2">한식</option>
+					<option value="3">일식</option>
+					<option value="4">중식</option>
 				</select>
 				</span>
      		   
 				<br>
-				<br> <label>마감일 설정 </label><input type="datetime-local" name="ddate">
+				<br> <label>마감일 설정 </label><input type="date" name="ddate">
 				<br>
+				
+				<!-- 
 				<br> <label>보유 포인트</label><input type="text"
 					placeholder="현재포인트" /> <br>
 				<br>
-				<!--  -->
+				
 
 				<label>사용할 포인트</label> <input type="number" min="10" max="1000"
 					value="10" step="10" />
-
-
-			</form>
-
-			<br>
+				 
+				 포인트 사용구간, 일단 사용하지 않을듯 하여 우선 주석처리해둠.
+				 -->
+				 
+					
 			<br>
 			<br>
 			<div align="center">
 				<button type="submit">작성완료</button>
 				<button type="reset">취소</button>
 			</div>
+					
 
+
+			</form>
+
+			
 
 		</div>
 	</div>
