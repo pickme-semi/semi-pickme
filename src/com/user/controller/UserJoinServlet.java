@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.user.exception.UserException;
 import com.user.model.service.UserService;
@@ -48,7 +49,14 @@ public class UserJoinServlet extends HttpServlet {
 		try {
 			 us.JoinUser(u);
 			System.out.println("회원가입 완료! : " + u );
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("user", u);
+			
 			response.sendRedirect("/pickme");
+			
+			
 		} catch (UserException e) {
 			request.setAttribute("msg", "회원가입 중 에러가 발생하였습니다.");
 			request.setAttribute("exception",e);
