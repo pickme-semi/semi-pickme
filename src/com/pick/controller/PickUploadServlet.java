@@ -2,6 +2,8 @@ package com.pick.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -50,7 +52,10 @@ public class PickUploadServlet extends HttpServlet {
 			
 			System.out.println("root 경로 확인 : " + root);
 					
-			String savePath = root + "/pickUploadFiles/";
+			String savePath = root + "/PickUploadFiles//";			
+			
+			
+			System.out.println("저장 경로 : " + savePath);
 			
 			MultipartRequest mrequest = 
 					new MultipartRequest(request, 
@@ -78,16 +83,33 @@ public class PickUploadServlet extends HttpServlet {
 				
 				saveFiles.add(mrequest.getFilesystemName(name));
 				originFiles.add(mrequest.getOriginalFileName(name));				
-			}
-		
-		
+			}		
 		
 		PickMe pm = new PickMe();
 		
+		
 		pm.setTitle(mrequest.getParameter("title"));
-		pm.setSelect_1(mrequest.getParameter("pick1"));
-		pm.setSelect_2(mrequest.getParameter("pick2"));
-		pm.setContent(mrequest.getParameter("content"));
+		pm.setSelect_1(mrequest.getFilesystemName("pick1"));
+		pm.setSelect_2(mrequest.getFilesystemName("pick2"));
+		pm.setContent(mrequest.getParameter("content"));		
+		
+		// System.out.println(mrequest.getParameter("ddate"));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date ddate;
+		try {
+			
+			ddate = new java.sql.Date(sdf.parse(mrequest.getParameter("ddate")).getTime());
+
+			pm.setDdate(ddate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("pm :" +pm);
+		
+		
 		
 		ArrayList<Attachment> list = new ArrayList<Attachment>();
 		
@@ -109,6 +131,8 @@ public class PickUploadServlet extends HttpServlet {
 		
 		if(result > 0 ) {
 			response.sendRedirect("pickmain.pm");
+			System.out.println(pm);
+			System.out.println(list);
 		}
 		
 		}

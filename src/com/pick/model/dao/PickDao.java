@@ -64,20 +64,25 @@ public class PickDao {
 	}
 
 	public int insertPick(Connection con, PickMe pm) {
+		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String sql = prop.getProperty("insertPick");
 		
 		try {
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);		
 			
-			pstmt.setString(3, pm.getTitle());
 			pstmt.setString(1, pm.getSelect_1());
 			pstmt.setString(2, pm.getSelect_2());
+			pstmt.setString(3, pm.getTitle());
 			pstmt.setString(4, pm.getContent());
+			pstmt.setDate(5, pm.getDdate());
+			
+			pstmt.executeQuery();
 			
 		} catch (SQLException e) {
+			
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
