@@ -31,7 +31,7 @@
             }
         }
         
-        <!-- 두번째 사진 미리보기 -->       
+        <!-- 두번째 사진 미리보기  -->       
         
         $(function() {
             $("#up2").on('change', function(){
@@ -107,8 +107,9 @@
 		<br>
 		<h2 align="center">Pick 올리기</h2>
 		<div class="col-md-12">
-			<form action="<%=request.getContextPath()%>/pickup.pm/" method="post"
-				enctype="multipart/form-data">
+			<form action="<%= request.getContextPath() %>/pickup.pm" 
+			method="post" encType="multipart/form-data">
+			
 				<table>
 					<tr>
 						<td>제목</td>
@@ -180,18 +181,21 @@
 
 				<label>사용할 포인트</label> <input type="number" min="10" max="1000"
 					value="10" step="10" />
-
-
-			</form>
-
-			<br>
+					
+					
+					<br>
 			<br>
 			<br>
 			<div align="center">
 				<button type="submit">작성완료</button>
 				<button type="reset">취소</button>
 			</div>
+					
 
+
+			</form>
+
+			
 
 		</div>
 	</div>
