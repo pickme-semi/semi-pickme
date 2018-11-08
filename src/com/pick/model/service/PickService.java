@@ -26,6 +26,7 @@ public class PickService {
 	}
 
 	public int insertPick(PickMe pm, ArrayList<Attachment> list) {
+		
 		int result = 0;
 		
 		Connection con = getConnection();
@@ -37,16 +38,17 @@ public class PickService {
 			for(int i = 0; i < list.size(); i++){
 				list.get(i).setBid(bid);
 			}
-			
+			result = 1;			
 		}
 		
-		int result2 = pDao.insertAttachment(con, list);
+		/*int result2 = pDao.insertAttachment(con, list);
 		
 		if( result1 > 0 && result2 > 0) {
 			commit(con);
 			result = 1;
 			
-		} else rollback(con);
+		} else rollback(con);*/
+		
 		
 		close(con);
 		

@@ -16,10 +16,47 @@ public class ProfileService {
 		
 		ArrayList<User> list = pDao.followerList(con);
 		
+		
 		close(con);
 		
 		return list;
 		
+	}
+
+	public ArrayList<User> followingList() {
+		Connection con = getConnection();
+		
+		ArrayList<User> list = pDao.followingList(con);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int followerCount() {
+		Connection con = getConnection();
+		
+		// 팔로워 수 
+		int result = pDao.followerCount(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int followingCount() {
+		
+		Connection con = getConnection();
+		
+		// 팔로워 수 
+		int result = pDao.followingCount(con);
+		
+		close(con);
+		
+		return result;
 	};
+	
+	
+	
 
 }

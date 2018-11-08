@@ -8,12 +8,17 @@
 <title>회원가입_[Pick Me]</title>
 <style>
 	.outer{
-		width : 450px;
-		height : 400px;
+		width : 600px;
+		height : 500px;
 		background : mistyrose;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
+	}
+	
+	.error_next_box{
+		color : red;
+		font-size : 10px;
 	}
 	
 	#p1{
@@ -36,17 +41,23 @@
 	<table align="center">
 	<tr>
 		<td width="120px"> 아이디 </td>
-		<td><input type="text" name="userId" id ="userId" required="required" ></td>
-		<td> <button id="idCheck"> 중복확인</button></td>
+		<td>
+		<input type="text" name="userId" id ="userId" class="int" required="required" maxlength="20"></td>
+		<td><!--   <button id="idCheck"> 중복확인</button> --></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class= "error_next_box" id="idMsg" style="display:none" role="alert"></span></td>
 	</tr>
 	<tr>
 		<td> 비밀번호 </td>
 		<td><input type="password" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
-		<td><label for="pswd1" class="lbl">
-				<span id="pswd1Span" class="step_txt"></span>
-			</label>
-			 <span class="error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+		<td>
 		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class= "error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span></td>
 	</tr>
 	<tr>
 		<td> 비밀번호 확인 </td>
@@ -54,20 +65,32 @@
 		<td><label id="pwdResult"></label></td>
 	</tr>
 	<tr>
+		<td></td>
+		<td><span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span></td>
+	</tr>
+	<tr>
 		<td> 이름 </td>
-		<td><input type="text" maxlength="5" name="userName" required="required" ></td>
+		<td><input type="text" maxlength="5" id="userName" name="userName" required="required" ></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td> 이메일 <br /></td>
-		<td><input type="email" name="userEmail" required="required" ></td>
 		<td></td>
+		<td><span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span></td>
+	</tr>
+	<tr>
+		<td> 이메일 <br /></td>
+		<td><input type="email" id="userEmail" name="userEmail" required="required" ></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span></td>
 	</tr>
 	
 	</table>
 	<br />
 	<div class="btns" align="center">
-	<button type="submit" > 가입하기 </button>
+	<button type="button" id= "btnJoin" > 가입하기 </button>
 	<br><br>
 	<p id="p1">이미 계정이 있으신가요? <a href="/pickme/views/user/UserLoginForm.jsp">로그인</a></p>
 
@@ -84,48 +107,77 @@
 </div>
 
 <script>
+		//회원가입 유효성 검사
 		var idFlag = false;
 		var pwFlag = false;
+		var pw2Flag = false;
+		var nameFlag = false;
+		var emailFlag = false;
 		
-
-		function insertMember() {
-			$("#joinform").submit();
-		}
-		
-		$("#joinform").submit(function(event){
-			if(/*$("#userPwd").val() == "" ||*/ $("#userId").val() == "") alert("아이디나 비밀번호는 필수 값입니다.");
-			else if($("#userPwd").val() != $("#userPwd2").val()) alert("비밀번호 확인 값과 다릅니다.");
-			else return;
-			event.preventDefault();
-		});
-		
-		$("#userPwd").blur(function(){
-			checkPswd1();
-		});
-		
-		
-		 function checkPswd1() {
-			 if($("#userPwd").val().length < 8)
-				 alert("비밀번호는 8자리 이상 입력하여야 합니다.")
-			 else if()
-		 }
-		
-
-		
-		
-		$('#idCheck').click(function(){
+		$(document).ready(function(){
 			
-			$.ajax({
+			$("#userId").blur(function() {
+	            idFlag = false;
+	            checkId();
+	        });
+
+	        $("#userPwd").blur(function() {
+	            pwFlag = false;
+	            checkPswd1();
+	        });
+
+	        $("#userPwd2").blur(function() {
+	            checkPswd2();
+	        });
+
+	        $("#userName").blur(function() {
+	            checkName();
+	        });
+			
+	        $("#userEmail").blur(function() {
+	            checkEmail();
+	        });
+			
+	        
+			
+		});
+		//아이디 체크
+		function checkId(){
+			
+			var id = $("#userId").val();
+			var oMsg = $("#idMsg");
+			
+			if (id == ""){
+		       showErrorMsg(oMsg,"필수 정보입니다.");
+		       return false;  
+			}else{
+				hideMsg(oMsg);
+				idFlag = true;
+			}
+			
+			//아이디 정규식
+			var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+	        if (!isID.test(id)) {
+	            showErrorMsg(oMsg,"5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+	            idFlag=false;
+	            return false;
+	            
+	        }
+	        
+	        //아이디 중복확인
+	        $.ajax({
 				url : "/pickme/idDup.au",
 				type : "post",
 				data : { userId : $('#userId').val() },
 				success : function(data){
 					console.log(data);
 					if(data == 'no'){
-						alert("이미 사용중인 아이디 입니다.");
+						showErrorMsg(oMsg,"이미 사용하고있는 아이디 입니다.");
 						$('#userId').select();
+						idFlag = false; 
 					} else {
-						alert("사용 가능한 아이디 입니다.");
+						showErrorMsg(oMsg,"사용 가능한 아이디 입니다.");
+						idFlag=true;
 					}
 					
 					
@@ -138,8 +190,163 @@
 				}
 				
 			});
+
+	        return true;
+
+			
+			
+		}
+		// 비밀번호 체크
+		function checkPswd1() {
+			var pwd = $("#userPwd").val();
+			var oMsg = $("#pswd1Msg");
+			
+			if(pwd==""){
+				showErrorMsg(oMsg,"필수 정보 입니다.");
+				return false;
+			}
+			
+	        // 비밀번호 정규식
+	        var isPwd = /^[A-Za-z0-9_-]{6,18}$/;   
+	          if(!isPwd.test(pwd)){
+	             showErrorMsg(oMsg,"5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.")
+	             return false;
+	          }else{
+	        	  hideMsg(oMsg);
+	        	  pwFlag=true;
+	          }
+	          
+	          
+	          
+	       }
+		// 비밀번호 확인
+		function checkPswd2(){
+			var pwd1 = $("#userPwd");
+			var pwd2 = $("#userPwd2");
+			var oMsg = $("#pswd2Msg");
+			
+			if (pwd2.val() == "") {
+	            showErrorMsg(oMsg,"필수 정보입니다.");
+	            pw2Flag = false;
+	            return false;
+	        }
+	        if (pwd1.val() != pwd2.val()) {
+	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+	            pwd2.val("");
+	            pw2Flag = false;
+	            return false;
+	        } else {
+	            hideMsg(oMsg);
+	            pw2Flag = true;
+	            return true;
+	        }
+
+	        return true;
+
+			
+		}
+		
+		// 이름 체크
+		function checkName(){
+			var oMsg = $("#nameMsg");
+			var nonchar = /[^가-힣a-zA-Z0-9]/gi;
+			var name = $("#userName").val();
+			
+			
+	        if (name == "") {
+	            showErrorMsg(oMsg,"필수 정보입니다.");
+	            nameFlag = false;
+	            return false;
+	        }
+	        if (name != "" && nonchar.test(name)) {
+	            showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+	            nameFlag = false;
+	            return false;
+	        }
+
+	        hideMsg(oMsg);
+	        nameFlag = true;
+	        return true;
+	    
+		}
+		
+		// 이메일 체크
+		function checkEmail() {
+	        var id = $("#userId").val();
+	        var email = $("#userEmail").val();
+	        var oMsg = $("#emailMsg");
+
+	        if (email == "") {
+	        	showErrorMsg(oMsg,"필수 정보입니다.");
+	            emailFlag = false;
+	            return true;
+	        }
+		
+	        // 이메일 정규식
+	        var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	        var isHan = /[ㄱ-ㅎ가-힣]/g;
+	        if (!isEmail.test(email) || isHan.test(email)) {
+	            showErrorMsg(oMsg,"이메일 주소를 다시 확인해주세요.");
+	            emailFlag = false;
+	            return false;
+	        }
+	        
+	        hideMsg(oMsg);
+	        emailFlag = true;
+	        return true;
+	    }
+
+		
+		// 에러메시지 함수 표출
+		function showErrorMsg(obj, msg) {
+			//obj.style.display = 'inline';
+	        obj.attr("style", "display:");
+	        obj.html(msg);
+	        obj.show();
+	    }
+		
+		// 메시지 숨김(맞을때)
+		function hideMsg(obj){
+			obj.attr("style","display:none");
+		}
+		
+		//가입하기 버튼 클릭시
+		$("#btnJoin").click(function(){
+			/*
+			console.log("id: " + idFlag);
+			console.log("pwd: " + pwFlag);
+			console.log("pwd2 : " + pw2Flag);
+			console.log("name : " + nameFlag);
+			console.log("email : " + emailFlag);
+			*/
+			
+			if(!idFlag){
+				$("#userId").focus();
+			}
+			else if(!pwFlag){
+				$("#userPwd").focus();
+			}
+			else if(!pw2Flag){
+				$("#userPwd2").focus();
+			}
+			else if(!nameFlag){
+				$("#userName").focus();
+			}
+			else if(!emailFlag){
+				$("#userEmail").focus();
+			}else{
+				insertMember();
+			}
 			
 		});
+		
+		function insertMember() {
+				$("#joinform").submit();
+		}
+		
+		
+
+	
 
 </script>
 <%@ include file="../common/footer.jsp" %>
