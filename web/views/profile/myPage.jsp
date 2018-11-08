@@ -4,8 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- select2 소스  -->
+
 <script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
-<title>회원가입_[Pick Me]</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<title>회원 정보 수정 페이지</title>
 <style>
 	.outer{
 		width : 600px;
@@ -48,8 +54,7 @@
 	<table align="center">
 	<tr>
 		<td width="120px"> 아이디 </td>
-		<td>
-		<input type="text" name="userId" id ="userId" class="int" required="required" maxlength="20"></td>
+		<td id ="userId" ><%= user.getUserId() %></td>
 		<td><!--   <button id="idCheck"> 중복확인</button> --></td>
 	</tr>
 	<tr>
@@ -77,7 +82,7 @@
 	</tr>
 	<tr>
 		<td> 이름 </td>
-		<td><input type="text" maxlength="5" id="userName" name="userName" required="required" ></td>
+		<td id="userName"><%= user.getUserName() %></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -86,7 +91,7 @@
 	</tr>
 	<tr>
 		<td> 이메일 <br /></td>
-		<td><input type="email" id="userEmail" name="userEmail" required="required" ></td>
+		<td><input type="email" id="userEmail" name="userEmail" required="required" value="<%= user.getUserEmail()%>"/></td>
 		<td></td>
 	</tr>
 	</table>
@@ -100,8 +105,8 @@
 	<tr>
 		<td> 성별 <br /></td>
 	
-		<td><input type="checkbox" id="usesrGender" name="usesrGender">남
-			<input type="checkbox" id="usesrGender" name="usesrGender">여</td>
+		<td><input type="checkbox" name="gender" id="male" value="male">남
+			<input type="checkbox" name="gender" id="female" value="Female">여</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -111,11 +116,21 @@
 	</tr>
 	<tr>
 		<td> 관심 분야 <br /></td>
-		<td><span></span></td>
-		<td><select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-  		<option value="AL">Alabama</option>
-  		<option value="WY">Wyoming</option>
-		</select></td>
+		<td>
+		<select class="interest-multiple" name="interests[]" data-placeholder="Select an option" multiple="multiple">
+  		<optgroup label="travel">
+  			<option value="japan">Japan</option>
+  			<option value="korea">Korea</option>
+  			<option value="US">US</option>
+  		</optgroup>
+  		<optgroup label="workout">Work Out
+  			<option value="Running">Running</option>
+  			<option value="yoga">Yoga</option>
+  			<option value="hiking">hiking</option>
+  		</optgroup>
+		</select>
+		</td>
+		<td></td>
 	</tr>
 	
 	</table>
@@ -123,13 +138,18 @@
 
 </div>
 
+
 <script>
 
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+	$(document).ready(function() {
+		
+    $('.interest-multiple').select2();
+    
 });
 
 </script>
+
+
 
 </body>
 
