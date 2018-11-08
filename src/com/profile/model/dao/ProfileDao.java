@@ -74,5 +74,91 @@ public class ProfileDao {
 		return list;
 	}
 
+	public ArrayList<User> followingList(Connection con) {
+		Statement stmt = null;
+		ArrayList<User> list = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("followingList");
+		
+		try {
+			
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			list = new ArrayList<User>();
+			
+			while(rset.next()){
+				User u = new User();
+				
+				u.setUserId(rset.getString("ID"));
+				u.setProfile(rset.getString("PROFILE"));
+				
+				list.add(u);
+				
+			}
+			
+			System.out.println("list : " + list);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return list;
+	}
+
+
+	public int followerCount(Connection con) {
+		Statement stmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("followCount");
+		
+		try {
+			
+			stmt = con.createStatement();
+		
+			result = stmt.executeUpdate(sql);
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally{
+			close(stmt);
+		}
+		
+		return result;
+	}
+
+	public int followingCount(Connection con) {
+		
+		Statement stmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("followingCount");
+		
+		try {
+			
+			stmt = con.createStatement();
+		
+			result = stmt.executeUpdate(sql);
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally{
+			close(stmt);
+		}
+		
+		return result;
+	}
+
 	
 }

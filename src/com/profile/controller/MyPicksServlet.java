@@ -1,28 +1,23 @@
 package com.profile.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.profile.model.service.ProfileService;
-import com.user.model.vo.User;
-
 /**
- * Servlet implementation class FollowerList
+ * Servlet implementation class MyPicksServlet
  */
-@WebServlet("/fList.pr")
-public class FollowerListServlet extends HttpServlet {
+@WebServlet("/mPicks.pr")
+public class MyPicksServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowerListServlet() {
+    public MyPicksServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +26,8 @@ public class FollowerListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<User> list = null;
-		ProfileService ps = new ProfileService();
-		int result = 0;
 		
-		list = ps.followerList();
-		
-		result = ps.followerCount();
-		
-		System.out.println(list);
-		
-		String page = "";
-		
-		if(list != null){
-			page = "views/profile/followerList.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("result", result);
-		}else{
-			page = "views/common/errorPage.jsp";
-		}
-		request.getRequestDispatcher(page).forward(request, response);
-		
+		request.getRequestDispatcher("views/profile/myPicks.jsp").forward(request, response);
 	}
 
 	/**
