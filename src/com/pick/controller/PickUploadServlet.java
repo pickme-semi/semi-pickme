@@ -2,6 +2,8 @@ package com.pick.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.common.MyRenamePolicy;
+import com.pick.model.vo.Attachment;
+import com.oreilly.servlet.MultipartRequest;
 import com.pick.model.service.PickService;
 import com.pick.model.vo.PickMe;
 
@@ -33,30 +38,80 @@ public class PickUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PickService ps = new PickService();
-		PickMe pm = new PickMe();
+		
+		if(ServletFileUpload.isMultipartContent(request)){
+			// 만약 multipart/form-data 로 전송이 되었다면 실행
+			
+			// 전송할 파일의 용량 선정
+			int maxSize = 1024 * 1024 * 10;
+			
+			// 저장할 경로 설정하기
+			String root = request.getServletContext().getRealPath("/resources");
+			
+			System.out.println("root 경로 확인 : " + root);
+					
+			String savePath = root + "/pickUploadFiles/";
+			
+			MultipartRequest mrequest = 
+					new MultipartRequest(request, 
+										savePath,
+										maxSize,
+										"UTF-8",
+										new MyRenamePolicy());
+			
+			
+			ArrayList<String> saveFiles = new ArrayList<String>();
+			
+			// 원본 파일 명
+			ArrayList<String> originFiles = new ArrayList<String>();
+			
+			// 폼으로 전송된 파일 이름들을 받아온다.
+			Enumeration<String> files
+			 = mrequest.getFileNames();
+			
+			while(files.hasMoreElements()){
+				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
 				
-		String ptitle = request.getParameter("title");
-		String pwriter = request.getParameter("userid");
-		String pick1 = request.getParameter("pick1");
-		String pick2 = request.getParameter("pick2");
-		String pcontent = request.getParameter("content");
-		String pcategory = request.getParameter("category");
+				String name = files.nextElement();
+				
+				System.out.println("name : " + name);
+				
+				saveFiles.add(mrequest.getFilesystemName(name));
+				originFiles.add(mrequest.getOriginalFileName(name));				
+			}
 		
 		
-		pm.setTitle(ptitle);
 		
-		pm.setSelect_1(pick1);
-		pm.setSelect_2(pick2);
-		pm.setContent(pcontent);
-		pm.setCategory(category);
+		PickMe pm = new PickMe();
 		
-		int result = ps.insertNotice(pm);
+		pm.setTitle(mrequest.getParameter("title"));
+		pm.setSelect_1(mrequest.getParameter("pick1"));
+		pm.setSelect_2(mrequest.getParameter("pick2"));
+		pm.setContent(mrequest.getParameter("content"));
+		
+		ArrayList<Attachment> list = new ArrayList<Attachment>();
+		
+		for(int i = originFiles.size() -1 ; i >= 0 ; i--){
+			// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
+			Attachment at = new Attachment();
+			
+			at.setFilePath(savePath);
+			at.setOriginName(originFiles.get(i));
+			at.setChangeName(saveFiles.get(i));
+			
+			System.out.println("at : " + at);
+			list.add(at);
+		}
+		
+		PickService ps = new PickService();
+		
+		int result = ps.insertPick(pm, list);
 		
 		if(result > 0 ) {
 			response.sendRedirect("pickmain.pm");
 		}
 		
+		}
 		
 	}
 
