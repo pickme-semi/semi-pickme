@@ -15,17 +15,15 @@
 </head>
 <body>
 
-                     <div id="wrap">
-        
-     
-                <div id="hyrendContentBody" style="height: 1658px;">
+        <div id="wrap">
+        <div id="hyrendContentBody" style="height: 1658px;">
                 
         <article id="container" class="mnHelpdesk pgHelpdeskHome">
             <div class="innerContainer">
   
                 <%@ include file="qnaHeader.jsp"  %>
     
-    
+    			
                 <div class="contentBody">
                 
                 
@@ -37,12 +35,11 @@
             <h1 style="font-size:30px;">Question</h1>               
             <p class="desc_vt">&nbsp;</p>
             <p class="ess mt"><span class="bl_ess">필수</span>항목은 <em>필수입력</em> 항목입니다.</p>
-            <form id="inquiryForm" name="inquiryForm" method="post" action="" enctype="multipart/form-data">
-                <input type="hidden" name="alias" value="bugs_member">
-                <input type="hidden" id="rootCategoryNo" value="5658">
-                <input type="hidden" id="serviceName" name="inquiry.serviceTypeCode" value="bugs">
+            <form id="inquiryForm" name="inquiryForm" method="post" action="<%= request.getContextPath() %>/qInsert.bo" enctype="multipart/form-data">
+                
+             
                 <input type="hidden" id="smsAcceptYN" name="inquiry.smsAcceptYN" value="N">
-                <input type="hidden" id="fileMaxUploadSize" value="10485760">
+                
                 
                 <fieldset>
                     <legend class="blind">1:1 문의하기</legend>
@@ -62,25 +59,25 @@
                                         
                                         <div id="categoryArea" style="overflow: hidden;">
                                             <span class="sel" style="width: 198px;">
-                                                <select id="upperCategory">
+                                                <select id="upperCategory" name = "category">
                                                     <option value="">문의유형 선택</option>
                                                 
-                                                    <option value="5730">PICK</option>
+                                                    <option value="Q02">PICK</option>
                                                 
-                                                    <option value="5731">회원가입/탈퇴</option>
+                                                    <option value="Q01">회원가입/탈퇴</option>
                                                 
-                                                    <option value="5732">포인트</option>
+                                                    <option value="Q03">포인트</option>
                                                 
-                                                    <option value="5733">오류</option>
+                                                    <option value="Q00">오류</option>
                                                 
-                                                    <option value="5734">기타</option>
+                                                    <option value="Q00">기타</option>
                                                 
                                                 </select>
                                             </span> <br>
                                         </div> <br>
                                         
                                         
-                                        <input type="hidden" name="inquiry.categoryNo" id="categoryNo" value="">
+                                        
                                         <input type="hidden" id="categoryName" value="회원"> 
                                     </td>
                                 </tr>
@@ -101,9 +98,9 @@
                 </span>
             </div>
             <div class="email complete" style="display: block;">
-                <input type="text" class="emailId inp" style="width:133px">
+                <input type="text" class="emailId inp" style="width:133px" name="email1">
                 <span class="mid">@</span>
-                <input type="text" class="emailDomain inp" style="width:133px" title="이메일 계정 입력">
+                <input type="text" class="emailDomain inp" style="width:133px" title="이메일 계정 입력" name="email2">
                 <span class="sel ml" style="width:100px">
                     <select class="emailDomainType" title="이메일 계정">
                         <option value="another">직접입력</option>
@@ -126,7 +123,7 @@
         <td>
             <div class="pr">
                 <span class="help_txt"></span>
-                <input type="text" id="inquiryTitle" class="contents inp" style="width:462px" maxlength="100">
+                <input type="text" id="inquiryTitle" class="contents inp" style="width:462px" maxlength="100" name="title">
                 <input type="hidden" class="guideContent" value="">
                 <input type="hidden" class="guideDisplayYN" value="N">
                 <input type="hidden" class="guideInitializeYN" value="Y">
@@ -143,7 +140,7 @@
         <td>
             <div class="pr">
                 <textarea id="inquiryContent" 
-                class="contents inp" cols="30" rows="4" maxlength="5000" style="width:482px; height: 300px">
+                class="contents inp" cols="30" rows="4" maxlength="5000" style="width:482px; height: 300px" name="content">
                 </textarea>
                 <p class="rei"><span class="bytes">0/5000글자</span></p>
                 <input type="hidden" class="guideContent" value="">
@@ -157,7 +154,7 @@
             <input type="hidden" id="customerMemberID" class="contents" value="">
             <input type="hidden" class="itemNo" value="2">
         </td>
-    </tr><tr class="itemArea PHONE" sort="5" itemno="8" requiredyn="N" inputlength="30">
+    </tr><tr class="itemArea PHONE" sort="5" itemno="8" requiredyn="N" inputlength="30" name="phone">
         <th scope="row">
             <label for="cellphoneNumber" class="thin_ic">
                 
@@ -171,7 +168,7 @@
                 <span class="chk"><input type="checkbox" id="chkSmsAccept" style="width:15px; height:15px">
                 </span><label for="chkSmsAccept">알림신청</label>
                 <span class="sel ml2" style="width:79px">
-                    <select title="휴대폰 국번 선택" class="mobileHead">
+                    <select title="휴대폰 국번 선택" class="mobileHead" name = "num1">
                         <option value="010">010</option>
                         <option value="011">011</option>
                         <option value="016">016</option>
@@ -181,9 +178,9 @@
                     </select>
                 </span>
                 <span class="mid_desh">-</span> 
-                <input type="text" class="inp mobileMid" style="width:98px" maxlength="4">
+                <input type="text" class="inp mobileMid" style="width:98px" maxlength="4" name="num2">
                 <span class="mid_desh">-</span> 
-                <input type="text" class="inp mobileTail" style="width:98px" maxlength="4">
+                <input type="text" class="inp mobileTail" style="width:98px" maxlength="4" name="num3">
                 <!-- Don't remove -->
                 <div class="phone complete" style="display: none">
                 </div>
@@ -212,7 +209,7 @@
             <div class="pr">
                 <div class="inp_file"><br>
                     <input type="text" id="attachFile" class="contents" readonly="">
-                    <span class="bn bn_sm bn_gy"><em>파일선택</em><input type="file" class="file unstaged"></span> 
+                    <span class="bn bn_sm bn_gy"><em>파일선택</em><input type="file" class="file unstaged" name="file"></span> 
                     <span class="bn bn_sm bn_gy"><button type="button" class="btnAddFile">첨부</button></span>
                 </div>
                 <ul class="fileList" style="display:none;">

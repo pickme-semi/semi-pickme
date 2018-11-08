@@ -24,8 +24,11 @@
                 
         <article id="container" class="mnHelpdesk pgHelpdeskHome">
             <div class="innerContainer">
+            
   
+  					
                 <%@ include file="qnaHeader.jsp"  %>
+                
     
     
                 <div class="contentBody">
@@ -48,8 +51,8 @@
                                             <option value="4603">기타</option>
                                         </select>
                                     </span>
-                                    <input type="text" name="searchKeyword" id="searchInput" style="width:289px" onkeydown="searchInputEventHandler(event);">
-                                    <span class="btns"><button type="button" onclick="moveSearch();">검색</button></span>
+                                    <input type="search" name="searchKeyword" id="searchInput" style="width:289px; height: 32px" onkeydown="searchInputEventHandler(event);">
+                                    <span class="btns"><button type="submit" onclick="moveSearch();">검색</button></span>
                                     <p id="ex">EX )  비밀번호 변경  |  신고 방법  |  포인트</p>
                                    
                                 </fieldset>
@@ -151,6 +154,9 @@
        </article>
      </div>
    </div>
+   
+   
+   
  </body>
 </html>
             
