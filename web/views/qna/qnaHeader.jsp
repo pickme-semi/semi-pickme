@@ -12,7 +12,12 @@
 
 </head>
 <body>
+
+	
 	<header>
+		
+		<button id="mainBt">메인 화면</button>
+		<button id="MMainBt">관리자 센터</button>	
 		      <nav class="shortcuts">
             <p>고객센터 무엇이든 물어보세요</p>
             
@@ -64,13 +69,22 @@
 			location.href="qnaReport.jsp";
 		});
 		
-		$("#qReprot").click(function() {
+		$("#qReport").click(function() {
 			location.href="qnaReport.jsp";
 		});
-		$("#qQnA").click(function(){
+		$("#qQna").click(function(){
 			location.href="qnaUp.jsp"
 		});
 	});
+	
+	$(function(){
+		$("#mainBt").click(function() {
+			location.href="../main/main.jsp";
+		})
+		$("#MMainBt").click(function(){
+			location.href="qnaMainM.jsp";
+		})
+	})
 
 </script>
 	</header>
