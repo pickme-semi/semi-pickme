@@ -50,7 +50,7 @@ public class UserLoginServlet extends HttpServlet {
 			
 			session.setAttribute("user", u);
 			
-			response.sendRedirect("views/main/main.jsp");
+			response.sendRedirect("views/pickpage/PickMain.jsp");
 			
 		} catch (UserException e) {
 			request.setAttribute("msg", "회원 로그인 실패");
