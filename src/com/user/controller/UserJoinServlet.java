@@ -47,7 +47,7 @@ public class UserJoinServlet extends HttpServlet {
 		System.out.println("가입할 유저 정보 : " + u);
 		
 		try {
-			 us.JoinUser(u);
+			us.JoinUser(u);
 			System.out.println("회원가입 완료! : " + u );
 			
 			HttpSession session = request.getSession();
@@ -57,7 +57,7 @@ public class UserJoinServlet extends HttpServlet {
 			response.sendRedirect("/pickme");
 			
 			
-		} catch (UserException e) {
+		} catch (Exception e) {
 			request.setAttribute("msg", "회원가입 중 에러가 발생하였습니다.");
 			request.setAttribute("exception",e);
 			request.getRequestDispatcher("views/common/errPage.jsp").forward(request, response);

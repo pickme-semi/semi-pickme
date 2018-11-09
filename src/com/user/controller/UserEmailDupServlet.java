@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.user.model.service.UserService;
 
 /**
- * Servlet implementation class UserIdSearchServlet
+ * Servlet implementation class UserEmailDupServlet
  */
-@WebServlet("/idSearch.au")
-public class UserIdSearchServlet extends HttpServlet {
+@WebServlet("/emailDup.au")
+public class UserEmailDupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserIdSearchServlet() {
+    public UserEmailDupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +28,9 @@ public class UserIdSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("userIdSearchServlet");
-		
-		String username = request.getParameter("userName");
-		String email = request.getParameter("userEmail");
-		
-		System.out.println("username : " + username + "userEmail : " + email );
-		
-		UserService us = new UserService();
-		
-		String result = us.idSearch(username,email);
-		
-		response.getWriter().print(result);
-		
-		System.out.println(result);
+		response.getWriter().print(
+				(new UserService().emailDupCheck(request.getParameter("userEmail")) > 0)
+				? "no" : "ok");
 	}
 
 	/**

@@ -1,6 +1,8 @@
 package com.user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,8 +58,13 @@ public class UserLoginServlet extends HttpServlet {
 		} catch (UserException e) {
 			request.setAttribute("msg", "회원 로그인 실패");
 			request.setAttribute("exception", e);
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			PrintWriter out = response.getWriter();
+			System.out.println("로그인 실패");
+	         out.println("<script>alert('아이디나 비밀번호가 일치하지 않습니다.'); location.href='views/user/UserLoginForm.jsp';</script>");
+	          
+	         out.flush();
+	         out.close();
+			//request.getRequestDispatcher("views/user/UserLoginForm.jsp").forward(request, response);
 			e.printStackTrace();
 		}
 		

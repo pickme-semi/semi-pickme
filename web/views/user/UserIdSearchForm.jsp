@@ -47,18 +47,21 @@
 	<table align="center">
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="userName" placeholder="이름"></td>
+			<td><input type="text" id="userName" name="userName" placeholder="이름"></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td>이메일</td>
-			<td><input type="text" name="userEmail" placeholder="이메일"></td>
+			<td><input type="text" id="userEmail" name="userEmail" placeholder="이메일"></td>
 			<td></td>
+		</tr>
+		<tr>
+			<td><div id = "showId" align ="center" style="diaplay:none"></div></td>
 		</tr>
 	</table>
 	<br />
 	<div class="btndiv" align="center">
-		<button type="submit">아이디 찾기</button>
+		<button type="button" id="searchId">아이디 찾기</button>
 		<br><br>
 		<p id="p1">
 			비밀번호가 기억나지 않으신가요? <a href="/pickme/views/user/UserPassSearchForm.jsp">비밀번호 찾기</a>
@@ -74,7 +77,43 @@
 </div>
 
 
+<script>
 
+$("#searchId").click(function(){
+	$.ajax({
+		url : "/pickme/idSearch.au",
+		type : "post",
+		data : {userName : $('#userName').val(),
+				userEmail : $('#userEmail').val()},
+		success : function(data){
+			if(data == null){
+				showMsg($("#showId"),"해당하는 아이디가 없습니다.");
+			}else{
+				showMsg($("#showId"),data);
+			}
+			
+		}, error : function(request, status, error){
+			alert(request+"\n" 
+					  + status+"\n"
+					  + error);
+				console.log("에러 발생!");
+				
+			}
+	});
+	
+});
+
+function showMsg(obj, msg) {
+    obj.attr("style", "display:");
+    obj.html(msg);
+    obj.show();
+}
+
+function hideMsg(obj){
+	obj.attr("style","display:none");
+}
+
+</script>
 
 <%@ include file="../common/footer.jsp" %>
 

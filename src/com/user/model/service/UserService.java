@@ -52,4 +52,29 @@ public class UserService {
 
 	}
 
+	public int emailDupCheck(String email ) {
+		
+		Connection con = getConnection();
+		
+		int result = uDao.emailDupCheck(con,email);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public String idSearch(String username, String email) {
+
+		Connection con = getConnection();
+		
+		String result = uDao.idSearch(con,username,email);
+		
+		close(con);
+		
+		
+		return result;
+	}
+	
+	
+
 }

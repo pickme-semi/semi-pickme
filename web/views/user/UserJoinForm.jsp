@@ -148,7 +148,7 @@
 			var oMsg = $("#idMsg");
 			
 			if (id == ""){
-		       showErrorMsg(oMsg,"필수 정보입니다.");
+		       showErrorMsg(oMsg,"필수 정보입니다.","red");
 		       return false;  
 			}else{
 				hideMsg(oMsg);
@@ -158,7 +158,7 @@
 			//아이디 정규식
 			var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
 	        if (!isID.test(id)) {
-	            showErrorMsg(oMsg,"5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+	            showErrorMsg(oMsg,"5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.","red");
 	            idFlag=false;
 	            return false;
 	            
@@ -172,11 +172,11 @@
 				success : function(data){
 					console.log(data);
 					if(data == 'no'){
-						showErrorMsg(oMsg,"이미 사용하고있는 아이디 입니다.");
+						showErrorMsg(oMsg,"이미 사용하고있는 아이디 입니다.","red");
 						$('#userId').select();
 						idFlag = false; 
 					} else {
-						showErrorMsg(oMsg,"사용 가능한 아이디 입니다.");
+						showErrorMsg(oMsg,"사용 가능한 아이디 입니다.","green");
 						idFlag=true;
 					}
 					
@@ -202,14 +202,14 @@
 			var oMsg = $("#pswd1Msg");
 			
 			if(pwd==""){
-				showErrorMsg(oMsg,"필수 정보 입니다.");
+				showErrorMsg(oMsg,"필수 정보 입니다.","red");
 				return false;
 			}
 			
 	        // 비밀번호 정규식
 	        var isPwd = /^[A-Za-z0-9_-]{6,18}$/;   
 	          if(!isPwd.test(pwd)){
-	             showErrorMsg(oMsg,"5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.")
+	             showErrorMsg(oMsg,"5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.","red")
 	             return false;
 	          }else{
 	        	  hideMsg(oMsg);
@@ -226,12 +226,12 @@
 			var oMsg = $("#pswd2Msg");
 			
 			if (pwd2.val() == "") {
-	            showErrorMsg(oMsg,"필수 정보입니다.");
+	            showErrorMsg(oMsg,"필수 정보입니다.","red");
 	            pw2Flag = false;
 	            return false;
 	        }
 	        if (pwd1.val() != pwd2.val()) {
-	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+	            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.","red");
 	            pwd2.val("");
 	            pw2Flag = false;
 	            return false;
@@ -249,17 +249,17 @@
 		// 이름 체크
 		function checkName(){
 			var oMsg = $("#nameMsg");
-			var nonchar = /[^가-힣a-zA-Z0-9]/gi;
+			var nonchar = /[^가-힣a-zA-Z]/gi;
 			var name = $("#userName").val();
 			
 			
 	        if (name == "") {
-	            showErrorMsg(oMsg,"필수 정보입니다.");
+	            showErrorMsg(oMsg,"필수 정보입니다.","red");
 	            nameFlag = false;
 	            return false;
 	        }
 	        if (name != "" && nonchar.test(name)) {
-	            showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+	            showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)","red");
 	            nameFlag = false;
 	            return false;
 	        }
@@ -277,7 +277,7 @@
 	        var oMsg = $("#emailMsg");
 
 	        if (email == "") {
-	        	showErrorMsg(oMsg,"필수 정보입니다.");
+	        	showErrorMsg(oMsg,"필수 정보입니다.","red");
 	            emailFlag = false;
 	            return true;
 	        }
@@ -286,21 +286,50 @@
 	        var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	        var isHan = /[ㄱ-ㅎ가-힣]/g;
 	        if (!isEmail.test(email) || isHan.test(email)) {
-	            showErrorMsg(oMsg,"이메일 주소를 다시 확인해주세요.");
+	            showErrorMsg(oMsg,"이메일 주소를 다시 확인해주세요.","red");
 	            emailFlag = false;
 	            return false;
 	        }
 	        
+	      //이메일 중복확인
+	        $.ajax({
+				url : "/pickme/emailDup.au",
+				type : "post",
+				data : { userEmail : $('#userEmail').val() },
+				success : function(data){
+					console.log(data);
+					if(data == 'no'){
+						showErrorMsg(oMsg,"이미 사용하고있는 이메일주소 입니다.","red");
+						$('#userId').select();
+						emailFlag = false; 
+					} else {
+						showErrorMsg(oMsg,"사용 가능한 이메일 주소 입니다.","green");
+						emailFlag=true;
+					}
+					
+					
+				}, error : function(request, status, error){
+					alert(request+"\n" 
+						  + status+"\n"
+						  + error);
+					console.log("에러 발생!");
+					
+				}
+				
+			});
+	        
 	        hideMsg(oMsg);
 	        emailFlag = true;
+	        
+	        
 	        return true;
 	    }
 
 		
 		// 에러메시지 함수 표출
-		function showErrorMsg(obj, msg) {
-			//obj.style.display = 'inline';
-	        obj.attr("style", "display:");
+		function showErrorMsg(obj, msg, color) {
+			//obj.attr("style","color:"+ color);
+	        obj.attr("style", "display:; color :" + color);
 	        obj.html(msg);
 	        obj.show();
 	    }
@@ -322,18 +351,23 @@
 			
 			if(!idFlag){
 				$("#userId").focus();
+				alert("아이디를 정확하게 입력해주세요.");
 			}
 			else if(!pwFlag){
 				$("#userPwd").focus();
+				alert("비밀번호를 정확하게 입력해주세요.");
 			}
 			else if(!pw2Flag){
 				$("#userPwd2").focus();
+				alert("비밀번호와 확인이 일치하지 않습니다.");
 			}
 			else if(!nameFlag){
 				$("#userName").focus();
+				alert("이름을 정확하게 입력해주세요.");
 			}
 			else if(!emailFlag){
 				$("#userEmail").focus();
+				alert("이메일을 정확하게 입력해주세요.")
 			}else{
 				insertMember();
 			}
@@ -341,6 +375,7 @@
 		});
 		
 		function insertMember() {
+				alert("회원가입 완료!");
 				$("#joinform").submit();
 		}
 		
