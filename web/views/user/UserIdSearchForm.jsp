@@ -47,12 +47,12 @@
 	<table align="center">
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="userName" placeholder="이름"></td>
+			<td><input type="text" id="userName" name="userName" placeholder="이름"></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td>이메일</td>
-			<td><input type="text" name="userEmail" placeholder="이메일"></td>
+			<td><input type="text" id="userEmail" name="userEmail" placeholder="이메일"></td>
 			<td></td>
 		</tr>
 		<tr>
