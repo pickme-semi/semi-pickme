@@ -32,7 +32,7 @@
         <div class="logo" style="width:33%" align="right">
 			<img src="/pickme/resources/icons/inbox.svg" alt="" style="width:33px;"/>
 			<img src="/pickme/resources/icons/issue-opened.svg" alt="" style="width:33px;"/>
-      <button onclick="location.href='views/qna/qnaMain.jsp'">QNA 메인 테스트</button>
+      <button onclick="location.href='views/qna/qnaUser/qnaMain.jsp'">QNA 메인 테스트</button>
         </div>
       </div>
     </nav>
