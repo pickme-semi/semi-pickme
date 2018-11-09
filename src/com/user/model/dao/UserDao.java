@@ -53,7 +53,7 @@ public class UserDao {
 			System.out.println("resulotdao : " + result);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UserException(e.getMessage());
 		} finally {
 			close(pstmt);
 			close(con);
@@ -78,7 +78,7 @@ public class UserDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				System.out.println(rset.getString("gender"));
+				//System.out.println(rset.getString("gender"));
 				
 				result = new User();
 				
@@ -121,13 +121,69 @@ public class UserDao {
 			if(rset.next()) result = rset.getInt(1);
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			close(rset);
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+	public int emailDupCheck(Connection con, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("emailDupCheck");
+		
+		try{
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) result = rset.getInt(1);
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public String idSearch(Connection con, String username, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String result = null;
+		
+		String sql = prop.getProperty("idSearch");
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setString(1, username);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+			result = rset.getString(1);
+			}
+			else{
+				result = "fail";
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+			close(rset);
+		}
 		return result;
 	}
 

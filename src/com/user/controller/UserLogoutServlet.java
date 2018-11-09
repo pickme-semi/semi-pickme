@@ -6,20 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.user.model.service.UserService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class UserIdSearchServlet
+ * Servlet implementation class UserLogoutServlet
  */
-@WebServlet("/idSearch.au")
-public class UserIdSearchServlet extends HttpServlet {
+@WebServlet("/logout.au")
+public class UserLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserIdSearchServlet() {
+    public UserLogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +27,11 @@ public class UserIdSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("userIdSearchServlet");
+HttpSession session = request.getSession(false);
 		
-		String username = request.getParameter("userName");
-		String email = request.getParameter("userEmail");
+		if(session != null) session.invalidate();
 		
-		System.out.println("username : " + username + "userEmail : " + email );
-		
-		UserService us = new UserService();
-		
-		String result = us.idSearch(username,email);
-		
-		response.getWriter().print(result);
-		
-		System.out.println(result);
+		response.sendRedirect("/pickme");
 	}
 
 	/**
