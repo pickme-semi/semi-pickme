@@ -2,6 +2,7 @@ package com.pick.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.pick.model.dao.PickDao;
 import com.pick.model.vo.Attachment;
@@ -53,6 +54,15 @@ public class PickService {
 		close(con);
 		
 		return result;
+	}
+
+	public HashMap<String, Object> selectPickMeMap(int pid) {
+		Connection con = getConnection();
+		HashMap<String, Object> hmap = null;
+		
+		hmap = pDao.selectPickMeMap(con, pid);
+		
+		return hmap;
 	}
 
 	
