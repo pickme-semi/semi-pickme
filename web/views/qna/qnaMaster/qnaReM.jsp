@@ -6,19 +6,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
- <link rel="stylesheet" href="../../resources/css/qna.css">
- <script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
- <script src="../../resources/js/jquery-3.3.1.min.js"></script>
- <script src="../../resources/js/qna.js"></script>
+ <link rel="stylesheet" href="../../../resources/css/qna.css">
+ <script src="../../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+ <script src="../../../resources/js/jquery-3.3.1.min.js"></script>
+ <script src="../../../resources/js/qna.js"></script>
 
 
 </head>
 <body>
 
 
+<!-- 관리자 전용 QNA 페이지  -->
+<!-- 신고/문의 답변 작성 폼 -->
 
-<!-- 관리자 전용 답변 테이블 전송 누를 시 메일로 답변 받을 수 있도록!
-	qnaListM 에서 답변으로 이어지는 페이지  -->
 
 
 
@@ -30,7 +30,7 @@
         <article id="container" class="mnHelpdesk pgHelpdeskHome">
             <div class="innerContainer">
   
-                <%@ include file="qnaHeader.jsp"  %>
+                <%@ include file="qnaHeaderM.jsp"  %>
     
     
                 <div class="contentBody">

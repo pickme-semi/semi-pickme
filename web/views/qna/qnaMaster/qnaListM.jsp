@@ -2,17 +2,21 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+<!-- 현재 존재하는 QNA 리스트 페이지 -->
+<!-- 테이블 안에 카테고리 버튼 추가해서 항목별 확인 가능하게 만들 예정 -->
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../resources/css/qna.css">
-<script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<script src="../../resources/js/jquery-3.3.1.min.js"></script>
-<script src="../../resources/js/qna.js"></script>
+<link rel="stylesheet" href="../../../resources/css/qna.css">
+<script src="../../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="../../../resources/js/jquery-3.3.1.min.js"></script>
+<script src="../../../resources/js/qna.js"></script>
 </head>
 <body>
 
-<!-- 관리자 전용 글 목록 페이지 (신고/질문) 답변은 답변 버튼 만들어 작성자의 메일 주소로 전송 -->
+
 	
 	
 	<div id="wrap">
@@ -23,7 +27,7 @@
 			<article id="container" class="mnHelpdesk pgHelpdeskHome">
 				<div class="innerContainer" >
 
-					<%@ include file="qnaHeader.jsp"%>
+					<%@ include file="qnaHeaderM.jsp"%>
 
 
 					<div class="contentBody" style="padding: 100px 162px 102px;">
@@ -45,7 +49,7 @@
 											
 												 <input type="hidden" name="domainId" id="domainId"
 													value="1"> <input type="hidden" name="domainId"
-													id="logId" value="71607fa3-9462-47b0-b816-2cd2cb68180b">
+													id="logId" value="">
 												<div class="faq_wrap">
 													<form id="faqSatisfaction1" action="">
 														<fieldset>

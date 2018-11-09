@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
+
+
+<!-- 관리자 전용 QNA 메인페이지 -->
+<!-- 최근 올라온 문의/신고 TOP 10 형태로 출력 가능하게 설정 예정 / 관리자 전용 공지사항 상단에 띄우기 -->
+
     <head>
         <meta charset="utf-8">
         <title>QNA</title>
         
-        <link rel="stylesheet" href="../../resources/css/qna.css">
-        <script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-		<script src="../../resources/js/jquery-3.3.1.min.js"></script>
-		<script src="../../resources/js/qna.js"></script>
+        <link rel="stylesheet" href="../../../resources/css/qna.css">
+        <script src="../../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+		<script src="../../../resources/js/jquery-3.3.1.min.js"></script>
+		<script src="../../../resources/js/qna.js"></script>
 
 
      </head>
@@ -24,11 +29,8 @@
                 
         <article id="container" class="mnHelpdesk pgHelpdeskHome">
             <div class="innerContainer">
-            
   
-  					
-                <%@ include file="qnaHeader.jsp"  %>
-                
+                <%@ include file="qnaHeaderM.jsp"  %>
     
     
                 <div class="contentBody">
@@ -36,33 +38,11 @@
             <!-- //lnbHelp -->
                     
                     <div class="content" id="helpContentArea">
-                    
-                    <div class="innerContent">
-                            <form name="frm" onsubmit="return false;">
-                                <fieldset class="search">
-                                    <legend class="blind">자주묻는 질문 검색</legend>
-                                    <label for="inp_search">질문 검색하기</label>
-                                    <span class="sel">
-                                        <select title="검색 카테고리 선택" name="subId" id="category_sel" onchange="bugs.wiselog.area('help_hcontents_01_01');">
-                                            <option value="4598" selected=z>전체</option>
-                                            <option value="4600">PICK</option>
-                                            <option value="4601">회원정보</option>
-                                            <option value="4602">포인트</option>
-                                            <option value="4603">기타</option>
-                                        </select>
-                                    </span>
-                                    <input type="search" name="searchKeyword" id="searchInput" style="width:289px; height: 32px" onkeydown="searchInputEventHandler(event);">
-                                    <span class="btns"><button type="submit" onclick="moveSearch();">검색</button></span>
-                                    <p id="ex">EX )  비밀번호 변경  |  신고 방법  |  포인트</p>
-                                   
-                                </fieldset>
-                            </form>
-                        </div>
 
                         <!-- //search -->
                         
                         <section class="innerContent faq">
-                            <h1>QNA</h1>
+                            <h1>신규 문의 내역</h1>
                             
                             <table class="list tbList">
                                 <caption>자주 묻는 질문 HOT 10 목록</caption>
@@ -154,9 +134,6 @@
        </article>
      </div>
    </div>
-   
-   
-   
  </body>
 </html>
             

@@ -2,13 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+<!-- 관리자 전용 QNA 페이지 헤더 -->
+
+
 <head>
 <meta charset="UTF-8">
 
 
-<link rel="stylesheet" href="../../resources/css/qna.css">        
-<script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<script src="../../resources/js/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="../../../resources/css/qna.css">        
+<script src="../../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="../../../resources/js/jquery-3.3.1.min.js"></script>
 
 
 </head>
@@ -22,15 +26,15 @@
                 <li class="item1">
                     <a class="itemHead"><i class="icon"></i>문의 관리</a>
                     <span>
-                        <a id="qMember">문의 확인</a><br>
-                        <a id="qLogin">신고 확인</a><br>
+                        <a id="qQuestion">문의 확인</a><br>
+                        <a id="qReport">신고 확인</a><br>
                     </span>					
                 </li>
                 <li class="item2">
                     <a   class="itemHead"><i class="icon"></i>QNA 관리</a>
                     <span>
-                        <a id="qPick">QNA 작성</a><br>
-                        <a id="qReport">QNA 삭제</a><br>
+                        <a id="qnaUpdate">QNA 작성</a><br>
+                        <a id="qnaDelete">QNA 삭제</a><br>
                     </span>				
                 </li>
                 <li class="item3">
@@ -57,19 +61,19 @@
 	/* Header */
 
 	$(function(){
-		$(".itemHead").click(function(){
-			location.href="qnaList.jsp";
+		$("#qQuestion").click(function(){
+			location.href="qnaUserByM.jsp";
 		});
 		
-		$(".itemReHead").click(function() {
-			location.href="qnaReport.jsp";
+		$("#qReport").click(function() {
+			location.href="qnaUserByM.jsp";
 		});
 		
-		$("#qReprot").click(function() {
-			location.href="qnaReport.jsp";
+		$("#qnaUpdate").click(function() {
+			location.href="qnaUpM.jsp";
 		});
-		$("#qQnA").click(function(){
-			location.href="qnaUp.jsp"
+		$("#qnaDelete").click(function(){
+			location.href="qnaListM.jsp"
 		});
 	});
 

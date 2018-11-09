@@ -1,4 +1,4 @@
-package com.qna.user.qnaInsert.controller;
+package com.qna.user.qnaUserInsert.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.qna.user.qnaInsert.model.vo.QnaBoard;
-
-
+import com.qna.user.qnaUserInsert.model.service.QnaService;
+import com.qna.user.qnaUserInsert.model.vo.QnaBoard;
 
 /**
- * Servlet implementation class QnaInsertServlet
+ * Servlet implementation class MQnaSelectOne
  */
-@WebServlet("/qInsert.bo")
-public class QnaInsertServlet extends HttpServlet {
+@WebServlet("/MselectOne.qno")
+public class MQnaSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaInsertServlet() {
+    public MQnaSelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +29,21 @@ public class QnaInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int qid = Integer.parseInt(request.getParameter("qno"));
 		
-		int maxSize = 1024 * 1024 * 10;
+		QnaBoard q = new QnaService().mSelectOne(qid);
+		String page = "";
 		
-		String root = request.getServletContext().getRealPath("/");
-		String savePath = root + "resources/qnaUserUploadFiles";
+		if(q != null){
+			page = "views/qna/qnaMaster/userQnaDetail.jsp";
+			request.setAttribute("qnaboard", q);
+			
+		}else{
+			page = "view/common/errorPage.jsp";
+		}
 		
+		request.getRequestDispatcher(page).forward(request, response);
 		
-		MultipartRequest mrequest = new MultipartRequest(
-				request, savePath, maxSize, "UTF-8",
-				new DefaultFileRenamePolicy());
-		
-		
-		String title = mrequest.getParameter("qtitle");
-		String content = mrequest.getParameter("qcontent");
-		String writer = mrequest.getParameter("qno");
-	
-		String fileName = mrequest.getFilesystemName("file");
-		
-		
-		QnaBoard b = new QnaBoard();
-
-		
-		
-		
-
 	}
 
 	/**
