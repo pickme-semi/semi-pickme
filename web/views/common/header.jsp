@@ -46,8 +46,8 @@
         	<a href="/pickme/logout.au">
         		<img src="/pickme/resources/icons/issue-opened.svg" alt="" style="width:33px;" title="로그아웃"/>
         	</a>
-        	
-      <button onclick="location.href='views/qna/qnaMain.jsp'">QNA 메인 테스트</button>
+      <button onclick="location.href='views/qna/qnaUser/qnaMain.jsp'">QNA 메인 테스트</button>
+
         </div>
       </div>
       <%} %>

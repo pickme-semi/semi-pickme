@@ -38,7 +38,7 @@ textarea {
 	
 	
 	<div class="row" align="center">
-		<div class="col-md-12" >
+		<div class="col-md-8 col-xs-12" >
 			<h2>pick 제목	</h2>
 			<p>
 				이러고 저러고 어쩌고 저쩌고 해서 아무튼 이 둘중에 하나 골라주세요.

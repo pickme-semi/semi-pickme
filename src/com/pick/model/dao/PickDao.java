@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.pick.model.vo.Attachment;
@@ -38,7 +39,7 @@ public class PickDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("");
+		String sql = prop.getProperty("selectPickMeOne");
 		
 		try {
 			stmt = con.createStatement();
@@ -49,10 +50,23 @@ public class PickDao {
 			while(rset.next()){
 				PickMe pm = new PickMe();
 				
-				pm.setId(rset.getInt("id"));				
+				pm.setId(rset.getInt("id"));
+				pm.setSelect_1(rset.getString("select_1"));
+				pm.setSelect_2(rset.getString("select_2"));
+				pm.setTitle(rset.getString("title"));
+				pm.setContent(rset.getString("content"));
+				pm.setEdate(rset.getDate("enroll_date"));
+				pm.setViewcount(rset.getInt("view_count"));
+				pm.setDdate(rset.getDate("due_date"));
+				pm.setType(rset.getString("type"));
+				pm.setUserno(rset.getInt("userno"));
+				pm.setCategory(0);
 				
+				list.add(pm);
 			}
 			
+			
+			return list;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -78,6 +92,7 @@ public class PickDao {
 			pstmt.setString(3, pm.getTitle());
 			pstmt.setString(4, pm.getContent());
 			pstmt.setDate(5, pm.getDdate());
+			pstmt.setInt(6, pm.getUserno());
 			
 			pstmt.executeQuery();
 			
@@ -153,6 +168,43 @@ public class PickDao {
 		}
 		
 		return result;
+	}
+
+	public HashMap<String, Object> selectPickMeMap(Connection con, int pid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;
+		PickMe p = null;
+		
+		String sql = prop.getProperty("selectPickMeOne");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+		while(rset.next()){
+			p.setId(pid);
+			p.setTitle(rset.getString("title"));
+			p.setContent(rset.getString("content"));
+			p.setSelect_1(rset.getString("select_1"));
+			p.setSelect_2(rset.getString("select_2"));
+						
+			System.out.println(p);
+		}
+		hmap = new HashMap<String, Object>();
+		hmap.put("PickMe", p);	
+		
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+				
+		return hmap;
 	}
 
 }
