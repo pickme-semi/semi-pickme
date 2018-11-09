@@ -14,7 +14,7 @@
 
 <style>
 section{
-		background : red;
+		background : white;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -95,6 +95,9 @@ section{
 .column {
   float: left;
   width: 16.66%;
+    content: "";
+  display: table;
+  clear: both;
 }
 
 /* Add a transparency effect for thumnbail images */
@@ -127,96 +130,10 @@ section{
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <!-- 업로드 이미지 미리보기 구현. -->
 
-<!--  
-<script type="text/javascript">
-
-$(document).ready(function() {            
-    //라디오 버튼 변경시 이벤트
-    $("input[name='category']:radio").change(function () {
-            //라디오 버튼 값을 가져온다.
-            var category = this.value;
-                             
-            if(category == "sports"){//스포츠인 경우
-                //스포츠 일때 여행/음식 카테고리 hide
-                $( "#viewTourCategory" ).hide();
-  			    $( "#viewFoodCategory" ).hide();
-                //스포츠 일때 스포츠 카테고리 show
-                $( "#viewSportCategory" ).show();
-               
-            }else if(category == "tour"){
-			    $( "#viewSportCategory" ).hide();
-			    $( "#viewFoodCategory" ).hide();
-			    // 여행 카테고리일때 스포츠/음식 카테고리 hide
-                $( "#viewTourCategory" ).show();
-               // 여행 카테고리 show
-                                    
-            }else if(category == "food"){
-			    $( "#viewSportCategory" ).hide();
-			    $( "#viewTourCategory" ).hide();
-			    // 음식 카테고리일때 스포츠/여행 카테고리 hide
-                $( "#viewFoodCategory" ).show();
-               // 음식 카테고리 show
-            }                                     
-        });
-});
-
-</script>
-
--->
 <body>
 <%@ include file="../common/header.jsp" %>
-<!-- 
-<div class="main" >
-	<div class="title" align="center">
-		
-			<div class="row">
-				<div class="col-md-12" align="center">					
-					<h3>
-						Pick 제목 
-					</h3>
-					 <button type="button" align="right">게시물 신고</button>					
-				</div>	
-											
-			</div>
-			
-			<br><br>
-			<label for="category">카테고리 이동</label> 
-			<br>
-				<input type="radio" name="category" value="tour" checked /><span>여행</span>
-				<input type="radio" name="category" value="sports" /><span>운동</span>
-				<input type="radio" name="category" value="food" /><span>요리</span>
-
-				<br>
-				<br>
-				<span id="viewTourCategory"> 여행 카테고리: 
-				<select	class="form-control tourMainCategory"
-				 name="tourtMainCategory" style="width: 200px">
-						<option value="1">국내여행</option>
-						<option value="2">해외여행</option>
-				</select>
-				</span>
-				<span id="viewSportCategory" style="display: none"> 스포츠 카테고리: 
-				<select class="form-control sportsMainCategory"
-				 name="sportsMainCategory" style="width: 200px">
-						<option value="1">실내운동</option>
-						<option value="2">야외운동</option>
-				</select>
-				</span> <span id="viewFoodCategory" style="display: none"> 음식 카테고리:
-				<select class="form-control foodMainCategory"
-				name="foodMainCategory" style="width: 200px">
-					<option value="1">한식</option>
-					<option value="2">일식</option>
-					<option value="3">중식</option>
-				</select>
-				</span>
-	
-		
-	</div>
-	<br><br><br><br>	
-	 -->
 				
 	<section class="col-xs-12 col-md-8">
 	
@@ -228,8 +145,9 @@ pData = plist.get(0);
 %>
 
   <!-- Full-width images with number text -->
-  <div class="mySlides">
+  <div class="mySlides">              
     <div class="numbertext">1 / 6</div>
+     <div class="row" align="center">
     	<div class="col-md-6" align="center" > <!--픽 이미지 1 -->
 			<%=pData.getSelect_1() %>
 			<br>
@@ -239,6 +157,7 @@ pData = plist.get(0);
 		<div class="col-md-6" align="right"> <!--픽 이미지 2 -->
 			<img id="pick2" src="" />
 			</div>	
+    </div>
 		<!--  	
       <img src="/pickme/resources/images/img_sample1.jpg" style="width:50%">
       <img src="/pickme/resources/images/img_sample2.jpg" style="width:50%">
@@ -247,87 +166,132 @@ pData = plist.get(0);
 
   <div class="mySlides">
     <div class="numbertext">2 / 6</div>
-      <img src="/pickme/resources/images/img_sample1.jpg" style="width:100%">
+   
+     <div class="row" align="center">
+		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
+			<img id="pick1" src="/pickme/resources/images/1.jpg" 
+			 />
+		</div>	
+		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
+			<img id="pick2" src="/pickme/resources/images/2.jpg" />
+		</div>
+		</div> 
   </div>
 
   <div class="mySlides">
     <div class="numbertext">3 / 6</div>
-      <img src="/pickme/resources/images/img_sample1.jpg" style="width:100%">
+     
+     <div class="row" align="center">
+		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
+			<img id="pick1" src="/pickme/resources/images/img_sample3.jpg" />
+		</div>	
+		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
+			<img id="pick2" src="/pickme/resources/images/img_sample4.jpg" />
+		</div>
+		</div> 
+ 
   </div>
 
   <div class="mySlides">
     <div class="numbertext">4 / 6</div>
-      <img src="/pickme/resources/images/img_sample1.jpg" style="width:100%">
+       <div class="row" align="center">
+		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
+			<img id="pick1" src="/pickme/resources/images/img_sample5.gif" />
+		</div>	
+		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
+			<img id="pick2" src="/pickme/resources/images/img_sample6.gif" />
+		</div>
+		</div> 
+ 
   </div>
 
   <div class="mySlides">
     <div class="numbertext">5 / 6</div>
-      <img src="/pickme/resources/images/img_sample1.jpg" style="width:100%">
+       <div class="row" align="center">
+		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
+			<img id="pick1" src="/pickme/resources/images/img_sample7.gif" />
+		</div>	
+		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
+			<img id="pick2" src="/pickme/resources/images/img_sample8.gif" />
+		</div>
+		</div> 
+ 
   </div>
 
   <div class="mySlides">
     <div class="numbertext">6 / 6</div>
-      <img src="/pickme/resources/images/img_sample1.jpg" style="width:100%">
+  <div class="row" align="center">
+		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
+			<img id="pick1" src="/pickme/resources/images/img_sample9.gif" />
+		</div>	
+		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
+			<img id="pick2" src="/pickme/resources/images/img_sample9.gif" />
+		</div>
+		</div> 
+ 
   </div>
 
-  <!-- Next and previous buttons -->
+  <!-- Next and previous buttons 이걸 수정해야한다--> 
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
   <!-- Image text -->
   <div class="caption-container">
     <p id="caption"></p>
+    <p>뭐라고써있니</p>
   </div>
 
   <!-- Thumbnail images -->
   <div class="row">
     <div class="column">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" style="width:100%" onclick="currentSlide(1)" alt="1번정보">
-    </div>
+           <div class="row" >
+      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" width="50%" height="16.66%" onclick="currentSlide(1)" alt="1번정보">
+      <img class="demo cursor" src="/pickme/resources/images/img_sample2.jpg" width="50%" height="16.66%" onclick="currentSlide(1)" alt="1번정보">
+           </div>
+        </div>
     <div class="column"> 
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" style="width:100%" onclick="currentSlide(2)" alt="2번정보 ">
+      <div class="row" >
+      <img class="demo cursor" src="/pickme/resources/images/1.jpg" width="50%" height="16.66%" onclick="currentSlide(2)" alt="2번정보">
+      <img class="demo cursor" src="/pickme/resources/images/2.jpg" width="50%" height="16.66%" onclick="currentSlide(2)" alt="2번정보">
+           </div>     
+     
+     
     </div>
     <div class="column">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" style="width:100%" onclick="currentSlide(3)" alt="3번정보">
+      <div class="row" >
+      <img class="demo cursor" src="/pickme/resources/images/img_sample3.jpg" width="50%" height="16.66%" onclick="currentSlide(3)" alt="3번정보">
+      <img class="demo cursor" src="/pickme/resources/images/img_sample4.jpg" width="50%" height="16.66%" onclick="currentSlide(3)" alt="3번정보">
+           </div>
     </div>
     <div class="column">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" style="width:100%" onclick="currentSlide(4)" alt="4번정보">
+      <div class="row" >
+      <img class="demo cursor" src="/pickme/resources/images/img_sample5.gif" width="50%" height="16.66%" onclick="currentSlide(4)" alt="4번정보">
+      <img class="demo cursor" src="/pickme/resources/images/img_sample6.gif" width="50%" height="16.66%" onclick="currentSlide(4)" alt="4번정보">
+           </div>
     </div>
     <div class="column">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" style="width:100%" onclick="currentSlide(5)" alt="5번정보">
+      <div class="row" >
+      <img class="demo cursor" src="/pickme/resources/images/img_sample7.gif" width="50%" height="16.66%" onclick="currentSlide(5)" alt="5번정보">
+      <img class="demo cursor" src="/pickme/resources/images/img_sample8.gif" width="50%" height="16.66%" onclick="currentSlide(5)" alt="5번정보">
+           </div>
     </div> 
     <div class="column">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" style="width:100%" onclick="currentSlide(6)" alt="6번정보">
-    </div>
+
+      <div class="row" >
+      <img class="demo cursor" src="/pickme/resources/images/img_sample9.gif" width="50%" height="16.66%" onclick="currentSlide(6)" alt="6번정보">
+      <img class="demo cursor" src="/pickme/resources/images/img_sample9.gif" width="50%" height="16.66%" onclick="currentSlide(6)" alt="6번정보">
+           </div>
+            </div>
   </div>
 </div>
 	
 	
 	
-	<!-- 
-	<div class="row" align="left">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1 
-			<img id="pick1" src="/pickme/resources/images/img_sample1.jpg"
-			 />
-		</div>	
-		<div class="col-md-6" align="right"> <!--픽 이미지 2 
-			<img id="pick2" src="/pickme/resources/images/img_sample2.jpg" />
-		</div>
-		</div> -->
+
+
 	</section>
 	
-<!-- 	<div class="row" align="center">
-		
-		<div class="col-md-4" align="center"> <!--픽 이미지 1
-			<img id="pick1" src="/pickme/resources/images/img_sample1.jpg"
-			 />
-		</div>	
-		<div class="col-md-4" align="center"> <!--픽 이미지 2
-			<img id="pick2" src="/pickme/resources/images/img_sample2.jpg" />
-		</div>
-		
-	</div>	
-	 -->
+
 	<br><br><br>
 	
 	<div class="col-md-12" align="center" >
@@ -366,6 +330,9 @@ pData = plist.get(0);
 		</div>
 	</div>
 </div>
+
+
+
 	<script>
 	
 	
@@ -386,7 +353,11 @@ pData = plist.get(0);
 	  var i;
 	  var slides = document.getElementsByClassName("mySlides");
 	  var dots = document.getElementsByClassName("demo");
+	  
+	  // 글쓸곳
 	  var captionText = document.getElementById("caption");
+	  
+	  // 길이 초과시 처음으로 보내기 여기선 다음 페이지 전송 하기 
 	  if (n > slides.length) {slideIndex = 1}
 	  if (n < 1) {slideIndex = slides.length}
 	  for (i = 0; i < slides.length; i++) {
@@ -399,6 +370,27 @@ pData = plist.get(0);
 	  dots[slideIndex-1].className += " active";
 	  captionText.innerHTML = dots[slideIndex-1].alt;
 	}
+	
+	// count 만들기  // 각 사진마다 값을 초기화 하는거라서 괜츈 
+	var countLeft = 0;
+	var leftPercent = 0;
+	var countRight = 0;
+	var rightPercent = 0;
+	var totalCount = countLeft + countRight;
+	
+	function selectLeft(){
+		countLeft +=1;
+		leftPercent = 100*(countLeft / totalCount);
+		console.log(countLeft);
+		console.log(leftPercent);
+		
+	
+	}
+	function selectRight(){
+		countRight +=1;
+		console.log(countRight);
+	}
+	
 	
 	</script>
 	

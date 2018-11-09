@@ -6,10 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
- <link rel="stylesheet" href="../../resources/css/qna.css">
- <script src="../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
- <script src="../../resources/js/jquery-3.3.1.min.js"></script>
- <script src="../../resources/js/qna.js"></script>
+ <link rel="stylesheet" href="../../../resources/css/qna.css">
+ <script src="../../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+ <script src="../../../resources/js/jquery-3.3.1.min.js"></script>
+ <script src="../../../resources/js/qna.js"></script>
+ 
+ 
+ <!-- 작성자 이메일/휴대폰 번호 자동으로 회원정보에서 꺼내오기 -->
+ <!--  -->
 
 
 </head>
@@ -165,8 +169,8 @@
             
                         
             	<br><br>
-                <span class="chk"><input type="checkbox" id="chkSmsAccept" style="width:15px; height:15px">
-                </span><label for="chkSmsAccept">알림신청</label>
+                <span class="chk"><input type="checkbox" style="width:15px; height:15px" name="alertChk">
+                </span><label for="chkSmsAccept">알림신청</label>		<!-- 클릭 시 자동으로 체크박스 체크되게 만들기 -->
                 <span class="sel ml2" style="width:79px">
                     <select title="휴대폰 국번 선택" class="mobileHead" name = "num1">
                         <option value="010">010</option>
