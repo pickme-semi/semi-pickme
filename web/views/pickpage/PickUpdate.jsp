@@ -1,25 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import ="com.user.model.vo.*, java.util.*" %>
-<%
-	User u = (User)session.getAttribute("user");
-
+    pageEncoding="UTF-8"%>
     
-%>	
-
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>픽 업로드 페이지</title>
- <link rel="stylesheet" type="text/css"
+<title>Pick 수정 페이지</title>
+<link rel="stylesheet" type="text/css"
 	href="../../resources/css/pickupload.css" />
 <!--  제이쿼리 파일 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- <link rel="stylesheet" href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css">
-<script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script> -->
-	
-	
 <!-- 업로드 이미지 미리보기 구현. -->
 <script type="text/javascript">
 		<!-- 첫번째 사진 미리보기 -->
@@ -41,7 +32,8 @@
             }
         }
         
-        <!-- 두번째 사진 미리보기  -->
+        <!-- 두번째 사진 미리보기  -->       
+        
         $(function() {
             $("#up2").on('change', function(){
                 readURL2(this);
@@ -111,15 +103,14 @@
 <body>
 
 	<%@ include file="../common/header.jsp"%>
-	
-	<% if(session.getAttribute("user") != null) {	 %>
+	<%-- <% if(m != null){ %> --%>
 	<div class="outer" align="center">
 		<br>
-		<h2 align="center">Pick 올리기</h2>
+		<h2 align="center">Pick 수정하기</h2>
 		<div class="col-md-8 col-xs-12">
-			<form action="<%= request.getContextPath() %>/pickup.pm" 
+			<form action="<%= request.getContextPath() %>/pupdate.pm" 
 			method="post" encType="multipart/form-data">
-			
+			<input type="hidden" name="pno" <%-- value="<%p.getId() %>" --%> />
 				<table>
 					<tr>
 						<td>제목</td>
@@ -127,11 +118,10 @@
 							style="width: 100%; height: 100%;" name="title"></td>
 					</tr>
 					<tr>
-						<td>작성자 </td>
-						<td colspan="3"> 
-						<%= u.getUserName() %>
-							 <input type="hidden" name="userId"
-							value="<%= u.getUserNo() %>" />																					
+						<td>작성자</td>
+						<td colspan="3">
+							<!-- %m.getusername % --> <input type="hidden" name="userId"
+							value="" />
 						</td>
 					</tr>
 					<tr>
@@ -217,10 +207,6 @@
 
 		</div>
 	</div>
-	<% } else {
-		request.setAttribute("msg", "회원만 열람 가능합니다.");
-		request.getRequestDispatcher("../common/errorPage.jsp").forward(request, response);
-	} %>
 
 	<br>
 	<br>

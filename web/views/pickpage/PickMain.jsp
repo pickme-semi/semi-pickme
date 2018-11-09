@@ -1,5 +1,10 @@
+<%@page import="com.pick.model.vo.PickMe"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	ArrayList<PickMe> plist = (ArrayList<PickMe>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,19 +139,29 @@ section{
 	
 	<div class="container">
 
+<% 
+PickMe pData = new PickMe();
+pData = plist.get(0);
+%>
+
   <!-- Full-width images with number text -->
-  <div class="mySlides">
-    <div class="numbertext" >1 / 6</div>
-    	     
-      <div class="row" align="center">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
-			<img id="pick1" src="/pickme/resources/images/img_sample1.jpg" onclick="selectLeft()"  />
+  <div class="mySlides">              
+    <div class="numbertext">1 / 6</div>
+     <div class="row" align="center">
+    	<div class="col-md-6" align="center" > <!--픽 이미지 1 -->
+			<%=pData.getSelect_1() %>
+			<br>
+			<img id="pick1" src="<%=pData.getSelect_1() %>"
+			 />
 		</div>	
-		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
-			<img id="pick2" src="/pickme/resources/images/img_sample2.jpg" onclick="selectRight()" />
-		</div>
-		</div> 
- 
+		<div class="col-md-6" align="right"> <!--픽 이미지 2 -->
+			<img id="pick2" src="" />
+			</div>	
+    </div>
+		<!--  	
+      <img src="/pickme/resources/images/img_sample1.jpg" style="width:50%">
+      <img src="/pickme/resources/images/img_sample2.jpg" style="width:50%">
+      -->
   </div>
 
   <div class="mySlides">

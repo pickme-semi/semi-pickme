@@ -88,10 +88,17 @@ public class PickUploadServlet extends HttpServlet {
 		PickMe pm = new PickMe();
 		
 		
-		pm.setTitle(mrequest.getParameter("title"));
-		pm.setSelect_1(mrequest.getFilesystemName("pick1"));
-		pm.setSelect_2(mrequest.getFilesystemName("pick2"));
-		pm.setContent(mrequest.getParameter("content"));		
+		pm.setTitle(mrequest.getParameter("title")); 
+		pm.setSelect_1(mrequest.getFile("pick1").getPath()); // 파일 업로드 경로 DB 저장		
+		/*System.out.println(mrequest.getFile("pick1").getAbsolutePath());
+		System.out.println(mrequest.getFile("pick1").getCanonicalPath());
+		System.out.println(mrequest.getFile("pick1").getPath());*/				
+		pm.setSelect_2(mrequest.getFile("pick2").getPath());
+		pm.setContent(mrequest.getParameter("content"));
+		System.out.println(Integer.parseInt(mrequest.getParameter("userId")));
+		pm.setUserno(Integer.parseInt(mrequest.getParameter("userId")));		
+		
+		
 		
 		// System.out.println(mrequest.getParameter("ddate"));
 		
@@ -106,6 +113,8 @@ public class PickUploadServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 		System.out.println("pm :" +pm);
 		
