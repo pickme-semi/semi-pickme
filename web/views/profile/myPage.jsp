@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 
-
 <!-- select2 소스  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
@@ -14,7 +13,7 @@
 <style>
 	.outer{
 		width : 600px;
-		height : 500px;
+		height : 400px;
 		background : mistyrose;
 		margin-left:auto;
 		margin-right:auto;
@@ -31,8 +30,19 @@
 		position : relative;
 		width : 50px;
 	}
+	
 	table tr {
 		font-size : 15px;
+	}
+	
+	.outer2{
+		width : 600px;
+		height : 350px;
+		background : darkgray;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:50px;
+	
 	}
 
 </style>
@@ -43,10 +53,11 @@
 
 <% if( user != null) { %>
 <div class = "outer">
-<br>
-<h2 align = "center"> 회원 정보 수정 </h2>
+<h2 align = "center"> 회원 정보  </h2>
 <br />
-<form id = "joinform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.pr">
+
+<form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.pr"
+encType="multipart/form-data">
 	<table align="center">
 	<tr>
 		<td width="120px"> 아이디 </td>
@@ -93,14 +104,14 @@
 	<tr>
 		<td> 프로필 사진 <br /></td>
 		<td>
-		<img id="profileImage" alt ="프로필 사진 바꾸기" src="/pickme/resources/profileImage/user.png" class="rounded-circle attr">
+		<img id="profileImage" alt ="프로필 사진 바꾸기" src="/pickme/resources/profileImage/<%= user.getProfile() %>" class="rounded-circle attr">
 		</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td> 성별 <br /></td>
 	
-		<td><input type="radio" name="gender" value="M" >남
+		<td><input type="radio" name="gender" value="M">남
 			<input type="radio" name="gender" value="F">여
 		</td>
 		<td></td>
@@ -108,16 +119,15 @@
 	<tr>
 		<td> 생년월일 <br /></td>
 		<td>
-		<input type="date" id="" name="usesrBirth">
-		
+		<input type="date" id="userBirth" name="userBirth" value="<%=user.getBirthdate() %>">
 		</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td> 회원 유형 <br /></td>
 		<td>
-		<input type="radio" name="userType" value="general" /> 일반
-		<input type="radio" name="userType" value="enterprise" /> 기업
+		<input type="radio" name="userType" value="TYP001" /> 일반
+		<input type="radio" name="userType" value="TYP003" /> 기업
 		</td>
 		<td></td>
 	</tr>
@@ -140,25 +150,25 @@
 		<td></td>
 	</tr>
 	</table>
-</form>
-
-</div>
-
-
-	<br />
-
-
-	<div align="center">
-		<button type="submit">수정 완료</button>
-		<button onclick="deleteUser();">회원 탈퇴</button>
-	</div>
+	<!-- 프로필 이미지 업로드를 위한 input:file -->
 	<div id="imageUpload">
 		<input type="file" name="profile" id="profile" onchange="LoadImg(this)" />
 	</div>
+</form>
+</div>
+<br />
+	<div align="center">
+		<button align="center" onclick="uComplete();">수정 완료</button>
+		<button onclick="uDelete();">회원 탈퇴</button>
+	</div>
+
+	<br />
+
+	
 	
 <% } else {
 		request.setAttribute("msg", "회원만 가능한 서비스 입니다.");
-		request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/common/errorPage.jsp").forward(request, response);
 	}
 	%>
 
@@ -169,7 +179,7 @@
 
 <script>
 	/* select2 사용을 위한 메소드 */
-	$(document).ready(function() {
+	$(function() {
 		
     $('.interest-multiple').select2();
     
@@ -202,18 +212,38 @@
 		
 		}
 	};
-	/* 체크박스 한가지 선택 및 체크 값 불러오기 */
-	$('input[name=gender]').click(function(){
-		$('input[name=gender]:checked').each(function(){
-			var value = $(this).val();
-			console.log(value);
+	
+	$(function(){
+		/* 성별 체크 */
+		$('input[name=gender]').each(function(){
+			if($(this).val() == '<%=user.getGender() %>')
+				$(this).prop('checked', true);
+			else
+				$(this).prop('checked', false);
+		});
+		/* 생년월일 체크 */
+		
+		var birthdate = '<%=user.getBirthdate() %>'.split('/');
+	
+		/* 회원 유형 체크 */
+		
+		$('input[name=userType]').each(function(){
+			if($(this).val()== '<%=user.getType() %>')
+				$(this).prop('checked', true);
+			else
+				$(this).prop('checked', false);
+		
 		});
 	});
 	
-	
-	
-	
-	
+	/* 수정완료 시 servlet으로 가는 메소드 */
+	function uComplete(){
+		$('#updateform').submit();
+	}
+	/* 회원 탈퇴 시 servlet으로 가는 메소드 */
+	function uDelete(){
+		location.href = "/pickme/uDelete.pr?uno=<%=user.getUserNo() %>";
+	}
 
 </script>
 </body>

@@ -1,7 +1,6 @@
 package com.profile.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +13,16 @@ import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
 
 /**
- * Servlet implementation class FollowingListServlet
+ * Servlet implementation class UserDeleteServlet
  */
-@WebServlet("/fiList.pr")
-public class FollowingListServlet extends HttpServlet {
+@WebServlet("/uDelete.pr")
+public class UserDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowingListServlet() {
+    public UserDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +31,22 @@ public class FollowingListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<User> list = null;
 		ProfileService ps = new ProfileService();
 
-		// 팔로잉 수 카운트
-		int followingCount = 0;
-
 		HttpSession session = request.getSession(false);
-		User user = (User)session.getAttribute("user");
-		int userNo = user.getUserNo();
+		int userNo = ((User)session.getAttribute("user")).getUserNo();
 		
-		list = ps.followingList(userNo);
-		followingCount = ps.followingCount(userNo);
+		int result = ps.deleteUser(userNo);
 		
-		String page = "";
-		
-		if(list != null){
-			
-			page = "views/profile/followingList.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("followingCount", followingCount);
-			
+		if(result > 0){
+			System.out.println("회원 탈퇴 완료!");
+			session.invalidate();
+			response.sendRedirect("/pickme");
 		}else{
-			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "회원 탈퇴 중 에러 발생");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

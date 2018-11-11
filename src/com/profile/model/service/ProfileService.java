@@ -11,10 +11,10 @@ public class ProfileService {
 	
 	private ProfileDao pDao = new ProfileDao();
 	
-	public ArrayList<User> followerList(){
+	public ArrayList<User> followerList(int userNo){
 		Connection con = getConnection();
 		
-		ArrayList<User> list = pDao.followerList(con);
+		ArrayList<User> list = pDao.followerList(con, userNo);
 		
 		
 		close(con);
@@ -23,33 +23,60 @@ public class ProfileService {
 		
 	}
 
-	public ArrayList<User> followingList() {
+	public ArrayList<User> followingList(int userNo) {
 		Connection con = getConnection();
 		
-		ArrayList<User> list = pDao.followingList(con);
+		ArrayList<User> list = pDao.followingList(con, userNo);
 		
 		close(con);
 		
 		return list;
 	}
 
-	public int followerCount() {
+	public int followerCount(int userNo) {
 		Connection con = getConnection();
 		
 		// 팔로워 수 
-		int result = pDao.followerCount(con);
+		int followerCount = pDao.followerCount(con, userNo);
+		
+		close(con);
+		
+		return followerCount;
+	}
+
+	public int followingCount(int userNo) {
+		
+		Connection con = getConnection();
+		
+		// 팔로워 수 
+		int result = pDao.followingCount(con, userNo);
 		
 		close(con);
 		
 		return result;
 	}
 
-	public int followingCount() {
-		
+	public	int updateMyPage(User user) {
 		Connection con = getConnection();
 		
-		// 팔로워 수 
-		int result = pDao.followingCount(con);
+		int result = pDao.updateMyPage(con, user);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+		
+	}
+
+	public int deleteUser(int userNo) {
+		Connection con = getConnection();
+		
+		int result = pDao.deleteUser(con, userNo);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
 		
 		close(con);
 		

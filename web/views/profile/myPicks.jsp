@@ -10,7 +10,11 @@
 <link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
 
 <style>
-	
+	.attr {
+		height : 50px;
+		position : relative;
+		width : 50px;
+			}
 </style>
 </head>
 <body>
@@ -19,14 +23,15 @@
 
 
 <div class="col-md-12 text-center user">
-  <img src="/pickme/resources/images/user.jpg" alt="Me" class="rounded-circle">
-<h2>아이디</h2>
+  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+<h2><%=user.getUserId() %></h2>
 <h3>한 줄 소개</h3>
 
 <a href="/pickme/fList.pr">Follower</a>
 <a href="/pickme/fiList.pr">Following</a>
 <a href="/pickme/mPicks.pr">My Picks</a>
 <a href="/pickme/mPage.pr">My Page</a>
+
 
 </div>
 
@@ -39,7 +44,8 @@
   <div class="page-section__content">
     <header class="page-section__header">
       <h2 class="page-section__header__title page-section__header__title--vote">
-        What's Your Pick?</h2></header>
+        What's Your Pick?</h2>
+     </header>
        
         
         <div class="live-swell">
@@ -58,10 +64,10 @@
               </div>
               <div class="live-swell__pics__or">
                   or</div>
-                </div>
-                      </div>
-                    </div>
-                  </section>
+           </div>
+         </div>
+   </div>
+</section>
 
 
 
