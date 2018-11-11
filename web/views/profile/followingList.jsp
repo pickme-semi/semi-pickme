@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.*, com.user.model.vo.User"%>
 <%
 	ArrayList<User> list = (ArrayList<User>)request.getAttribute("list");
-	int result = (Integer)request.getAttribute("result");
+	int followingCount = (Integer)request.getAttribute("followingCount");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,11 @@
 <link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
 
 <style>
-	
+		.attr {
+		height : 50px;
+		position : relative;
+		width : 50px;
+			}
 </style>
 </head>
 <body>
@@ -23,8 +27,8 @@
 
 
 <div class="col-md-12 text-center user">
-  <img src="/pickme/resources/images/user.jpg" alt="Me" class="rounded-circle">
-<h2>아이디</h2>
+  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+<h2><%= user.getUserId() %></h2>
 <h3>한 줄 소개</h3>
 
 <a href="/pickme/fList.pr">Follower</a>
@@ -36,11 +40,9 @@
 
 <section class="works text-center">
 
-
-
 <div class="outer">
 	<h2 align="center">Following</h2>
-	<h5><%= result %>명</h5>
+	<h5><%=followingCount %>명</h5>
 		<br /><br /><br />
 		
 		<div class="followerArea">

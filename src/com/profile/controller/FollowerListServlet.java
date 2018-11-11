@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
@@ -33,20 +34,23 @@ public class FollowerListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<User> list = null;
 		ProfileService ps = new ProfileService();
-		int result = 0;
 		
-		list = ps.followerList();
+		// 팔로워 수 카운트
+		int followerCount = 0;
+
+		HttpSession session = request.getSession(false);
+		User user = (User)session.getAttribute("user");
+		int userNo = user.getUserNo();
 		
-		result = ps.followerCount();
-		
-		System.out.println(list);
+		list = ps.followerList(userNo);
+		followerCount = ps.followerCount(userNo);
 		
 		String page = "";
 		
 		if(list != null){
 			page = "views/profile/followerList.jsp";
 			request.setAttribute("list", list);
-			request.setAttribute("result", result);
+			request.setAttribute("followerCount", followerCount);
 		}else{
 			page = "views/common/errorPage.jsp";
 		}

@@ -1,8 +1,6 @@
 package com.profile.controller;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.common.MyRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
 
@@ -37,33 +35,74 @@ public class MyPageUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProfileService ps = new ProfileService();
+		// 파일 처리용 MultipartRequest //
 		
-		if(ServletFileUpload.isMultipartContent(request)){
-			
-			int maxSize = 1024 * 1024 * 10;
-			
-			String root = request.getServletContext().getRealPath("/resources");
-			
-			String savePath = root + "/profileImage/";
-			
-			MultipartRequest mrequest = new MultipartRequest(
-					request,
-					savePath,
-					maxSize,
-					"UTF-8",
-					new DefaultFileRenamePolicy());
-			
-			HttpSession session = request.getSession(false);
-			
-			User user = (User)session.getAttribute("user");
-			
-			String userPass = mrequest.getParameter("userPass");
-			String userEmail = mrequest.getParameter("userEmail");
-			
-			
-			
+		// 1. 업로드할 파일의 최대 크기를 설정 10MB
+		int maxSize = 1024 * 1024 * 10;
+		
+		// 2. multipart/form-data로 전송되었는지 확인!
+		if(!ServletFileUpload.isMultipartContent(request)){
+			request.setAttribute("msg", "enctype을 통한 multipart 전송이 되지 않았습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+		
+		// 3. 웹 상의 루트(최상위) 경로를 활용하여 저장할 폴더 위치를 선정한다.
+		String root = request.getServletContext().getRealPath("/resources/");
+		
+		// 업로드 할 파일 명
+		String savePath = root + "/profileImage/";
+		System.out.println(savePath);
+		MultipartRequest mrequest = new MultipartRequest(
+				request,
+				savePath,
+				maxSize,
+				"UTF-8",
+				new MyRenamePolicy());
+		
+		
+		
+		String password = mrequest.getParameter("userPass");
+		String email = mrequest.getParameter("userEmail");
+		String gender = mrequest.getParameter("gender");
+		
+		// String -> Date 형변환
+		String birth = mrequest.getParameter("userBirth");
+		java.sql.Date birthdate = java.sql.Date.valueOf(birth);
+		
+		String type = mrequest.getParameter("userType");
+		
+		String profile = mrequest.getFilesystemName("profile");
+		System.out.println(profile);
+		
+		ProfileService ps = new ProfileService();
+		HttpSession session =  request.getSession(false);
+		
+		User user = (User)session.getAttribute("user");
+		
+		user.setUserPass(password);
+		user.setUserEmail(email);
+		user.setProfile(profile);
+		user.setGender(gender);
+		user.setBirthdate(birthdate);
+		user.setType(type);
+		
+		System.out.println("회원 기존 정보 : " + session.getAttribute("user"));
+		System.out.println("회원 정보 수정 시 전달 받은 값 : " + user);
+		
+		
+		try{
+			
+		ps.updateMyPage(user);
+		System.out.println("회원 정보 수정 완료! : " + user);
+		response.sendRedirect("/pickme/mPicks.pr");
+		
+		} catch(Exception e) {
+			
+		request.setAttribute("msg", "회원 정보 수정 실패!");
+		request.setAttribute("exception", e);
+		request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
 		
 		
 	}
