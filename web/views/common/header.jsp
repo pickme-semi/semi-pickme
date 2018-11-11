@@ -21,6 +21,7 @@
 	<header>
 	<nav class="navbar navbar-expand-lg navbar-white bg-white">
 	  
+	  <div class="container">
 	  <%if(user==null) {%>
 	  <div class="login" align="center">
 	  	<div class="logo" style="width:33%">
@@ -28,7 +29,7 @@
         </div>
 	  </div>
 	  <%}else{ %>
-      <div class="container">
+      
       	<div class="logo" style="width:33%">
         	<a class="navbar-brand" href="/pickme/views/pickpage/PickMain.jsp">PICK ME</a>
         </div>
@@ -40,14 +41,10 @@
 	        </div>
         </div>
         <div class="logo" style="width:33%" align="right">
-        	<a href="/pickme/mPage.pr">
-        		<img src="/pickme/resources/icons/inbox.svg" alt="" style="width:33px;" title="마이페이지"/>
-        	</a>
-        	<a href="/pickme/logout.au">
-        		<img src="/pickme/resources/icons/issue-opened.svg" alt="" style="width:33px;" title="로그아웃"/>
-        	</a>
-      <button onclick="location.href='views/qna/qnaUser/qnaMain.jsp'">QNA 메인 테스트</button>
-
+			<a href="/pickme/logout.au">LogOut</a> /
+			<a href="/pickme/mPage.pr">Profile</a> /
+			<a href="/pickme/pickmain.pm">Pick</a> /
+			<a href="/pickme/views/qna/qnaUser/qnaMain.jsp">Q&A</a>
         </div>
       </div>
       <%} %>
