@@ -187,4 +187,58 @@ public class UserDao {
 		return result;
 	}
 
+	public int passSearch(Connection con, String userid, String useremail) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("passSearch");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, userid);
+			pstmt.setString(2, useremail);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}else{
+				result = 0;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+			close(rset);
+		}
+		
+		return result;
+	}
+
+	public int updatePass(Connection con, String id, String pass) throws UserException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePass");
+		
+		try{
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pass);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(SQLException e){
+			throw new UserException(e.getMessage());
+		} finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

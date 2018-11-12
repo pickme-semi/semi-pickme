@@ -1,25 +1,26 @@
 package com.user.controller;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.user.model.service.UserService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class UserPassSearchServlet
+ * Servlet implementation class UserReissueServlet
  */
-@WebServlet("/passSearch.au")
-public class UserPassSearchServlet extends HttpServlet {
+@WebServlet("/reissue.au")
+public class UserReissueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPassSearchServlet() {
+    public UserReissueServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,24 +29,20 @@ public class UserPassSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("userPassSearchServlet");
-		
-		String id = request.getParameter("userId");
 		String email = request.getParameter("userEmail");
+		String code = request.getParameter("code");
+		HttpSession session = request.getSession();
+		String sCode = (String)session.getAttribute(email);
 		
-		System.out.println("비밀번호 찾기 파라미터 : userid=" + id + " useremail=" + email );
-	
-		UserService us = new UserService();
+		System.out.println(email);
+		System.out.println(code);
+		System.out.println(sCode);
 		
-		String result = us.passSearch(id,email);
-		
-		response.getWriter().print(result);
-		
-		System.out.println(result);
-		
-		response.sendRedirect("/pickme/views/user/UserPassReset.jsp");
-		
-		
+		if(code.equals(sCode)){
+			response.getWriter().print(true);
+		}else{
+			response.getWriter().print(false);
+		}
 	}
 
 	/**

@@ -33,17 +33,20 @@ public class MailServlet extends HttpServlet {
 		// authCode 로 인증코드를 발급받는다.
 		// 발급받은 코드는 세션에 "이메일(key),코드(value)" 로 저장한다
 		// 이후 클라이언트에서 세션에 값 확인후 변경된 비밀번호 발급
-		String to = request.getParameter("to");
+		String to = request.getParameter("userEmail");
 		
 		System.out.println("[" + to + "]");
 		
 		SendMail sm = new SendMail();
 		String authCode = sm.makeAuthCode();
 				
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		session.setAttribute(to, authCode);
+		session.setAttribute("email", to);
 		
-		sm.send(to, authCode);
+		boolean result = sm.send(to, authCode);
+		
+		response.getWriter().print(result);
 		
 		System.out.println("session 인증값 : " + session.getAttribute(to));
 		
