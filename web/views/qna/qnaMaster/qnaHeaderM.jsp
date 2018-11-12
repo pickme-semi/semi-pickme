@@ -34,7 +34,7 @@
                     <a   class="itemHead"><i class="icon"></i>QNA 관리</a>
                     <span>
                         <a id="qnaUpdate">QNA 작성</a><br>
-                        <a id="qnaDelete">QNA 삭제</a><br>
+                        <a id="qnaList">QNA 목록</a><br>
                     </span>				
                 </li>
                 <li class="item3">
@@ -72,7 +72,7 @@
 		$("#qnaUpdate").click(function() {
 			location.href="qnaUpM.jsp";
 		});
-		$("#qnaDelete").click(function(){
+		$("#qnaList").click(function(){
 			location.href="qnaListM.jsp"
 		});
 	});

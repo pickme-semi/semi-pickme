@@ -1,28 +1,26 @@
-package com.pick.controller;
+package com.qna.user.qnaUserInsert.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pick.model.service.PickService;
-import com.pick.model.vo.PickMe;
+import com.qna.user.qnaUserInsert.model.service.QnaService;
+import com.qna.user.qnaUserInsert.model.vo.QnaBoard;
 
 /**
- * Servlet implementation class PickMain
+ * Servlet implementation class MQnaUserReServlet
  */
-@WebServlet("/pickmain.pm")
-public class PickMainServlet extends HttpServlet {
+@WebServlet("/qUserRe.bo")
+public class MQnaUserReServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PickMainServlet() {
+    public MQnaUserReServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +29,17 @@ public class PickMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<PickMe> list = new ArrayList<PickMe>();
+		int qid = Integer.parseInt(request.getParameter("qno"));
 		
-		PickService ps = new PickService();
-		list = ps.selectList();
-		
+		QnaBoard q = new QnaService().mSelectOne(qid);
 		String page = "";
 		
-		if(list != null){
+		if(q != null){
+			page = "views/qna/qnaMaster/userQnaDetail.jsp";
+			request.setAttribute("qnaboard", q);
 			
-			page = "views/pickpage/PickMain.jsp";
-			request.setAttribute("list", list);			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "pick메인페이지 조회 실패");
+		}else{
+			page = "view/common/errorPage.jsp";
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

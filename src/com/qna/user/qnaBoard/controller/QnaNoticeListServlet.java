@@ -1,4 +1,4 @@
-package com.pick.controller;
+package com.qna.user.qnaBoard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pick.model.service.PickService;
-import com.pick.model.vo.PickMe;
+import com.qna.user.qnaBoard.model.vo.QnaNotice;
+import com.qna.user.qnaBoard.model.service.QnaNoticeService;
 
 /**
- * Servlet implementation class PickMain
+ * Servlet implementation class QnaNoticeListServlet
  */
-@WebServlet("/pickmain.pm")
-public class PickMainServlet extends HttpServlet {
+@WebServlet("/qnaList.no")
+public class QnaNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PickMainServlet() {
+    public QnaNoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +31,17 @@ public class PickMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<PickMe> list = new ArrayList<PickMe>();
+		ArrayList<QnaNotice> qlist = new ArrayList<QnaNotice>();
+		QnaNoticeService qs = new QnaNoticeService();
+		qlist = qs.QnaSelectList();
+		String page ="";
 		
-		PickService ps = new PickService();
-		list = ps.selectList();
-		
-		String page = "";
-		
-		if(list != null){
-			
-			page = "views/pickpage/PickMain.jsp";
-			request.setAttribute("list", list);			
-		} else {
+		if(qlist != null){
+			page = "views/qna/qnaMaster/qnaListM.jsp";
+			request.setAttribute("qlist", qlist);
+		}else{
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "pick메인페이지 조회 실패");
+			request.setAttribute(null, response);
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

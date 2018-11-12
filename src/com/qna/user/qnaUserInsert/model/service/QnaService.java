@@ -4,6 +4,7 @@ import static com.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.qna.user.qnaBoard.model.vo.QnaNotice;
 import com.qna.user.qnaUserInsert.model.dao.QnaInsertDao;
 import com.qna.user.qnaUserInsert.model.vo.QnaBoard;
 
@@ -56,5 +57,10 @@ public class QnaService {
 		
 		return q;
 	}
-
+	
 }
+
+
+
+
+
