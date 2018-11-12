@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.pick.model.vo.*"%>
+<% PickMe p = (PickMe)reqeust.getAttribute("pickme"); %>
     
     
 <!DOCTYPE html>
@@ -27,8 +28,8 @@
             reader.onload = function (e) {
                     $('#pick1').attr('src', e.target.result);
                 }
-
-              reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0]);
+            
             }
         }
         

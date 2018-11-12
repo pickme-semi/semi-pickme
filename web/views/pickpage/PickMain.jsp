@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<PickMe> plist = (ArrayList<PickMe>)request.getAttribute("list");
+	   
 %>
 <!DOCTYPE html>
 <html>
@@ -80,7 +81,7 @@ section{
 /* Container for image text */
 .caption-container {
   text-align: center;
-  background-color: #222;
+  background-color : #222;
   padding: 2px 16px;
   color: white;
 }
@@ -95,7 +96,7 @@ section{
 .column {
   float: left;
   width: 16.66%;
-    content: "";
+  content: "";
   display: table;
   clear: both;
 }
@@ -112,14 +113,14 @@ section{
 
 #pick1 { 
 /*픽 이미지 1 크기 조절 */
- width: 400px; height: 300px;
+ width: 200px; height: auto;
      
-  max-width: 300px;   
+     
 }
 #pick2 {
- width: 400px; height: 300px;
+ width: 200px; height: auto;
    
-    max-width: 300px;    
+    
 } 
 
 </style>
@@ -135,168 +136,81 @@ section{
 <body>
 <%@ include file="../common/header.jsp" %>
 				
-	<section class="col-xs-12 col-md-8">
+<section class="col-xs-12 col-md-8">
 	
-	<div class="container">
+<div class="PickPage">
 
 <% 
 PickMe pData = new PickMe();
+if(plist != null){
+for(int i =0; i<plist.size(); i++){
+    pData = plist.get(i);
 %>
 
   <!-- Full-width images with number text -->
   <div class="mySlides">              
-    <div class="numbertext">1 / 6</div>
-     <div class="row" align="center">
-    	<div class="col-md-6" align="center" > <!-- 픽 이미지 1 -->
-			
-			<br>
-			<img id="pick1" src=""
-			 />
-		</div>	
-		<div class="col-md-6" align="right"> <!--픽 이미지 2 -->
-			<img id="pick2" src="" />
-			</div>	
-    </div>
+    <div class="numbertext"><%= i+1 %> / 6</div>
+      <div class="" >      
+    	  <div class="" align="center" > <!--픽 이미지 1 -->	<!--픽 이미지 2 -->	
+			<img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" />
+		  	<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" />
+		  </div>
+	  
+      </div>
 		<!--  	
       <img src="/pickme/resources/images/img_sample1.jpg" style="width:50%">
       <img src="/pickme/resources/images/img_sample2.jpg" style="width:50%">
       -->
+    </div>
   </div>
-
-  <div class="mySlides">
-    <div class="numbertext">2 / 6</div>
-   
-     <div class="row" align="center">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
-			<img id="pick1" src="/pickme/resources/images/1.jpg" 
-			 />
-		</div>	
-		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
-			<img id="pick2" src="/pickme/resources/images/2.jpg" />
-		</div>
-		</div> 
-  </div>
-
-  <div class="mySlides">
-    <div class="numbertext">3 / 6</div>
-     
-     <div class="row" align="center">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
-			<img id="pick1" src="/pickme/resources/images/img_sample3.jpg" />
-		</div>	
-		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
-			<img id="pick2" src="/pickme/resources/images/img_sample4.jpg" />
-		</div>
-		</div> 
+<% } %>
  
-  </div>
-
-  <div class="mySlides">
-    <div class="numbertext">4 / 6</div>
-       <div class="row" align="center">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
-			<img id="pick1" src="/pickme/resources/images/img_sample5.gif" />
-		</div>	
-		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
-			<img id="pick2" src="/pickme/resources/images/img_sample6.gif" />
-		</div>
-		</div> 
- 
-  </div>
-
-  <div class="mySlides">
-    <div class="numbertext">5 / 6</div>
-       <div class="row" align="center">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
-			<img id="pick1" src="/pickme/resources/images/img_sample7.gif" />
-		</div>	
-		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
-			<img id="pick2" src="/pickme/resources/images/img_sample8.gif" />
-		</div>
-		</div> 
- 
-  </div>
-
-  <div class="mySlides">
-    <div class="numbertext">6 / 6</div>
-  <div class="row" align="center">
-		<div class="col-md-6" align="center" > <!--픽 이미지 1  -->
-			<img id="pick1" src="/pickme/resources/images/img_sample9.gif" />
-		</div>	
-		<div class="col-md-6" align="center"> <!--픽 이미지 2 -->
-			<img id="pick2" src="/pickme/resources/images/img_sample9.gif" />
-		</div>
-		</div> 
- 
-  </div>
-
-  <!-- Next and previous buttons 이걸 수정해야한다--> 
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-  <!-- Image text -->
-  <div class="caption-container">
-    <p id="caption"></p>
-    <p>뭐라고써있니</p>
-  </div>
-
   <!-- Thumbnail images -->
-  <div class="row">
-    <div class="column">
+
+
+  <div class="row" >
+    <div class="column">  
            <div class="row" >
-      <img class="demo cursor" src="/pickme/resources/images/img_sample1.jpg" width="50%" height="16.66%" onclick="currentSlide(1)" alt="1번정보">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample2.jpg" width="50%" height="16.66%" onclick="currentSlide(1)" alt="1번정보">
+   <% for(int i =0; i<plist.size(); i++){
+    pData = plist.get(i);%>
+      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" width="50%" height="16.66%" onclick="currentSlide(<%=i+1 %>)" alt="">
+      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" width="50%" height="16.66%" onclick="currentSlide(<%=i+1 %>)">
            </div>
         </div>
-    <div class="column"> 
-      <div class="row" >
-      <img class="demo cursor" src="/pickme/resources/images/1.jpg" width="50%" height="16.66%" onclick="currentSlide(2)" alt="2번정보">
-      <img class="demo cursor" src="/pickme/resources/images/2.jpg" width="50%" height="16.66%" onclick="currentSlide(2)" alt="2번정보">
-           </div>     
-     
-     
-    </div>
-    <div class="column">
-      <div class="row" >
-      <img class="demo cursor" src="/pickme/resources/images/img_sample3.jpg" width="50%" height="16.66%" onclick="currentSlide(3)" alt="3번정보">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample4.jpg" width="50%" height="16.66%" onclick="currentSlide(3)" alt="3번정보">
-           </div>
-    </div>
-    <div class="column">
-      <div class="row" >
-      <img class="demo cursor" src="/pickme/resources/images/img_sample5.gif" width="50%" height="16.66%" onclick="currentSlide(4)" alt="4번정보">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample6.gif" width="50%" height="16.66%" onclick="currentSlide(4)" alt="4번정보">
-           </div>
-    </div>
-    <div class="column">
-      <div class="row" >
-      <img class="demo cursor" src="/pickme/resources/images/img_sample7.gif" width="50%" height="16.66%" onclick="currentSlide(5)" alt="5번정보">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample8.gif" width="50%" height="16.66%" onclick="currentSlide(5)" alt="5번정보">
-           </div>
-    </div> 
-    <div class="column">
+   </div>  
 
-      <div class="row" >
-      <img class="demo cursor" src="/pickme/resources/images/img_sample9.gif" width="50%" height="16.66%" onclick="currentSlide(6)" alt="6번정보">
-      <img class="demo cursor" src="/pickme/resources/images/img_sample9.gif" width="50%" height="16.66%" onclick="currentSlide(6)" alt="6번정보">
-           </div>
-            </div>
+<% } %>	
+	
+	 <!-- Image text -->
+  <div class="caption-container" align="center">
+   
+    <% 
+for(int i =0; i<plist.size(); i++){
+    pData = plist.get(i);
+%>
+    <p><%= pData.getContent() %></p>
   </div>
-</div>
 	
-	
-	
-
-
-	</section>
-	
+<% } %>
+ <!-- Next and previous buttons 이걸 수정해야한다-->  
+ <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+		
+</section>
 
 	<br><br><br>
 	
-	<div class="col-md-12" align="center" >
+	<!-- <div class="col-md-12" align="center" >
 		<button type="button" onclick="javascript:location.href='PickSub.jsp';">
 		상세보기
 		</button>
+	</div> -->
+	
+	<div class="col-xs-12 col-md-8" align="center" >
+		<button type="button" onclick="location.href='views/pickpage/PickUpload.jsp'">픽 업로드</button>
+		
+		<button type="button" onclick="location.href='views/pickpage/PickUpdate.jsp'">픽 수정</button>	
+		consol.log()	
 	</div>
 	
 	
@@ -330,6 +244,9 @@ PickMe pData = new PickMe();
 	</div>
 </div>
 
+<% }else { %>
+<span> 현재 업로드 된 pick 데이터가 없습니다.</span>
+<% } %>
 
 
 	<script>

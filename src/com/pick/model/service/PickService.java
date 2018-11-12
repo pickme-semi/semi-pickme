@@ -26,20 +26,19 @@ public class PickService {
 		return list;
 	}
 
-	public int insertPick(PickMe pm, ArrayList<Attachment> list) {
+	public int insertPick(PickMe pm/*, ArrayList<Attachment> list*/) {
 		
 		int result = 0;
 		
 		Connection con = getConnection();
 		
-		int result1 = pDao.insertPick(con, pm);
-		if(result1 > 0){
-			int bid = pDao.selectCurrentBid(con);
+		result = pDao.insertPick(con, pm);
+		if(result > 0){
+			int pid = pDao.selectCurrentBid(con);
 			
-			for(int i = 0; i < list.size(); i++){
+			/*for(int i = 0; i < list.size(); i++){
 				list.get(i).setBid(bid);
-			}
-			result = 1;			
+			}*/					
 		}
 		
 		/*int result2 = pDao.insertAttachment(con, list);

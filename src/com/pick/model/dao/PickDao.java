@@ -94,7 +94,7 @@ public class PickDao {
 			pstmt.setDate(5, pm.getDdate());
 			pstmt.setInt(6, pm.getUserno());
 			
-			pstmt.executeQuery();
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			
@@ -108,7 +108,7 @@ public class PickDao {
 	public int selectCurrentBid(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
-		int bid = 0;
+		int pid = 0;
 		
 		String sql = prop.getProperty("selectCurrentBid");
 		
@@ -118,7 +118,7 @@ public class PickDao {
 			rset = stmt.executeQuery(sql);
 			
 			if(rset.next()){
-				bid = rset.getInt(1); // "CURRVAL"
+				pid = rset.getInt(1); // "CURRVAL"
 			}
 			
 		} catch (SQLException e) {
@@ -129,7 +129,7 @@ public class PickDao {
 			close(stmt);
 		}
 		
-		return bid;
+		return pid;
 	}
 
 	public int insertAttachment(Connection con, ArrayList<Attachment> list) {
@@ -179,7 +179,7 @@ public class PickDao {
 		String sql = prop.getProperty("selectPickMeOne");
 		
 		try {
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);			
 			
 			rset = pstmt.executeQuery();
 			
