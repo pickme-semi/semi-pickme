@@ -6,20 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.user.model.service.UserService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class UserPassSearchServlet
+ * Servlet implementation class UserRepassViewServlet
  */
-@WebServlet("/passSearch.au")
-public class UserPassSearchServlet extends HttpServlet {
+@WebServlet("/repassVeiw.au")
+public class UserRepassViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPassSearchServlet() {
+    public UserRepassViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,23 +27,14 @@ public class UserPassSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("userPassSearchServlet");
+
+		String id = request.getParameter("id");
 		
-		String id = request.getParameter("userId");
-		String email = request.getParameter("userEmail");
+		HttpSession session = request.getSession(true);
 		
-		System.out.println("비밀번호 찾기 파라미터 : userid=" + id + " useremail=" + email );
-	
-		UserService us = new UserService();
-		
-		String result = us.passSearch(id,email);
-		
-		response.getWriter().print(result);
-		
-		System.out.println(result);
+		session.setAttribute("id", id);
 		
 		response.sendRedirect("/pickme/views/user/UserPassReset.jsp");
-		
 		
 	}
 

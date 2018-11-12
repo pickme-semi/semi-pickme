@@ -51,14 +51,20 @@
 			<td></td>
 		</tr>
 		<tr>
+			<td></td>
+			<td><span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span></td>
+		</tr>
+		<tr>
 			<td>이메일</td>
 			<td><input type="text" id="userEmail" name="userEmail" placeholder="이메일"></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><div id = "showId" align ="center" style="diaplay:none"></div></td>
+			<td></td>
+			<td><span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span></td>
 		</tr>
 	</table>
+	<div align="center"><span id = "showId" style="diaplay:none"></span></div>
 	<br />
 	<div class="btndiv" align="center">
 		<button type="button" id="searchId">아이디 찾기</button>
@@ -79,17 +85,69 @@
 
 <script>
 
+var nameFlag = false;
+var emailFlag = false;
+
+$(document).ready(function(){
+	
+	$("#userName").blur(function() {
+        naemFlag = false;
+        checkName();
+    });
+	
+    $("#userEmail").blur(function() {
+        checkEmail();
+    });
+	
+    
+	
+});
+
+function checkName(){
+	var oMsg = $("#nameMsg");
+	var name = $("#userName").val();
+	
+	
+    if (name == "") {
+        showMsg(oMsg,"필수 정보입니다.","red");
+        nameFlag = false;
+    }else{
+        hideMsg(oMsg);
+        nameFlag = true;	
+    }
+    
+    return true;
+
+}
+
+function checkEmail() {
+    var email = $("#userEmail").val();
+    var oMsg = $("#emailMsg");
+
+    if (email == "") {
+    	showMsg(oMsg,"필수 정보입니다.","red");
+        emailFlag = false;
+    }else{
+    	hideMsg(oMsg);
+        emailFlag = true;
+    }
+    
+    return true;
+}
+
 $("#searchId").click(function(){
+	
+	if( emailFlag && nameFlag){
 	$.ajax({
 		url : "/pickme/idSearch.au",
 		type : "post",
 		data : {userName : $('#userName').val(),
 				userEmail : $('#userEmail').val()},
 		success : function(data){
-			if(data == null){
+			if(data == "fail"){
 				showMsg($("#showId"),"해당하는 아이디가 없습니다.");
 			}else{
-				showMsg($("#showId"),data);
+				showMsg($("#showId"),"해당 정보와 일치하는 아이디는 " + data + "입니다.");
 			}
 			
 		}, error : function(request, status, error){
@@ -100,6 +158,9 @@ $("#searchId").click(function(){
 				
 			}
 	});
+	}else{
+		alert("값을 정확하게 입력해 주세요.");
+	}
 	
 });
 

@@ -6,20 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.user.exception.UserException;
 import com.user.model.service.UserService;
 
 /**
- * Servlet implementation class UserPassSearchServlet
+ * Servlet implementation class UserPassResetServlet
  */
-@WebServlet("/passSearch.au")
-public class UserPassSearchServlet extends HttpServlet {
+@WebServlet("/passReset.au")
+public class UserPassResetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPassSearchServlet() {
+    public UserPassResetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,24 +30,27 @@ public class UserPassSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("userPassSearchServlet");
 		
-		String id = request.getParameter("userId");
-		String email = request.getParameter("userEmail");
+		String pass = request.getParameter("newPass");
 		
-		System.out.println("비밀번호 찾기 파라미터 : userid=" + id + " useremail=" + email );
-	
+		
 		UserService us = new UserService();
 		
-		String result = us.passSearch(id,email);
+		HttpSession session = request.getSession(true);
 		
-		response.getWriter().print(result);
+		String id = (String)session.getAttribute("id");
 		
-		System.out.println(result);
-		
-		response.sendRedirect("/pickme/views/user/UserPassReset.jsp");
-		
-		
+		try {
+			us.updatePass(id, pass);
+			System.out.println("비밀번호 변경 완료 id :" + id + "비밀번호 : " + pass );
+		} catch (UserException e) {
+			request.setAttribute("msg", "비밀번호 변경에 실패하였습니다.");
+			request.setAttribute("exception", e);
+			request.getRequestDispatcher("views/common/errPage.jsp").forward(request, response);
+
+		}
+
+		response.sendRedirect("/pickme");
 	}
 
 	/**

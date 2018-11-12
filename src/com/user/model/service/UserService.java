@@ -74,6 +74,48 @@ public class UserService {
 		
 		return result;
 	}
+
+	public String passSearch(String userid, String useremail) {
+		
+		Connection con = getConnection();
+
+		String result = "";
+		
+		int check = uDao.passSearch(con, userid, useremail);
+		
+		if(check == 1){
+			for(int i = 0; i<6; i++){
+				int rndVal =(int)(Math.random() * 62);
+				if(rndVal <10) {
+					result += rndVal;
+				} else if(rndVal > 35){
+					result += (char)(rndVal + 61);
+				} else{
+					result += (char)(rndVal +55);
+				}
+			}
+		}else{
+			result = "fail";
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int updatePass(String id, String pass) throws UserException{
+		Connection con = getConnection();
+		
+		int result = uDao.updatePass(con,id,pass);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+		
+	}
 	
 	
 
