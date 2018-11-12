@@ -42,7 +42,7 @@
         </div>
         <div class="logo" style="width:33%" align="right">
 			<a href="/pickme/logout.au">LogOut</a> /
-			<a href="/pickme/mPage.pr">Profile</a> /
+			<a href="/pickme/mPicks.pr">Profile</a> /
 			<a href="/pickme/pickmain.pm">Pick</a> /
 			<a href="/pickme/views/qna/qnaUser/qnaMain.jsp">Q&A</a>
         </div>

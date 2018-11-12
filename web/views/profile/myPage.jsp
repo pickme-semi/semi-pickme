@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*" import="com.profile.model.vo.*" %>
+<%
+	ArrayList<Category> category = (ArrayList<Category>)request.getAttribute("cArr");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +59,7 @@
 <h2 align = "center"> 회원 정보  </h2>
 <br />
 
-<form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.pr"
+<form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.au"
 encType="multipart/form-data">
 	<table align="center">
 	<tr>
@@ -134,17 +137,11 @@ encType="multipart/form-data">
 	<tr>
 		<td> 관심 분야 <br /></td>
 		<td>
-		<select class="interest-multiple" name="interests[]" data-placeholder="Select an option" multiple="multiple">
-  		<optgroup label="travel">
-  			<option value="japan">Japan</option>
-  			<option value="korea">Korea</option>
-  			<option value="US">US</option>
-  		</optgroup>
-  		<optgroup label="workout">Work Out
-  			<option value="Running">Running</option>
-  			<option value="yoga">Yoga</option>
-  			<option value="hiking">hiking</option>
-  		</optgroup>
+		<select class="interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
+		style="width: 75%" onchange="selectValue();">
+		<% for(int i=0; i< category.size(); i++) {%>
+  			<option value="<%=category.get(i).getCategoryId()%>"><%=category.get(i).getCategoryName() %></option>
+  		<% } %>
 		</select>
 		</td>
 		<td></td>
@@ -181,9 +178,13 @@ encType="multipart/form-data">
 	/* select2 사용을 위한 메소드 */
 	$(function() {
 		
-    $('.interest-multiple').select2();
+    $('.interest-multiple').select2({
+    	width: 'resolve'
+    });
     
 });
+	/* select2 값 가져오기 위한 메소드 */
+	
 	
 	/* 이미지 클릭 시 이미지 삽입 메소드 */
 	$(function(){

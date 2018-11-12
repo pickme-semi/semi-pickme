@@ -36,6 +36,9 @@ public class UserDeleteServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userNo = ((User)session.getAttribute("user")).getUserNo();
 		
+		// 팔로우 정보 지우기
+		int fResult = ps.followDel(userNo);
+		
 		int result = ps.deleteUser(userNo);
 		
 		if(result > 0){

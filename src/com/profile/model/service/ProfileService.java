@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.profile.model.dao.ProfileDao;
+import com.profile.model.vo.Category;
 import com.user.model.vo.User;
 import static com.common.JDBCTemplate.*;
 
@@ -81,7 +82,43 @@ public class ProfileService {
 		close(con);
 		
 		return result;
-	};
+	}
+
+	public int followDel(int userNo) {
+		Connection con = getConnection();
+		
+		int fResult = pDao.followDel(con, userNo);
+		
+		if(fResult > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return fResult;
+	}
+
+	public ArrayList<Category> browseCategory() {
+		Connection con = getConnection();
+
+		ArrayList<Category> cArr = pDao.browseCategory(con);
+		
+		close(con);
+		
+		return cArr;
+	}
+
+	public void insertCategory(int userNo, String category) {
+		Connection con = getConnection();
+		
+		int result = pDao.insertCategory(con, userNo, category);
+		
+		if(result > 0 ) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+	}
+
 	
 	
 	

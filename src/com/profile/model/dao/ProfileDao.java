@@ -1,5 +1,7 @@
 package com.profile.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,8 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.profile.model.vo.Category;
 import com.user.model.vo.User;
-import static com.common.JDBCTemplate.*;
 
 public class ProfileDao {
 	
@@ -202,12 +204,33 @@ public class ProfileDao {
 		
 		return result;
 	}
+	public int followDel(Connection con, int userNo) {
+		int fResult = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteFollow");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
+			
+			fResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return fResult;
+	}
 
 	public int deleteUser(Connection con, int userNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("deleteUser");
+		
 		
 		try {
 			
@@ -225,6 +248,64 @@ public class ProfileDao {
 		
 		return result;
 	}
+
+	public ArrayList<Category> browseCategory(Connection con) {
+		
+		ArrayList<Category> cArr = new ArrayList<Category>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			stmt = con.createStatement();
+			
+			String sql = "SELECT * FROM PM_CATEGORY_TB";
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()){
+				Category c = new Category();
+				
+				c.setCategoryId(rset.getInt("ID"));
+				c.setCategoryName(rset.getString("Name"));
+				
+				cArr.add(c);
+			}
+			System.out.println(cArr);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return cArr;
+	}
+
+	public int insertCategory(Connection con, int userNo,String category) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertCategory");
+		
+		String[] c = category.split(", ");
+		
+		try {
+			
+				
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	
 
 	
 }
