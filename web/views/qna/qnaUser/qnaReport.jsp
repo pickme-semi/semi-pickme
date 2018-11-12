@@ -42,13 +42,6 @@
 									</p>
 									<form id="inquiryForm" name="inquiryForm" method="post"
 										action="" enctype="multipart/form-data">
-										<input type="hidden" name="alias" value="bugs_member">
-										<input type="hidden" id="rootCategoryNo" value="5658">
-										<input type="hidden" id="serviceName"
-											name="inquiry.serviceTypeCode" value="bugs"> <input
-											type="hidden" id="smsAcceptYN" name="inquiry.smsAcceptYN"
-											value="N"> <input type="hidden"
-											id="fileMaxUploadSize" value="10485760">
 
 										<fieldset>
 											<legend class="blind">신고</legend>
@@ -72,7 +65,7 @@
 
 																<div id="categoryArea" style="overflow: hidden;">
 																	<span class="sel" style="width: 198px;"> <select
-																		id="upperCategory">
+																		id="upperCategory" name="category">
 																			<option value="">신고유형 선택</option>
 
 																			<option value="5730">민감한 콘텐츠</option>

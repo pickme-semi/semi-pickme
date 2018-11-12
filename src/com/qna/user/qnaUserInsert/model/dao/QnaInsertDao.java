@@ -44,7 +44,7 @@ public class QnaInsertDao {
 					
 			pstmt.setString(1, b.getQtitle());
 			pstmt.setString(2, b.getQcontent());
-			pstmt.setInt(3, b.getQcategory());
+			pstmt.setString(3, b.getQcategory());
 			pstmt.setInt(4, b.getQpickId());
 			pstmt.setInt(5, b.getQalert());
 			pstmt.setInt(6, b.getQphone());
@@ -120,7 +120,7 @@ public class QnaInsertDao {
 				q.setQcontent(rset.getString("CONTENT"));
 				q.setQdate(rset.getDate("EROLL_DATE"));
 				q.setQstatus(rset.getString("STATUS"));
-				q.setQcategory(rset.getInt("CATEGORY"));
+				q.setQcategory(rset.getString("CATEGORY"));
 				q.setQno(rset.getInt("USER_NO"));
 				q.setQpickId(rset.getInt("PICK_ID"));
 				q.setQtype(rset.getString("TYPE"));
@@ -164,7 +164,7 @@ public class QnaInsertDao {
 				q.setQcontent(rset.getString("CONTENT"));
 				q.setQdate(rset.getDate("EROLL_DATE"));
 				q.setQstatus(rset.getString("STATUS"));
-				q.setQcategory(rset.getInt("CATEGORY"));
+				q.setQcategory(rset.getString("CATEGORY"));
 				q.setQno(rset.getInt("USER_NO"));
 				q.setQpickId(rset.getInt("PICK_ID"));
 				q.setQtype(rset.getString("TYPE"));

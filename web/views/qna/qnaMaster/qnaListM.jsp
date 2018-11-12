@@ -1,5 +1,8 @@
+<%@page import="com.qna.user.qnaBoard.model.vo.*, java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<% ArrayList<QnaNotice> list = (ArrayList<QnaNotice>)request.getAttribute("qnaList"); %>
 <!DOCTYPE html>
 <html>
 
@@ -33,7 +36,7 @@
 					<div class="contentBody" style="padding: 100px 162px 102px;">
 
 
-						<h1 style="width: 700px;">자주 묻는 질문</h1>
+						<h1 style="width: 700px;">QnA 리스트</h1>
 
 
 						<div class="tbl_vt faqlist" >
@@ -63,21 +66,26 @@
 																<div class="faqTitle on">
 																	<table align="center" id="listArea">
 																		<tr>
+																			<th width="100px">카테고리</th>
 																			<th width="100px">글번호</th>
 																			<th width="300px">글제목</th>
 																			<th width="100px">조회수</th>
+																			<th width="100px">작성자</th>
 
 																		</tr>
 																		
-																		
+																		<%for(QnaNotice q : list){%>
 																		<tr>
-																			<input type="hidden" value="">
-																			<td>1</td>
-																			<td>2</td>
-																			<td>3</td>
+																		
+																			<td><%= q.getQcategory() %></td>
+																			<td><%= q.getQnno() %></td>
+																			<td><%= q.getQtitle() %></td>
+																			<td><%= q.getQcount() %></td>
+																			<td><%= q.getQwriter() %></td>
 																			
 
 																		</tr>
+																		<%} %>
 																		
 																	</table>
 																</div>
@@ -127,5 +135,16 @@
 			</article>
 		</div>
 	</div>
+	
+	<script>
+	 $(function(){
+		$('#listArea td').click(function(){
+			var qnno = $(this).parent().children().eq(0).text();
+			
+		})
+	})	
+
+	</script>
+	
 </body>
 </html>

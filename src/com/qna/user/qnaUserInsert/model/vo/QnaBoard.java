@@ -12,7 +12,7 @@ public class QnaBoard implements Serializable{
 	private String qcontent;
 	private Date qdate;
 	private String qstatus;
-	private int qcategory;
+	private String qcategory;
 	private int qno;
 	private int qpickId;
 	private String qtype;
@@ -25,7 +25,7 @@ public class QnaBoard implements Serializable{
 
 	
 	
-	public QnaBoard(String qtitle, String qcontent, int qcategory, int qpickId, int qalert, int qphone, String qemail, String qfile) {
+	public QnaBoard(String qtitle, String qcontent, String qcategory, int qpickId, int qalert, int qphone, String qemail, String qfile) {
 		super();
 		this.qtitle = qtitle;
 		this.qcontent = qcontent;
@@ -39,7 +39,7 @@ public class QnaBoard implements Serializable{
 
 
 
-	public QnaBoard(int qid, String qtitle, String qcontent, Date qdate, String qstatus, int qcategory, int qno,
+	public QnaBoard(int qid, String qtitle, String qcontent, Date qdate, String qstatus, String qcategory, int qno,
 			int qpickId, String qtype, int qalert, int qphone, String qemail, String qfile) {
 		super();
 		this.qid = qid;
@@ -170,7 +170,7 @@ public class QnaBoard implements Serializable{
 	/**
 	 * @return the qcategory
 	 */
-	public int getQcategory() {
+	public String getQcategory() {
 		return qcategory;
 	}
 
@@ -179,7 +179,7 @@ public class QnaBoard implements Serializable{
 	/**
 	 * @param qcategory the qcategory to set
 	 */
-	public void setQcategory(int qcategory) {
+	public void setQcategory (String qcategory) {
 		this.qcategory = qcategory;
 	}
 
