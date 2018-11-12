@@ -68,7 +68,7 @@
 													<th width="50">작성일</th>
 													<th width="50">처리여부</th>
 													</tr>
-																		
+		
 													<% for(QnaBoard q : list){ %>						
 													<tr>
 													<input type="hidden" value="<%= q.getQid() %>">
@@ -78,7 +78,8 @@
 													<td><%= q.getQdate() %></td>
 													<td><%= q.getQstatus() %></td>
 													</tr>
-													<%} %>					
+													<%} %>
+			
 													</table>
 											</div>
 
