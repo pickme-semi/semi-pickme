@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import ="com.user.model.vo.*, java.util.*" %>
 <%
-	User u = (User)session.getAttribute("user");
-
-    
+	User u = (User)session.getAttribute("user");    
 %>	
 
 <!DOCTYPE html>
@@ -137,12 +135,12 @@
 					<tr>
 						<td>첨부파일</td>
 						<td colspan="3"><input type="file" name="pick1" id="up1" /> <img
-							id="pick1" src="#" alt="미리보기1" /></td>
+							id="pick1" src="#" alt="" /></td>
 					</tr>
 					<tr>
 						<td>첨부파일2</td>
 						<td colspan="3"><input type="file" name="pick2" id="up2" /> <img
-							id="pick2" src="#" alt="미리보기2" /></td>
+							id="pick2" src="#" alt="" /></td>
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -208,8 +206,6 @@
 				<button type="submit">작성완료</button>
 				<button type="reset">취소</button>
 			</div>
-					
-
 
 			</form>
 
