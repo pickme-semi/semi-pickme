@@ -19,7 +19,7 @@ import com.user.model.vo.User;
 /**
  * Servlet implementation class MyPageUpdateServlet
  */
-@WebServlet("/mPageUpdate.pr")
+@WebServlet("/mPageUpdate.au")
 public class MyPageUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -72,6 +72,9 @@ public class MyPageUpdateServlet extends HttpServlet {
 		String type = mrequest.getParameter("userType");
 		
 		String profile = mrequest.getFilesystemName("profile");
+		
+		String category = String.join(", ", mrequest.getParameterValues("interest"));
+		
 		System.out.println(profile);
 		
 		ProfileService ps = new ProfileService();
@@ -86,13 +89,16 @@ public class MyPageUpdateServlet extends HttpServlet {
 		user.setBirthdate(birthdate);
 		user.setType(type);
 		
+		
 		System.out.println("회원 기존 정보 : " + session.getAttribute("user"));
 		System.out.println("회원 정보 수정 시 전달 받은 값 : " + user);
 		
 		
+		
 		try{
-			
 		ps.updateMyPage(user);
+		ps.insertCategory(user.getUserNo(),category);
+		
 		System.out.println("회원 정보 수정 완료! : " + user);
 		response.sendRedirect("/pickme/mPicks.pr");
 		
