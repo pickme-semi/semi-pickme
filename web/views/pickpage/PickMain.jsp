@@ -141,7 +141,6 @@ section{
 
 <% 
 PickMe pData = new PickMe();
-pData = plist.get(0);
 %>
 
   <!-- Full-width images with number text -->
@@ -149,9 +148,9 @@ pData = plist.get(0);
     <div class="numbertext">1 / 6</div>
      <div class="row" align="center">
     	<div class="col-md-6" align="center" > <!--픽 이미지 1 -->
-			<%=pData.getSelect_1() %>
+			
 			<br>
-			<img id="pick1" src="<%=pData.getSelect_1() %>"
+			<img id="pick1" src=""
 			 />
 		</div>	
 		<div class="col-md-6" align="right"> <!--픽 이미지 2 -->
