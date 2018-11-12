@@ -50,7 +50,7 @@
 			<% for (User followerList : list) { %>
 			<div class="follower-list" align="center">
 				<img data-src="holder.js/75x75" src="<%=followerList.getProfile() %>" class="rounded-circle" width="100px" height="50px" /> &nbsp;
-				<%= followerList.getUserId() %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button>follow</button>
+				<%= followerList.getUserId() %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick="">follow</button>
 				
 			</div>
 			
@@ -68,11 +68,6 @@
 	
 
 <script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
-<script src="/pickme/resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/rocket-loader.min.js" defer=""></script></body>
 </html>
 
 </body>

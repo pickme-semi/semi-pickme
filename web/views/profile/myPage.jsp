@@ -138,7 +138,7 @@ encType="multipart/form-data">
 		<td> 관심 분야 <br /></td>
 		<td>
 		<select class="interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
-		style="width: 75%" onchange="selectValue();">
+		style="width: 75%" >
 		<% for(int i=0; i< category.size(); i++) {%>
   			<option value="<%=category.get(i).getCategoryId()%>"><%=category.get(i).getCategoryName() %></option>
   		<% } %>
