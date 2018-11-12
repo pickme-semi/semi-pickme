@@ -286,26 +286,29 @@ public class ProfileDao {
 		int result = 0;
 		
 		String sql = prop.getProperty("insertCategory");
-		
 		String[] c = category.split(", ");
+		int[] categoryId = new int[c.length];
 		
 		try {
 			
-				
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, userNo);
+			for(int i=0; i<c.length; i++){
+				categoryId[i] = Integer.parseInt(c[i]);
 			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+				pstmt.setInt(2, categoryId[i]);
 			
+				result = pstmt.executeUpdate();
+			}
+			
+			System.out.println("category DB 입력 완료!");
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
 		
-		return 0;
+		return result;
 	}
-
-	
-
 	
 }

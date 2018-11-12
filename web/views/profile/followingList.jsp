@@ -48,8 +48,8 @@
 		<div class="followerArea">
 			<% for (User followingList : list) { %>
 			<div class="following-list" align="center">
-				<img src="<%=followingList.getProfile() %>" class="rounded-circle" width="100px" height="50px" /> &nbsp;
-				<%= followingList.getUserId() %> &nbsp;&nbsp;&nbsp; <button>follow</button>
+				<img src="/pickme/resources/profileImage/<%=followingList.getProfile() %>" class="rounded-circle" width="100px" height="50px" onclick="move();"/> &nbsp;
+				<%= followingList.getUserId() %> &nbsp;&nbsp;&nbsp; <button value=<%= followingList.getUserNo() %> >follow</button>
 				
 			</div>
 			
@@ -64,11 +64,13 @@
 
 
 <script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
-<script src="/pickme/resources/js/jquery.mixitup.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/smoothscroll.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/bootstrap.min.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/custom.js" type="5202d73d56a5dd51f2120085-text/javascript"></script>
-<script src="/pickme/resources/js/rocket-loader.min.js" defer=""></script></body>
+
+<script>
+
+	function move(){
+		alret("dd");
+	};
+</script>
 </html>
 
 </body>
