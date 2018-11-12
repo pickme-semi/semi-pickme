@@ -25,7 +25,8 @@
 
 <div class="pm-section col-xs-12 col-md-8">
 <h1>pick list</h1>
-<% for(int i = 1 ; i <= 10 ;i ++){ %>
+<div class="pm-div">
+<% for(int i = 1 ; i <= 10 ;i++){ %>
 	<div>
 	<span class="title"><a href="/pickme/statsOneList.st?pickno=<%=i%>">pick <%= i %> title</a></span>
 	<img src="" alt="select1-img" />
@@ -36,6 +37,27 @@
 
 <% } %>
 </div>
+</div>
 <%@ include file="../common/footer.jsp" %>
+<script>
+	$(window).scroll(function(){
+			if($(window).scrollTop() == $(document).height() - $(window).height()){
+				$(".pm-div").append("<div>" +
+						"<span class='title'><a href='/pickme/statsOneList.st?pickno=''>picktitle</a></span>" +
+						"<img src='' alt='select1-img' />" +
+						"<img src='' alt='select2-img' />" +
+						"<span class='name'><a href=''>작성자 </a></span>" +
+						"</div>" +	
+						"<hr />" +
+						"<div>" +
+						"<span class='title'><a href='/pickme/statsOneList.st?pickno=''>picktitle</a></span>" +
+						"<img src='' alt='select1-img' />" +
+						"<img src='' alt='select2-img' />" +
+						"<span class='name'><a href=''>작성자 </a></span>" +
+						"</div>" +	
+						"<hr />");
+			}
+	});
+</script>
 </body>
 </html>
