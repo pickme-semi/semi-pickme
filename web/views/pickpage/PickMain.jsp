@@ -147,7 +147,7 @@ PickMe pData = new PickMe();
   <div class="mySlides">              
     <div class="numbertext">1 / 6</div>
      <div class="row" align="center">
-    	<div class="col-md-6" align="center" > <!--픽 이미지 1 -->
+    	<div class="col-md-6" align="center" > <!-- 픽 이미지 1 -->
 			
 			<br>
 			<img id="pick1" src=""
@@ -389,8 +389,54 @@ PickMe pData = new PickMe();
 		countRight +=1;
 		console.log(countRight);
 	}
+	/* 
+	// ajax 통신클릭시 왼쪽 선택
+	$("#pick1").click(function(){
+			
+			$.ajax({
+				url : "/com/pick/pickresult.pr",
+				type : "get",
+				data : {
+					resultPickId : $('#resultPickId').val() // 사진Pic값 전송
+					selectUserNo : $('#selectUserNo').val()
+					selectUserNo : $('#selectResult').val()
+					selectDdate : $('#selectDdate').val()
+				}, success : function(data){
+					console.log("데이터 전달 성공!");
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
 	
-	
+	// ajax 통신클릭시   오른쪽 선택
+		$("#pick2").click(function(){
+			
+			$.ajax({
+				url : "/com/pick/pickresult.pr",
+				type : "get",
+				data : {
+					resultPickId : $('#resultPickId').val() // 사진Pic값 전송
+					selectUserNo : $('#selectUserNo').val()
+					selectUserNo : $('#selectResult').val()
+					selectDdate : $('#selectDdate').val()
+				}, success : function(data){
+					console.log("데이터 전달 성공!");
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		}); */
 	</script>
 	
 
