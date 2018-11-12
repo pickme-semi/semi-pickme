@@ -65,87 +65,24 @@
 									<tr>
 										<td colspan="2" class="answer" id="faq_ans_26049">
 											<div class="inner">
-												여기에 내용<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
-												<br>
+												
+												<p id="content"><%= q.getQcontent() %>
+
 												<br> <input type="hidden" name="domainId" id="domainId"
 													value="1"> <input type="hidden" name="domainId"
-													id="logId" value="71607fa3-9462-47b0-b816-2cd2cb68180b">
-												<div class="faq_wrap">
-													<form id="faqSatisfaction1" action="">
-														<fieldset>
-															<legend>
-																<div class="blind">FAQ 만족도 조사</div>
-															</legend>
+													id="logId" value="">
 
-															<dl class="rating">
-																<dt>궁금하신 내용이 해결 되셨나요?</dt>
-																<dd class="score_area">
-																	<ul class="lst_score">
-
-																		<li><input type="radio" name="fbCheck1"
-																			id="fbCheck10" value="100"><label
-																			for="fbCheck10">매우 도움됨</label></li>
-
-																		<li><input type="radio" name="fbCheck1"
-																			id="fbCheck11" value="80"><label
-																			for="fbCheck11">도움됨</label></li>
-
-																		<li><input type="radio" name="fbCheck1"
-																			id="fbCheck12" value="60"><label
-																			for="fbCheck12">보통</label></li>
-
-																		<li><input type="radio" name="fbCheck1"
-																			id="fbCheck13" value="40"><label
-																			for="fbCheck13">도움 안됨</label></li>
-
-																		<li><input type="radio" name="fbCheck1"
-																			id="fbCheck14" value="20"><label
-																			for="fbCheck14">전혀 도움 안됨</label></li>
-
-																	</ul>
-																</dd>
-																<dd class="textarea_wrap">
-																	<textarea id="fbContents1" title="고객의견"
-																		class="customer_feedback"></textarea>
-																	<span id="feedbackLen1" class="count_txt">2자입력 /
-																		최대 500자</span>
-																</dd>
-															</dl>
-															<div class="btn_wrap">
-																<a
-																	href="javascript:faqFeedback('fbCheck1','fbContents1', '26049', '1','1');"
-																	class="bn btn_ok">확인</a>
-															</div>
-
-															<!--// 만족도 평가 -->
-															<script type="text/javascript">
-																feedbackLengthCheck(
-																		$("#fbContents1"),
-																		$("#feedbackLen1"));
-															</script>
-
-
-												
-															
-															
-														</fieldset>
-													</form>
-												</div>
 											</div>
 										</td>
 									</tr>
+								
+									
+										<div name ="">
+										<button onclick="location.href='<%= request.getContextPath() %>/qListM.bo'">목록</button>
+										<button onclick="location.href='<%= request.getContextPath() %>/qUserRe.bo'">답변하기</button>
+	
+										</div>
+										
 								</tbody>
 							</table>
 						</div>

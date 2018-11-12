@@ -15,6 +15,20 @@
  .container{
  	width : 1000px;
  }
+ 
+ a{
+ 	color : black;
+ }
+ 
+ *{
+ 	font-family: 'Nanum Brush Script';
+ }
+ 
+.pm-section{
+	background : lightgreen;
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
 </head>
 <body>
@@ -44,7 +58,8 @@
 			<a href="/pickme/logout.au">LogOut</a> /
 			<a href="/pickme/mPage.pr">Profile</a> /
 			<a href="/pickme/pickmain.pm">Pick</a> /
-			<a href="/pickme/views/qna/qnaUser/qnaMain.jsp">Q&A</a>
+			<a href="/pickme/views/qna/qnaUser/qnaMain.jsp">Q&A</a> / 
+			<a href="/pickme/sTotalList.st">통계</a>
         </div>
       </div>
       <%} %>

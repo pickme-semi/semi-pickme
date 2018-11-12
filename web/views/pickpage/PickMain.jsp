@@ -306,8 +306,54 @@ for(int i =0; i<plist.size(); i++){
 		countRight +=1;
 		console.log(countRight);
 	}
+	/* 
+	// ajax 통신클릭시 왼쪽 선택
+	$("#pick1").click(function(){
+			
+			$.ajax({
+				url : "/com/pick/pickresult.pr",
+				type : "get",
+				data : {
+					resultPickId : $('#resultPickId').val() // 사진Pic값 전송
+					selectUserNo : $('#selectUserNo').val()
+					selectUserNo : $('#selectResult').val()
+					selectDdate : $('#selectDdate').val()
+				}, success : function(data){
+					console.log("데이터 전달 성공!");
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
 	
-	
+	// ajax 통신클릭시   오른쪽 선택
+		$("#pick2").click(function(){
+			
+			$.ajax({
+				url : "/com/pick/pickresult.pr",
+				type : "get",
+				data : {
+					resultPickId : $('#resultPickId').val() // 사진Pic값 전송
+					selectUserNo : $('#selectUserNo').val()
+					selectUserNo : $('#selectResult').val()
+					selectDdate : $('#selectDdate').val()
+				}, success : function(data){
+					console.log("데이터 전달 성공!");
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		}); */
 	</script>
 	
 
