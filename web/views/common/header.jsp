@@ -48,8 +48,8 @@
 	        </div>
 			<div class="search" style="width:33%" text-align="center">
 		        <div class="collapse navbar-collapse" id="navbarsExample07">
-		          <form class="form-inline my-2 my-md-0" style="margin-left:auto;margin-right:auto;">
-		            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+		          <form class="form-inline my-2 my-md-0" style="margin-left:auto;margin-right:auto;" action="/pickme/search.se" method="get">
+		            <input class="form-control" type="text" name="userSearch" placeholder="@user #category" aria-label="Search">
 		          </form>
 		        </div>
 	        </div>
