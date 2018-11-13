@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class QnaNotice implements Serializable{
 
-	private int qnno;
+	private int qno;
 	private String qcategory;
 	private String qtitle;
 	private String qcontent;
@@ -24,9 +24,9 @@ public QnaNotice(String qtitle, String qcontent, String qwriter, String qcategor
 	this.qcategory = qcategory;
 }
 
-public QnaNotice(int qnno, String qtitle, String qcontent, String qwriter, int qcount, Date qdate, String qcategory) {
+public QnaNotice(int qno, String qtitle, String qcontent, String qwriter, int qcount, Date qdate, String qcategory) {
 	super();
-	this.qnno = qnno;
+	this.qno = qno;
 	this.qtitle = qtitle;
 	this.qcontent = qcontent;
 	this.qwriter = qwriter;
@@ -38,15 +38,15 @@ public QnaNotice(int qnno, String qtitle, String qcontent, String qwriter, int q
 /**
  * @return the qnno
  */
-public int getQnno() {
-	return qnno;
+public int getQno() {
+	return qno;
 }
 
 /**
  * @param qnno the qnno to set
  */
-public void setQnno(int qnno) {
-	this.qnno = qnno;
+public void setQno(int qno) {
+	this.qno = qno;
 }
 
 /**
@@ -142,9 +142,10 @@ public void setQcategory(String qcategory) {
  */
 @Override
 public String toString() {
-	return "QnaNotice [qnno=" + qnno + ", qtitle=" + qtitle + ", qcontent=" + qcontent + ", qwriter=" + qwriter
+	return "QnaNotice [qno=" + qno + ", qtitle=" + qtitle + ", qcontent=" + qcontent + ", qwriter=" + qwriter
 			+ ", qcount=" + qcount + ", qdate=" + qdate + ", qcategory ="+ qcategory + "]";
 }
+
 
 
  

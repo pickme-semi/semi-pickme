@@ -1,4 +1,4 @@
-package com.stats;
+package com.stats.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class StatsTotalList
+ * Servlet implementation class StatsOneList
  */
-@WebServlet("/sTotalList.st")
-public class StatsTotalList extends HttpServlet {
+@WebServlet("/statsOneList.st")
+public class StatsOneList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StatsTotalList() {
+    public StatsOneList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class StatsTotalList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("views/stats/statsTotalList.jsp");
+		response.sendRedirect("views/stats/statsOneList.jsp");
 	}
 
 	/**

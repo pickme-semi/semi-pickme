@@ -11,12 +11,11 @@
 <script src="../../../resources/js/qna.js"></script>
 </head>
 <body>
-
-
+	<%@ include file="../../common/header.jsp" %>
 	<div id="wrap">
 
 
-		<div id="hyrendContentBody" style="height: 1658px;">
+		<div id="hyrendContentBody" style="height: ;">
 
 			<article id="container" class="mnHelpdesk pgHelpdeskHome">
 				<div class="innerContainer" >
@@ -121,5 +120,6 @@
 			</article>
 		</div>
 	</div>
+	<%@ include file="../../common/footer.jsp" %>
 </body>
 </html>

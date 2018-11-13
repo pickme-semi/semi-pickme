@@ -3,6 +3,8 @@ package com.profile.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.pick.model.vo.PickMe;
+import com.pick.model.vo.PickResult;
 import com.profile.model.dao.ProfileDao;
 import com.profile.model.vo.Category;
 import com.user.model.vo.User;
@@ -119,8 +121,58 @@ public class ProfileService {
 		
 	}
 
-	
-	
-	
+	public ArrayList<Category> getCategory(int userNo) {
+		Connection con = getConnection();
+		
+		ArrayList<Category> result = pDao.getCategory(con,userNo);
+		
+		close(con);
+		
+		return result;
+	}
 
+	
+	public User userPage(int userNo) {
+		Connection con = getConnection();
+		
+		User user = pDao.userPage(con, userNo);
+		
+		close(con);
+		
+		return user;
+	}
+
+	public int followInsert(int userNo1, int userNo2) {
+		Connection con = getConnection();
+		
+		int result = pDao.followInsert(con, userNo1, userNo2);
+		
+		if(result > 0 ) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
+
+	public ArrayList<PickMe> browseMyPick(int userNo) {
+		Connection con = getConnection();
+
+		ArrayList<PickMe> myPick = pDao.browseMyPick(con, userNo);
+		
+		close(con);
+		
+		return myPick;
+	}
+
+	public int categoryDel(int userNo) {
+		Connection con = getConnection();
+		
+		int cResult = pDao.categoryDel(con, userNo);
+		
+		if(cResult > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return cResult;
+	}
 }

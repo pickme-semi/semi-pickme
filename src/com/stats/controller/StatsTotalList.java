@@ -1,4 +1,4 @@
-package com.search;
+package com.stats.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class StatsTotalList
  */
-@WebServlet("/search.se")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/sTotalList.st")
+public class StatsTotalList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public StatsTotalList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,18 +26,8 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// userSearch
-		// @유저 검색,
-		// #카테고리 검색,
-		// 아무것도 없을때 픽검색
-		String search = request.getParameter("userSearch");
-		
-		System.out.println("검색할 단어 : " + search);
-		if(search.charAt(0) == '@') {
-			response.sendRedirect("views/search/SearchUserList.jsp");
-		}else {
-			response.sendRedirect("views/search/SearchPickList.jsp");
-		}
+		// TODO Auto-generated method stub
+		response.sendRedirect("views/stats/statsTotalList.jsp");
 	}
 
 	/**

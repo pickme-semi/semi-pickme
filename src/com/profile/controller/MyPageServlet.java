@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.profile.model.service.ProfileService;
 import com.profile.model.vo.Category;
+import com.user.model.vo.User;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -37,6 +39,15 @@ public class MyPageServlet extends HttpServlet {
 		
 		cArr = ps.browseCategory();
 		
+		HttpSession session =  request.getSession(true);
+		User user = (User)session.getAttribute("user");
+
+		ArrayList<Category> cat = new ArrayList<Category>();
+		
+		cat = ps.getCategory(user.getUserNo());
+		
+		//session.setAttribute("category", cat);
+		request.setAttribute("category", cat);
 		String page = "";
 		if(cArr != null){
 			request.setAttribute("cArr", cArr);
@@ -47,6 +58,7 @@ public class MyPageServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		
+		System.out.println("카테고리 정보 : " + cat);
 		
 	}
 

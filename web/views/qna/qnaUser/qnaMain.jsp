@@ -6,8 +6,6 @@
         <title>QNA</title>
         
         <link rel="stylesheet" href="../../../resources/css/qna.css">
-        <script src="../../../resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-		<script src="../../../resources/js/jquery-3.3.1.min.js"></script>
 		<script src="../../../resources/js/qna.js"></script>
 
 
@@ -15,12 +13,11 @@
 
 
      <body>
-
-    
+    		<%@ include file="../../common/header.jsp" %>
             <div id="wrap">
         
      
-                <div id="hyrendContentBody" style="height: 1658px;">
+                <div id="hyrendContentBody" style="height: ;">
                 
         <article id="container" class="mnHelpdesk pgHelpdeskHome">
             <div class="innerContainer">
@@ -156,7 +153,7 @@
    </div>
    
    
-   
+   <%@ include file="../../common/footer.jsp" %>
  </body>
 </html>
             

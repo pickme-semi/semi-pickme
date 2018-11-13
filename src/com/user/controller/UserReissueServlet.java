@@ -40,6 +40,8 @@ public class UserReissueServlet extends HttpServlet {
 		
 		if(code.equals(sCode)){
 			response.getWriter().print(true);
+			session.removeAttribute("email");
+			session.removeAttribute(email);
 		}else{
 			response.getWriter().print(false);
 		}

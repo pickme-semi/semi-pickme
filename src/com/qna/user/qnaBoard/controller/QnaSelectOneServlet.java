@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.qna.user.qnaBoard.model.service.QnaNoticeService;
-import com.qna.user.qnaBoard.model.vo.QnaNotice;
+import com.qna.user.qnaBoard.model.vo.*;
 
 /**
  * Servlet implementation class QnaSelectOneServlet
@@ -29,15 +29,16 @@ public class QnaSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int qnno = Integer.parseInt(request.getParameter("qnno"));
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		QnaNoticeService ns = new QnaNoticeService();
 		
-		QnaNotice q = ns.qnaSelectOne(qnno);
+		QnaNotice q = ns.qnaSelectOne(qno);
 		String page = "";
 		
 		if(q != null){
 			page = "views/qna/qnaMaster/QnaNoticeDetail.jsp";
-			request.setAttribute("qnaNotice", q);
+			request.setAttribute("QnaNotice", q);
+			
 		}else{
 			page = "views/common/errorPage.jsp";
 		}

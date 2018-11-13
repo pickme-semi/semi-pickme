@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.pick.model.vo.PickMe;
+import com.pick.model.vo.PickResult;
 import com.profile.model.vo.Category;
 import com.user.model.vo.User;
 
@@ -58,6 +60,7 @@ public class ProfileDao {
 			while(rset.next()){
 				User u = new User();
 				
+				u.setUserNo(rset.getInt(1));
 				u.setUserId(rset.getString("ID"));
 				u.setProfile(rset.getString("PROFILE"));
 				
@@ -182,7 +185,6 @@ public class ProfileDao {
 		try {
 			
 			pstmt = con.prepareStatement(sql);
-
 			pstmt.setString(1, user.getUserPass());
 			pstmt.setString(2, user.getUserEmail());
 			pstmt.setString(3, user.getProfile());
@@ -223,6 +225,26 @@ public class ProfileDao {
 			e.printStackTrace();
 		}
 		return fResult;
+	}
+	public int categoryDel(Connection con, int userNo) {
+		
+		int cResult = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteCategory");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			cResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return cResult;
 	}
 
 	public int deleteUser(Connection con, int userNo) {
@@ -309,6 +331,143 @@ public class ProfileDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Category> getCategory(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Category result = null;
+		
+		String sql = prop.getProperty("getCategory");
+		
+		
+
+		ArrayList<Category> list = new ArrayList<Category>();
+		
+		try {
+			System.out.println(userNo);
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()){
+				result = new Category();
+				System.out.println(rset.getInt(1));
+				
+				result.setCategoryId(rset.getInt(1));
+				list.add(result);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return list;
+	}
+  
+  	public User userPage(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+		User user = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("userPage");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				
+				user = new User();
+				
+				user.setUserNo(rset.getInt("NO"));
+				user.setUserId(rset.getString("ID"));
+				user.setUserEmail(rset.getString("EMAIL"));
+				user.setUserName(rset.getString("NAME"));
+				user.setGender(rset.getString("PROFILE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+
+	public int followInsert(Connection con, int userNo1, int userNo2) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("followInsert");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, userNo2);
+			pstmt.setInt(2, userNo1);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<PickMe> browseMyPick(Connection con, int userNo) {
+		ArrayList<PickMe> myPick = new ArrayList<PickMe>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("browsePickResult");
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset= pstmt.executeQuery();
+			
+			while(rset.next()){
+				PickMe pm = new PickMe();
+				
+				pm.setId(rset.getInt("ID"));
+				pm.setSelect_1(rset.getString("SELECT_1"));
+				pm.setSelect_2(rset.getString("SELECT_2"));
+				pm.setTitle(rset.getString("TITLE"));
+				pm.setContent(rset.getString("CONTENT"));
+				pm.setEdate(rset.getDate("ENROLL_DATE"));
+				pm.setViewcount(rset.getInt("VIEW_COUNT"));
+				pm.setType(rset.getString("TYPE"));
+				pm.setUserno(rset.getInt("USERNO"));
+				
+				myPick.add(pm);
+			}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return myPick;
 	}
 	
 }

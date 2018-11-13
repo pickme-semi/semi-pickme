@@ -12,22 +12,24 @@
 <script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 
 <style>
- .container{
- 	width : 1000px;
- }
- 
+
  a{
  	color : black;
  }
  
  *{
- 	font-family: 'Nanum Brush Script';
+ 	font-family: '';
  }
  
 .pm-section{
 	background : lightgreen;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.result-none{
+	height : 500px;
+	background : pink;
 }
 </style>
 </head>
@@ -55,7 +57,7 @@
 	        </div>
 	        <div class="logo" style="width:33%" align="right">
 				<a href="/pickme/logout.au">LogOut</a> /
-				<a href="/pickme/mPicks.pr">Profile</a> /
+				<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">Profile</a> /
 				<a href="/pickme/pickmain.pm">Pick</a> /
 				<a href="/pickme/views/qna/qnaUser/qnaMain.jsp">Q&A</a> / 
 				<a href="/pickme/sTotalList.st">통계</a>
