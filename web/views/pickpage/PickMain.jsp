@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<PickMe> plist = (ArrayList<PickMe>)request.getAttribute("list");
-	   
+User u = (User)session.getAttribute("user");    
 %>
 <!DOCTYPE html>
 <html>
@@ -145,14 +145,22 @@ PickMe pData = new PickMe();
 if(plist != null){
 for(int i =0; i<plist.size(); i++){
     pData = plist.get(i);
+ 	int gg = pData.getId();
 %>
 
   <!-- Full-width images with number text -->
   <div class="mySlides">              
     <div class="numbertext"><%= i+1 %> / 6</div>
       <div class="" >      
+      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
+      	<input type="hidden" id="resultPickId" class="current" value="<%= gg %>"/> 
+      	<p><%= gg %></p>
+      		<p id="userNo1" value="<%= u.getUserName() %>"><%= u.getUserName() %></p>
     	  <div class="" align="center" > <!--픽 이미지 1 -->	<!--픽 이미지 2 -->	
-			<img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" />
+			<img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
+			value="<%= gg %>"
+			/>
+    	<button id="testBtn">가나다</button>
 		  	<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" />
 		  </div>
 	  
@@ -165,6 +173,38 @@ for(int i =0; i<plist.size(); i++){
   </div>
 <% } %>
  
+ <script>
+ 		
+ 	var countLeft = 2;
+	var hoji = "dddd";
+
+ $("#pick1").click(function(){
+	 console.log(countLeft);
+	    alert("The paragraph was clicked.");
+	});
+ $("#pick1").click(function(){
+		$.ajax({
+			url : "/pickme/pickresult.pr",
+			type : "get",
+			data : {
+				selectUserNo : $('#selectUserNo').val(),
+				resultPickId : $('#resultPickId').val(),
+				selectResult : countLeft,
+				hoji : hoji
+			}, success : function(data){
+				console.log("데이터 전달 성공!");
+			}, error :  function(request, status, error) {
+				console.log("실패!!!");
+				console.log(request);
+				console.log(status);
+				console.log(error);
+			}, complete : function(){
+				console.log("무조건 실행하는 함수");
+			}
+		});
+	});
+ 
+ </script>
   <!-- Thumbnail images -->
 
 
@@ -287,73 +327,7 @@ for(int i =0; i<plist.size(); i++){
 	  captionText.innerHTML = dots[slideIndex-1].alt;
 	}
 	
-	// count 만들기  // 각 사진마다 값을 초기화 하는거라서 괜츈 
-	var countLeft = 0;
-	var leftPercent = 0;
-	var countRight = 0;
-	var rightPercent = 0;
-	var totalCount = countLeft + countRight;
 	
-	function selectLeft(){
-		countLeft +=1;
-		leftPercent = 100*(countLeft / totalCount);
-		console.log(countLeft);
-		console.log(leftPercent);
-		
-	
-	}
-	function selectRight(){
-		countRight +=1;
-		console.log(countRight);
-	}
-	/* 
-	// ajax 통신클릭시 왼쪽 선택
-	$("#pick1").click(function(){
-			
-			$.ajax({
-				url : "/com/pick/pickresult.pr",
-				type : "get",
-				data : {
-					resultPickId : $('#resultPickId').val() // 사진Pic값 전송
-					selectUserNo : $('#selectUserNo').val()
-					selectUserNo : $('#selectResult').val()
-					selectDdate : $('#selectDdate').val()
-				}, success : function(data){
-					console.log("데이터 전달 성공!");
-				}, error :  function(request, status, error) {
-					console.log("실패!!!");
-					console.log(request);
-					console.log(status);
-					console.log(error);
-				}, complete : function(){
-					console.log("무조건 실행하는 함수");
-				}
-			});
-		});
-	
-	// ajax 통신클릭시   오른쪽 선택
-		$("#pick2").click(function(){
-			
-			$.ajax({
-				url : "/com/pick/pickresult.pr",
-				type : "get",
-				data : {
-					resultPickId : $('#resultPickId').val() // 사진Pic값 전송
-					selectUserNo : $('#selectUserNo').val()
-					selectUserNo : $('#selectResult').val()
-					selectDdate : $('#selectDdate').val()
-				}, success : function(data){
-					console.log("데이터 전달 성공!");
-				}, error :  function(request, status, error) {
-					console.log("실패!!!");
-					console.log(request);
-					console.log(status);
-					console.log(error);
-				}, complete : function(){
-					console.log("무조건 실행하는 함수");
-				}
-			});
-		}); */
 	</script>
 	
 
