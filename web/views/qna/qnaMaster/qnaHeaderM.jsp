@@ -73,7 +73,7 @@
 			location.href="qnaUpM.jsp";
 		});
 		$("#qnaList").click(function(){
-			location.href="qnaListM.jsp"
+			location.href="/pickme/qnaList.no/";
 		});
 	});
 

@@ -2,7 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<% ArrayList<QnaNotice> list = (ArrayList<QnaNotice>)request.getAttribute("qnaList"); %>
+<% 
+	ArrayList<QnaNotice> qlist = (ArrayList<QnaNotice>)request.getAttribute("qlist"); 
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
+	
 <!DOCTYPE html>
 <html>
 
@@ -74,16 +83,15 @@
 
 																		</tr>
 																		
-																		<%for(QnaNotice q : list){%>
+																		<% for(QnaNotice q : qlist){ %>
 																		<tr>
 																		
 																			<td><%= q.getQcategory() %></td>
-																			<td><%= q.getQnno() %></td>
+																			<td><%= q.getQno() %></td>
 																			<td><%= q.getQtitle() %></td>
 																			<td><%= q.getQcount() %></td>
-																			<td><%= q.getQwriter() %></td>
-																			
-
+																			<td>작성자는후에추가</td>
+													
 																		</tr>
 																		<%} %>
 																		
@@ -94,30 +102,31 @@
 
 
 																<%-- 페이지 --%>
-																<div class="tableArea" align="center">
-																	<button
-																		onclick="location.href='/selectList.bo?currentPage=1'"><<</button>
-											
-																	<button disabled><</button>
-
-																	<button
-																		onclick="location.href='/selectList.bo?currentPage='"><</button>
-
-																	<button disabled></button>
-
-																	<button
-																		onclick="location.href='/selectList.bo?currentPage='"></button>
-
-
-																	<button disabled>></button>
-
-																	<button
-																		onclick="location.href='/selectList.bo?currentPage='">></button>
-
-																	<button
-																		onclick="location.href='/selectList.bo?currentPage='">>></button>
-
-																</div>
+																<div class="pagingArea" align="center">
+						<button onclick="location.href='<%= request.getContextPath() %>/qnaList.no?currentPage=1'"><<</button>
+						<%  if(currentPage <= 1){  %>
+						<button disabled><</button>
+						<%  }else{ %>
+						<button onclick="location.href='<%= request.getContextPath() %>/qnaList.no?currentPage=<%=currentPage - 1 %>'"><</button>
+						<%  } %>
+						
+						<% for(int p = startPage; p <= endPage; p++){
+								if(p == currentPage){	
+						%>
+							<button disabled><%= p %></button>
+						<%      }else{ %>
+							<button onclick="location.href='<%= request.getContextPath() %>/qnaList.no?currentPage=<%= p %>'"><%= p %></button>
+						<%      } %>
+						<% } %>
+							
+						<%  if(currentPage >= maxPage){  %>
+						<button disabled>></button>
+						<%  }else{ %>
+						<button onclick="location.href='<%= request.getContextPath() %>/qnaList.no?currentPage=<%=currentPage + 1 %>'">></button>
+						<%  } %>
+						<button onclick="location.href='<%= request.getContextPath() %>/qnaList.no?currentPage=<%= maxPage %>'">>></button>
+						
+					</div>
 															</div>
 															
 															
@@ -137,12 +146,6 @@
 	</div>
 	
 	<script>
-	 $(function(){
-		$('#listArea td').click(function(){
-			var qnno = $(this).parent().children().eq(0).text();
-			
-		})
-	})	
 
 	</script>
 	
