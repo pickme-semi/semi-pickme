@@ -51,7 +51,7 @@ public class PickUploadServlet extends HttpServlet {
 			
 			System.out.println("root 경로 확인 : " + root);
 					
-			String savePath = root + "/PickUploadFiles//";	
+			String savePath = root + "\\pickUploadFiles\\";	
 			System.out.println("저장 경로 : " + savePath);
 			
 			MultipartRequest mrequest = 
@@ -97,23 +97,32 @@ public class PickUploadServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		/*String category = String.join(", ", mrequest.getParameterValues("interest"));
+		PickService ps = new PickService();		
+		int result = ps.insertPick(pm/*, list*/); // pick DB 저장.
+		
+		
+		String category = String.join(",", mrequest.getParameterValues("interest"));
+		
+		// 게시판 최신 게시물의 ID를 가져옴
+		int boardNum = ps.getPickCount(); 
+		
+		if(boardNum == -1){
+			System.out.println("게시물의 ID를 받아오지 못했습니다.");
+		}
+		
+		String[] at = category.split(",");
+		for(int i=0; i < at.length; i++)
+		{
+			ps.insertPCategory(boardNum, Integer.parseInt(at[i])); // pick에 설정된 카테고리 DB저장.
+		}
+		
 		//int category1 = 
 		//		Integer.parseInt(String.join(", ", mrequest.getParameterValues("interest")));
-		ArrayList<PickCategory> list = new ArrayList<PickCategory>();
-		for(int i = 0; i<category.length(); i++){
-			PickCategory pc = new PickCategory();
-			pc.setPickid(pm.getId());
-			
-		}*/
-			
-		System.out.println("pm :" +pm);
-
-		PickService ps = new PickService();		
-		int result = ps.insertPick(pm/*, list*/);
-		
-		
-		
+		//		ArrayList<PickCategory> list = new ArrayList<PickCategory>();
+		//		System.out.println(mrequest.getParameterValues("interest"));
+		//		System.out.println("pm :" +pm);
+		//		PickCategory pc = new PickCategory();
+		//		pc.setPickid(pm.getId());
 		if(result > 0 ) {			
 			response.sendRedirect("pickmain.pm");
 					
@@ -123,8 +132,7 @@ public class PickUploadServlet extends HttpServlet {
 			request.setAttribute("msg", "Pick 작성 실패!");			
 			request.getRequestDispatcher("views/common/errorPage.jsp")
 			.forward(request, response);			
-		}
-		
+		}		
 		
 	/*	ArrayList<Attachment> list = new ArrayList<Attachment>();
 		

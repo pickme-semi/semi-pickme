@@ -72,10 +72,10 @@ public class PickService {
 		return pcArr;
 	}
 
-	public void insertPCategory(int id, String category) {
+	public void insertPCategory(int boardNum, int cateId) {
 		Connection con = getConnection();
-		
-		int result = pDao.insertCategory(con, id, category);
+	
+		int result = pDao.insertCategory(con, boardNum, cateId);
 		
 		if(result > 0 ) commit(con);
 		else rollback(con);
@@ -83,6 +83,23 @@ public class PickService {
 		close(con);
 		
 	}	
+	
+	public int getPickCount()
+	{
+		Connection con = getConnection();
+		
+		int result = pDao.getPickCount(con);
+		
+		if(result > 0 ) 
+				commit(con);
+		else 
+				rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
+	
 	
 }
