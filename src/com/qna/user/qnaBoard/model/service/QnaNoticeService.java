@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.qna.user.qnaBoard.model.dao.QnaNoticeDao;
-import com.qna.user.qnaBoard.model.vo.QnaNotice;
+import com.qna.user.qnaBoard.model.vo.*;
 
 import static com.common.JDBCTemplate.*;
 
@@ -29,30 +29,37 @@ public class QnaNoticeService {
 	}
 
 
-	public QnaNotice qnaSelectOne(int qnno) {
+	public QnaNotice qnaSelectOne(int qno) {
 		Connection con = getConnection();
-		int result = 0;
-		QnaNotice q = qnDao.QnaSelectOne(con, qnno);
 		
-		if( q != null){
-			result = qnDao.updateCount(con, qnno);
-			
-			if(result > 0)commit(con);
-			else rollback(con);
-		}
+		QnaNotice q = qnDao.QnaSelectOne(con, qno);
+		
 		close(con);
+		
 		return q;
 	}
 
 
-	public ArrayList<QnaNotice> QnaSelectList() {
+	public ArrayList<QnaNotice> QnaSelectList(int currentPage, int limit) {
 		ArrayList<QnaNotice> qlist = null;
 		Connection con = getConnection();
 		qlist = qnDao.qnaSelectList(con);
 		
+		System.out.println("service qlist" + qlist);
+		
 		close(con);
 		
 		return qlist;
+	}
+
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = qnDao.getListCount(con);
+		
+		close(con);
+		
+		return listCount;
 	}
 
 
