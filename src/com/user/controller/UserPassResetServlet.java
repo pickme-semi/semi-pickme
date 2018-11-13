@@ -31,7 +31,7 @@ public class UserPassResetServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String pass = request.getParameter("newPass");
+		String pass = request.getParameter("userPass");
 		
 		
 		UserService us = new UserService();

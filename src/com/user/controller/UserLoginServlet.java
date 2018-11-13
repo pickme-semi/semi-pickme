@@ -37,7 +37,7 @@ public class UserLoginServlet extends HttpServlet {
 		
 		String id = request.getParameter("userId");
 		String pass = request.getParameter("userPass");
-		
+		String result = null;
 		UserService us = new UserService();
 		
 		User u = new User(id, pass);
@@ -47,10 +47,13 @@ public class UserLoginServlet extends HttpServlet {
 		try {
 			u = us.loginUser(u);
 			System.out.println("로그인 성공!");
+			System.out.println(u);
 			
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("user", u);
+			result = "ok";
+			response.getWriter().print(result);
 			
 			// response.sendRedirect("views/pickpage/PickMain.jsp");
 			response.sendRedirect("pickmain.pm");
@@ -60,12 +63,9 @@ public class UserLoginServlet extends HttpServlet {
 			request.setAttribute("exception", e);
 			PrintWriter out = response.getWriter();
 			System.out.println("로그인 실패");
-	         out.println("<script>alert('아이디나 비밀번호가 일치하지 않습니다.'); location.href='views/user/UserLoginForm.jsp';</script>");
-	          
-	         out.flush();
-	         out.close();
-			//request.getRequestDispatcher("views/user/UserLoginForm.jsp").forward(request, response);
-			e.printStackTrace();
+			result = "fail";
+			response.getWriter().print(result);
+	        e.printStackTrace();
 		}
 		
 		

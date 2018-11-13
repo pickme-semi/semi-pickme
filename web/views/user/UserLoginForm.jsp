@@ -54,6 +54,7 @@
 			<td><span class="error_next_box" id="loginfail" style="display:none" role="alert"></span></td>
 		</tr>
 	</table>
+	<div align ="center"><span class="error_next_box" id = loginMsg style="display:none" role="alert"></span></div>
 	<br>
 	<div class="btns" align="center">
 	<button type="button" id="loginBtn" value="로그인">로그인</button>
@@ -104,8 +105,31 @@
 			hide(pwdMsg);
 		}
 		
-		if(id !="" && pwd !="")
-			login();
+		if(id !="" && pwd!=""){
+		$.ajax({
+			url:"/pickme/login.au",
+			type : "post",
+			data : {userId : $('#userId').val(),
+					userPass : $('#userPwd').val()
+			},
+			success : function(data){
+				if(data=="fail"){
+					showErrorMsg($("#loginMsg"),"해당하는 아이디가 없거나 비밀번호가 일치하지 않습니다.")
+					$("#userPwd").val("");
+				}else{
+					login();
+				}
+			}, error : function(request, status, error){
+				alert(request+"\n" 
+						  + status+"\n"
+						  + error);
+					console.log("에러 발생!");
+					
+				}
+			
+			
+		});
+		}
 		
 	});
 	
