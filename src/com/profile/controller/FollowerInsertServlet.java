@@ -7,22 +7,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.profile.model.service.ProfileService;
-import com.user.model.vo.User;
 
 /**
- * Servlet implementation class UserDeleteServlet
+ * Servlet implementation class FollowerInsertServlet
  */
-@WebServlet("/uDelete.pr")
-public class UserDeleteServlet extends HttpServlet {
+@WebServlet("/fiPage.pr")
+public class FollowerInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserDeleteServlet() {
+    public FollowerInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +29,21 @@ public class UserDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 나의 번호
+		int userNo1 = Integer.parseInt(request.getParameter("uno1"));
+		// 팔로우할 사람의 번호
+		int userNo2 = Integer.parseInt(request.getParameter("uno2"));
+		
 		ProfileService ps = new ProfileService();
-
-		HttpSession session = request.getSession(false);
-		int userNo = ((User)session.getAttribute("user")).getUserNo();
 		
-		// 팔로우 정보 지우기
-		int fResult = ps.followDel(userNo);
+		int result = ps.followInsert(userNo1, userNo2);
 		
-		// 카테고리 정보 지우기
-		int cResult = ps.categoryDel(userNo);
-		
-		int result = ps.deleteUser(userNo);
-		
-		if(result > 0 || fResult > 0 || cResult > 0){
-			System.out.println("회원 탈퇴 완료!");
-			session.invalidate();
-			response.sendRedirect("/pickme");
+		if(result > 0 ){
+			response.sendRedirect("/pickme/mPicks.pr");			
 		}else{
-			request.setAttribute("msg", "회원 탈퇴 중 에러 발생");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("msg", "팔로우 인서트 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);	
 		}
-		
 	}
 
 	/**

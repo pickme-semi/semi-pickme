@@ -7,22 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
 
 /**
- * Servlet implementation class UserDeleteServlet
+ * Servlet implementation class UserPageServlet
  */
-@WebServlet("/uDelete.pr")
-public class UserDeleteServlet extends HttpServlet {
+@WebServlet("/uPage.pr")
+public class UserPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserDeleteServlet() {
+    public UserPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +31,29 @@ public class UserDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProfileService ps = new ProfileService();
-
-		HttpSession session = request.getSession(false);
-		int userNo = ((User)session.getAttribute("user")).getUserNo();
 		
-		// 팔로우 정보 지우기
-		int fResult = ps.followDel(userNo);
+		int userNo = Integer.parseInt(request.getParameter("uno"));
 		
-		// 카테고리 정보 지우기
-		int cResult = ps.categoryDel(userNo);
+		System.out.println(userNo);
 		
-		int result = ps.deleteUser(userNo);
+		User user = new User();
 		
-		if(result > 0 || fResult > 0 || cResult > 0){
-			System.out.println("회원 탈퇴 완료!");
-			session.invalidate();
-			response.sendRedirect("/pickme");
+		String page = "";
+		
+		user = ps.userPage(userNo); 
+		
+		if(user != null){
+			
+			page = "views/profile/userPage.jsp";
+			request.setAttribute("user", user);
+			
 		}else{
-			request.setAttribute("msg", "회원 탈퇴 중 에러 발생");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "사용자 불러오기 오류 ");
+			
 		}
+		request.getRequestDispatcher(page).forward(request, response);
+		
 		
 	}
 
