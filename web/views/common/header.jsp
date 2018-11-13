@@ -12,10 +12,7 @@
 <script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 
 <style>
- .container{
- 	width : 1000px;
- }
- 
+
  a{
  	color : black;
  }

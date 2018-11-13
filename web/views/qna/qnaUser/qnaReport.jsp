@@ -14,11 +14,11 @@
 
 </head>
 <body>
-
+	<%@ include file="../../common/header.jsp" %>
 	<div id="wrap">
 
 
-		<div id="hyrendContentBody" style="height: 1658px;">
+		<div id="hyrendContentBody" style="height: ;">
 
 			<article id="container" class="mnHelpdesk pgHelpdeskHome">
 				<div class="innerContainer">
@@ -329,8 +329,9 @@
 				</div>
 			</article>
 		</div>
+		
 	</div>
-
+	
 <script>
 /* 신고 / 문의 영역 */
 
@@ -399,6 +400,6 @@
 
 </script>
 
-
+<%@ include file="../../common/footer.jsp" %>
 </body>
 </html>
