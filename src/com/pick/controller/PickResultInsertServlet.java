@@ -2,6 +2,7 @@ package com.pick.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,21 +33,21 @@ public class PickResultInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		int resultPickId = Integer.parseInt(request.getParameter("resultPickId"));
+//		int selectUserNo = Integer.parseInt(request.getParameter("selectUserNo"));
+//		Date selectDdate =  Date.valueOf(request.getParameter("selectDdate"));
+//		System.out.println("결과"+selectResult);
 		int selectUserNo = Integer.parseInt(request.getParameter("selectUserNo"));
+		int resultPickId = Integer.parseInt(request.getParameter("resultPickId"));
 		int selectResult = Integer.parseInt(request.getParameter("selectResult"));
-		Date selectDdate =  Date.valueOf(request.getParameter("selectDdate"));
+		Date selectDdate =  new Date(new GregorianCalendar().getTimeInMillis());
+
+
+		System.out.println("selectUserNo  : " + selectUserNo);
+		System.out.println("resultPickId  : " + resultPickId);
+		System.out.println("selectResult  : " + selectResult);
+		System.out.println(selectDdate);
 		
-		
-		System.out.println("resultPickId = " +resultPickId
-				+"selectUserNo = " +selectUserNo
-				+"selectResult = " +selectResult
-				+"selectDdate = " +selectDdate
-				);
-		
-		
-		// 우선 보류 
-		/*
+	
 		PickResult pr = new PickResult();
 			pr.setId(resultPickId);
 			pr.setUserno(selectUserNo);
@@ -54,7 +55,7 @@ public class PickResultInsertServlet extends HttpServlet {
 			pr.setDdate(selectDdate);
 			
 			int result = new PickResultService().updatePick(pr);
-		*/
+	
 	}
 
 	/**

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import ="com.user.model.vo.*, java.util.*" %>
+	pageEncoding="UTF-8" import ="com.user.model.vo.*, java.util.*,
+	com.pick.model.vo.*" %>
 <%
-	User u = (User)session.getAttribute("user");    
+	User u = (User)session.getAttribute("user");
+	ArrayList<PickCategory> category = 
+			(ArrayList<PickCategory>)request.getAttribute("pcArr");	
 %>	
 
 <!DOCTYPE html>
@@ -9,14 +12,18 @@
 <head>
 <meta charset="UTF-8">
 <title>픽 업로드 페이지</title>
- <link rel="stylesheet" type="text/css"
-	href="../../resources/css/pickupload.css" />
+<!-- select2 소스  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+ <!-- <link rel="stylesheet" type="text/css"	href="../../resources/css/pickupload.css" /> 
+ 사용 안하는 CSS/ 삭제해도 될듯. -->
+ 
 <!--  제이쿼리 파일 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <!-- <link rel="stylesheet" href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css">
 <script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/pickme/resources/js/jquery-3.3.1.min.js"></script> -->
-	
+
 	
 <!-- 업로드 이미지 미리보기 구현. -->
 <script type="text/javascript">
@@ -29,12 +36,10 @@
 
         function readURL(input) {
             if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
+            var reader = new FileReader();	
             reader.onload = function (e) {
                     $('#pick1').attr('src', e.target.result);
                 }
-
               reader.readAsDataURL(input.files[0]);
             }
         }
@@ -57,7 +62,7 @@
               reader.readAsDataURL(input.files[0]);
             }
         }
-        $(document).ready(function() {            
+       /*  $(document).ready(function() {            
             //라디오 버튼 변경시 이벤트
             $("input[name='category']:radio").change(function () {
                     //라디오 버튼 값을 가져온다.
@@ -85,8 +90,8 @@
                        // 음식 카테고리 show
                     }                                     
                 });
-        });
-    
+        }); */
+      
     </script>
 
 <style>
@@ -101,6 +106,7 @@
 	width: 200px;
 	height: 200px;
 }
+	
 </style>
 
 
@@ -111,11 +117,11 @@
 	<%@ include file="../common/header.jsp"%>
 	
 	<% if(session.getAttribute("user") != null) {	 %>
-	<div class="outer" align="center">
+	<div class="outer" align="center" >
 		<br>
 		<h2 align="center">Pick 올리기</h2>
 		<div class="col-md-8 col-xs-12">
-			<form action="<%= request.getContextPath() %>/pickup.pm" 
+			<form id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
 			method="post" encType="multipart/form-data">
 			
 				<table>
@@ -144,13 +150,12 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="3"><textarea name="content"
-								style="width: 100%; height: 100%;">
-					</textarea></td>
+						<td colspan="3"><textarea name="content" style= "width: 100%; height: 100%;">
+						</textarea></td>
 					</tr>
 				</table>
 				<br>
-				<label for="category">카테고리 선택</label> 
+				<!-- <label for="category">카테고리 선택</label> 
 				<br><br> 
 				<input type="radio" name="category" value="tour" checked /><span>여행</span>
 				<input type="radio" name="category" value="sports" /><span>운동</span>
@@ -181,12 +186,26 @@
 					<option value="3">일식</option>
 					<option value="4">중식</option>
 				</select>
-				</span>
-     		   
+				</span> -->
 				<br>
-				<br> <label>마감일 설정 </label><input type="date" name="ddate">
+				<label>마감일 설정 </label><input type="date" name="ddate">
 				<br>
-				
+		<br><br>		
+		<table>
+		<tr>
+		<td > 카테고리 <br /></td>
+		<td style="width : 75%">		
+		<select class="interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
+		style= "width: 75%" > 
+		<% for(int i=0; i< category.size(); i++) {%>
+  			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
+  		<% } %> 
+		</select>
+		</td>
+		<td></td>
+				</tr>
+			</table>	
+			
 				<!-- 
 				<br> <label>보유 포인트</label><input type="text"
 					placeholder="현재포인트" /> <br>
@@ -197,8 +216,7 @@
 					value="10" step="10" />
 				 
 				 포인트 사용구간, 일단 사용하지 않을듯 하여 우선 주석처리해둠.
-				 -->
-				 
+				 -->				 
 					
 			<br>
 			<br>
@@ -220,10 +238,34 @@
 
 	<br>
 	<br>
+<script>
+	/* select2 사용을 위한 메소드 */
+	
+	/* select2 값 가져오기 위한 메소드 */	
+	
+
+
+</script>	
 
 
 
+<%@ include file="../common/footer.jsp"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-	<%@ include file="../common/footer.jsp"%>
+<script>
+	/* select2 사용을 위한 메소드 */
+	
+	$(function(){
+		$('.interest-multiple').select2({
+			width: 'resolve'
+		});
+		
+	});
+	/* select2 값 가져오기 위한 메소드 */
+	
+	
+	
+	
+</script>	 -->
 </body>
 </html>

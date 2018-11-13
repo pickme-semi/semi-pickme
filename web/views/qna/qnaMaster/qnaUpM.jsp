@@ -65,7 +65,7 @@
                                         <div id="categoryArea" style="overflow: hidden;">
                                             <span class="sel" style="width: 198px;">
                                                 <select id="upperCategory" name="category">
-                                                    <option value="">QNA 유형</option>
+                                                    <option value="BOT001">QNA 유형</option>
                                                 
                                                     <option value="BOT001">가입/탈퇴</option>
                                                 
@@ -105,10 +105,6 @@
             <div class="pr">
                 <span class="help_txt"></span>
                 <input type="text" id="inquiryTitle" class="contents inp" style="width:462px" maxlength="100" name="title">
-                <input type="hidden" class="guideContent" value="">
-                <input type="hidden" class="guideDisplayYN" value="N">
-                <input type="hidden" class="guideInitializeYN" value="Y">
-                <input type="hidden" class="itemNo" value="5"><br><br>
             </div>
         </td>
     </tr><tr class="itemArea HTML" sort="3" itemno="13" requiredyn="Y">
@@ -121,8 +117,7 @@
         <td>
             <div class="pr">
                 <textarea id="inquiryContent" 
-                class="contents inp" cols="30" rows="4" maxlength="5000" style="width:482px; height: 300px" name="content">
-                </textarea>
+                class="contents inp" cols="30" rows="4" maxlength="5000" style="width:482px; height: 300px"></textarea>
                 <p class="rei"><span class="bytes">0/5000글자</span></p>
                 <input type="hidden" class="guideContent" value="">
                 <input type="hidden" class="guideDisplayYN" value="N">
@@ -143,7 +138,7 @@
             
                         
             	 <div class="bn_wrap v2" style="margin:0 auto; width:50%; ">
-                <span class="bn bn_big bn_rd"><button type="submit" class="qnaBt" id="btnSend" >확인</button></span>
+                <span class="bn bn_big bn_rd"><button type="button" class="qnaBt" id="btnSend" >확인</button></span>
                 
                 <span class="bn bn_big bn_bk"><button type="reset" class="qnaBt">취소</button></span>
             </div>
@@ -174,7 +169,38 @@
     </div>
     
     <script>
+    
+    
 
+
+		
+		$('#btnSend').click(function(){
+			 var QnaData = new Object();
+			
+			
+			QnaData.title = $('#inquiryTitle').val();
+			QnaData.content = $('#inquiryContent').val(); 
+			QnaData.category = $('#upperCategory').val();
+			
+			$.ajax({
+				url : "/pickme/qUpdate.no",
+				type : "get",
+				data : QnaData,
+				success : function(data) {console.log("성공");},
+				error : function(request, status, error) {console.log("실패");},
+				complete : function(){ console.log("무조건 실행하는 함수"); }
+			});
+			
+		});
+		
+
+			
+
+	
+			
+		
+	
+		
 
 
 
@@ -204,14 +230,6 @@
 	}
 	
 	
-	$(function(){
-		$('#btnSend').click(function(){
-			if(confirm('전송확인') == true){	
-
-	
-			}	
-		});
-	});
 
 	$(function(){
 		$('#btnRe').click(function(){

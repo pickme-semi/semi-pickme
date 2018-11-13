@@ -1,23 +1,27 @@
-package com.search;
+package com.pick.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pick.model.service.PickService;
+import com.pick.model.vo.PickCategory;
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class PickCategoryServlet
  */
-@WebServlet("/search.se")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/pcate.pm")
+public class PickCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public PickCategoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,18 +30,22 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// userSearch
-		// @유저 검색,
-		// #카테고리 검색,
-		// 아무것도 없을때 픽검색
-		String search = request.getParameter("userSearch");
+		PickService ps = new PickService();
 		
-		System.out.println("검색할 단어 : " + search);
-		if(search.charAt(0) == '@') {
-			response.sendRedirect("views/search/SearchUserList.jsp");
-		}else {
-			response.sendRedirect("views/search/SearchPickList.jsp");
+		ArrayList<PickCategory> pcArr = new ArrayList<PickCategory>();
+		
+		pcArr = ps.browseCategory();
+		
+		String page = "";
+		if(pcArr != null){
+			request.setAttribute("pcArr", pcArr);
+			page = "views/pickpage/PickUpload.jsp";
+		}else{
+			request.setAttribute("msg", "카테고리에서 값을 불러오는 오류");
+			page = "../views/common/errorPage.jsp";
 		}
+		System.out.println(pcArr);
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

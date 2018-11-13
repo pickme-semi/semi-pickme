@@ -1,7 +1,6 @@
 package com.profile.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,49 +8,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pick.model.vo.PickMe;
-import com.pick.model.vo.PickResult;
 import com.profile.model.service.ProfileService;
 
 /**
- * Servlet implementation class MyPicksServlet
+ * Servlet implementation class FollowerInsertServlet
  */
-@WebServlet("/mPicks.pr")
-public class MyPicksServlet extends HttpServlet {
+@WebServlet("/fiPage.pr")
+public class FollowerInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPicksServlet() {
+    public FollowerInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 팔로우 할 사람의 번호
+		int userNo1 = Integer.parseInt(request.getParameter("uno1"));
+		// 내 번호 
+		int userNo2 = Integer.parseInt(request.getParameter("uno2"));
 		
 		ProfileService ps = new ProfileService();
 		
-		ArrayList<PickMe> myPick = new ArrayList<PickMe>();
+		int result = ps.followInsert(userNo1, userNo2);
 		
-		int userNo = Integer.parseInt(request.getParameter("uno"));
-		
-		System.out.println(userNo);
-		
-		myPick = ps.browseMyPick(userNo);
-		System.out.println(myPick);
-		
-		if(myPick != null){
-			request.setAttribute("myPick", myPick);
-			request.getRequestDispatcher("views/profile/myPicks.jsp").forward(request, response);
+		if(result > 0 ){
+			response.sendRedirect("/pickme/uPage.pr?uno="+userNo1);			
 		}else{
-			request.setAttribute("msg", "pick 불러오는 과정에서 오류");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("msg", "팔로우 인서트 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);	
 		}
-		
 	}
 
 	/**

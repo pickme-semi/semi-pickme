@@ -17,6 +17,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.common.MyRenamePolicy;
 import com.pick.model.vo.Attachment;
+import com.pick.model.vo.PickCategory;
 import com.oreilly.servlet.MultipartRequest;
 import com.pick.model.service.PickService;
 import com.pick.model.vo.PickMe;
@@ -42,19 +43,15 @@ public class PickUploadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(ServletFileUpload.isMultipartContent(request)){
-			// 만약 multipart/form-data 로 전송이 되었다면 실행
-			
+			// 만약 multipart/form-data 로 전송이 되었다면 실행			
 			// 전송할 파일의 용량 선정
-			int maxSize = 1024 * 1024 * 10;
-			
+			int maxSize = 1024 * 1024 * 10;			
 			// 저장할 경로 설정하기
 			String root = request.getServletContext().getRealPath("/resources");
 			
 			System.out.println("root 경로 확인 : " + root);
 					
-			String savePath = root + "/PickUploadFiles//";			
-			
-			
+			String savePath = root + "/PickUploadFiles//";	
 			System.out.println("저장 경로 : " + savePath);
 			
 			MultipartRequest mrequest = 
@@ -62,11 +59,9 @@ public class PickUploadServlet extends HttpServlet {
 										savePath,
 										maxSize,
 										"UTF-8",
-										new MyRenamePolicy());
+										new MyRenamePolicy());			
 			
-			
-			ArrayList<String> saveFiles = new ArrayList<String>();
-			
+			ArrayList<String> saveFiles = new ArrayList<String>();			
 			// 원본 파일 명
 			ArrayList<String> originFiles = new ArrayList<String>();
 			
@@ -75,57 +70,60 @@ public class PickUploadServlet extends HttpServlet {
 			 = mrequest.getFileNames();
 			
 			while(files.hasMoreElements()){
-				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
-				
-				String name = files.nextElement();
-				
-				System.out.println("name : " + name);
-				
+				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.				
+				String name = files.nextElement();				
+				System.out.println("name : " + name);				
 				saveFiles.add(mrequest.getFilesystemName(name));
 				originFiles.add(mrequest.getOriginalFileName(name));				
 			}		
 		
-		PickMe pm = new PickMe();
-		
-		
+		PickMe pm = new PickMe();				
 		pm.setTitle(mrequest.getParameter("title")); 
 		pm.setSelect_1(mrequest.getFilesystemName("pick1"));
-		pm.setSelect_2(mrequest.getFilesystemName("pick2")); // 파일 명 DB 저장.		
-		
+		pm.setSelect_2(mrequest.getFilesystemName("pick2")); // 파일 명 DB 저장.			
 		//pm.setSelect_1(mrequest.getFile("pick1").getPath()); // 파일 업로드 경로 DB 저장			
 		//pm.setSelect_2(mrequest.getFile("pick2").getPath());		
 		pm.setContent(mrequest.getParameter("content"));
-		System.out.println(Integer.parseInt(mrequest.getParameter("userId")));
-		pm.setUserno(Integer.parseInt(mrequest.getParameter("userId")));		
+		//System.out.println(Integer.parseInt(mrequest.getParameter("userId")));
+		pm.setUserno(Integer.parseInt(mrequest.getParameter("userId")));	
 		
-		// System.out.println(mrequest.getParameter("ddate"));
-		
+		// System.out.println(mrequest.getParameter("ddate"));		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date ddate;
 		try {
 			ddate = new java.sql.Date(sdf.parse(mrequest.getParameter("ddate")).getTime());
-			pm.setDdate(ddate);
-			
+			pm.setDdate(ddate);			
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}		
+		}
+		
+		/*String category = String.join(", ", mrequest.getParameterValues("interest"));
+		//int category1 = 
+		//		Integer.parseInt(String.join(", ", mrequest.getParameterValues("interest")));
+		ArrayList<PickCategory> list = new ArrayList<PickCategory>();
+		for(int i = 0; i<category.length(); i++){
+			PickCategory pc = new PickCategory();
+			pc.setPickid(pm.getId());
+			
+		}*/
 			
 		System.out.println("pm :" +pm);
 
-		PickService ps = new PickService();
-		
+		PickService ps = new PickService();		
 		int result = ps.insertPick(pm/*, list*/);
 		
-		if(result > 0 ) {
+		
+		
+		if(result > 0 ) {			
 			response.sendRedirect("pickmain.pm");
-			System.out.println(pm);
+					
+			System.out.println(pm);			
 		/*	System.out.println(list);*/
 		} else {			
-			request.setAttribute("msg", "게시글 작성 실패!");			
+			request.setAttribute("msg", "Pick 작성 실패!");			
 			request.getRequestDispatcher("views/common/errorPage.jsp")
 			.forward(request, response);			
 		}
-		
 		
 		
 	/*	ArrayList<Attachment> list = new ArrayList<Attachment>();
@@ -140,10 +138,7 @@ public class PickUploadServlet extends HttpServlet {
 			
 			System.out.println("at : " + at);
 			list.add(at);
-		}*/
-		
-		
-		
+		} 죽은 코드, 쓸일 없을 듯.*/ 
 		}
 		
 	}
