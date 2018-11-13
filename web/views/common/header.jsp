@@ -21,7 +21,7 @@
  }
  
  *{
- 	font-family: 'Nanum Brush Script';
+ 	font-family: '';
  }
  
 .pm-section{

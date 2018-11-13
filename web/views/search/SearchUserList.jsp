@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.user.model.vo.User" %>
+<%@ page import="java.util.ArrayList" %>
+<% ArrayList<User> uList = (ArrayList<User>)request.getAttribute("searchList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +17,7 @@
 	
 		<h1>유저 검색 결과 리스트 창</h1>
 		
-		<% for(int i = 1 ; i < 10; i++){ %>
+		<% for(int i = 0 ; i < 10; i++){ %>
 			<a href="?userno=<%=i%>">유저번호 <%= i %></a>
 			<hr />
 		<% } %>
