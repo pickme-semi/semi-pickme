@@ -185,7 +185,6 @@ public class ProfileDao {
 		try {
 			
 			pstmt = con.prepareStatement(sql);
-
 			pstmt.setString(1, user.getUserPass());
 			pstmt.setString(2, user.getUserEmail());
 			pstmt.setString(3, user.getProfile());
@@ -334,7 +333,46 @@ public class ProfileDao {
 		return result;
 	}
 
-	public User userPage(Connection con, int userNo) {
+	public ArrayList<Category> getCategory(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Category result = null;
+		
+		String sql = prop.getProperty("getCategory");
+		
+		
+
+		ArrayList<Category> list = new ArrayList<Category>();
+		
+		try {
+			System.out.println(userNo);
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()){
+				result = new Category();
+				System.out.println(rset.getInt(1));
+				
+				result.setCategoryId(rset.getInt(1));
+				list.add(result);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return list;
+	}
+  
+  	public User userPage(Connection con, int userNo) {
 		PreparedStatement pstmt = null;
 		User user = null;
 		ResultSet rset = null;
@@ -342,7 +380,6 @@ public class ProfileDao {
 		String sql = prop.getProperty("userPage");
 		
 		try {
-			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, userNo);
@@ -432,7 +469,5 @@ public class ProfileDao {
 		
 		return myPick;
 	}
-
-	
 	
 }

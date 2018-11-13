@@ -272,7 +272,6 @@
 		
 		// 이메일 체크
 		function checkEmail() {
-	        var id = $("#userId").val();
 	        var email = $("#userEmail").val();
 	        var oMsg = $("#emailMsg");
 
