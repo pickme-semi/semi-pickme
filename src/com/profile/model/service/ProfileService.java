@@ -119,6 +119,16 @@ public class ProfileService {
 		
 	}
 
+	public ArrayList<Category> getCategory(int userNo) {
+		Connection con = getConnection();
+		
+		ArrayList<Category> result = pDao.getCategory(con,userNo);
+		
+		close(con);
+		
+		return result;
+	}
+
 	
 	
 	

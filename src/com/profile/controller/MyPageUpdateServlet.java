@@ -14,6 +14,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.common.MyRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
 import com.profile.model.service.ProfileService;
+import com.profile.model.vo.Category;
 import com.user.model.vo.User;
 
 /**
@@ -79,10 +80,16 @@ public class MyPageUpdateServlet extends HttpServlet {
 		
 		ProfileService ps = new ProfileService();
 		HttpSession session =  request.getSession(false);
-		
 		User user = (User)session.getAttribute("user");
 		
-		user.setUserPass(password);
+		
+		if(!password.equals("")){
+			System.out.println("password:"+ password);
+			user.setUserPass(password);
+		}else{
+			System.out.println("null일때 :" +user.getUserPass());
+			user.setUserPass(user.getUserPass());
+		}
 		user.setUserEmail(email);
 		user.setProfile(profile);
 		user.setGender(gender);

@@ -3,6 +3,9 @@
 <%
 	ArrayList<Category> category = (ArrayList<Category>)request.getAttribute("cArr");
  %>
+ <%
+ 	ArrayList<Category> cat = (ArrayList<Category>)request.getAttribute("category");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,18 +71,9 @@ encType="multipart/form-data">
 		<td><!--   <button id="idCheck"> 중복확인</button> --></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><span class= "error_next_box" id="idMsg" style="display:none" role="alert"></span></td>
-	</tr>
-	<tr>
 		<td> 비밀번호 </td>
 		<td><input type="password" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
-		<td>
-		</td>
-	</tr>
-	<tr>
 		<td></td>
-		<td><span class= "error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span></td>
 	</tr>
 	<tr>
 		<td> 비밀번호 확인 </td>
@@ -87,22 +81,18 @@ encType="multipart/form-data">
 		<td><label id="pwdResult"></label></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td><span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span></td>
-	</tr>
-	<tr>
 		<td> 이름 </td>
 		<td id="userName"><%= user.getUserName() %></td>
 		<td></td>
 	</tr>
 	<tr>
+		<td> 이메일 <br /></td>
+		<td><input type="email" id="userEmail" name="userEmail" onchange="resetEmail();" required="required" value="<%= user.getUserEmail()%>"/></td>
 		<td></td>
-		<td><span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span></td>
 	</tr>
 	<tr>
-		<td> 이메일 <br /></td>
-		<td><input type="email" id="userEmail" name="userEmail" required="required" value="<%= user.getUserEmail()%>"/></td>
 		<td></td>
+		<td><span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span></td>
 	</tr>
 	<tr>
 		<td> 프로필 사진 <br /></td>
@@ -178,12 +168,79 @@ encType="multipart/form-data">
 
 
 <script>
+	
+	
+	
+	//이메일 체크
+	function resetEmail() {
+	        var email = $("#userEmail").val();
+	        var oMsg = $("#emailMsg");
+
+	        if (email == "") {
+	        	showErrorMsg(oMsg,"필수 정보입니다.","red");
+	            emailFlag = false;
+	            return true;
+	        }
+		
+	        // 이메일 정규식
+	        var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	        var isHan = /[ㄱ-ㅎ가-힣]/g;
+	        if (!isEmail.test(email) || isHan.test(email)) {
+	            showErrorMsg(oMsg,"이메일 주소를 다시 확인해주세요.","red");
+	            emailFlag = false;
+	            return false;
+	        }
+	        
+	      //이메일 중복확인
+	        $.ajax({
+				url : "/pickme/emailDup.au",
+				type : "post",
+				data : { userEmail : $('#userEmail').val() },
+				success : function(data){
+					console.log(data);
+					if(data == 'no'){
+						showErrorMsg(oMsg,"이미 사용하고있는 이메일주소 입니다.","red");
+						$('#userId').select();
+						emailFlag = false; 
+					} else {
+						showErrorMsg(oMsg,"사용 가능한 이메일 주소 입니다.","green");
+						emailFlag=true;
+					}
+					
+					
+				}, error : function(request, status, error){
+					alert(request+"\n" 
+						  + status+"\n"
+						  + error);
+					console.log("에러 발생!");
+					
+				}
+				
+			});
+	        
+	        hideMsg(oMsg);
+	        emailFlag = true;
+	        
+	        
+	        return true;
+	    }
+	
+
 	/* select2 사용을 위한 메소드 */
 	$(function() {
 		
     $('.interest-multiple').select2({
     	width: 'resolve'
     });
+    
+    /* $("select").val(["1","2"]).trigger("change"); */
+    
+     
+    $("select").val([<%for(int i = 0; i < cat.size(); i++){%>
+    "<%= cat.get(i).getCategoryId()%>",
+    <%}%> ]).trigger("change");
+    
+    
     
 });
 	/* select2 값 가져오기 위한 메소드 */
@@ -230,7 +287,7 @@ encType="multipart/form-data">
 		var birthdate = '<%=user.getBirthdate() %>'.split('/');
 	
 		/* 회원 유형 체크 */
-		
+
 		$('input[name=userType]').each(function(){
 			if($(this).val()== '<%=user.getType() %>')
 				$(this).prop('checked', true);
@@ -247,6 +304,18 @@ encType="multipart/form-data">
 	/* 회원 탈퇴 시 servlet으로 가는 메소드 */
 	function uDelete(){
 		location.href = "/pickme/uDelete.pr?uno=<%=user.getUserNo() %>";
+	}
+	
+	function showErrorMsg(obj, msg, color) {
+		//obj.attr("style","color:"+ color);
+        obj.attr("style", "display:; color :" + color);
+        obj.html(msg);
+        obj.show();
+    }
+	
+	// 메시지 숨김(맞을때)
+	function hideMsg(obj){
+		obj.attr("style","display:none");
 	}
 
 </script>
