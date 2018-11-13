@@ -241,35 +241,40 @@ public class PickDao {
 		return pcArr;
 	}
 
-	public int insertCategory(Connection con, int id, String category) {
-		PreparedStatement pstmt = null;
+	public int insertCategory(Connection con, int boardNum, int categoryNum) {
 		int result = 0;
-		
+		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertCategory");
-		String[] c = category.split(", ");
-		int[] categoryId = new int[c.length];
-		
 		try {
-			
-			for(int i=0; i<c.length; i++){
-				categoryId[i] = Integer.parseInt(c[i]);
-			
-				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, id);
-				pstmt.setInt(2, categoryId[i]);
-			
-				result = pstmt.executeUpdate();
-			}
-			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, boardNum);
+			pstmt.setInt(2, categoryNum);
+			result = pstmt.executeUpdate();
 			System.out.println("Pcategory DB 입력 완료!");
-			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
-	
 
+	public int getPickCount(Connection con) {
+		int result = 0;
+		String sql = prop.getProperty("getCountPick");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = con.prepareStatement(sql);			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return result;
+	}
 }
