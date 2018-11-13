@@ -207,7 +207,7 @@ for(int i =0; i<plist.size(); i++){
 	</div> -->
 	
 	<div class="col-xs-12 col-md-8" align="center" >
-		<button type="button" onclick="location.href='views/pickpage/PickUpload.jsp'">픽 업로드</button>
+		<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>
 		
 		<button type="button" onclick="location.href='views/pickpage/PickUpdate.jsp'">픽 수정</button>	
 		consol.log()	
