@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import com.pick.model.dao.PickDao;
 import com.pick.model.vo.Attachment;
+import com.pick.model.vo.PickCategory;
 import com.pick.model.vo.PickMe;
+
 
 import static com.common.JDBCTemplate.*;
 
@@ -33,22 +35,18 @@ public class PickService {
 		Connection con = getConnection();
 		
 		result = pDao.insertPick(con, pm);
-		if(result > 0){
-			int pid = pDao.selectCurrentBid(con);
-			
+		if(result > 0) commit(con);
+		else rollback(con);
+		//int pid = pDao.selectCurrentBid(con);			
 			/*for(int i = 0; i < list.size(); i++){
 				list.get(i).setBid(bid);
-			}*/					
-		}
-		
-		/*int result2 = pDao.insertAttachment(con, list);
-		
+			}*/									
+		/*int result2 = pDao.insertAttachment(con, list);		
 		if( result1 > 0 && result2 > 0) {
 			commit(con);
-			result = 1;
-			
-		} else rollback(con);*/
-		
+			result = 1;		
+		} else rollback(con);*/	
+		// 죽은 코드, 지워도 상관없을듯.
 		
 		close(con);
 		
@@ -63,6 +61,28 @@ public class PickService {
 		
 		return hmap;
 	}
+
+	public ArrayList<PickCategory> browseCategory() {
+		Connection con = getConnection();
+
+		ArrayList<PickCategory> pcArr = pDao.browseCategory(con);
+		
+		close(con);
+		
+		return pcArr;
+	}
+
+	public void insertPCategory(int id, String category) {
+		Connection con = getConnection();
+		
+		int result = pDao.insertCategory(con, id, category);
+		
+		if(result > 0 ) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+	}	
 
 	
 }

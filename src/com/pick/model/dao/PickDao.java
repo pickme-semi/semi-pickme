@@ -13,7 +13,10 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import com.pick.model.vo.Attachment;
+import com.pick.model.vo.PickCategory;
 import com.pick.model.vo.PickMe;
+
+
 import static com.common.JDBCTemplate.*;
 
 
@@ -86,7 +89,7 @@ public class PickDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);		
-			
+						
 			pstmt.setString(1, pm.getSelect_1());
 			pstmt.setString(2, pm.getSelect_2());
 			pstmt.setString(3, pm.getTitle());
@@ -206,5 +209,67 @@ public class PickDao {
 				
 		return hmap;
 	}
+
+	public ArrayList<PickCategory> browseCategory(Connection con) {
+		ArrayList<PickCategory> pcArr = new ArrayList<PickCategory>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		try {
+			
+			stmt = con.createStatement();
+			
+			String sql = "SELECT * FROM PM_CATEGORY_TB";
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()){
+				PickCategory pc = new PickCategory();
+				
+				pc.setCategoryid(rset.getInt("ID"));
+				pc.setCategoryName(rset.getString("Name"));
+				
+				pcArr.add(pc);
+			}
+			System.out.println(pcArr);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return pcArr;
+	}
+
+	public int insertCategory(Connection con, int id, String category) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertCategory");
+		String[] c = category.split(", ");
+		int[] categoryId = new int[c.length];
+		
+		try {
+			
+			for(int i=0; i<c.length; i++){
+				categoryId[i] = Integer.parseInt(c[i]);
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, id);
+				pstmt.setInt(2, categoryId[i]);
+			
+				result = pstmt.executeUpdate();
+			}
+			
+			System.out.println("Pcategory DB 입력 완료!");
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 
 }
