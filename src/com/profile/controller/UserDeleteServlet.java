@@ -39,9 +39,12 @@ public class UserDeleteServlet extends HttpServlet {
 		// 팔로우 정보 지우기
 		int fResult = ps.followDel(userNo);
 		
+		// 카테고리 정보 지우기
+		int cResult = ps.categoryDel(userNo);
+		
 		int result = ps.deleteUser(userNo);
 		
-		if(result > 0){
+		if(result > 0 || fResult > 0 || cResult > 0){
 			System.out.println("회원 탈퇴 완료!");
 			session.invalidate();
 			response.sendRedirect("/pickme");

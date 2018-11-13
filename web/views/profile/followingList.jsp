@@ -27,7 +27,12 @@
 
 
 <div class="col-md-12 text-center user">
+<!-- 프로필 사진 업을 때 기본이미지 보여주기 -->
+<% if(user.getProfile() != null) {%>
   <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+<% } else{ %>
+	<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
+<% }%>
 <h2><%= user.getUserId() %></h2>
 <h3>한 줄 소개</h3>
 
@@ -48,7 +53,11 @@
 		<div class="followerArea">
 			<% for (User followingList : list) { %>
 			<div class="following-list" align="center">
-				<img src="/pickme/resources/profileImage/<%=followingList.getProfile() %>" class="rounded-circle" width="100px" height="50px" onclick="move();"/> &nbsp;
+				<% if(user.getProfile() != null) {%>
+				  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+				<% } else{ %>
+				<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
+				<% }%>
 				<%= followingList.getUserId() %> &nbsp;&nbsp;&nbsp; <button value=<%= followingList.getUserNo() %> >follow</button>
 				
 			</div>
