@@ -107,7 +107,11 @@ encType="multipart/form-data">
 	<tr>
 		<td> 프로필 사진 <br /></td>
 		<td>
-		<img id="profileImage" alt ="프로필 사진 바꾸기" src="/pickme/resources/profileImage/<%= user.getProfile() %>" class="rounded-circle attr">
+		<% if(user.getProfile() != null) {%>
+		  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+		<% } else{ %>
+			<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
+		<% }%>
 		</td>
 		<td></td>
 	</tr>
