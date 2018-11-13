@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.pick.model.vo.PickMe;
 import com.user.model.vo.User;
 
 import static com.common.JDBCTemplate.*;
@@ -32,6 +33,7 @@ public class SearchDao {
 		}
 	}
 
+	// 유저 아이디로 검색
 	public ArrayList<User> searchUser(Connection con, String search) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -39,12 +41,10 @@ public class SearchDao {
 		
 		String sql = prop.getProperty("searchUser");
 		
-		System.out.println("sql : " + sql);
-		System.out.println("search : " + search);
-		
 		try {
 			pstmt = con.prepareStatement(sql);
 			
+			pstmt.setString(1,"%"+ search + "%");
 			
 			rset = pstmt.executeQuery();
 			
@@ -77,14 +77,79 @@ public class SearchDao {
 		return list;
 	}
 
-	public ArrayList searchCategoryPick(Connection con, String search) {
-		// TODO Auto-generated method stub
-		return null;
+	// 카테고리로 검색 
+	// 쿼리 수정하기
+	public ArrayList<PickMe> searchCategoryPick(Connection con, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<PickMe> list = null;
+		
+		String sql = prop.getProperty("searchPick");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				PickMe pm = new PickMe();
+				
+				pm.setTitle(rset.getString(1));
+				pm.setUserno(rset.getInt(2));
+				pm.setSelect_1(rset.getString(3));
+				pm.setSelect_2(rset.getString(4));
+				
+				list.add(pm);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
-	public ArrayList searchPick(Connection con, String search) {
-		// TODO Auto-generated method stub
-		return null;
+	// 픽 제목으로 검색
+	public ArrayList<PickMe> searchPick(Connection con, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<PickMe> list = null;
+		
+		String sql = prop.getProperty("searchPick");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				PickMe pm = new PickMe();
+				
+				pm.setTitle(rset.getString(1));
+				pm.setUserno(rset.getInt(2));
+				pm.setSelect_1(rset.getString(3));
+				pm.setSelect_2(rset.getString(4));
+				
+				list.add(pm);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

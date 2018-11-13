@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.pick.model.vo.PickMe" %>
+<%@ page import="java.util.ArrayList" %>
+<% ArrayList<PickMe> pList = (ArrayList<PickMe>)session.getAttribute("searchList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +17,15 @@
 	
 		<h1>픽&카테고리 검색 결과 리스트 창</h1>
 		
-		<% for(int i = 0 ; i < 10; i++) { %>
-			<a href="?pickno?<%=i%>"><strong>픽 <%=i%></strong> 상세보기</a>
+		<% if(pList.size() != 0){ %>
+		<% for(int i = 0 ; i < pList.size(); i++) { %>
+			<a href="?pickno?<%=pList.get(i).getId()%>"><strong>픽 제목<%=pList.get(i).getTitle()%></strong> 상세보기</a>
 			<hr />
+		<% } %>
+		<% }else{ %>
+			<div class="result-none">
+				<h1>검색 결과 없음</h1>
+			</div>
 		<% } %>
 	
 	</div>

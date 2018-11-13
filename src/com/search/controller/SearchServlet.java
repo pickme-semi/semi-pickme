@@ -69,7 +69,7 @@ public class SearchServlet extends HttpServlet {
 		session.setAttribute("searchList", searchList);
 		
 		System.out.println("서치리스트 : " + searchList);
-		
+		System.out.println("검색 옵션 : " + option);
 		System.out.println("검색할 단어 : " + search);
 		
 		if(option == "user") {

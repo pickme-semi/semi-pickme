@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.user.model.vo.User" %>
 <%@ page import="java.util.ArrayList" %>
-<% ArrayList<User> uList = (ArrayList<User>)request.getAttribute("searchList"); %>
+<% ArrayList<User> uList = (ArrayList<User>)session.getAttribute("searchList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +17,16 @@
 	
 		<h1>유저 검색 결과 리스트 창</h1>
 		
-		<% for(int i = 0 ; i < 10; i++){ %>
-			<a href="?userno=<%=i%>">유저번호 <%= i %></a>
+		<%if(uList.size() != 0){ %>
+		<% for(int i = 0 ; i < uList.size(); i++){ %>
+			<!-- 사용자 정보 페이지로 이동시키기 -->
+			<a href="?userno=<%= uList.get(i).getUserNo()%>"><%= uList.get(i).getUserId()%></a>
 			<hr />
+		<% } %>
+		<% }else { %>
+			<div class="result-none">
+				<h1>검색 결과 없음</h1>
+			</div>
 		<% } %>
 	</div>
 

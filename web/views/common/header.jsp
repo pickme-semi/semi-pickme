@@ -29,6 +29,11 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.result-none{
+	height : 500px;
+	background : pink;
+}
 </style>
 </head>
 <body>

@@ -3,6 +3,7 @@ package com.search.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.pick.model.vo.PickMe;
 import com.search.model.dao.SearchDao;
 import com.user.model.vo.User;
 
@@ -25,10 +26,10 @@ public class SearchService {
 	}
 
 	// 카테고리를 검색어로 픽 검색
-	public ArrayList searchCategoryPick(String search) {
+	public ArrayList<PickMe> searchCategoryPick(String search) {
 		Connection con = getConnection();
 		
-		ArrayList list = sDao.searchCategoryPick(con, search);
+		ArrayList<PickMe> list = sDao.searchCategoryPick(con, search);
 		
 		close(con);
 		
@@ -37,10 +38,10 @@ public class SearchService {
 	}
 
 	// 픽 제목으로 픽 검색
-	public ArrayList searchPick(String search) {
+	public ArrayList<PickMe> searchPick(String search) {
 		Connection con = getConnection();
 		
-		ArrayList list = sDao.searchPick(con, search);
+		ArrayList<PickMe> list = sDao.searchPick(con, search);
 		
 		close(con);
 		
