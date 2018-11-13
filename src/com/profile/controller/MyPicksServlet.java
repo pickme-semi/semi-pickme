@@ -45,7 +45,7 @@ public class MyPicksServlet extends HttpServlet {
 		System.out.println(myPick);
 		
 		if(myPick != null){
-			request.setAttribute("myPick", myPick );
+			request.setAttribute("myPick", myPick);
 			request.getRequestDispatcher("views/profile/myPicks.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "pick 불러오는 과정에서 오류");

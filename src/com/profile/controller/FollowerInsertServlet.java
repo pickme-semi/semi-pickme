@@ -24,14 +24,15 @@ public class FollowerInsertServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 나의 번호
+		// 팔로우 할 사람의 번호
 		int userNo1 = Integer.parseInt(request.getParameter("uno1"));
-		// 팔로우할 사람의 번호
+		// 내 번호 
 		int userNo2 = Integer.parseInt(request.getParameter("uno2"));
 		
 		ProfileService ps = new ProfileService();
@@ -39,7 +40,7 @@ public class FollowerInsertServlet extends HttpServlet {
 		int result = ps.followInsert(userNo1, userNo2);
 		
 		if(result > 0 ){
-			response.sendRedirect("/pickme/mPicks.pr");			
+			response.sendRedirect("/pickme/uPage.pr?uno="+userNo1);			
 		}else{
 			request.setAttribute("msg", "팔로우 인서트 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);	

@@ -26,7 +26,8 @@
 <% }%>
 <h2><%= users.getUserId() %></h2>
 <h5>한 줄 소개</h5>
-<button id ="fBtn" onclick="followBtn();">follow</button>
+<button id ="fBtn" onclick="follow();">follow</button>
+<button id ="fBtn2" style="display:none" onclick="cancelFollow();">follow 취소</button>
 <br />
 <br />
 
@@ -67,11 +68,23 @@
 <%@ include file="../common/footer.jsp" %>
 
 <script>
-	function followBtn(){
+	$("button").click(function(){
+		
+		$('button').toggle();
+		
+	});
 	
-		location.href='<%= request.getContextPath() %>/fiPage.pr?uno1=<%=users.getUserNo() %>&uno2=<%=user.getUserNo()%>'
+	function follow(){
+		
+	location.href='<%= request.getContextPath() %>/fiPage.pr?uno1=<%=users.getUserNo() %>&uno2=<%=user.getUserNo()%>'
+	
 	}
-
+	
+	function cancelFollow(){
+		
+		alert("ㅎㅇ");
+		
+	}
 </script>
 </body>
 </html>

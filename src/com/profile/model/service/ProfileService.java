@@ -134,7 +134,7 @@ public class ProfileService {
 	public int followInsert(int userNo1, int userNo2) {
 		Connection con = getConnection();
 		
-		int result = pDao.followInsert(con,userNo1, userNo2);
+		int result = pDao.followInsert(con, userNo1, userNo2);
 		
 		if(result > 0 ) commit(con);
 		else rollback(con);
