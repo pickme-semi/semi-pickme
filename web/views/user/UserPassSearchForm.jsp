@@ -38,6 +38,7 @@
 		<td><input type="text" name="userId" id ="userId" required="required" ></td>
 		<td></td>
 	</tr>
+	
 	<tr>
 		<td> 이메일</td>
 		<td><input type="text" name="userEmail" id="userEmail" required="required"></td>

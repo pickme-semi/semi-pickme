@@ -341,13 +341,6 @@
 		
 		//가입하기 버튼 클릭시
 		$("#btnJoin").click(function(){
-			/*
-			console.log("id: " + idFlag);
-			console.log("pwd: " + pwFlag);
-			console.log("pwd2 : " + pw2Flag);
-			console.log("name : " + nameFlag);
-			console.log("email : " + emailFlag);
-			*/
 			
 			if(!idFlag){
 				$("#userId").focus();
