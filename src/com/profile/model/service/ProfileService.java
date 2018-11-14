@@ -112,9 +112,10 @@ public class ProfileService {
 	public void insertCategory(int userNo, String category) {
 		Connection con = getConnection();
 		
-		int result = pDao.insertCategory(con, userNo, category);
+		int result1 = pDao.deleteCategory(con,userNo); 
+		int result2  = pDao.insertCategory(con, userNo, category);
 		
-		if(result > 0 ) commit(con);
+		if(result1 > 0  || result2 > 0 ) commit(con);
 		else rollback(con);
 		
 		close(con);

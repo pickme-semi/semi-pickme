@@ -8,13 +8,17 @@
 <title>로그인_[Pick Me]</title>
 <style>
 	.outer{
-		width : 300px;
-		height : 400px;
-		background : mistyrose;
+		width : auto;
+		height : auto;
+		/* background : mistyrose; */
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
 	
+	}
+	
+	.form_input{
+		width : 300px;
 	}
 	
 	#p1{
@@ -37,23 +41,26 @@
 <br />
 
 <form id="loginform" action="/pickme/login.au" method="post">
-	<table align="center">
-		<tr>
-			<td><input name="userId" id="userId" type="text" placeholder="아이디"></td>
-		</tr>
-		<tr>
-			<td><span class="error_next_box" id="idMsg" style="display:none" role="alert"></span></td>
-		</tr>
-		<tr>
-			<td><input name="userPass" id="userPwd" type="password" placeholder="비밀번호" ></td>
-		</tr>
-		<tr>
-			<td><span class="error_next_box" id="pwdMsg" style="display:none" role="alert"></span></td>
-		</tr>
-		<tr>
-			<td><span class="error_next_box" id="loginfail" style="display:none" role="alert"></span></td>
-		</tr>
-	</table>
+	<div align = "center">
+	<div class = "form_field">
+		<div class = "form_input">
+			<input name="userId" class="form-control" id="userId" type="text" placeholder="아이디" >
+		</div>
+		<div>
+			<span class="error_next_box" id="idMsg" style="display:none" role="alert"></span>
+		</div>
+	</div>
+	<div class = "form_field">
+		<div class="form_input">
+			<input name="userPass" class="form-control" id="userPwd" type="password" placeholder="비밀번호" >
+		</div>
+		<div>
+			<span class="error_next_box" id="pwdMsg" style="display:none" role="alert"></span>
+		</div>
+		
+	</div>
+	</div>
+	
 	<div align ="center"><span class="error_next_box" id = loginMsg style="display:none" role="alert"></span></div>
 	<br>
 	<div class="btns" align="center">

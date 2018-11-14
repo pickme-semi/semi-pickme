@@ -11,8 +11,8 @@
 	#container{
 		width : 600px;
 		height : auto;
-		background : mistyrose;
 		padding : 10px;
+		background : snow;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
@@ -31,6 +31,7 @@
 		border : 1px solid;
 		background : white;
 		overflow : scroll;
+		overflow-x : hidden;
 	}
 	
 	.article{

@@ -15,6 +15,7 @@ import com.common.MyRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
 import com.profile.model.service.ProfileService;
 import com.profile.model.vo.Category;
+import com.user.encrypt.EncryptWrapper;
 import com.user.model.vo.User;
 
 /**
@@ -63,12 +64,18 @@ public class MyPageUpdateServlet extends HttpServlet {
 		
 		
 		String password = mrequest.getParameter("userPass");
+		password = EncryptWrapper.getSHA512(password);
 		String email = mrequest.getParameter("userEmail");
 		String gender = mrequest.getParameter("gender");
 		
 		// String -> Date 형변환
 		String birth = mrequest.getParameter("userBirth");
-		java.sql.Date birthdate = java.sql.Date.valueOf(birth);
+		System.out.println("birth : " +birth);
+		java.sql.Date birthdate = null;
+		
+		if(!birth.equals("")){
+		birthdate = java.sql.Date.valueOf(birth);
+		}
 		
 		String type = mrequest.getParameter("userType");
 		
@@ -107,7 +114,7 @@ public class MyPageUpdateServlet extends HttpServlet {
 		ps.insertCategory(user.getUserNo(),category);
 		
 		System.out.println("회원 정보 수정 완료! : " + user);
-		response.sendRedirect("/pickme/mPicks.pr");
+		response.sendRedirect("/pickme/mPicks.pr?uno=" + user.getUserNo());
 		
 		} catch(Exception e) {
 			

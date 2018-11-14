@@ -33,7 +33,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		return value;
 	}
 	
-	private static String getSHA512(String password) {
+	public static String getSHA512(String password) {
 		String result = null;
 		
 		try {
