@@ -31,36 +31,35 @@
 	height : 500px;
 	background : pink;
 }
+
+header.board{
+	background : green;
+}
+
 </style>
 </head>
 <body>
-	<header>
-	<nav class="navbar navbar-expand-lg navbar-white bg-white">
+	<header class="board">
+	<nav class="navbar navbar-expand-lg">
 	  
 	  <div class="container">
 	  <%if(user==null) {%>
 		  <div class="login" align="center">
 		  	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme">PICK ME</a>
+	        	<a class="navbar-brand" href="/pickme">PICK ME</a> 고객센터
 	        </div>
 		  </div>
 	  <%}else{ %>
 	      	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme/pickmain.pm">PICK ME</a>
+	        	<a class="navbar-brand" href="/pickme/pickmain.pm">PICK ME</a> 고객센터
 	        </div>
 			<div class="search" style="width:33%" text-align="center">
-		        <div class="collapse navbar-collapse" id="navbarsExample07">
-		          <form class="form-inline my-2 my-md-0" style="margin-left:auto;margin-right:auto;" action="/pickme/search.se" method="get">
-		            <input class="form-control" type="text" name="userSearch" placeholder="@user #category" aria-label="Search">
-		          </form>
-		        </div>
+
 	        </div>
 	        <div class="logo" style="width:33%" align="right">
-				<a href="/pickme/logout.au">LogOut</a> /
-				<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">Profile</a> /
-				<a href="/pickme/pickmain.pm">Pick</a> /
-				<a href="/pickme/list.bo">고객센터</a> / 
-				<a href="/pickme/sTotalList.st">통계</a>
+				<a href="/pickme/list.bo?bType=qna">질문하기</a> /
+				<a href="/pickme/list.bo?bType=report">신고하기</a> /
+				<a href="/pickme/list.bo?bType=admin">관리자 페이지</a>
 	        </div>
       <%} %>
       </div>
