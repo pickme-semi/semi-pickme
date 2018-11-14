@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -40,10 +41,12 @@ public class BoardDao {
 		
 		String sql = prop.getProperty("getBoardCategory");
 		
-		// BOT001 : 질문, BOT002 : 신고
+		// BOT001 : 신고, BOT002 : 질문
 		String sqlType = (category.equals("report")) ? "신고" :"질문";
 		
 		try {
+			
+			System.out.println("sql type : " + sqlType);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sqlType);
 			
@@ -81,6 +84,8 @@ public class BoardDao {
 		// BOT001 : 질문, BOT002 : 신고
 		String sqlType = (type.equals("report")) ? "신고" :"질문";
 		
+		System.out.println("타입 DAO : " + sqlType);
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sqlType);
@@ -92,6 +97,17 @@ public class BoardDao {
 			while(rset.next()){
 				Board bo = new Board();
 				
+				System.out.println("dao board : " + bo);
+				
+				bo.setId(rset.getInt(1));
+				bo.setTitle(rset.getString(2));
+				bo.setContent(rset.getString(3));
+				bo.setEnrollDate(rset.getDate(4));
+				bo.setStatus(rset.getString(5));
+				bo.setCategoryId(rset.getInt(6));
+				bo.setUserNo(rset.getInt(7));
+				bo.setPickId(rset.getInt(8));
+				bo.setType(rset.getString(9));
 				
 				boardList.add(bo);
 			}
@@ -104,6 +120,95 @@ public class BoardDao {
 		}
 		
 		return boardList;
+	}
+
+	public int insertBoard(Connection con, Board board) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String bType = (board.getType().equals("BOT001"))? "report" : "qna";
+		
+		String sql = "";
+		
+		if(bType.equals("report")) {
+			sql = prop.getProperty("insertReport");
+		}else {
+			sql = prop.getProperty("insertQuestion");
+		}
+		
+		System.out.println("sql : " + sql);
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setInt(3, board.getCategoryId());
+			pstmt.setInt(4, board.getUserNo());
+
+			if(bType.equals("report")) {
+				pstmt.setInt(5, board.getPickId());
+				pstmt.setString(6, board.getType());
+			}else {
+				pstmt.setString(5, board.getType());
+			}
+			
+			System.out.println("titel : " + board.getTitle());
+			System.out.println("content : " + board.getContent());
+			System.out.println("cateid : " + board.getCategoryId());
+			System.out.println("userno : " + board.getUserNo());
+			System.out.println("type : " + board.getType());
+			System.out.println("pickid : " + board.getPickId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Board> getCommonBoardList(Connection con) {
+		PreparedStatement pstmt = null;
+		ArrayList<Board> commonBoardList = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getCommonBoardList");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			commonBoardList = new ArrayList<Board>();
+			
+			while(rset.next()){
+				Board bo = new Board();
+				
+				bo.setId(rset.getInt(1));
+				bo.setTitle(rset.getString(2));
+				bo.setContent(rset.getString(3));
+				bo.setEnrollDate(rset.getDate(4));
+				bo.setStatus(rset.getString(5));
+				bo.setCategoryId(rset.getInt(6));
+				bo.setUserNo(rset.getInt(7));
+				bo.setPickId(rset.getInt(8));
+				bo.setType(rset.getString(9));
+				
+				System.out.println("DAO : " + bo);
+				
+				commonBoardList.add(bo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return commonBoardList;
 	}
 
 }

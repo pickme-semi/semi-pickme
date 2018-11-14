@@ -29,4 +29,25 @@ public class BoardService {
 		return boardList;
 	}
 
+	public int insertBoard(Board board) {
+		Connection con = getConnection();
+		
+		int result = bDao.insertBoard(con, board);
+		
+		if(result > 0)commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<Board> getCommonBoardList() {
+		Connection con = getConnection();
+		
+		ArrayList<Board> commonBoardList = bDao.getCommonBoardList(con);
+		
+		return commonBoardList;
+	}
+
 }

@@ -22,6 +22,27 @@ public class Board implements Serializable{
 	public Board() {
 		super();
 	}
+	
+	// 질문 보드
+	public Board(String title, String content, int categoryId, int userNo, String type) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.categoryId = categoryId;
+		this.userNo = userNo;
+		this.type = type;
+	}
+	
+	// 신고 보드
+	public Board(String title, String content, int categoryId, int userNo, int pickId, String type) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.categoryId = categoryId;
+		this.userNo = userNo;
+		this.pickId = pickId;
+		this.type = type;
+	}
 
 	public Board(int id, String title, String content, Date enrollDate, String status, int categoryId, int userNo,
 			int pickId, String type) {

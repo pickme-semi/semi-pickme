@@ -38,6 +38,7 @@ public class BoardListServlet extends HttpServlet {
 		BoardService bs = new BoardService();
 		ArrayList<BoardCategory> cateList = null;
 		ArrayList<Board> boardList = null;
+		ArrayList<Board> commonBoardList = null;
 		
 		if(type.equals("report")){
 			cateList = bs.getBoardCategory("report");
@@ -46,13 +47,19 @@ public class BoardListServlet extends HttpServlet {
 		}else{
 			cateList = bs.getBoardCategory("qna");
 			boardList = bs.getBoardList("qna");
+			commonBoardList = bs.getCommonBoardList();
+			
+			System.out.println("컴먼 : " + commonBoardList);
+			
 			session.setAttribute("bType", "qna");
+			session.setAttribute("commonBoardList", commonBoardList);
 		}
 		
 		session.setAttribute("cateList", cateList);
 		session.setAttribute("boardList", boardList);
 		
 		System.out.println(cateList);
+		System.out.println(boardList);
 		
 		
 		request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
