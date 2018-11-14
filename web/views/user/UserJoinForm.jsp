@@ -8,12 +8,19 @@
 <title>회원가입_[Pick Me]</title>
 <style>
 	.outer{
-		width : 600px;
-		height : 500px;
-		background : mistyrose;
+		width : auto;
+		height : auto;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
+	}
+	
+	.form_field{
+		width : 400px;
+	}
+	
+	.form_label{
+		align : left;
 	}
 	
 	.error_next_box{
@@ -38,56 +45,68 @@
 <h2 align = "center"> 회원가입 </h2>
 <br />
 <form id = "joinform" action="/pickme/userJoin.au" method="post">
-	<table align="center">
-	<tr>
-		<td width="120px"> 아이디 </td>
-		<td>
-		<input type="text" name="userId" id ="userId" class="int" required="required" maxlength="20"></td>
-		<td><!--   <button id="idCheck"> 중복확인</button> --></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><span class= "error_next_box" id="idMsg" style="display:none" role="alert"></span></td>
-	</tr>
-	<tr>
-		<td> 비밀번호 </td>
-		<td><input type="password" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
-		<td>
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><span class= "error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span></td>
-	</tr>
-	<tr>
-		<td> 비밀번호 확인 </td>
-		<td><input type="password" id="userPwd2" name="userPass2" ></td>
-		<td><label id="pwdResult"></label></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span></td>
-	</tr>
-	<tr>
-		<td> 이름 </td>
-		<td><input type="text" maxlength="5" id="userName" name="userName" required="required" ></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span></td>
-	</tr>
-	<tr>
-		<td> 이메일 <br /></td>
-		<td><input type="email" id="userEmail" name="userEmail" required="required" ></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td><span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span></td>
-	</tr>
-	
-	</table>
+
+	<div align="center">
+		<div class = "form_field">
+			<div align="left">
+				<label class = "form_label" for="userId">아이디</label>
+			</div>
+			<div class = "form_input">
+				<input type="text" name="userId" id ="userId" class="form-control" required="required" maxlength="20" >
+			</div>
+			<div>
+				<span class="error_next_box" id="idMsg" style="display:none" role="alert"></span>
+			</div>
+		</div>
+		<br />
+		<div class = "form_field">
+			<div align="left">
+				<label class = "form_label" for="userPwd">비밀번호</label>
+			</div>
+			<div class="form_input">
+				<input type="password" class="form-control" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20">			
+			</div>
+			<div>
+				<span class="error_next_box" id="pwd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+			</div>
+		</div>
+		<br />
+		<div class = "form_field">
+			<div align="left">
+				<label class = "form_label" for="userPwd2">비밀번호 확인</label>
+			</div>
+			<div class="form_input">
+				<input type="password" class="form-control" id="userPwd2" name="userPass2" required="required" aria-describedby="pswd1Msg" maxlength="20">			
+			</div>
+			<div>
+				<span class="error_next_box" id="pwd2Msg" style="display:none" role="alert"></span>
+			</div>
+		</div>
+		<br />
+		<div class = "form_field">
+			<div align="left">
+				<label class = "form_label" for="userName">이름</label>
+			</div>
+			<div class="form_input">
+				<input type="text" class="form-control" maxlength="5" id="userName" name="userName" required="required" >			
+			</div>
+			<div>
+				<span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span>
+			</div>
+		</div>
+		<br />
+		<div class = "form_field">
+			<div align="left">
+				<label class = "form_label" for="userEmail">이메일</label>
+			</div>
+			<div class="form_input">
+				<input type="email" class="form-control" id="userEmail" name="userEmail" required="required" >			
+			</div>
+			<div>
+				<span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span>
+			</div>
+		</div>
+	</div>
 	<br />
 	<div class="btns" align="center">
 	<button type="button" id= "btnJoin" > 가입하기 </button>
@@ -100,7 +119,6 @@
 
 	
 </form>
-
 
 <br>
 
@@ -122,7 +140,6 @@
 	        });
 
 	        $("#userPwd").blur(function() {
-	            pwFlag = false;
 	            checkPswd1();
 	        });
 

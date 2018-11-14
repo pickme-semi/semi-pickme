@@ -304,7 +304,7 @@ public class ProfileDao {
 		return cArr;
 	}
 
-	public int insertCategory(Connection con, int userNo,String category) {
+	public int insertCategory(Connection con, int userNo, String category) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -328,6 +328,26 @@ public class ProfileDao {
 			
 		} catch (SQLException e) {
 			
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int deleteCategory(Connection con, int userNo){
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteCategory");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

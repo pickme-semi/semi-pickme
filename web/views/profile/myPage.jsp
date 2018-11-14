@@ -18,9 +18,8 @@
 
 <style>
 	.outer{
-		width : 600px;
-		height : 400px;
-		background : mistyrose;
+		width : auto;
+		height : auto;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
@@ -62,7 +61,7 @@
 <h2 align = "center"> 회원 정보  </h2>
 <br />
 
-<form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.au"
+<form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.au?uno=<%=user.getUserNo() %>"
 encType="multipart/form-data">
 	<table align="center">
 	<tr>
@@ -72,12 +71,12 @@ encType="multipart/form-data">
 	</tr>
 	<tr>
 		<td> 비밀번호 </td>
-		<td><input type="password" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
+		<td><input type="password" class="form-control" id="userPwd" name="userPass"  required="required" aria-describedby="pswd1Msg" maxlength="20"></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td> 비밀번호 확인 </td>
-		<td><input type="password" id="userPwd2" name="userPass2" ></td>
+		<td><input type="password" class="form-control" id="userPwd2" name="userPass2"  ></td>
 		<td><label id="pwdResult"></label></td>
 	</tr>
 	<tr>
@@ -87,7 +86,7 @@ encType="multipart/form-data">
 	</tr>
 	<tr>
 		<td> 이메일 <br /></td>
-		<td><input type="email" id="userEmail" name="userEmail" onchange="resetEmail();" required="required" value="<%= user.getUserEmail()%>"/></td>
+		<td><input type="email" class="form-control" id="userEmail" name="userEmail" onchange="resetEmail();" required="required" value="<%= user.getUserEmail()%>"/></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -168,11 +167,70 @@ encType="multipart/form-data">
 
 
 <script>
+	var emailFlag = true;
+	var pwFlag = true;
+	var pw2Flag = true;
 	
 	
+	$(document).ready(function(){
+		
+        $("#userPwd").blur(function() {
+            checkPswd1();
+        });
+
+        $("#userPwd2").blur(function() {
+            checkPswd2();
+        });
+
+        $("#userEmail").blur(function() {
+            checkEmail();
+        });
+		
+        
+		
+	});
+	
+	function checkPswd1() {
+		var pwd = $("#userPwd").val();
+		var oMsg = $("#pswd1Msg");
+		console.log(pwFlag);
+		
+        // 비밀번호 정규식
+        var isPwd = /^[A-Za-z0-9_-]{6,18}$/;   
+          if(!isPwd.test(pwd)){
+             showErrorMsg(oMsg,"5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.","red")
+             pwFlag=false;
+          }else{
+        	  hideMsg(oMsg);
+        	  pwFlag=true;
+          }
+          
+          
+          
+       }
+	// 비밀번호 확인
+	function checkPswd2(){
+		var pwd1 = $("#userPwd");
+		var pwd2 = $("#userPwd2");
+		var oMsg = $("#pswd2Msg");
+		
+		console.log(pw2Flag);
+        if (pwd1.val() != pwd2.val()) {
+            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.","red");
+            pwd2.val("");
+            pw2Flag = false;
+        } else {
+            hideMsg(oMsg);
+            pw2Flag = true;
+        }
+
+
+		
+	}
 	
 	//이메일 체크
 	function resetEmail() {
+			console.log(emailFlag);
 	        var email = $("#userEmail").val();
 	        var oMsg = $("#emailMsg");
 
@@ -190,8 +248,12 @@ encType="multipart/form-data">
 	            emailFlag = false;
 	            return false;
 	        }
-	        
+	        console.log(emailFlag);
 	      //이메일 중복확인
+	      	if(email == "<%=user.getUserEmail()%>"){
+	      		hideMsg(oMsg);
+	      		emailFlag = true;
+	      	}else{
 	        $.ajax({
 				url : "/pickme/emailDup.au",
 				type : "post",
@@ -217,6 +279,7 @@ encType="multipart/form-data">
 				}
 				
 			});
+	      	}
 	        
 	        hideMsg(oMsg);
 	        emailFlag = true;
@@ -225,7 +288,8 @@ encType="multipart/form-data">
 	        return true;
 	    }
 	
-
+	
+	
 	/* select2 사용을 위한 메소드 */
 	$(function() {
 		
@@ -299,7 +363,22 @@ encType="multipart/form-data">
 	
 	/* 수정완료 시 servlet으로 가는 메소드 */
 	function uComplete(){
-		$('#updateform').submit();
+		
+			if(!emailFlag){
+				alert("이메일 정보를 다시 확인해주세요.");
+			}else if($("#userPwd").val()!="" || $("#userPwd2").val()!="")
+				{if(!pwFlag){
+				alert("비밀번호를 형식에 맞게 입력해주세요.");
+				}else if(!pw2Flag){
+				alert("비밀번호와 확인 값이 일치하지 않습니다.")
+				}else{
+					$('#updateform').submit();	
+				}	
+			}else{
+			$('#updateform').submit();	
+			}
+		
+		
 	}
 	/* 회원 탈퇴 시 servlet으로 가는 메소드 */
 	function uDelete(){
