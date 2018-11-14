@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.profile.model.service.ProfileService;
 
 /**
  * Servlet implementation class FollowerInsertServlet
  */
-@WebServlet("/fiPage.pr")
+@WebServlet("/fInsert.pr")
 public class FollowerInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,21 +31,17 @@ public class FollowerInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 팔로우 할 사람의 번호
-		int userNo1 = Integer.parseInt(request.getParameter("uno1"));
-		// 내 번호 
-		int userNo2 = Integer.parseInt(request.getParameter("uno2"));
-		
-		ProfileService ps = new ProfileService();
-		
-		int result = ps.followInsert(userNo1, userNo2);
-		
-		if(result > 0 ){
-			response.sendRedirect("/pickme/uPage.pr?uno="+userNo1);			
-		}else{
-			request.setAttribute("msg", "팔로우 인서트 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);	
-		}
+				// 팔로우 할 사람의 번호
+				int userNo1 = Integer.parseInt(request.getParameter("uno1"));
+				// 내 번호 
+				int userNo2 = Integer.parseInt(request.getParameter("uno2"));
+				
+				ProfileService ps = new ProfileService();
+				
+				int result = ps.followInsert(userNo1, userNo2);
+				
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().println(result);
 	}
 
 	/**

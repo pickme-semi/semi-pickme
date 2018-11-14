@@ -1,7 +1,6 @@
 package com.profile.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.profile.model.service.ProfileService;
-import com.user.model.vo.User;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class FollowerDeleteServlet
  */
-@WebServlet("/uPage.pr")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/fDelete.pr")
+public class FollowerDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public FollowerDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,23 +28,17 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 팔로우 끊을 사람의 번호
+		int userNo1 = Integer.parseInt(request.getParameter("uno1"));
+		// 내 번호 
+		int userNo2 = Integer.parseInt(request.getParameter("uno2"));
+		
 		ProfileService ps = new ProfileService();
-		int userNo = Integer.parseInt(request.getParameter("uno"));
 		
-		User user = ps.userPage(userNo); 
+		int result = ps.followDelete(userNo1, userNo2);
 		
-		String page = " ";
-		if(user != null){
-			
-			page = "views/profile/userPage.jsp";
-			request.setAttribute("user", user);
-			
-		}else{
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "사용자 불러오기 오류 ");
-			
-		}
-		request.getRequestDispatcher(page).forward(request, response);
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().println(result);
 	}
 
 	/**

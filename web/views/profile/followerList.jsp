@@ -38,7 +38,7 @@
 <h5>한 줄 소개</h5>
 <a href="/pickme/fList.pr">Follower</a>
 <a href="/pickme/fiList.pr">Following</a>
-<a href="/pickme/mPicks.pr">My Picks</a>
+<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
 <a href="/pickme/mPage.pr">My Page</a>
 
 
@@ -60,7 +60,7 @@
 				<% } else{ %>
 				<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 				<% }%> &nbsp;&nbsp;&nbsp;&nbsp;
-				<%= followerList.getUserId() %> 
+				<%= followerList.getUserId() %> &nbsp;&nbsp;&nbsp; <button value=<%= followerList.getUserNo() %> >follow</button>
 			</div>
 			<% } %>
 	</div>

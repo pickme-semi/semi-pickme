@@ -10,9 +10,6 @@
 <meta charset="UTF-8">
 <title>My Pick Page</title>
 
-
-<link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
-
 <style>
 		.attr {
 		height : 50px;
@@ -38,7 +35,7 @@
 
 <a href="/pickme/fList.pr">Follower</a>
 <a href="/pickme/fiList.pr">Following</a>
-<a href="/pickme/mPicks.pr">My Picks</a>
+<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
 <a href="/pickme/mPage.pr">My Page</a>
 
 </div>
@@ -50,21 +47,27 @@
 	<h5><%=followingCount %>명</h5>
 		<br /><br /><br />
 		
-		<div class="followerArea">
+			
 			<% for (User followingList : list) { %>
-			<div class="following-list" align="center">
+			<div class="followerArea container">
+			<div class="row">
+			<div class="following-list " align="center" style= "width : 500px"
+			onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followingList.getUserNo() %>">
 				<% if(user.getProfile() != null) {%>
 				  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
 				<% } else{ %>
 				<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 				<% }%>
-				<%= followingList.getUserId() %> &nbsp;&nbsp;&nbsp; <button value=<%= followingList.getUserNo() %> >follow</button>
-				
-			</div>
-			
+				</div>
+				<div class="col-sm" style= "width : 50%">
+				<%= followingList.getUserId() %> 
+				</div>
+				<div class="col-sm" style= "width : 50%">
+				<button value=<%= followingList.getUserNo() %> >follow</button>
+				</div>
 			<% } %>
 	</div>
-
+</div>
 </div>
 
 </section>
