@@ -26,8 +26,8 @@
 <% }%>
 <h2><%= users.getUserId() %></h2>
 <h5>한 줄 소개</h5>
-<button id ="fBtn" onclick="follow();">follow</button>
-<button id ="fBtn2" style="display:none" onclick="cancelFollow();">follow 취소</button>
+<button id="fbtn" value="<%=users.getUserNo() %>">follow</button>
+<button id="fbtn2"style="display:none" value="<%=user.getUserNo() %>">follow 취소</button>
 <br />
 <br />
 
@@ -68,23 +68,83 @@
 <%@ include file="../common/footer.jsp" %>
 
 <script>
-	$("button").click(function(){
+	// 팔로우 확인
+	$(function (){
 		
-		$('button').toggle();
-		
+		$.ajax({
+			url : '/pickme/fCheck.pr',
+			type : 'get',
+			data :  {
+				uno1 : $('#fbtn').val(),
+				uno2 : $('#fbtn2').val()
+			},success : function(data){
+				if(data > 0){
+					$("button").toggle()
+				}
+			}, error : function(request, status, error){
+				alert(request + "\n" 
+					  + status + "\n"
+					  + error)
+			}
+			
+		});
 	});
 	
-	function follow(){
-		
-	location.href='<%= request.getContextPath() %>/fiPage.pr?uno1=<%=users.getUserNo() %>&uno2=<%=user.getUserNo()%>'
+	//팔로우 버튼
+	$("#fbtn").click(function(){
 	
-	}
+	$.ajax({
+		url : '/pickme/fInsert.pr',
+		type : 'get',
+		data : {
+			uno1 : $('#fbtn').val(),
+			uno2 : $('#fbtn2').val()
+		},
+		success : function(data){
+			
+			if(data > 0){
+				
+			$("button").toggle()
+			}else{
+				alert("불러오기 실패")
+			}
+		},error : function(request, status, error){
+			alert(request + "\n"
+				  + status + "\n"
+				  + error);
+		}
+		
+		});
+	});
 	
-	function cancelFollow(){
+	// 팔로우 취소 버튼
+	$("#fbtn2").click(function(){
+	
+	$.ajax({
+		url : '/pickme/fDelete.pr',
+		type : 'get',
+		data : {
+			uno1 : $('#fbtn').val(),
+			uno2 : $('#fbtn2').val()
+		},
+		success : function(data){
+			
+			if(data > 0){
+				
+			$("button").toggle()
+			
+			}else{
+				alert("불러오기 실패!")
+			}
+			
+		},error : function(request, status, error){
+			alert(request + "\n"
+				  + status + "\n"
+				  + error);
+		}
 		
-		alert("ㅎㅇ");
-		
-	}
+	});
+});
 </script>
 </body>
 </html>

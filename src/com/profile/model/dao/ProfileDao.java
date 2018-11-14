@@ -98,6 +98,7 @@ public class ProfileDao {
 			while(rset.next()){
 				User u = new User();
 				
+				u.setUserNo(rset.getInt("NO"));
 				u.setUserId(rset.getString("ID"));
 				u.setProfile(rset.getString("PROFILE"));
 				
@@ -468,6 +469,58 @@ public class ProfileDao {
 		}
 		
 		return myPick;
+	}
+
+	public int followDelete(Connection con, int userNo1, int userNo2) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("followDelete");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, userNo2);
+			pstmt.setInt(2, userNo1);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int followCheck(Connection con, int userNo1, int userNo2) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("followCheck");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, userNo2);
+			pstmt.setInt(2, userNo1);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

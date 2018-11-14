@@ -175,4 +175,26 @@ public class ProfileService {
 		
 		return cResult;
 	}
+
+	public int followDelete(int userNo1, int userNo2) {
+		Connection con = getConnection();
+		
+		int result = pDao.followDelete(con, userNo1, userNo2);
+		
+		if(result > 0 ) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
+
+	public int followCheck(int userNo1, int userNo2) {
+		Connection con = getConnection();
+		
+		int result = pDao.followCheck(con, userNo1, userNo2);
+		
+		if(result > 0 ) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
 }
