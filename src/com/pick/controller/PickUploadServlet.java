@@ -51,7 +51,7 @@ public class PickUploadServlet extends HttpServlet {
 			
 			System.out.println("root 경로 확인 : " + root);
 					
-			String savePath = root + "\\pickUploadFiles\\";	
+			String savePath = root + "\\PickUploadFiles\\";	
 			System.out.println("저장 경로 : " + savePath);
 			
 			MultipartRequest mrequest = 
@@ -69,6 +69,7 @@ public class PickUploadServlet extends HttpServlet {
 			Enumeration<String> files
 			 = mrequest.getFileNames();
 			
+			
 			while(files.hasMoreElements()){
 				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.				
 				String name = files.nextElement();				
@@ -77,7 +78,8 @@ public class PickUploadServlet extends HttpServlet {
 				originFiles.add(mrequest.getOriginalFileName(name));				
 			}		
 		
-		PickMe pm = new PickMe();				
+		PickMe pm = new PickMe();
+				
 		pm.setTitle(mrequest.getParameter("title")); 
 		pm.setSelect_1(mrequest.getFilesystemName("pick1"));
 		pm.setSelect_2(mrequest.getFilesystemName("pick2")); // 파일 명 DB 저장.			
@@ -98,8 +100,7 @@ public class PickUploadServlet extends HttpServlet {
 		}
 		
 		PickService ps = new PickService();		
-		int result = ps.insertPick(pm/*, list*/); // pick DB 저장.
-		
+		int result = ps.insertPick(pm/*, list*/); // pick DB 저장.		
 		
 		String category = String.join(",", mrequest.getParameterValues("interest"));
 		

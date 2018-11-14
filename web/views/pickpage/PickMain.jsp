@@ -157,8 +157,8 @@ for(int i =0; i<plist.size(); i++){
       	<p><%= gg %></p>
       		<p id="userNo1" value="<%= u.getUserName() %>"><%= u.getUserName() %></p>
     	  <div class="" align="center" > <!--픽 이미지 1 -->	<!--픽 이미지 2 -->	
-			  <img id="pick1" src="<%= request.getContextPath() %>/resources/pickUploadFiles/<%=pData.getSelect_1() %>" />
-		  	<img id="pick2" src="<%= request.getContextPath() %>/resources/pickUploadFiles/<%=pData.getSelect_2() %>" />
+			  <img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" />
+		  	<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" />
 		  </div>
 	  
       </div>
@@ -206,29 +206,28 @@ for(int i =0; i<plist.size(); i++){
 
 
   <div class="row" >
-    <div class="column">  
-           <div class="row" >
    <% for(int i =0; i<plist.size(); i++){
-    pData = plist.get(i);%>
-      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/pickUploadFiles/<%=pData.getSelect_1() %>" width="50%" height="16.66%" onclick="currentSlide(<%=i+1 %>)" alt="">
-      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/pickUploadFiles/<%=pData.getSelect_2() %>" width="50%" height="16.66%" onclick="currentSlide(<%=i+1 %>)">
+    pData = plist.get(i);%> 
+      <div class="column">   
+           <div class="row" >   
+      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)" alt="">
+      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)">
            </div>
         </div>
+    <% } %>	    
    </div>  
-
-<% } %>	
-	
 	 <!-- Image text -->
-  <div class="caption-container" align="center">
-   
-    <% 
+	 <% 
 for(int i =0; i<plist.size(); i++){
     pData = plist.get(i);
 %>
+  <div class="caption-container" align="center">
+   
     <p><%= pData.getContent() %></p>
+ 
   </div>
-	
-<% } %>
+  <% } %> 	
+
  <!-- Next and previous buttons 이걸 수정해야한다-->  
  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>

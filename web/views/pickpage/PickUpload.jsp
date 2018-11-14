@@ -14,7 +14,7 @@
 <title>픽 업로드 페이지</title>
 <!-- select2 소스  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
- <!-- <link rel="stylesheet" type="text/css"	href="../../resources/css/pickupload.css" /> 
+ <!-- <link rel="stylesheet" type="text/css" href="../../resources/css/pickupload.css" /> 
  사용 안하는 CSS/ 삭제해도 될듯. -->
  
 <!--  제이쿼리 파일 -->
@@ -28,12 +28,11 @@
 <!-- 업로드 이미지 미리보기 구현. -->
 <script type="text/javascript">
 		<!-- 첫번째 사진 미리보기 -->
-        $(function() {
+      /*   $(function() {
             $("#up1").on('change', function(){
                 readURL(this);
             });
         });
-
         function readURL(input) {
             if (input.files && input.files[0]) {
             var reader = new FileReader();	
@@ -42,15 +41,13 @@
                 }
               reader.readAsDataURL(input.files[0]);
             }
-        }
-        
+        }        
         <!-- 두번째 사진 미리보기  -->
         $(function() {
             $("#up2").on('change', function(){
                 readURL2(this);
             });
         });
-
         function readURL2(input) {
             if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -58,10 +55,9 @@
             reader.onload = function (e) {
                     $('#pick2').attr('src', e.target.result);
                 }
-
               reader.readAsDataURL(input.files[0]);
             }
-        }
+        } */
        /*  $(document).ready(function() {            
             //라디오 버튼 변경시 이벤트
             $("input[name='category']:radio").change(function () {
@@ -90,7 +86,29 @@
                        // 음식 카테고리 show
                     }                                     
                 });
-        }); */
+        }); */ 
+        
+     /*    $('#uploadpick').submit(function(event){
+        	
+        	if(!fileCheck()) event.preventDefault();
+        	
+        });
+         */
+     function fileCheck(obj){
+        	// var file = document.uploadpick.pick.value;
+        	
+        	var file = $(obj).val();
+        	var fileExt = file.substring(file.lastIndexOf('.')+1);
+        	
+        	if(fileExt.toLowerCase() == "jpg" || fileExt.toLowerCase() ==  "png"
+        		|| fileExt.toLowerCase()== "jpeg" || fileExt.toLowerCase()== "gif"){
+        		return true;
+        	}else {
+        		alert("jpg,png,jpeg,gif 파일만 등록 가능합니다.");
+        		var file = $(obj).val("");
+        		return false;
+        	}
+     }
       
     </script>
 
@@ -116,19 +134,19 @@
 
 	<%@ include file="../common/header.jsp"%>
 	
-	<% if(session.getAttribute("user") != null) {	 %>
+	<% if(session.getAttribute("user") != null) { %>
 	<div class="outer" align="center" >
 		<br>
 		<h2 align="center">Pick 올리기</h2>
 		<div class="col-md-8 col-xs-12">
-			<form id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
+			<form name = "uploadpick" id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
 			method="post" encType="multipart/form-data">
 			
 				<table>
 					<tr>
 						<td>제목</td>
 						<td colspan="3"><input type="text"
-							style="width: 100%; height: 100%;" name="title"></td>
+							style="width: 100%; height: 100%;" name="title" required="required"></td>
 					</tr>
 					<tr>
 						<td>작성자 </td>
@@ -140,18 +158,23 @@
 					</tr>
 					<tr>
 						<td>첨부파일</td>
-						<td colspan="3"><input type="file" name="pick1" id="up1" /> <img
-							id="pick1" src="#" alt="" /></td>
+						<td colspan="3"><input type="file" name="pick" id="up1" required="required"
+						onchange="fileCheck(this);" /> 
+						
+						<img id="pick1" src="#" alt=""/></td>
 					</tr>
 					<tr>
 						<td>첨부파일2</td>
-						<td colspan="3"><input type="file" name="pick2" id="up2" /> <img
-							id="pick2" src="#" alt="" /></td>
+						<td colspan="3"><input type="file" name="pick" id="up2"
+						onchange="fileCheck(this);"  required="required"/> 
+						
+						<img id="pick2" src="#" alt="" /></td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="3"><textarea name="content" style= "width: 100%; height: 100%;">
-						</textarea></td>
+						<td colspan="3">
+						<textarea name="content" style= "width: 100%; height: 100%;" required="required"></textarea>
+						</td>
 					</tr>
 				</table>
 				<br>
@@ -188,7 +211,8 @@
 				</select>
 				</span> -->
 				<br>
-				<label>마감일 설정 </label><input type="date" name="ddate">
+				<label>마감일 설정 </label>
+				<input type="date" name="ddate" value="" required="required">
 				<br>
 		<br><br>		
 		<table>
@@ -196,7 +220,7 @@
 		<td > 카테고리 <br /></td>
 		<td style="width : 75%">		
 		<select class="interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
-		style= "width: 75%" > 
+		style= "width: 75%" required="required" > 
 		<% for(int i=0; i< category.size(); i++) {%>
   			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
   		<% } %> 
