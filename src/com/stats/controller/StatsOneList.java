@@ -1,11 +1,16 @@
 package com.stats.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.pick.model.vo.PickResult;
+import com.stats.model.service.StatsService;
 
 /**
  * Servlet implementation class StatsOneList
@@ -26,7 +31,20 @@ public class StatsOneList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int pickId = Integer.parseInt(request.getParameter("id"));
+		
+		PickResult pr = new PickResult();
+		
+		pr.setId(pickId);
+		
+		StatsService ss = new StatsService();
+		
+		ArrayList<Integer> ageList = new ArrayList<Integer>();
+		
+		ageList = ss.countAge(pr);
+		
+		
+		
 		response.sendRedirect("views/stats/statsOneList.jsp");
 	}
 

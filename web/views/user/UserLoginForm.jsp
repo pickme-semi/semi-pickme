@@ -10,10 +10,10 @@
 	.outer{
 		width : auto;
 		height : auto;
-		/* background : mistyrose; */
 		margin-left:auto;
 		margin-right:auto;
-		margin-top:50px;
+		margin-top:100px;
+		margin-bottom:100px;
 	
 	}
 	
@@ -33,7 +33,7 @@
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
-
+<div class="col-xs-12 col-md-8 pm-section">
 <div class = "outer">
 <br>
 <h2 align = "center"> 로그인 </h2>
@@ -44,7 +44,7 @@
 	<div align = "center">
 	<div class = "form_field">
 		<div class = "form_input">
-			<input name="userId" class="form-control" id="userId" type="text" placeholder="아이디" >
+			<input name="userId"  class="form-control" id="userId" type="text" placeholder="아이디" >
 		</div>
 		<div>
 			<span class="error_next_box" id="idMsg" style="display:none" role="alert"></span>
@@ -155,7 +155,7 @@
 	}
 </script>
 
-
+</div>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

@@ -39,7 +39,7 @@
 
 <body>
 <%@ include file="../common/header.jsp" %>
-
+<section class="col-xs-12 col-md-8">
 <div class = "outer">
 <br>
 <h2 align = "center"> 회원가입 </h2>
@@ -67,7 +67,7 @@
 				<input type="password" class="form-control" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20">			
 			</div>
 			<div>
-				<span class="error_next_box" id="pwd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+				<span class="error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
 			</div>
 		</div>
 		<br />
@@ -79,7 +79,7 @@
 				<input type="password" class="form-control" id="userPwd2" name="userPass2" required="required" aria-describedby="pswd1Msg" maxlength="20">			
 			</div>
 			<div>
-				<span class="error_next_box" id="pwd2Msg" style="display:none" role="alert"></span>
+				<span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span>
 			</div>
 		</div>
 		<br />
@@ -242,6 +242,7 @@
 			var pwd2 = $("#userPwd2");
 			var oMsg = $("#pswd2Msg");
 			
+			
 			if (pwd2.val() == "") {
 	            showErrorMsg(oMsg,"필수 정보입니다.","red");
 	            pw2Flag = false;
@@ -313,7 +314,6 @@
 				type : "post",
 				data : { userEmail : $('#userEmail').val() },
 				success : function(data){
-					console.log(data);
 					if(data == 'no'){
 						showErrorMsg(oMsg,"이미 사용하고있는 이메일주소 입니다.","red");
 						$('#userId').select();
@@ -393,6 +393,7 @@
 	
 
 </script>
+</section>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

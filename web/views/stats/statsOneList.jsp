@@ -23,8 +23,13 @@
 
 	<div class="pm-section col-xs-12 col-md-8">
 		<h1>pick1 세부 통계</h1>
-		
+		<div class="chart">
+		<h5 align="center">연령별 pick</h5>
 		<div id="chart"></div>
+		<h5 align="center">성별 pick</h5>
+		<div id="PieChart"></div>
+		
+		</div>
 		
 		
 	</div>
@@ -32,16 +37,48 @@
 	<%@ include file="../common/footer.jsp" %>
 	
 	<script>
-		var chart = bb.generate({
-		    bindto: "#chart",
+		var chartAge = bb.generate({
+		    
 		    data: {
-		        type: "bar",
+		    	bindto: "#chart",
+		    	type:"bar",
 		        columns: [
-		            ["pick1", 30, 200, 100, 170, 150, 250],
-		            ["pick2", 130, 100, 140, 35, 110, 50]
+		            ["pick1", 30, 200, 100, 170, 150],
+		            ["pick2", 130, 100, 140, 35, 110]
 		        ]
+		},
+		        
+		    axis:{
+		    	x : {
+		    		type : "category",
+		    		categories:[
+		    			"10대↓","20대","30대","40대","50대↑"]
+		    	}
 		    }
+		    
+		    
 		});
+		
+		var chartGender = bb.generate({
+			  data: {
+			    columns: [
+				["data1", 50],
+				["data2", 120]
+			    ],
+			    type: "pie",
+			    onclick: function(d, i) {
+				console.log("onclick", d, i);
+			   },
+			    onover: function(d, i) {
+				console.log("onover", d, i);
+			   },
+			    onout: function(d, i) {
+				console.log("onout", d, i);
+			   }
+			  },
+			  bindto: "#PieChart"
+			});
+
 	</script>
 </body>
 </html>
