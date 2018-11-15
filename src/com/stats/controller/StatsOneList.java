@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.SessionCheck;
+
 /**
  * Servlet implementation class StatsOneList
  */
@@ -26,8 +28,10 @@ public class StatsOneList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.sendRedirect("views/stats/statsOneList.jsp");
+		
+		// 로그인 유저만 접근 가능
+		if( !SessionCheck.login(request))  response.sendRedirect("views/common/NotLogin.jsp");
+		else response.sendRedirect("views/stats/statsOneList.jsp");
 	}
 
 	/**
