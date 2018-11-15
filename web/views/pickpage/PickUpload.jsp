@@ -109,6 +109,10 @@
         		return false;
         	}
      }
+                 
+     
+   
+     
       
     </script>
 
@@ -124,6 +128,10 @@
 	width: 200px;
 	height: 200px;
 }
+
+.pickform {
+	background : aliceblue;
+}
 	
 </style>
 
@@ -137,8 +145,9 @@
 	<% if(session.getAttribute("user") != null) { %>
 	<div class="outer" align="center" >
 		<br>
+		
+		<div class="pickform col-md-8 col-xs-12">
 		<h2 align="center">Pick 올리기</h2>
-		<div class="col-md-8 col-xs-12">
 			<form name = "uploadpick" id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
 			method="post" encType="multipart/form-data">
 			
@@ -161,14 +170,14 @@
 						<td colspan="3"><input type="file" name="pick1" id="up1" required="required"
 						onchange="fileCheck(this);" /> 
 						
-						<img id="pick1" src="#" alt=""/></td>
+						<!-- <img id="pick1" src="#" alt=""/> --></td>
 					</tr>
 					<tr>
 						<td>첨부파일2</td>
 						<td colspan="3"><input type="file" name="pick2" id="up2"
 						onchange="fileCheck(this);"  required="required"/> 
 						
-						<img id="pick2" src="#" alt="" /></td>
+						<!-- <img id="pick2" src="#" alt="" /> --></td>
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -212,7 +221,7 @@
 				</span> -->
 				<br>
 				<label>마감일 설정 </label>
-				<input type="date" name="ddate" value="" required="required">
+				<input type="date" id="dday" name="ddate" required="required">
 				<br>
 		<br><br>		
 		<table>
@@ -220,7 +229,7 @@
 		<td > 카테고리 <br /></td>
 		<td style="width : 75%">		
 		<select class="interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
-		style= "width: 75%" required="required" > 
+		style= "width: 75%" > 
 		<% for(int i=0; i< category.size(); i++) {%>
   			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
   		<% } %> 
@@ -255,6 +264,8 @@
 
 		</div>
 	</div>
+	
+	
 	<% } else {
 		request.setAttribute("msg", "회원만 열람 가능합니다.");
 		request.getRequestDispatcher("../common/errorPage.jsp").forward(request, response);
@@ -285,7 +296,31 @@
 		});
 		
 	});
-	/* select2 값 가져오기 위한 메소드 */
+	
+	var today = new Date();
+	
+	$(function(){
+	   	 document.getElementById('dday').valueAsDate = 
+	   		 new Date(Date.parse(today) + 30 * 1000 * 60 * 60 * 24);
+	   	 // 마감일 기본값 현재 날짜 기준 1달 뒤로 잡는 스크립트.
+	   //http://blueskai.tistory.com/100		   	
+	   
+	var todayFormat = today.getFullYear() + '-' + leadZero(today.getMonth() + 1) + '-' + leadZero(today.getDate()); 
+	 
+	console.log(todayFormat); 	 
+	document.getElementById('dday').setAttribute('min', todayFormat); 
+	 
+	function leadZero(number) { 	 
+	    return (number < 10 ? '0' : '') + number; 
+	}
+	// 날짜 선택시 오늘 날짜 이전은 선택 불가하게 설정하는 스크립트.
+	
+	});
+	
+	
+
+
+	
 	
 	
 	

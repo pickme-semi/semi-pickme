@@ -102,28 +102,22 @@ public class PickUploadServlet extends HttpServlet {
 		PickService ps = new PickService();		
 		int result = ps.insertPick(pm/*, list*/); // pick DB 저장.		
 		
-		String category = String.join(",", mrequest.getParameterValues("interest"));
 		
-		// 게시판 최신 게시물의 ID를 가져옴
-		int boardNum = ps.getPickCount(); 
+		if(mrequest.getParameter("interest") != null){ // 카테고리 값이 null 이 아닐 경우에만
 		
-		if(boardNum == -1){
+		String category = String.join(",", mrequest.getParameterValues("interest"));		
+		System.out.println("category id : " + category); 
+						
+			int boardNum = ps.getPickCount();  // pick의 최신 게시물의 ID를 가져옴		
+			if(boardNum == -1){
 			System.out.println("게시물의 ID를 받아오지 못했습니다.");
+			}		
+			String[] at = category.split(",");
+			for(int i=0; i < at.length; i++){
+				ps.insertPCategory(boardNum, Integer.parseInt(at[i])); // pick에 설정된 카테고리 DB저장.
+			}
 		}
 		
-		String[] at = category.split(",");
-		for(int i=0; i < at.length; i++)
-		{
-			ps.insertPCategory(boardNum, Integer.parseInt(at[i])); // pick에 설정된 카테고리 DB저장.
-		}
-		
-		//int category1 = 
-		//		Integer.parseInt(String.join(", ", mrequest.getParameterValues("interest")));
-		//		ArrayList<PickCategory> list = new ArrayList<PickCategory>();
-		//		System.out.println(mrequest.getParameterValues("interest"));
-		//		System.out.println("pm :" +pm);
-		//		PickCategory pc = new PickCategory();
-		//		pc.setPickid(pm.getId());
 		if(result > 0 ) {			
 			response.sendRedirect("pickmain.pm");
 					
