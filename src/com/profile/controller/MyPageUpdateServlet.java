@@ -64,6 +64,7 @@ public class MyPageUpdateServlet extends HttpServlet {
 		
 		
 		String password = mrequest.getParameter("userPass");
+		// 수정해야할 것
 		password = EncryptWrapper.getSHA512(password);
 		String email = mrequest.getParameter("userEmail");
 		String gender = mrequest.getParameter("gender");

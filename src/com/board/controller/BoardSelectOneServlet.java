@@ -1,29 +1,26 @@
-package com.stats.controller;
+package com.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pick.model.vo.PickResult;
-import com.stats.model.service.StatsService;
-import com.common.SessionCheck;
+import com.board.model.service.BoardService;
+import com.board.model.vo.Board;
 
 /**
- * Servlet implementation class StatsOneList
+ * Servlet implementation class BoardDetailServlet
  */
-@WebServlet("/statsOneList.st")
-public class StatsOneList extends HttpServlet {
+@WebServlet("/selectOne.bo")
+public class BoardSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StatsOneList() {
+    public BoardSelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +29,24 @@ public class StatsOneList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
-    		// 로그인 유저만 접근 가능
-		if( !SessionCheck.login(request))  response.sendRedirect("views/common/NotLogin.jsp");
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		System.out.println(id);
+		
+		Board b = new BoardService().selectOne(id);
+		
+		String page = "";
+		
+		if(b != null){
+			page = "views/board/boardDetail.jsp";
+			request.setAttribute("board", b);
+		} else {
+			page = "views/commcon/errorPage.jsp";
+			
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 
-    int pickId = Integer.parseInt(request.getParameter("id"));
-		
-		PickResult pr = new PickResult();
-		
-		pr.setId(pickId);
-		
-		StatsService ss = new StatsService();
-		
-		ArrayList<Integer> ageList = new ArrayList<Integer>();
-		
-		ageList = ss.countAge(pr);
-		
-		response.sendRedirect("views/stats/statsOneList.jsp");
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

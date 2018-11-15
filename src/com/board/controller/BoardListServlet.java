@@ -40,10 +40,22 @@ public class BoardListServlet extends HttpServlet {
 		ArrayList<Board> boardList = null;
 		ArrayList<Board> commonBoardList = null;
 		
+		ArrayList<BoardCategory> cateListQ = null;
+		ArrayList<Board> boardListQ = null;
+		
 		if(type.equals("report")){
 			cateList = bs.getBoardCategory("report");
 			boardList = bs.getBoardList("report");
 			session.setAttribute("bType", "report");
+			
+		
+		}else if(type.equals("admin")){
+			cateList = bs.getBoardCategory("report");
+			boardList = bs.getBoardList("report");
+			cateListQ = bs.getBoardCategory("qna");
+			boardListQ = bs.getBoardList("qna");
+			session.setAttribute("bType", "admin");
+			
 		}else{
 			cateList = bs.getBoardCategory("qna");
 			boardList = bs.getBoardList("qna");
@@ -57,12 +69,20 @@ public class BoardListServlet extends HttpServlet {
 		
 		session.setAttribute("cateList", cateList);
 		session.setAttribute("boardList", boardList);
+		session.setAttribute("cateListQ", cateListQ);
+		session.setAttribute("boardListQ", boardListQ);
+		
+		
 		
 		System.out.println(cateList);
 		System.out.println(boardList);
+		System.out.println(cateListQ);
+		System.out.println(boardListQ);
 		
-		
-		request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response);
+		if(type.equals("admin")){
+			request.getRequestDispatcher("views/board/adminList.jsp").forward(request, response);
+		}else{
+		request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response); }
 		
 	}
 

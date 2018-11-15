@@ -9,15 +9,51 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 <meta charset="UTF-8">
 <title>My Pick Page</title>
 
-
-<link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
-
 <style>
-	.attr {
-		height : 50px;
-		position : relative;
-		width : 50px;
-			}
+	.parent {
+		margin-left : auto;
+		margin-right : auto;
+	}
+	.child1 {
+		z-index : 5;
+		position: relative;
+		border : 1px solid black;
+		width: 200px;
+		height : 200px;
+		margin: auto; 
+	}
+	.child2 {
+		z-index : 1;
+		position: relative;
+		border : 1px solid black;
+		width: 200px;
+		height : 200px;
+		margin: auto; 
+	}
+	.caption-container{
+		margin-left : auto;
+		margin-right : auto;
+		border : 1px solid red;
+		position: absoulte;
+		width : auto;
+		height : auto;
+		word-break:break-all;
+	}
+	
+	.or {
+	z-index : 3;
+	background-color: rgb(1, 5, 0);
+	border-radius: 50%;
+	color: #b3b3b3;
+	font-size: 1.3em;
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	top: calc(50% - 25px);
+	vertical-align: middle;
+	width: 50px
+}
 </style>
 </head>
 <body>
@@ -39,50 +75,35 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 <a href="/pickme/fiList.pr">Following</a>
 <a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
 <a href="/pickme/mPage.pr">My Page</a>
-
-
 </div>
 
+<hr />
 
 
 
-<section class="page-section page-section--vote">
+<section class="col-xs-12 col-md-12">
+ <% for (int i=0; i<myPick.size(); i++) {%>
+	
+	<div class="parent" align=center>
+		<img class="child1" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_1() %>" />
+		<span class="or">or</span>
+		<img class="child2" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_2() %>" />
+    <div class="caption-container parent col-sm-5 col-md-4" align=center >
+    <dl>
+    	<dt> <%= myPick.get(i).getTitle() %></dt>
+    	<dd style ="vertical-align : middle;"> <%= myPick.get(i).getContent() %></dd>
+    </dl>
+ 	</div>
+  </div>
+
+	
+<br />
+<% } %>
 
 
-  <div class="page-section__content">
-    <header class="page-section__header">
-      <h2 class="page-section__header__title page-section__header__title--vote">
-        What's Your Pick?</h2>
-     </header>
-       
-        <% for (int i=0; i<myPick.size(); i++) {%>
-        <div class="live-swell">
-          <div class="live-swell__pics">
-            <div id="live-swell-img-a" class="live-swell__pics__pic live-swell__pics__pic--a">
 
-            </div>
-            <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
-              
-            </div>
-            
-            <div class="live-swell__results">
-              <div id="live-swell-result-a" class="live-swell__results__result live-swell__results__result--a option option-a">
-              <img src="/pickme/resources/profileImage/"<%=myPick.get(i).getSelect_1() %>></img>
-              </div>
-              <div id="live-swell-result-b" class="live-swell__results__result live-swell__results__result--b option option-b">
-                57%</div>
-              </div>
-              <div class="live-swell__pics__or">
-                  or</div>
-           </div>
-           
-         </div>
-         <% } %>
-   </div>
+
 </section>
-
-
-
 
 
 <%@ include file="../common/footer.jsp" %>

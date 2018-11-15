@@ -50,4 +50,12 @@ public class BoardService {
 		return commonBoardList;
 	}
 
+	public Board selectOne(int id) {
+		Connection con = getConnection();
+		Board b = bDao.selectOne(con, id);
+		close(con);
+		
+		return b;
+	}
+
 }

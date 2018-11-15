@@ -211,4 +211,38 @@ public class BoardDao {
 		return commonBoardList;
 	}
 
+	public Board selectOne(Connection con, int id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board b = null;
+		String sql = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				b = new Board();
+				
+				b.setId(rset.getInt("ID"));
+				b.setCategoryId(rset.getInt("CATEGORY_ID"));
+				b.setContent(rset.getString("CONTENT"));
+				b.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				b.setTitle(rset.getString("TITLE"));
+				
+				
+			}
+					
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return b;
+	}
+
 }
