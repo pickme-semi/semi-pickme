@@ -13,138 +13,141 @@
 
 </head>
 <body>
-
-<%@ include file="../common/header.jsp" %>
-
-
-<div class="col-md-12 text-center user">
- 
-<% if(users.getProfile() != null) {%>
-  <img src="/pickme/resources/profileImage/<%= users.getProfile() %>" alt="Me" class="rounded-circle attr">
-<% } else{ %>
-	<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
-<% }%>
-<h2><%= users.getUserId() %></h2>
-<h5>한 줄 소개</h5>
-<button id="fbtn" value="<%=users.getUserNo() %>">follow</button>
-<button id="fbtn2"style="display:none" value="<%=user.getUserNo() %>">follow 취소</button>
-<br />
-<br />
-
-</div>
-
-<section class="page-section page-section--vote">
-
-
-  <div class="page-section__content">
-    <header class="page-section__header">
-      <h2 class="page-section__header__title page-section__header__title--vote">
-        What's Your Pick?</h2>
-     </header>
-       
-        
-        <div class="live-swell">
-          <div class="live-swell__pics">
-            <div id="live-swell-img-a" class="live-swell__pics__pic live-swell__pics__pic--a">
-
-            </div>
-            <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
-              
-            </div>
-            <div class="live-swell__results">
-              <div id="live-swell-result-a" class="live-swell__results__result live-swell__results__result--a option option-a">
-              </div>
-              <div id="live-swell-result-b" class="live-swell__results__result live-swell__results__result--b option option-b">
-                57%</div>
-              </div>
-              <div class="live-swell__pics__or">
-                  or</div>
-           </div>
-         </div>
-   </div>
-</section>
-
-
-<%@ include file="../common/footer.jsp" %>
-
-<script>
-	// 팔로우 확인
-	$(function (){
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else { %>
+	<%@ include file="../common/header.jsp" %>
+	
+	<div class="col-md-12 text-center user">
+	 
+	<% if(users.getProfile() != null) {%>
+	  <img src="/pickme/resources/profileImage/<%= users.getProfile() %>" alt="Me" class="rounded-circle attr">
+	<% } else{ %>
+		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
+	<% }%>
+	<h2><%= users.getUserId() %></h2>
+	<h5>한 줄 소개</h5>
+	<button id="fbtn" value="<%=users.getUserNo() %>">follow</button>
+	<button id="fbtn2"style="display:none" value="<%=user.getUserNo() %>">follow 취소</button>
+	<br />
+	<br />
+	
+	</div>
+	
+	<section class="page-section page-section--vote">
+	
+	
+	  <div class="page-section__content">
+	    <header class="page-section__header">
+	      <h2 class="page-section__header__title page-section__header__title--vote">
+	        What's Your Pick?</h2>
+	     </header>
+	       
+	        
+	        <div class="live-swell">
+	          <div class="live-swell__pics">
+	            <div id="live-swell-img-a" class="live-swell__pics__pic live-swell__pics__pic--a">
+	
+	            </div>
+	            <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
+	              
+	            </div>
+	            <div class="live-swell__results">
+	              <div id="live-swell-result-a" class="live-swell__results__result live-swell__results__result--a option option-a">
+	              </div>
+	              <div id="live-swell-result-b" class="live-swell__results__result live-swell__results__result--b option option-b">
+	                57%</div>
+	              </div>
+	              <div class="live-swell__pics__or">
+	                  or</div>
+	           </div>
+	         </div>
+	   </div>
+	</section>
+	
+	
+	<%@ include file="../common/footer.jsp" %>
+	
+	<script>
+		// 팔로우 확인
+		$(function (){
+			
+			$.ajax({
+				url : '/pickme/fCheck.pr',
+				type : 'get',
+				data :  {
+					uno1 : $('#fbtn').val(),
+					uno2 : $('#fbtn2').val()
+				},success : function(data){
+					if(data > 0){
+						$("button").toggle()
+					}
+				}, error : function(request, status, error){
+					alert(request + "\n" 
+						  + status + "\n"
+						  + error)
+				}
+				
+			});
+		});
+		
+		//팔로우 버튼
+		$("#fbtn").click(function(){
 		
 		$.ajax({
-			url : '/pickme/fCheck.pr',
+			url : '/pickme/fInsert.pr',
 			type : 'get',
-			data :  {
+			data : {
 				uno1 : $('#fbtn').val(),
 				uno2 : $('#fbtn2').val()
-			},success : function(data){
+			},
+			success : function(data){
+				
 				if(data > 0){
-					$("button").toggle()
+					
+				$("button").toggle()
+				}else{
+					alert("불러오기 실패")
 				}
-			}, error : function(request, status, error){
-				alert(request + "\n" 
+			},error : function(request, status, error){
+				alert(request + "\n"
 					  + status + "\n"
-					  + error)
+					  + error);
+			}
+			
+			});
+		});
+		
+		// 팔로우 취소 버튼
+		$("#fbtn2").click(function(){
+		
+		$.ajax({
+			url : '/pickme/fDelete.pr',
+			type : 'get',
+			data : {
+				uno1 : $('#fbtn').val(),
+				uno2 : $('#fbtn2').val()
+			},
+			success : function(data){
+				
+				if(data > 0){
+					
+				$("button").toggle()
+				
+				}else{
+					alert("불러오기 실패!")
+				}
+				
+			},error : function(request, status, error){
+				alert(request + "\n"
+					  + status + "\n"
+					  + error);
 			}
 			
 		});
 	});
-	
-	//팔로우 버튼
-	$("#fbtn").click(function(){
-	
-	$.ajax({
-		url : '/pickme/fInsert.pr',
-		type : 'get',
-		data : {
-			uno1 : $('#fbtn').val(),
-			uno2 : $('#fbtn2').val()
-		},
-		success : function(data){
-			
-			if(data > 0){
-				
-			$("button").toggle()
-			}else{
-				alert("불러오기 실패")
-			}
-		},error : function(request, status, error){
-			alert(request + "\n"
-				  + status + "\n"
-				  + error);
-		}
-		
-		});
-	});
-	
-	// 팔로우 취소 버튼
-	$("#fbtn2").click(function(){
-	
-	$.ajax({
-		url : '/pickme/fDelete.pr',
-		type : 'get',
-		data : {
-			uno1 : $('#fbtn').val(),
-			uno2 : $('#fbtn2').val()
-		},
-		success : function(data){
-			
-			if(data > 0){
-				
-			$("button").toggle()
-			
-			}else{
-				alert("불러오기 실패!")
-			}
-			
-		},error : function(request, status, error){
-			alert(request + "\n"
-				  + status + "\n"
-				  + error);
-		}
-		
-	});
-});
-</script>
+	</script>
+<% } %>
 </body>
 </html>

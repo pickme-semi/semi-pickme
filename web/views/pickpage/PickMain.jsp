@@ -134,200 +134,206 @@ section{
 <!-- 업로드 이미지 미리보기 구현. -->
 
 <body>
-<%@ include file="../common/header.jsp" %>
-				
-<section class="col-xs-12 col-md-8">
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else{ %>
+	<%@ include file="../common/header.jsp" %>
+					
+	<section class="col-xs-12 col-md-8">
+		
+	<div class="PickPage">
 	
-<div class="PickPage">
-
-<% 
-PickMe pData = new PickMe();
-if(plist != null){
-for(int i =0; i<plist.size(); i++){
-    pData = plist.get(i);
- 	int gg = pData.getId();
-%>
-
-  <!-- Full-width images with number text -->
-  <div class="mySlides">              
-    <div class="numbertext"><%= i+1 %> / 6</div>
-      <div class="" >      
-      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
-      	<input type="hidden" id="resultPickId" class="current" value="<%= gg %>"/> 
-      	<p><%= gg %></p>
-      		<p id="userNo1" value="<%= u.getUserName() %>"><%= u.getUserName() %></p>
-    	  <div class="" align="center" > <!--픽 이미지 1 -->	<!--픽 이미지 2 -->	
-			  <img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" />
-		  	<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" />
-		  </div>
-	  
-      </div>
-		<!--  	
-      <img src="/pickme/resources/images/img_sample1.jpg" style="width:50%">
-      <img src="/pickme/resources/images/img_sample2.jpg" style="width:50%">
-      -->
-    </div>
-  </div>
-<% } %>
- 
- <script>
- 		
- 	var countLeft = 2;
-	var hoji = "dddd";
-
- $("#pick1").click(function(){
-	 console.log(countLeft);
-	    alert("The paragraph was clicked.");
-	});
- $("#pick1").click(function(){
-		$.ajax({
-			url : "/pickme/pickresult.pr",
-			type : "get",
-			data : {
-				selectUserNo : $('#selectUserNo').val(),
-				resultPickId : $('#resultPickId').val(),
-				selectResult : countLeft,
-				hoji : hoji
-			}, success : function(data){
-				console.log("데이터 전달 성공!");
-			}, error :  function(request, status, error) {
-				console.log("실패!!!");
-				console.log(request);
-				console.log(status);
-				console.log(error);
-			}, complete : function(){
-				console.log("무조건 실행하는 함수");
-			}
+	<% 
+	PickMe pData = new PickMe();
+	if(plist != null){
+	for(int i =0; i<plist.size(); i++){
+	    pData = plist.get(i);
+	 	int gg = pData.getId();
+	%>
+	
+	  <!-- Full-width images with number text -->
+	  <div class="mySlides">              
+	    <div class="numbertext"><%= i+1 %> / 6</div>
+	      <div class="" >      
+	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
+	      	<input type="hidden" id="resultPickId" class="current" value="<%= gg %>"/> 
+	      	<p><%= gg %></p>
+	      		<p id="userNo1" value="<%= u.getUserName() %>"><%= u.getUserName() %></p>
+	    	  <div class="" align="center" > <!--픽 이미지 1 -->	<!--픽 이미지 2 -->	
+				  <img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" />
+			  	<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" />
+			  </div>
+		  
+	      </div>
+			<!--  	
+	      <img src="/pickme/resources/images/img_sample1.jpg" style="width:50%">
+	      <img src="/pickme/resources/images/img_sample2.jpg" style="width:50%">
+	      -->
+	    </div>
+	  </div>
+	<% } %>
+	 
+	 <script>
+	 		
+	 	var countLeft = 2;
+		var hoji = "dddd";
+	
+	 $("#pick1").click(function(){
+		 console.log(countLeft);
+		    alert("The paragraph was clicked.");
 		});
-	});
- 
- </script>
-  <!-- Thumbnail images -->
-
-
-  <div class="row" >
-   <% for(int i =0; i<plist.size(); i++){
-    pData = plist.get(i);%> 
-      <div class="column">   
-           <div class="row" >   
-      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)" alt="">
-      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)">
-           </div>
-        </div>
-    <% } %>	    
-   </div>  
-	 <!-- Image text -->
-	 <% 
-for(int i =0; i<plist.size(); i++){
-    pData = plist.get(i);
-%>
-  <div class="caption-container" align="center">
-   
-    <p><%= pData.getContent() %></p>
- 
-  </div>
-  <% } %> 	
-
- <!-- Next and previous buttons 이걸 수정해야한다-->  
- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+	 $("#pick1").click(function(){
+			$.ajax({
+				url : "/pickme/pickresult.pr",
+				type : "get",
+				data : {
+					selectUserNo : $('#selectUserNo').val(),
+					resultPickId : $('#resultPickId').val(),
+					selectResult : countLeft,
+					hoji : hoji
+				}, success : function(data){
+					console.log("데이터 전달 성공!");
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
+	 
+	 </script>
+	  <!-- Thumbnail images -->
+	
+	
+	  <div class="row" >
+	   <% for(int i =0; i<plist.size(); i++){
+	    pData = plist.get(i);%> 
+	      <div class="column">   
+	           <div class="row" >   
+	      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)" alt="">
+	      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)">
+	           </div>
+	        </div>
+	    <% } %>	    
+	   </div>  
+		 <!-- Image text -->
+		 <% 
+	for(int i =0; i<plist.size(); i++){
+	    pData = plist.get(i);
+	%>
+	  <div class="caption-container" align="center">
+	   
+	    <p><%= pData.getContent() %></p>
+	 
+	  </div>
+	  <% } %> 	
+	
+	 <!-- Next and previous buttons 이걸 수정해야한다-->  
+	 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+			
+	</section>
+	
+		<br><br><br>
 		
-</section>
-
-	<br><br><br>
-	
-	<!-- <div class="col-md-12" align="center" >
-		<button type="button" onclick="javascript:location.href='PickSub.jsp';">
-		상세보기
-		</button>
-	</div> -->
-	
-	<div class="col-xs-12 col-md-8" align="center" >
-		<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>
+		<!-- <div class="col-md-12" align="center" >
+			<button type="button" onclick="javascript:location.href='PickSub.jsp';">
+			상세보기
+			</button>
+		</div> -->
 		
-		<button type="button" onclick="location.href='views/pickpage/PickUpdate.jsp'">픽 수정</button>	
-		consol.log()	
-	</div>
-	
-	
-	<br><br><br>
-	
-	<div class="list" align="center">
-		<div class="col-md-12" align="center">
-			<nav align="center">
-				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#">previous</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">1</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">4</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">last</a>
-					</li>
-				</ul>
-			</nav>
+		<div class="col-xs-12 col-md-8" align="center" >
+			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>
+			
+			<button type="button" onclick="location.href='views/pickpage/PickUpdate.jsp'">픽 수정</button>	
+			consol.log()	
+		</div>
+		
+		
+		<br><br><br>
+		
+		<div class="list" align="center">
+			<div class="col-md-12" align="center">
+				<nav align="center">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" href="#">previous</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">1</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">2</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">3</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">4</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">last</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		</div>
 	</div>
-</div>
+	
+	<% }else { %>
+	<span> 현재 업로드 된 pick 데이터가 없습니다.</span>
+	<% } %>
+	
+	
+		<script>
+		
+		
+		var slideIndex = 1;
+		showSlides(slideIndex);
+	
+		// Next/previous controls
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+	
+		// Thumbnail image controls
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+	
+		function showSlides(n) {
+		  var i;
+		  var slides = document.getElementsByClassName("mySlides");
+		  var dots = document.getElementsByClassName("demo");
+		  
+		  // 글쓸곳
+		  var captionText = document.getElementById("caption");
+		  
+		  // 길이 초과시 처음으로 보내기 여기선 다음 페이지 전송 하기 
+		  if (n > slides.length) {slideIndex = 1}
+		  if (n < 1) {slideIndex = slides.length}
+		  for (i = 0; i < slides.length; i++) {
+		    slides[i].style.display = "none";
+		  }
+		  for (i = 0; i < dots.length; i++) {
+		    dots[i].className = dots[i].className.replace(" active", "");
+		  }
+		  slides[slideIndex-1].style.display = "block";
+		  dots[slideIndex-1].className += " active";
+		  captionText.innerHTML = dots[slideIndex-1].alt;
+		}
+		
+		
+		</script>
+		
+	
+	
+	<%@ include file="../common/footer.jsp" %>
 
-<% }else { %>
-<span> 현재 업로드 된 pick 데이터가 없습니다.</span>
 <% } %>
-
-
-	<script>
-	
-	
-	var slideIndex = 1;
-	showSlides(slideIndex);
-
-	// Next/previous controls
-	function plusSlides(n) {
-	  showSlides(slideIndex += n);
-	}
-
-	// Thumbnail image controls
-	function currentSlide(n) {
-	  showSlides(slideIndex = n);
-	}
-
-	function showSlides(n) {
-	  var i;
-	  var slides = document.getElementsByClassName("mySlides");
-	  var dots = document.getElementsByClassName("demo");
-	  
-	  // 글쓸곳
-	  var captionText = document.getElementById("caption");
-	  
-	  // 길이 초과시 처음으로 보내기 여기선 다음 페이지 전송 하기 
-	  if (n > slides.length) {slideIndex = 1}
-	  if (n < 1) {slideIndex = slides.length}
-	  for (i = 0; i < slides.length; i++) {
-	    slides[i].style.display = "none";
-	  }
-	  for (i = 0; i < dots.length; i++) {
-	    dots[i].className = dots[i].className.replace(" active", "");
-	  }
-	  slides[slideIndex-1].style.display = "block";
-	  dots[slideIndex-1].className += " active";
-	  captionText.innerHTML = dots[slideIndex-1].alt;
-	}
-	
-	
-	</script>
-	
-
-
-<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

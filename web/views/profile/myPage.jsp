@@ -54,6 +54,11 @@
 </head>
 <body>
 
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else { %>
+
 <%@ include file="../common/header.jsp" %>
 
 <% if( user != null) { %>
@@ -153,8 +158,8 @@ encType="multipart/form-data">
 </div>
 <br />
 	<div align="center">
-		<button align="center" onclick="uComplete();">수정 완료</button>
-		<button onclick="uDelete();">회원 탈퇴</button>
+		<button align="center" onclick="uComplete();" class="btn btn-primary">수정 완료</button>
+		<button onclick="uDelete();" class="btn btn-danger">회원 탈퇴</button>
 	</div>
 
 	<br />
@@ -418,6 +423,7 @@ encType="multipart/form-data">
 	}
 
 </script>
+<% } %>
 </body>
 
 </html>

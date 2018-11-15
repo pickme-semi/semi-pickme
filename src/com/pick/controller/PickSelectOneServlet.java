@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.SessionCheck;
 import com.pick.model.service.PickService;
 
 /**
@@ -31,24 +32,30 @@ public class PickSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pid = Integer.parseInt(request.getParameter("id"));
-		
-		HashMap<String, Object> Pick = new PickService().selectPickMeMap(pid);
-		
-		System.out.println(Pick);
-		
-		String page ="";
-		if(Pick != null){
-			page = "views/Pickpage/PickMain.jsp";
-			request.setAttribute("PickMe", Pick.get("PickMe"));
-			
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
 		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "pick출력 실패");
+			int pid = Integer.parseInt(request.getParameter("id"));
+			
+			HashMap<String, Object> Pick = new PickService().selectPickMeMap(pid);
+			
+			System.out.println(Pick);
+			
+			String page ="";
+			if(Pick != null){
+				page = "views/Pickpage/PickMain.jsp";
+				request.setAttribute("PickMe", Pick.get("PickMe"));
+				
+			}else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "pick출력 실패");
+			}
+			
+			RequestDispatcher view = request.getRequestDispatcher(page);
+			view.forward(request, response);
 		}
-		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 		
 	}
 

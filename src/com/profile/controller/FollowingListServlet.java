@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.common.SessionCheck;
 import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
 
@@ -32,31 +33,37 @@ public class FollowingListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<User> list = null;
-		ProfileService ps = new ProfileService();
-
-		// 팔로잉 수 카운트
-		int followingCount = 0;
-
-		HttpSession session = request.getSession(false);
-		User user = (User)session.getAttribute("user");
-		int userNo = user.getUserNo();
-		
-		list = ps.followingList(userNo);
-		followingCount = ps.followingCount(userNo);
-		
-		String page = "";
-		
-		if(list != null){
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+			ArrayList<User> list = null;
+			ProfileService ps = new ProfileService();
+	
+			// 팔로잉 수 카운트
+			int followingCount = 0;
+	
+			HttpSession session = request.getSession(false);
+			User user = (User)session.getAttribute("user");
+			int userNo = user.getUserNo();
 			
-			page = "views/profile/followingList.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("followingCount", followingCount);
+			list = ps.followingList(userNo);
+			followingCount = ps.followingCount(userNo);
 			
-		}else{
-			page = "views/common/errorPage.jsp";
+			String page = "";
+			
+			if(list != null){
+				
+				page = "views/profile/followingList.jsp";
+				request.setAttribute("list", list);
+				request.setAttribute("followingCount", followingCount);
+				
+			}else{
+				page = "views/common/errorPage.jsp";
+			}
+			request.getRequestDispatcher(page).forward(request, response);
 		}
-		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

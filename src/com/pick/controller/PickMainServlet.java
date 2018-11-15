@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.SessionCheck;
 import com.pick.model.service.PickService;
 import com.pick.model.vo.PickMe;
 
@@ -31,23 +32,30 @@ public class PickMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<PickMe> list = new ArrayList<PickMe>();
-		
-		PickService ps = new PickService();
-		list = ps.selectList();
-		
-		String page = "";
-		
-		if(list != null){
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			System.out.println("login 실패");
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+			ArrayList<PickMe> list = new ArrayList<PickMe>();
 			
-			page = "views/pickpage/PickMain.jsp";
-			request.setAttribute("list", list);			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "pick메인페이지 조회 실패");
+			PickService ps = new PickService();
+			list = ps.selectList();
+			
+			String page = "";
+			
+			if(list != null){
+				
+				page = "views/pickpage/PickMain.jsp";
+				request.setAttribute("list", list);			
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "pick메인페이지 조회 실패");
+			}
+			
+			request.getRequestDispatcher(page).forward(request, response);
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

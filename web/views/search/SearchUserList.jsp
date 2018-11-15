@@ -10,31 +10,35 @@
 <title>유저 검색결과</title>
 </head>
 <body>
-
-<%@ include file="../common/header.jsp" %>
-
-	<div class="pm-section col-xs-12 col-md-8">
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else { %>
+	<%@ include file="../common/header.jsp" %>
 	
-		<h1>유저 검색 결과 리스트 창</h1>
+		<div class="pm-section col-xs-12 col-md-8">
 		
-		<%if(uList.size() != 0){ %>
-		<% for(int i = 0 ; i < uList.size(); i++){ %>
-			<!-- 사용자 정보 페이지로 이동시키기 -->
-			<% if(user.getUserNo() != uList.get(i).getUserNo()) { %>
-			<a href="/pickme/uPage.pr?uno=<%= uList.get(i).getUserNo()%>"><%= uList.get(i).getUserId()%></a>
-			<% } else { %>
-			<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= uList.get(i).getUserId()%></a>
+			<h1>유저 검색 결과 리스트 창</h1>
+			
+			<%if(uList.size() != 0){ %>
+			<% for(int i = 0 ; i < uList.size(); i++){ %>
+				<!-- 사용자 정보 페이지로 이동시키기 -->
+				<% if(user.getUserNo() != uList.get(i).getUserNo()) { %>
+				<a href="/pickme/uPage.pr?uno=<%= uList.get(i).getUserNo()%>"><%= uList.get(i).getUserId()%></a>
+				<% } else { %>
+				<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= uList.get(i).getUserId()%></a>
+				<% } %>
+				<hr />
 			<% } %>
-			<hr />
-		<% } %>
-		<% }else { %>
-			<div class="result-none">
-				<h1>검색 결과 없음</h1>
-			</div>
-		<% } %>
-	</div>
-
-<%@ include file="../common/footer.jsp" %>
+			<% }else { %>
+				<div class="result-none">
+					<h1>검색 결과 없음</h1>
+				</div>
+			<% } %>
+		</div>
+	
+	<%@ include file="../common/footer.jsp" %>
+<% } %>
 
 </body>
 </html>

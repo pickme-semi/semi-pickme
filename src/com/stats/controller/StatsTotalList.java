@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.SessionCheck;
+
 /**
  * Servlet implementation class StatsTotalList
  */
@@ -26,8 +28,14 @@ public class StatsTotalList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.sendRedirect("views/stats/statsTotalList.jsp");
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+			// TODO Auto-generated method stub
+			response.sendRedirect("views/stats/statsTotalList.jsp");
+		}
 	}
 
 	/**

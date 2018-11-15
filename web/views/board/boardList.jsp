@@ -14,6 +14,10 @@
 <title><%= (type.equals("report"))? "신고" : "질문" %>게시판</title>
 </head>
 <body>
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( (session.getAttribute("user") == null)){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	<div class="pm-section col-xs-12 col-md-8">
 		<h1><%= (type.equals("report"))? "신고" : "질문" %> 게시판</h1>
@@ -97,5 +101,6 @@
 			});
 		});
 	</script>
+<% } %>
 </body>
 </html>
