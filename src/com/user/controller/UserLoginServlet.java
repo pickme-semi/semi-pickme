@@ -40,6 +40,10 @@ public class UserLoginServlet extends HttpServlet {
 		String result = null;
 		UserService us = new UserService();
 		
+		System.out.println("id : " + id);
+		
+		System.out.println("pass : " + pass);
+		
 		User u = new User(id, pass);
 		
 		System.out.println("전달받은 회원 정보 : " + u );
