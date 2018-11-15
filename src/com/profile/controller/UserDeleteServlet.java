@@ -36,16 +36,15 @@ public class UserDeleteServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int userNo = ((User)session.getAttribute("user")).getUserNo();
 		
-		// 팔로우 정보 지우기
+		// 회원 지우기 전 연결된 팔로우 정보 지우기
 		int fResult = ps.followDel(userNo);
 		
-		// 카테고리 정보 지우기
+		// 회원 지우기 전 연결된 카테고리 정보 지우기
 		int cResult = ps.categoryDel(userNo);
 		
 		int result = ps.deleteUser(userNo);
 		
 		if(result > 0 || fResult > 0 || cResult > 0){
-			System.out.println("회원 탈퇴 완료!");
 			session.invalidate();
 			response.sendRedirect("/pickme");
 		}else{

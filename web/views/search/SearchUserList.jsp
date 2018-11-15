@@ -20,7 +20,11 @@
 		<%if(uList.size() != 0){ %>
 		<% for(int i = 0 ; i < uList.size(); i++){ %>
 			<!-- 사용자 정보 페이지로 이동시키기 -->
+			<% if(user.getUserNo() != uList.get(i).getUserNo()) { %>
 			<a href="/pickme/uPage.pr?uno=<%= uList.get(i).getUserNo()%>"><%= uList.get(i).getUserId()%></a>
+			<% } else { %>
+			<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= uList.get(i).getUserId()%></a>
+			<% } %>
 			<hr />
 		<% } %>
 		<% }else { %>

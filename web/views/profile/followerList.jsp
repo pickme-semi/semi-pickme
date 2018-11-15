@@ -12,9 +12,6 @@
 <meta charset="UTF-8">
 <title>My Pick Page</title>
 
-
-<link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
-
 <style>
 		.attr {
 		height : 50px;
@@ -41,7 +38,7 @@
 <a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
 <a href="/pickme/mPage.pr">My Page</a>
 
-
+</div>
 
 <section class="works text-center">
 
@@ -51,24 +48,30 @@
 		<h5><%= followerCount %>명</h5>
 		<br /><br /><br />
 		
-		<div class="followerArea">
+		<div class="followerArea container col-sm-4">
+		
+		
 			<% for (User followerList : list) { %>
-			<div class="follower-list" align="center" 
+			
+		<div class="row">
+			<div class="follower-list col" align="center" 
 			onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followerList.getUserNo() %>">
 				<% if(user.getProfile() != null) {%>
-				<img data-src="holder.js/75x75" src="/pickme/resources/profileImage/<%=followerList.getProfile() %>" class="rounded-circle" width="100px" height="50px" /> &nbsp;
+				<img src="/pickme/resources/profileImage/<%=followerList.getProfile() %>" class="rounded-circle" width="100px" height="50px" /> &nbsp;
 				<% } else{ %>
 				<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
-				<% }%> &nbsp;&nbsp;&nbsp;&nbsp;
-				<%= followerList.getUserId() %> &nbsp;&nbsp;&nbsp; <button value=<%= followerList.getUserNo() %> >follow</button>
+				<% }%> 
+				</div>
+				<div class="col">
+				<%= followerList.getUserId() %>
+				</div>
+				<div class="col">
+				<button value=<%= followerList.getUserNo() %> >follow</button>
+				</div>
 			</div>
-			<% } %>
+         <% } %>
 	</div>
-
 </div>
-
-
-
 </section>
 
 	<%@ include file="../common/footer.jsp" %>
