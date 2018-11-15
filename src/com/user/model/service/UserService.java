@@ -27,6 +27,7 @@ public class UserService {
 	}
 	
 	public User loginUser(User u) throws UserException {
+		System.out.println("user service");
 		Connection con = getConnection();
 		
 		User result = uDao.loginUser(con, u);

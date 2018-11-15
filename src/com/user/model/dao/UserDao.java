@@ -63,6 +63,7 @@ public class UserDao {
 	}
 
 	public User loginUser(Connection con, User u) throws UserException {
+		System.out.println("user dao");
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		User result = null;
@@ -77,8 +78,14 @@ public class UserDao {
 			
 			rset = pstmt.executeQuery();
 			
+			System.out.println("dao rset " + rset);
+			
+			
+			
 			if(rset.next()){
 				//System.out.println(rset.getString("gender"));
+				
+				
 				
 				result = new User();
 				
@@ -93,10 +100,14 @@ public class UserDao {
 				result.setProfile(rset.getString(9));
 				
 				
+				System.out.println(" userdao " +result);
+				
+				
 			}
 			
 		} catch(SQLException e){
-			throw new UserException(e.getMessage());			
+			System.out.println("에러 : ");
+			e.printStackTrace();		
 		} finally {
 			close(rset);
 			close(pstmt);

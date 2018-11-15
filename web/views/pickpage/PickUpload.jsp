@@ -158,14 +158,14 @@
 					</tr>
 					<tr>
 						<td>첨부파일</td>
-						<td colspan="3"><input type="file" name="pick" id="up1" required="required"
+						<td colspan="3"><input type="file" name="pick1" id="up1" required="required"
 						onchange="fileCheck(this);" /> 
 						
 						<img id="pick1" src="#" alt=""/></td>
 					</tr>
 					<tr>
 						<td>첨부파일2</td>
-						<td colspan="3"><input type="file" name="pick" id="up2"
+						<td colspan="3"><input type="file" name="pick2" id="up2"
 						onchange="fileCheck(this);"  required="required"/> 
 						
 						<img id="pick2" src="#" alt="" /></td>
