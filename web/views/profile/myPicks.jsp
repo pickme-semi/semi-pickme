@@ -58,55 +58,57 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 </head>
 <body>
 
-<%@ include file="../common/header.jsp" %>
-
-
-<div class="col-md-12 text-center user">
- 
-<% if(user.getProfile() != null) {%>
-  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
-<% } else{ %>
-	<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
-<% }%>
-<h2><%= user.getUserId() %></h2>
-<h3>한 줄 소개</h3>
-
-<a href="/pickme/fList.pr">Follower</a>
-<a href="/pickme/fiList.pr">Following</a>
-<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
-<a href="/pickme/mPage.pr">My Page</a>
-</div>
-
-<hr />
-
-
-
-<section class="col-xs-12 col-md-12">
- <% for (int i=0; i<myPick.size(); i++) {%>
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else { %>
 	
-	<div class="parent" align=center>
-		<img class="child1" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_1() %>" />
-		<span class="or">or</span>
-		<img class="child2" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_2() %>" />
-    <div class="caption-container parent col-sm-5 col-md-4" align=center >
-    <dl>
-    	<dt> <%= myPick.get(i).getTitle() %></dt>
-    	<dd style ="vertical-align : middle;"> <%= myPick.get(i).getContent() %></dd>
-    </dl>
- 	</div>
-  </div>
-
+	<%@ include file="../common/header.jsp" %>
 	
-<br />
+	
+	<div class="col-md-12 text-center user">
+	 
+	<% if(user.getProfile() != null) {%>
+	  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+	<% } else{ %>
+		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
+	<% }%>
+	<h2><%= user.getUserId() %></h2>
+	<h3>한 줄 소개</h3>
+	
+	<a href="/pickme/fList.pr">Follower</a>
+	<a href="/pickme/fiList.pr">Following</a>
+	<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
+	<a href="/pickme/mPage.pr">My Page</a>
+	</div>
+	
+	<hr />
+	
+	
+	
+	<section class="col-xs-12 col-md-12">
+	 <% for (int i=0; i<myPick.size(); i++) {%>
+		
+		<div class="parent" align=center>
+			<img class="child1" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_1() %>" />
+			<span class="or">or</span>
+			<img class="child2" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_2() %>" />
+	    <div class="caption-container parent col-sm-5 col-md-4" align=center >
+	    <dl>
+	    	<dt> <%= myPick.get(i).getTitle() %></dt>
+	    	<dd style ="vertical-align : middle;"> <%= myPick.get(i).getContent() %></dd>
+	    </dl>
+	 	</div>
+	  </div>
+	
+		
+	<br />
+	<% } %>
+	
+	</section>
+	
+	<%@ include file="../common/footer.jsp" %>
 <% } %>
-
-
-
-
-</section>
-
-
-<%@ include file="../common/footer.jsp" %>
 </body>
 
 </html>

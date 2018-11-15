@@ -13,6 +13,10 @@
 <title>게시물 작성</title>
 </head>
 <body>
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( (session.getAttribute("user") == null)){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	<div class="pm-section col-xs-12 col-md-8" align="center">
 		<form id="insertForm" action="/pickme/insert.bo" style="width : 50%;">
@@ -141,5 +145,6 @@
 	}
 </script>
 	
+<% } %>
 </body>
 </html>

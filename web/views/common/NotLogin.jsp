@@ -5,24 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	section{
-		background : lightgreen;
-		margin-left: auto;
-		margin-right: auto;
-	}
+
 </style>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
-	<section class="pm-section col-xs-12 com-md-8">
+	<div class="pm-section col-xs-12 com-md-8">
 		<div align="center">
-			<h1>로그인 안됨</h1>
+			<h1>403 FORBIDDEN</h1>
+			<% String msg = (String)session.getAttribute("msg"); %>
 			<br />
 			<br />
 			<br />
 			<h3><a href="/pickme">로그인 하기</a></h3>
 		</div>
-	</section>
+	</div>
 	<%@ include file="footer.jsp" %>
 </body>
 </html>

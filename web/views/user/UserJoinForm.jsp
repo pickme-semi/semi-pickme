@@ -39,7 +39,7 @@
 
 <body>
 <%@ include file="../common/header.jsp" %>
-<section class="col-xs-12 col-md-8">
+<section class="pm-section col-xs-12 col-md-8">
 <div class = "outer">
 <br>
 <h2 align = "center"> 회원가입 </h2>
@@ -109,7 +109,7 @@
 	</div>
 	<br />
 	<div class="btns" align="center">
-	<button type="button" id= "btnJoin" > 가입하기 </button>
+	<button type="button" id= "btnJoin" class="btn btn-primary" > 가입하기 </button>
 	<br><br>
 	<p id="p1">이미 계정이 있으신가요? <a href="/pickme/views/user/UserLoginForm.jsp">로그인</a></p>
 

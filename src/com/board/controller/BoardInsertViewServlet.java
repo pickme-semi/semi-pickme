@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.common.SessionCheck;
+
 /**
  * Servlet implementation class BoardInsertViewServlet
  */
@@ -27,16 +29,22 @@ public class BoardInsertViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = (request.getParameter("bType") == null)? "" : request.getParameter("bType");
-		HttpSession session = request.getSession(true);
-		
-		if(type.equals("report")){
-			session.setAttribute("bType", "report");
-		}else{
-			session.setAttribute("bType", "qna");
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+			String type = (request.getParameter("bType") == null)? "" : request.getParameter("bType");
+			HttpSession session = request.getSession(true);
+			
+			if(type.equals("report")){
+				session.setAttribute("bType", "report");
+			}else{
+				session.setAttribute("bType", "qna");
+			}
+			
+			request.getRequestDispatcher("views/board/boardInsert.jsp").forward(request, response);
 		}
-		
-		request.getRequestDispatcher("views/board/boardInsert.jsp").forward(request, response);
 	}
 
 	/**

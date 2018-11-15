@@ -18,7 +18,10 @@
 <link rel="stylesheet" href="../../resources/stats/insight.css">
 </head>
 <body>
-
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else { %>
 	<%@ include file="../common/header.jsp" %>
 
 	<div class="pm-section col-xs-12 col-md-8">
@@ -36,6 +39,7 @@
 	
 	<%@ include file="../common/footer.jsp" %>
 	
+
 	<script>
 		var chartAge = bb.generate({
 		    
@@ -80,5 +84,6 @@
 			});
 
 	</script>
+<% } %>
 </body>
 </html>

@@ -33,22 +33,25 @@ public class StatsOneList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
-    		// 로그인 유저만 접근 가능
-		if( !SessionCheck.login(request))  response.sendRedirect("views/common/NotLogin.jsp");
-
-    int pickId = Integer.parseInt(request.getParameter("id"));
-		
-		PickResult pr = new PickResult();
-		
-		pr.setId(pickId);
-		
-		StatsService ss = new StatsService();
-		
-		ArrayList<Integer> ageList = new ArrayList<Integer>();
-		
-		ageList = ss.countAge(pr);
-		
-		response.sendRedirect("views/stats/statsOneList.jsp");
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+		// 로그인 된 유저
+			int pickId = Integer.parseInt(request.getParameter("id"));
+			
+			PickResult pr = new PickResult();
+			
+			pr.setId(pickId);
+			
+			StatsService ss = new StatsService();
+			
+			ArrayList<Integer> ageList = new ArrayList<Integer>();
+			
+			ageList = ss.countAge(pr);
+			response.sendRedirect("views/stats/statsOneList.jsp");
+		}
 	}
 
 	/**

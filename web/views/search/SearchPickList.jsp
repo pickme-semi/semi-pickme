@@ -10,27 +10,30 @@
 <title>픽 검색결과</title>
 </head>
 <body>
-
-<%@ include file="../common/header.jsp" %>
-
-	<div class="pm-section col-xs-12 col-md-8">
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( session.getAttribute("user") == null){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else { %>
+	<%@ include file="../common/header.jsp" %>
 	
-		<h1>픽&카테고리 검색 결과 리스트 창</h1>
+		<div class="pm-section col-xs-12 col-md-8">
 		
-		<% if(pList.size() != 0){ %>
-		<% for(int i = 0 ; i < pList.size(); i++) { %>
-			<a href="?pickno?<%=pList.get(i).getId()%>"><strong>픽 제목<%=pList.get(i).getTitle()%></strong> 상세보기</a>
-			<hr />
-		<% } %>
-		<% }else{ %>
-			<div class="result-none">
-				<h1>검색 결과 없음</h1>
-			</div>
-		<% } %>
-	
-	</div>
-	
-<%@ include file="../common/footer.jsp" %>
-
+			<h1>픽&카테고리 검색 결과 리스트 창</h1>
+			
+			<% if(pList.size() != 0){ %>
+			<% for(int i = 0 ; i < pList.size(); i++) { %>
+				<a href="?pickno?<%=pList.get(i).getId()%>"><strong>픽 제목<%=pList.get(i).getTitle()%></strong> 상세보기</a>
+				<hr />
+			<% } %>
+			<% }else{ %>
+				<div class="result-none">
+					<h1>검색 결과 없음</h1>
+				</div>
+			<% } %>
+		
+		</div>
+		
+	<%@ include file="../common/footer.jsp" %>
+<% } %>
 </body>
 </html>

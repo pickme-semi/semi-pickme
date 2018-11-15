@@ -64,7 +64,7 @@
 	<div align ="center"><span class="error_next_box" id = loginMsg style="display:none" role="alert"></span></div>
 	<br>
 	<div class="btns" align="center">
-	<button type="button" id="loginBtn" value="로그인">로그인</button>
+	<button type="button" id="loginBtn" value="로그인" class="btn btn-primary">로그인</button>
 	<br><br>
 	<p id="p1">아직 계정이 없으신가요? <a href="/pickme/views/user/UserTerms.jsp">회원가입</a></p>
 
@@ -80,6 +80,13 @@
 </div>
 <br><br>
 <script>
+	// 로그인 된 상태에서 메인에 접근할때
+    $(function(){
+    	<% if(user != null){%>
+    		location.href = "/pickme/pickmain.pm";
+    	<% } %>
+    });
+    
 	$("#userPwd").keypress(function(e){
 		if(e.which==13){
 			$("#loginBtn").click();

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.common.SessionCheck;
 
 /**
  * Servlet implementation class BoardDetailServlet
@@ -29,22 +30,28 @@ public class BoardSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		
-		System.out.println(id);
-		
-		Board b = new BoardService().selectOne(id);
-		
-		String page = "";
-		
-		if(b != null){
-			page = "views/board/boardDetail.jsp";
-			request.setAttribute("board", b);
-		} else {
-			page = "views/commcon/errorPage.jsp";
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+			int id = Integer.parseInt(request.getParameter("id"));
 			
+			System.out.println(id);
+			
+			Board b = new BoardService().selectOne(id);
+			
+			String page = "";
+			
+			if(b != null){
+				page = "views/board/boardDetail.jsp";
+				request.setAttribute("board", b);
+			} else {
+				page = "views/commcon/errorPage.jsp";
+				
+			}
+			request.getRequestDispatcher(page).forward(request, response);
 		}
-		request.getRequestDispatcher(page).forward(request, response);
 
 	}
 	/**

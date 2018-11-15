@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.common.SessionCheck;
 import com.pick.model.vo.PickMe;
 import com.pick.model.vo.PickResult;
 import com.profile.model.service.ProfileService;
@@ -32,24 +33,29 @@ public class MyPicksServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ProfileService ps = new ProfileService();
-		
-		ArrayList<PickMe> myPick = new ArrayList<PickMe>();
-		
-		int userNo = Integer.parseInt(request.getParameter("uno"));
-		
-		System.out.println(userNo);
-		
-		myPick = ps.browseMyPick(userNo);
-		System.out.println(myPick);
-		
-		if(myPick != null){
-			request.setAttribute("myPick", myPick);
-			request.getRequestDispatcher("views/profile/myPicks.jsp").forward(request, response);
-		}else{
-			request.setAttribute("msg", "pick 불러오는 과정에서 오류");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		// 세션에 유저 정보 체크
+		// 로그인 유저만 접근가능
+		if( !SessionCheck.login(request)) {
+			response.sendRedirect("views/common/NotLogin.jsp");
+		}else {
+			ProfileService ps = new ProfileService();
+			
+			ArrayList<PickMe> myPick = new ArrayList<PickMe>();
+			
+			int userNo = Integer.parseInt(request.getParameter("uno"));
+			
+			System.out.println(userNo);
+			
+			myPick = ps.browseMyPick(userNo);
+			System.out.println(myPick);
+			
+			if(myPick != null){
+				request.setAttribute("myPick", myPick);
+				request.getRequestDispatcher("views/profile/myPicks.jsp").forward(request, response);
+			}else{
+				request.setAttribute("msg", "pick 불러오는 과정에서 오류");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
 		}
 		
 	}

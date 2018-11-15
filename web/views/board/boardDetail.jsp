@@ -13,6 +13,10 @@
 <title>자주 하는 질문 </title>
 </head>
 <body>
+<!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
+<% if( (session.getAttribute("user") == null)){ %>
+	<%@ include file="../common/NotLogin.jsp" %>
+<% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	
 	
@@ -70,5 +74,6 @@
 			location.href = "/pickme/list.bo?bType=" + "<%=type%>";
 		}
 	</script>
+<% } %>
 </body>
 </html>

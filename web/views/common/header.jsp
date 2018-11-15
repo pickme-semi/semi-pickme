@@ -22,7 +22,7 @@
  }
  
 .pm-section{
-	background : lightgreen;
+	background : ;
 	margin-left: auto;
 	margin-right: auto;
 }
