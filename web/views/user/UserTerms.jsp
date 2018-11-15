@@ -9,7 +9,6 @@
 <style>
 	
 	#container{
-		width : 600px;
 		height : auto;
 		padding : 10px;
 		background : snow;
@@ -26,7 +25,6 @@
 		font-size : 20px;
 	}
 	.terms_box{
-		width : 500px;
 		height : 150px;
 		border : 1px solid;
 		background : white;
@@ -86,8 +84,8 @@
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
-
-<div id="container" role="main">
+<div class="col-xs-12 col-sm-10 col-md-8 pm-section">
+<div role="main" id="container" class="col-xs-12 col-sm-10 col-md-6">
 	<form id="termform" action="" method="post">
 
 	<div class = "pickterm">
@@ -562,7 +560,7 @@ $(document).ready(function(){
 	
 </script>
 
-
+</div>
 <%@ include file="../common/footer.jsp" %>
 
 </body>
