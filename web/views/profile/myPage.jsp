@@ -202,7 +202,7 @@ encType="multipart/form-data">
 	
 	function checkPswd1() {
 		var pwd = $("#userPwd").val();
-		var oMsg = $("#pswd1Msg");
+		var oMsg = $("#pwdResult");
 		console.log(pwFlag);
 		
         // 비밀번호 정규식
@@ -222,7 +222,7 @@ encType="multipart/form-data">
 	function checkPswd2(){
 		var pwd1 = $("#userPwd");
 		var pwd2 = $("#userPwd2");
-		var oMsg = $("#pswd2Msg");
+		var oMsg = $("#pwdResult");
 		
 		console.log(pw2Flag);
         if (pwd1.val() != pwd2.val()) {
@@ -371,20 +371,26 @@ encType="multipart/form-data">
 	
 	/* 수정완료 시 servlet으로 가는 메소드 */
 	function uComplete(){
-			console.log(emailFlag)
+		var pwd1 = $("#userPwd");
+		var pwd2 = $("#userPwd2");
+		var oMsg = $("#pwdResult");
+			
 			if(!emailFlag){
 				alert("이메일 정보를 다시 확인해주세요.");
-			}else if($("#userPwd").val()!="" || $("#userPwd2").val()!="")
-				{if(!pwFlag){
+			}else if(pwd1.val() =="" && pwd2.val() ==""){
+				 showErrorMsg(oMsg,"비밀번호를 입력해주세요.","red");
+		         pw2Flag = false;
+			}else if($("#userPwd").val()!="" && $("#userPwd2").val()!="")
+				{
+				if(!pwFlag){
 				alert("비밀번호를 형식에 맞게 입력해주세요.");
 				}else if(!pw2Flag){
 				alert("비밀번호와 확인 값이 일치하지 않습니다.")
-				}else{
-					$('#updateform').submit();	
-				}	
+				}
 			}else{
-			$('#updateform').submit();	
+				$('#updateform').submit();	
 			}
+			
 			
 	}
 	/* 회원 탈퇴 시 servlet으로 가는 메소드 */

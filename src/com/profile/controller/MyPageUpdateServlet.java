@@ -88,7 +88,8 @@ public class MyPageUpdateServlet extends HttpServlet {
 			
 			String profile = mrequest.getFilesystemName("profile");
 			
-			String category = String.join(", ", mrequest.getParameterValues("interest"));
+			String category = mrequest.getParameterValues("interest")== null ?
+				"" : String.join(", ", mrequest.getParameterValues("interest"));
 			
 			System.out.println(profile);
 			
@@ -117,8 +118,9 @@ public class MyPageUpdateServlet extends HttpServlet {
 			
 			
 			try{
-			ps.updateMyPage(user);
-			ps.insertCategory(user.getUserNo(),category);
+		  ps.updateMyPage(user);
+		  if(!category.equals("")){
+		  ps.insertCategory(user.getUserNo(),category);}
 			
 			System.out.println("회원 정보 수정 완료! : " + user);
 			response.sendRedirect("/pickme/mPicks.pr?uno=" + user.getUserNo());
