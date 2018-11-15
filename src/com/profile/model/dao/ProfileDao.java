@@ -232,7 +232,7 @@ public class ProfileDao {
 		int cResult = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("deleteCategory");
+		String sql = prop.getProperty("categoryDel");
 		
 		try {
 			

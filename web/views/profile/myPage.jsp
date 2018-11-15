@@ -77,7 +77,12 @@ encType="multipart/form-data">
 	<tr>
 		<td> 비밀번호 확인 </td>
 		<td><input type="password" class="form-control" id="userPwd2" name="userPass2"  ></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
 		<td><label id="pwdResult"></label></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td> 이름 </td>
@@ -97,9 +102,9 @@ encType="multipart/form-data">
 		<td> 프로필 사진 <br /></td>
 		<td>
 		<% if(user.getProfile() != null) {%>
-		  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
+		  <img id="profileImage" src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
 		<% } else{ %>
-			<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
+			<img id="profileImage" src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 		<% }%>
 		</td>
 		<td></td>
@@ -223,8 +228,6 @@ encType="multipart/form-data">
             hideMsg(oMsg);
             pw2Flag = true;
         }
-
-
 		
 	}
 	
@@ -363,7 +366,7 @@ encType="multipart/form-data">
 	
 	/* 수정완료 시 servlet으로 가는 메소드 */
 	function uComplete(){
-		
+			console.log(emailFlag)
 			if(!emailFlag){
 				alert("이메일 정보를 다시 확인해주세요.");
 			}else if($("#userPwd").val()!="" || $("#userPwd2").val()!="")
@@ -377,12 +380,23 @@ encType="multipart/form-data">
 			}else{
 			$('#updateform').submit();	
 			}
-		
-		
+			
 	}
 	/* 회원 탈퇴 시 servlet으로 가는 메소드 */
 	function uDelete(){
-		location.href = "/pickme/uDelete.pr?uno=<%=user.getUserNo() %>";
+		var pwd1 = $("#userPwd");
+		var pwd2 = $("#userPwd2");
+		var oMsg = $("#pwdResult");
+		console.log(pwd1.val());
+        if (pwd1.val() == "" && pwd2.val() == "") {
+            showErrorMsg(oMsg,"비밀번호를 입력해주세요.","red");
+            pwd2.val("");
+            pw2Flag = false;
+        } else {
+            hideMsg(oMsg);
+            pw2Flag = true;
+            location.href = "/pickme/uDelete.pr?uno=<%=user.getUserNo() %>";
+        }
 	}
 	
 	function showErrorMsg(obj, msg, color) {
