@@ -158,11 +158,11 @@ encType="multipart/form-data">
 </div>
 <br />
 	<div align="center">
-		<button align="center" onclick="uComplete();" class="btn btn-primary">수정 완료</button>
+		<button onclick="uComplete();" class="btn btn-primary">수정 완료</button>
 		<button onclick="uDelete();" class="btn btn-danger">회원 탈퇴</button>
 	</div>
 
-	<br />
+<br />
 
 	
 	
@@ -307,7 +307,7 @@ encType="multipart/form-data">
     
     /* $("select").val(["1","2"]).trigger("change"); */
     
-     
+
     $("select").val([<%for(int i = 0; i < cat.size(); i++){%>
     "<%= cat.get(i).getCategoryId()%>",
     <%}%> ]).trigger("change");
@@ -371,23 +371,30 @@ encType="multipart/form-data">
 	
 	/* 수정완료 시 servlet으로 가는 메소드 */
 	function uComplete(){
+		
 		var pwd1 = $("#userPwd");
 		var pwd2 = $("#userPwd2");
 		var oMsg = $("#pwdResult");
 			
 			if(!emailFlag){
+				
 				alert("이메일 정보를 다시 확인해주세요.");
-			}else if(pwd1.val() =="" && pwd2.val() ==""){
+			}
+			else if(pwd1.val() =="" && pwd2.val() ==""){
 				 showErrorMsg(oMsg,"비밀번호를 입력해주세요.","red");
 		         pw2Flag = false;
-			}else if($("#userPwd").val()!="" && $("#userPwd2").val()!="")
+			}
+			else if(pwd1.val()!="" && pwd2.val()!="")
 				{
 				if(!pwFlag){
 				alert("비밀번호를 형식에 맞게 입력해주세요.");
 				}else if(!pw2Flag){
 				alert("비밀번호와 확인 값이 일치하지 않습니다.")
+				}else{
+					$('#updateform').submit();
 				}
-			}else{
+			}
+			else{
 				$('#updateform').submit();	
 			}
 			

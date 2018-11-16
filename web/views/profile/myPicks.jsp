@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import = "java.util.*, com.pick.model.vo.*"%>
 <%
 ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
+int point = (Integer)request.getAttribute("point");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -54,6 +56,15 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 	vertical-align: middle;
 	width: 50px
 }
+
+	.card {
+	
+	margin-left : auto;
+	margin-right : auto;
+	max-width: 10rem;
+	max-height : 10rem;
+	
+	}
 </style>
 </head>
 <body>
@@ -62,9 +73,7 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 <% if( session.getAttribute("user") == null){ %>
 	<%@ include file="../common/NotLogin.jsp" %>
 <% }else { %>
-	
 	<%@ include file="../common/header.jsp" %>
-	
 	
 	<div class="col-md-12 text-center user">
 	 
@@ -80,15 +89,24 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 	<a href="/pickme/fiList.pr">Following</a>
 	<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
 	<a href="/pickme/mPage.pr">My Page</a>
+	<br />
+	<br />
+	<div class="card bg-light md-4 text-center user">
+  	<div class="card-header">포인트 내역</div>
+  	<div class="card-body">
+    <h5 class="card-title">포인트</h5>
+    <p class="card-text"><%=point %></p>
+  	</div>
+	</div>
+	
 	</div>
 	
 	<hr />
 	
-	
-	
 	<section class="col-xs-12 col-md-12">
+	
+	<% if(!myPick.isEmpty()) { %>
 	 <% for (int i=0; i<myPick.size(); i++) {%>
-		
 		<div class="parent" align=center>
 			<img class="child1" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_1() %>" />
 			<span class="or">or</span>
@@ -100,10 +118,13 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 	    </dl>
 	 	</div>
 	  </div>
-	
-		
 	<br />
 	<% } %>
+		  <% } else{ %>
+		  <div align="center"><h5>작성한 게시글이 없습니다.</h5></div>
+		  <% } %>
+		
+	
 	
 	</section>
 	

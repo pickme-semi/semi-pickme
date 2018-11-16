@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.common.SessionCheck;
 import com.pick.model.vo.PickMe;
 import com.pick.model.vo.PickResult;
+import com.point.model.vo.Point;
 import com.profile.model.service.ProfileService;
 
 /**
@@ -40,16 +41,20 @@ public class MyPicksServlet extends HttpServlet {
 		}else {
 			ProfileService ps = new ProfileService();
 			
+			// 픽 결과값 불러오기 위한 객체 선언
 			ArrayList<PickMe> myPick = new ArrayList<PickMe>();
+			// 포인트 값 불러오기 위한 객체
+			Point point = new Point();
+			int pointResult = 0;
 			
 			int userNo = Integer.parseInt(request.getParameter("uno"));
 			
-			System.out.println(userNo);
+			pointResult = ps.browsePoint(userNo);
 			
 			myPick = ps.browseMyPick(userNo);
-			System.out.println(myPick);
 			
 			if(myPick != null){
+				request.setAttribute("point", pointResult);
 				request.setAttribute("myPick", myPick);
 				request.getRequestDispatcher("views/profile/myPicks.jsp").forward(request, response);
 			}else{
