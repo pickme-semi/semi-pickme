@@ -1,0 +1,88 @@
+.page-section:last-child {
+	border-bottom: 0
+}
+
+.page-section__content {
+	margin: 0 .5em;
+	padding: 2em 0
+}
+
+@media ( min-width :650px) {
+	.page-section__content {
+		margin: 0 auto;
+		width: 650px
+	}
+}
+
+.page-section__content+.page-section__content,
+	.page-section__content--footer-only {
+	padding-top: 0
+}
+
+@media ( min-width :650px) {
+	.page-section__content+.page-section__content {
+		padding-top: 2em
+	}
+}
+
+.live-swell {
+	margin-left : 400px;
+	margin-right : 400px;
+	display: -ms-flexbox;
+	display: flex;
+	flex-direction :row;
+	justify-content : center;
+	position: relative
+}
+
+.live-swell__pics {
+	border: 5px solid rgb(1, 5, 0);
+	border-radius: 5px;
+	margin: 0 auto;
+	padding: 3px;
+	position: relative;
+	width: 300px
+}
+
+@media ( min-width :605px) {
+	.live-swell__pics {
+		-ms-flex-order: 2;
+		order: 2
+	}
+}
+
+.live-swell__pics__pic {
+	background-repeat: no-repeat;
+	background-size: 274px 182px;
+	height: 182px;
+	width: 274px
+}
+
+.live-swell__pics__pic--a {
+	/* background-image: url(/img/live-swells/food-a-604e817829.jpg); */
+	border-bottom: 3px solid rgb(1, 5, 0);
+	height: 185px
+}
+
+.live-swell__pics__pic--b {
+	/* background-image: url(/img/live-swells/food-b-d1adfeb4ca.jpg) */
+}
+
+.live-swell__pics__or {
+	background-color: rgb(1, 5, 0);
+	border-radius: 50%;
+	color: #b3b3b3;
+	font-size: 1.3em;
+	line-height: 50px;
+	left: calc(50% - 25px);
+	position: absolute;
+	text-align: center;
+	text-transform: uppercase;
+	top: calc(50% - 25px);
+	vertical-align: middle;
+	width: 50px
+}
+
+.text-center {
+	text-align: center
+}
