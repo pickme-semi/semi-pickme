@@ -109,24 +109,31 @@
         		return false;
         	}
      }
-                 
-     
-   
-     
-      
     </script>
 
 <style>
 #pick1 {
 	/*픽 이미지 1 크기 조절 */
-	width: 200px;
-	height: 200px;
+	width: 160px;
+	height: 160px;
 }
 
 #pick2 {
 	/*픽 이미지 2 크기 조절 */
-	width: 200px;
-	height: 200px;
+	width: 160px;
+	height: 160px;
+}
+
+#upfile1 {
+	background : lightskyblue;
+	width: 165px;
+	height: 165px;
+}
+
+#upfile2 {
+	background : lightgreen;
+	width: 165px;
+	height: 165px;
 }
 
 .pickform {
@@ -150,7 +157,22 @@
 	<div class="outer" align="center" >
 		<br>
 		
+
+		
 		<div class="pickform col-md-8 col-xs-12">
+		
+		<div class="container-fluid" align="center">
+	<div class="row col-md-8 col-xs-12" align="center" >
+		<div class="col-md-6" id="upfile1" >
+			<img alt="upload1" id="pick1" src="#" alt="" />
+		</div>
+		<div class="col-md-6" id="upfile2" >
+			<img alt="upload2" id="pick2" src="#" alt=""  />
+		</div>
+	</div>
+</div>
+		
+		
 		<h2 align="center">Pick 올리기</h2>
 			<form name = "uploadpick" id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
 			method="post" encType="multipart/form-data">
@@ -170,14 +192,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td>첨부파일</td>
+						<!-- <td>첨부파일</td> -->
 						<td colspan="3"><input type="file" name="pick1" id="up1" required="required"
 						onchange="fileCheck(this);" /> 
 						
 						<!-- <img id="pick1" src="#" alt=""/> --></td>
 					</tr>
 					<tr>
-						<td>첨부파일2</td>
+						<!-- <td>첨부파일2</td> -->
 						<td colspan="3"><input type="file" name="pick2" id="up2"
 						onchange="fileCheck(this);"  required="required"/> 
 						
@@ -349,15 +371,53 @@
 	
 	});
 	
-	
+	   $(function() {
+           $("#up1").on('change', function(){
+               readURL(this);
+           });
+       });
+       function readURL(input) {
+           if (input.files && input.files[0]) {
+           var reader = new FileReader();	
+           reader.onload = function (e) {
+                   $('#pick1').attr('src', e.target.result);
+               }
+             reader.readAsDataURL(input.files[0]);
+           }
+       }        
+       <!-- 두번째 사진 미리보기  -->
+       $(function() {
+           $("#up2").on('change', function(){
+               readURL2(this);
+           });
+       });
+       function readURL2(input) {
+           if (input.files && input.files[0]) {
+           var reader = new FileReader();
 
-
+           reader.onload = function (e) {
+                   $('#pick2').attr('src', e.target.result);
+               }
+             reader.readAsDataURL(input.files[0]);
+           }
+       }
+       
+      $(function(){
+  		  $('#up1').hide();
+   		  $('#upfile1').click(function(){
+   			$('#up1').click();
+   		  });
+   	  });
+      $(function(){
+  		  $('#up2').hide();
+   		  $('#upfile2').click(function(){
+   			$('#up2').click();
+   		  });
+   	  });
 	
 	
 	
-	
-	
-</script>	 -->
+</script>	 
 <% } %>
 </body>
 </html>

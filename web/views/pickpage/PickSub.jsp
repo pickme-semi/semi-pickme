@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.pick.model.vo.PickMe"%>
+<%@page import="java.util.ArrayList"%>
+<% 
+	ArrayList<PickMe> plist = (ArrayList<PickMe>)request.getAttribute("list");
+	User u = (User)session.getAttribute("user");	
+%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,13 +46,16 @@ textarea {
 	<%@ include file="../common/NotLogin.jsp" %>
 <% }else { %>
 	<%@ include file="../common/header.jsp"%>
-	
+	<% 
+	PickMe pData = new PickMe();	
+	 	
+	%>
 	
 	<div class="row" align="center">
 		<div class="col-md-8 col-xs-12" >
-			<h2>pick 제목	</h2>
+			<h2> 제목  <%=pData.getTitle()%></h2>
 			<p>
-				이러고 저러고 어쩌고 저쩌고 해서 아무튼 이 둘중에 하나 골라주세요.
+				<%= pData.getContent() %>
 			</p>			
 		<br>
 			
