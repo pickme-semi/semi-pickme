@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
+import static com.common.JDBCTemplate.*;
 
 import com.pick.model.vo.PickResult;
 
@@ -34,24 +36,36 @@ public class StatsDao {
 	
 	
 
-	public ArrayList<Integer> countAge(Connection con, PickResult pr) {
+	public HashMap<Integer,Integer> countAge(Connection con, PickResult pr) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getAge");
 		
-		ArrayList<Integer> list = new ArrayList<Integer>();
+		HashMap<Integer,Integer> hmap = new HashMap<Integer,Integer>();
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pr.getId());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				int age = rset.getInt(1);
+				int no = rset.getInt(2);
+				hmap.put(age,no);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
 		}
 		
 		
 		
-		return null;
+		return hmap;
 	}
 
 }

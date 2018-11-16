@@ -2,6 +2,7 @@ package com.stats.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.common.JDBCTemplate.*;
 
@@ -13,14 +14,14 @@ public class StatsService {
 	private StatsDao sDao = new StatsDao();
 	
 
-	public ArrayList<Integer> countAge(PickResult pr) {
+	public HashMap<Integer,Integer> countAge(PickResult pr) {
 		Connection con = getConnection();
 		
-		ArrayList<Integer> list = sDao.countAge(con,pr);
+		HashMap<Integer,Integer> hmap = sDao.countAge(con,pr);
 		
 		close(con);
 		
-		return list;
+		return hmap;
 	}
 
 
