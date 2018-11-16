@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.*"%>
+<% ArrayList<Integer> ageList = (ArrayList<Integer>)session.getAttribute("ageList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,13 +43,13 @@
 
 	<script>
 		var chartAge = bb.generate({
-		    
 		    data: {
 		    	bindto: "#chart",
 		    	type:"bar",
 		        columns: [
-		            ["pick1", 30, 200, 100, 170, 150],
-		            ["pick2", 130, 100, 140, 35, 110]
+		        	
+		           ["pick2", <%= ageList.get(0) %>, <%= ageList.get(1) %>, <%= ageList.get(2) %>, <%= ageList.get(3) %>, <%= ageList.get(4) %>,<%= ageList.get(5) %>]
+		            
 		        ]
 		},
 		        
@@ -56,7 +57,7 @@
 		    	x : {
 		    		type : "category",
 		    		categories:[
-		    			"10대↓","20대","30대","40대","50대↑"]
+		    			"10대↓","10대","20대","30대","40대","50대↑"]
 		    	}
 		    }
 		    

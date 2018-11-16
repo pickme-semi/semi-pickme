@@ -2,12 +2,14 @@ package com.stats.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pick.model.vo.PickResult;
 import com.stats.model.service.StatsService;
@@ -39,7 +41,7 @@ public class StatsOneList extends HttpServlet {
 			response.sendRedirect("views/common/NotLogin.jsp");
 		}else {
 		// 로그인 된 유저
-			int pickId = Integer.parseInt(request.getParameter("id"));
+			int pickId = Integer.parseInt(request.getParameter("pickno"));
 			
 			PickResult pr = new PickResult();
 			
@@ -47,9 +49,36 @@ public class StatsOneList extends HttpServlet {
 			
 			StatsService ss = new StatsService();
 			
-			ArrayList<Integer> ageList = new ArrayList<Integer>();
+			HashMap<Integer,Integer> hmap = new HashMap<Integer,Integer>();
+			ArrayList<Integer> list = new ArrayList<Integer>();
 			
-			ageList = ss.countAge(pr);
+			//HashMap<Integer,Integer> hmap = new HashMap<Integer,Integer>();
+			
+			hmap = ss.countAge(pr);
+			int cnt=0;
+			
+			for(int i = 0 ; i <= 50; i+=10){
+				if(hmap.get(i) == null){
+					cnt = 0;
+				}else{
+					cnt = hmap.get(i);
+				}
+				list.add(cnt);
+			}
+			
+			
+			
+			
+			
+			response.getWriter().print(list);
+			
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("ageList", list);
+			
+			System.out.println(list);
+			
 			response.sendRedirect("views/stats/statsOneList.jsp");
 		}
 	}
