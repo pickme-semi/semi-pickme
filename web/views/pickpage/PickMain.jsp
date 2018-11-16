@@ -20,68 +20,50 @@ section{
 		margin-right: auto;
 	}
 
-
-* {
-  box-sizing: border-box;
+body {
+  font-family: Arial;  /*글꼴 수정 Arial 고딕체 계열 */
+  margin: 0;  
 }
 
-/* Position the image container (needed to position the left and right arrows) */
-.container {
+* {
+  box-sizing: border-box;   /* 테두리를 포함한 크기를 지정할 수 있다 */
+}
+
+img{
+  vertical-align: bottom;   /* 인라인요소의 수직 정렬 */
+   width: 100%;
+    object-fit: contain;
+    
+}
+/* .클래스명 모든 container의 요소를 선택한다.
+   #id명  문서내 주어진 id를 갖는 요소 유일해야한다.
+    * 모든 선택자
+
+*/
+/* relative 로 해놓으면
+   left: 5px; right: 5px;   bottom :5px; 등으로 위치변경가능 하다 
+   absolute d
+*/
+.container {     
   position: relative;
 }
 
 /* Hide the images by default */
+/* Display 는 속성의 요소를 보여주는것이다. none 보이지않음 */
 .mySlides {
   display: none;
 }
 
-/* Add a pointer when hovering over the thumbnail images */
+/* 썸네일 눌렀을때 손가락으로 나오게하는것 */
 .cursor {
   cursor: pointer;
 }
 
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 40%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
 
 /* Container for image text */
 .caption-container {
   text-align: center;
-  background-color : #222;
+  background-color: #222;
   padding: 2px 16px;
   color: white;
 }
@@ -95,33 +77,21 @@ section{
 /* Six columns side by side */
 .column {
   float: left;
-  width: 16.66%;
-  content: "";
-  display: table;
-  clear: both;
+  width: 8.33%;
+
 }
 
 /* Add a transparency effect for thumnbail images */
 .demo {
   opacity: 0.6;
+  max-width: 100%;
+  height: auto !important;
 }
 
 .active,
 .demo:hover {
-  opacity: 1;
+  opacity:5;
 }
-
-#pick1 { 
-/*픽 이미지 1 크기 조절 */
- width: 200px; height: auto;
-     
-     
-}
-#pick2 {
- width: 200px; height: auto;
-   
-    
-} 
 
 </style>
 
@@ -129,9 +99,6 @@ section{
 <script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- 업로드 이미지 미리보기 구현. -->
 
 <body>
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
@@ -142,8 +109,7 @@ section{
 					
 	<section class="col-xs-12 col-md-8">
 		
-	<div class="PickPage">
-	
+<section class="col-xs-12 col-md-12">
 	<% 
 	PickMe pData = new PickMe();
 	if(plist != null){
@@ -151,25 +117,22 @@ section{
 	    pData = plist.get(i);
 	 	int gg = pData.getId();
 	%>
-	
-	  <!-- Full-width images with number text -->
-	  <div class="mySlides">              
-	    <div class="numbertext"><%= i+1 %> / 6</div>
-	      <div class="" >      
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="resultPickId" class="current" value="<%= gg %>"/> 
-	      	<p><%= gg %></p>
-	      		<p id="userNo1" value="<%= u.getUserName() %>"><%= u.getUserName() %></p>
-	    	  <div class="" align="center" > <!--픽 이미지 1 -->	<!--픽 이미지 2 -->	
-				  <img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" />
-			  	<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" />
-			  </div>
-		  
-	      </div>
-			<!--  	
-	      <img src="/pickme/resources/images/img_sample1.jpg" style="width:50%">
-	      <img src="/pickme/resources/images/img_sample2.jpg" style="width:50%">
-	      -->
+	
+	  <!-- Full-width images with number text -->
+	<div class="container " >	 
+	   <div class="mySlides" style="background-color : blue">          
+	        <div class="row" align="center">
+		<div class="col-md-6" align="center" style="background-color : pink" >
+			<img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
+			style="height:auto" onclick="plusSlides(<%=i+1%>);checkNumber(<%=gg %>);"  />
+		</div>	
+		<div class="col-md-6" align="center" style="background-color : green"> 
+			<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
+			style="width:100%"onclick="checkNumber(<%=gg %>);plusSlides(<%=i+1%>);"/>
+		</div>
+		</div> 
 	    </div>
 	  </div>
 	<% } %>
@@ -206,51 +169,47 @@ section{
 		});
 	 
 	 </script>
-	  <!-- Thumbnail images -->
 	
 	
 	  <div class="row" >
 	   <% for(int i =0; i<plist.size(); i++){
 	    pData = plist.get(i);%> 
-	      <div class="column">   
-	           <div class="row" >   
-	      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)" alt="">
-	      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" width="40%" height="16.66%" onclick="currentSlide(<%=i+1 %>)">
-	           </div>
-	        </div>
+	    <div class="column">
+      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>"
+       style="width:200%"  onclick="currentSlide(<%=i+1 %>)">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
+       style="width:200%" onclick="currentSlide(<%=i+1 %>)" >
+    </div>
 	    <% } %>	    
 	   </div>  
-		 <!-- Image text -->
+	
+	
 		 <% 
 	for(int i =0; i<plist.size(); i++){
 	    pData = plist.get(i);
 	%>
-	  <div class="caption-container" align="center">
+	
+	  <div class="caption-container" align="center">gggg
 	   
 	    <p><%= pData.getContent() %></p>
 	 
 	  </div>
 	  <% } %> 	
+
 	
-	 <!-- Next and previous buttons 이걸 수정해야한다-->  
-	 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-	  <a class="next" onclick="plusSlides(1)">&#10095;</a>
 			
 	</section>
 	
 		<br><br><br>
 		
-		<!-- <div class="col-md-12" align="center" >
-			<button type="button" onclick="javascript:location.href='PickSub.jsp';">
-			상세보기
-			</button>
-		</div> -->
 		
 		<div class="col-xs-12 col-md-8" align="center" >
 			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>
 			
 			<button type="button" onclick="location.href='views/pickpage/PickUpdate.jsp'">픽 수정</button>	
-			consol.log()	
+			
 		</div>
 		
 		
@@ -282,7 +241,7 @@ section{
 				</nav>
 			</div>
 		</div>
-	</div>
+	</section>
 	
 	<% }else { %>
 	<span> 현재 업로드 된 pick 데이터가 없습니다.</span>
@@ -290,43 +249,40 @@ section{
 	
 	
 		<script>
-		
-		
+		function checkNumber(a)
+		{
+			var checkN =a;
+			console.log('%d는 숫자 %d는 다음숫자', a, checkN);
+		}
+		// 처음은 1로 시작해놓는다	
 		var slideIndex = 1;
 		showSlides(slideIndex);
 	
-		// Next/previous controls
 		function plusSlides(n) {
-		  showSlides(slideIndex += n);
+		  showSlides(slideIndex = n+1);
 		}
-	
-		// Thumbnail image controls
+
 		function currentSlide(n) {
 		  showSlides(slideIndex = n);
 		}
-	
+
 		function showSlides(n) {
 		  var i;
 		  var slides = document.getElementsByClassName("mySlides");
 		  var dots = document.getElementsByClassName("demo");
-		  
-		  // 글쓸곳
 		  var captionText = document.getElementById("caption");
-		  
-		  // 길이 초과시 처음으로 보내기 여기선 다음 페이지 전송 하기 
 		  if (n > slides.length) {slideIndex = 1}
 		  if (n < 1) {slideIndex = slides.length}
 		  for (i = 0; i < slides.length; i++) {
-		    slides[i].style.display = "none";
+		      slides[i].style.display = "none";
 		  }
 		  for (i = 0; i < dots.length; i++) {
-		    dots[i].className = dots[i].className.replace(" active", "");
+		      dots[i].className = dots[i].className.replace(" active", "");
 		  }
 		  slides[slideIndex-1].style.display = "block";
 		  dots[slideIndex-1].className += " active";
 		  captionText.innerHTML = dots[slideIndex-1].alt;
 		}
-		
 		
 		</script>
 		
