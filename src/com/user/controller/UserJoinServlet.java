@@ -50,12 +50,7 @@ public class UserJoinServlet extends HttpServlet {
 			us.JoinUser(u);
 			System.out.println("회원가입 완료! : " + u );
 			
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("user", u);
-			
 			response.sendRedirect("/pickme");
-			
 			
 		} catch (Exception e) {
 			request.setAttribute("msg", "회원가입 중 에러가 발생하였습니다.");
