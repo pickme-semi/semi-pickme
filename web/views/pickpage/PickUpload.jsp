@@ -130,7 +130,7 @@
 }
 
 .pickform {
-	background : aliceblue;
+	background : ;
 }
 	
 </style>
@@ -158,7 +158,7 @@
 				<table>
 					<tr>
 						<td>제목</td>
-						<td colspan="3"><input type="text"
+						<td colspan="3"><input class="form-control" type="text"
 							style="width: 100%; height: 100%;" name="title" required="required"></td>
 					</tr>
 					<tr>
@@ -183,14 +183,30 @@
 						
 						<!-- <img id="pick2" src="#" alt="" /> --></td>
 					</tr>
-					<tr>
+					<tr class="form-group">
 						<td>내용</td>
 						<td colspan="3">
-						<textarea name="content" style= "width: 100%; height: 100%;" required="required"></textarea>
+						<textarea class="form-control"  name="content" style= "width: 100%; height: 100%;" required="required"></textarea>
+						</td>
+					</tr>
+					<tr class="form-group">
+						<td><label>마감일 설정 </label></td>
+						<td><input class="form-control" type="date" id="dday" name="ddate" required="required"></td>
+					</tr>
+					<tr class="form-group">
+						<td > 카테고리 <br /></td>
+						<td style="width : ">		
+						<select class="form-control interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
+						style= "width:" > 
+						<% for(int i=0; i< category.size(); i++) {%>
+				  			<option value="<%=category.get(i
+				  					
+				  					).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
+				  		<% } %> 
+						</select>
 						</td>
 					</tr>
 				</table>
-				<br>
 				<!-- <label for="category">카테고리 선택</label> 
 				<br><br> 
 				<input type="radio" name="category" value="tour" checked /><span>여행</span>
@@ -223,25 +239,6 @@
 					<option value="4">중식</option>
 				</select>
 				</span> -->
-				<br>
-				<label>마감일 설정 </label>
-				<input type="date" id="dday" name="ddate" required="required">
-				<br>
-		<br><br>		
-		<table>
-		<tr>
-		<td > 카테고리 <br /></td>
-		<td style="width : 75%">		
-		<select class="interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
-		style= "width: 75%" > 
-		<% for(int i=0; i< category.size(); i++) {%>
-  			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
-  		<% } %> 
-		</select>
-		</td>
-		<td></td>
-				</tr>
-			</table>	
 			
 				<!-- 
 				<br> <label>보유 포인트</label><input type="text"
@@ -258,13 +255,11 @@
 			<br>
 			<br>
 			<div align="center">
-				<button type="submit">작성완료</button>
-				<button type="reset">취소</button>
+				<button type="submit" class="btn btn-primary">작성완료</button>
+				<button type="button" class="btn btn-defailt" data-toggle="modal" data-target="#cancelModal">취소</button>
 			</div>
 
 			</form>
-
-			
 
 		</div>
 	</div>
@@ -277,6 +272,27 @@
 
 	<br>
 	<br>
+	
+<!-- Cancel Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">작성 취소</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         게시글 작성을 취소 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+	      <button type="button" class="btn btn-primary" id="modalBtnCancle">예</button>
+    	  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 	/* select2 사용을 위한 메소드 */
 	
@@ -292,6 +308,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
+	$("#modalBtnCancle").click(function(){
+		resetTable();
+		location.href = "/pickme/pickmain.pm";
+	});
+	
+	function resetTable(){
+		$("select").val("").trigger("change");
+		$("input").val("");
+		$("textarea").val("");
+		$("[type=file]").val('');
+	}
+	
 	/* select2 사용을 위한 메소드 */
 	
 	$(function(){

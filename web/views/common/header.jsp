@@ -56,11 +56,20 @@
 		        </div>
 	        </div>
 	        <div class="logo" style="width:33%" align="right">
-				<a href="/pickme/logout.au">LogOut</a> /
-				<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">Profile</a> /
-				<a href="/pickme/pickmain.pm">Pick</a> /
-				<a href="/pickme/list.bo">고객센터</a> / 
-				<a href="/pickme/sTotalList.st">통계</a>
+			<div class="dropdown show" align="right" style="diplay:block;float:right">
+			  <a class="dropdown-toggle" href="#" role="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <%= user.getUserName() %>
+			  </a>
+			
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="right" style="diplay:block;">
+				<a class="dropdown-item" href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">내정보</a>
+				<a class="dropdown-item" href="/pickme/pickmain.pm">픽</a>
+				<a class="dropdown-item" href="/pickme/sTotalList.st">통계</a> 
+				<a class="dropdown-item" href="/pickme/list.bo">고객센터</a>
+				<hr />
+				<a class="dropdown-item" href="/pickme/logout.au">로그아웃</a>
+			  </div>
+			</div>
 	        </div>
       <%} %>
       </div>
