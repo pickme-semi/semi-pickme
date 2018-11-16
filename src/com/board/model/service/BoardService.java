@@ -58,4 +58,14 @@ public class BoardService {
 		return b;
 	}
 
+	public int reInsertBoard(Board b) {
+		Connection con = getConnection();
+		
+		int result = bDao.reInsertBoard(con, b);
+		if(result > 0)commit(con);
+		else rollback(con);
+		close(con);
+		return result;
+	}
+
 }

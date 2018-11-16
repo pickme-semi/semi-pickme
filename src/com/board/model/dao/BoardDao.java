@@ -245,4 +245,29 @@ public class BoardDao {
 		return b;
 	}
 
+	public int reInsertBoard(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("reInsert");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, b.getId());
+			pstmt.setInt(2, b.getUserNo());
+			pstmt.setString(3, b.getContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 }

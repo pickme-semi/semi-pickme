@@ -53,7 +53,7 @@
 		<div align="center">
 			
 			<% if(type.equals("admin")){ %>
-			<button class="btn btn-primary" onclick="boardInsert();">답변하기</button>
+			<button class="btn btn-primary" id="boardReInsert">답변하기</button>
 			<%}else{ %>
 			<button class="btn btn-primary" onclick="boardInsert();"><%= (type.equals("report"))? "신고" : "질문" %>하기</button>
 			<%} %>
@@ -69,11 +69,19 @@
 		function boardInsert(){
 			location.href = "/pickme/InsertView.bo?bType=" + "<%=type%>";
 		}
-		
+	
 		function list(){
 			location.href = "/pickme/list.bo?bType=" + "<%=type%>";
 		}
+		
+		$('#boardReInsert').click(function(){
+			location.href = "/pickme/InsertReView.bo?id=" + "<%=b.getId()%>";
+		});
+		
+
 	</script>
-<% } %>
+<% }  %>
 </body>
+
+
 </html>

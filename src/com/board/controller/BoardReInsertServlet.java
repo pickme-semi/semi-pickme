@@ -11,19 +11,20 @@ import javax.servlet.http.HttpSession;
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.common.SessionCheck;
+import com.oreilly.servlet.MultipartRequest;
 import com.user.model.vo.User;
 
 /**
  * Servlet implementation class BoardInserServlet
  */
-@WebServlet("/insert.bo")
-public class BoardInserServlet extends HttpServlet {
+@WebServlet("/reInsert.bo")
+public class BoardReInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInserServlet() {
+    public BoardReInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,53 +37,34 @@ public class BoardInserServlet extends HttpServlet {
 		// 로그인 유저만 접근가능
 		if( !SessionCheck.login(request)) {
 			response.sendRedirect("views/common/NotLogin.jsp");
-		}else {
+		}else{
+
 			HttpSession session = request.getSession(true);
 			User user = (User)session.getAttribute("user");
 			
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			int categoryId = Integer.parseInt(request.getParameter("category"));
-			int userNo = user.getUserNo();
-			String bType = (request.getParameter("bType").equals("report")? "BOT001" :"BOT002");
-			int pickId = (request.getParameter("pickId") != null)? Integer.parseInt(request.getParameter("pickId")) : 0;
-			
-			System.out.println("서블릿 pickid : " + pickId);
+			int bid = Integer.parseInt(request.getParameter("bid"));	// 게시물 아이디
+			String content = request.getParameter("content");			// 답변 내용
+			int userNo = user.getUserNo();								// 답변인
 			
 			BoardService bs = new BoardService();
-			Board board = null;
-			
-
-			
+			Board b = new Board(bid, content, userNo);
+			int result = bs.reInsertBoard(b);
 			
 			
-			if(bType.equals("BOT001")) {
-				board = new Board(title, content, categoryId, userNo, pickId ,bType);
-			}else {
-				board = new Board(title, content, categoryId, userNo, bType);
+			
+			if(result > 0){
+				response.sendRedirect("/pickme/list.bo?bType=admin");
 			}
 			
-			int result = bs.insertBoard(board);
-			
-			System.out.println("result : " + result);
-			
-			if(result > 0) {
-				String view = "list.bo?bType=";
-				if(bType.equals("BOT001")) {
-					view += "report";
-				}else {
-					view += "qna";
-				}
-				
-				response.sendRedirect(view);
-				
-			}else {
-				request.setAttribute("msg", "게시글 작성 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			}
 		}
 	}
 
+	
+//	ID
+//	BOARD_ID
+//	USER_NO
+//	CONTENT
+//	ENROLL_DATE
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
