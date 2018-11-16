@@ -43,6 +43,15 @@ public class Board implements Serializable{
 		this.pickId = pickId;
 		this.type = type;
 	}
+	
+	// 답변 보드
+	public Board(int id, String content, int userNo){
+		super();
+		this.id = id;
+		this.content = content;
+		this.userNo = userNo;
+	}
+	
 
 	public Board(int id, String title, String content, Date enrollDate, String status, int categoryId, int userNo,
 			int pickId, String type) {
