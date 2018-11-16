@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.pick.model.vo.PickMe;
 import com.pick.model.vo.PickResult;
+import com.point.model.vo.Point;
 import com.profile.model.vo.Category;
 import com.user.model.vo.User;
 
@@ -541,6 +542,72 @@ public class ProfileDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<PickMe> browseUserPick(Connection con, int userNo) {
+		ArrayList<PickMe> userPick = new ArrayList<PickMe>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("browsePickResult");
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset= pstmt.executeQuery();
+			
+			while(rset.next()){
+				PickMe pm = new PickMe();
+				
+				pm.setId(rset.getInt("ID"));
+				pm.setSelect_1(rset.getString("SELECT_1"));
+				pm.setSelect_2(rset.getString("SELECT_2"));
+				pm.setTitle(rset.getString("TITLE"));
+				pm.setContent(rset.getString("CONTENT"));
+				pm.setEdate(rset.getDate("ENROLL_DATE"));
+				pm.setViewcount(rset.getInt("VIEW_COUNT"));
+				pm.setType(rset.getString("TYPE"));
+				pm.setUserno(rset.getInt("USERNO"));
+				
+				userPick.add(pm);
+			}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return userPick;
+	}
+
+	public int browsePoint(Connection con, int userNo) {
+			
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		int pointResult = 0;
+		
+		String sql = prop.getProperty("browsePoint");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				
+				pointResult = rset.getInt("POINT");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return pointResult;
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.pick.model.vo.PickMe;
 import com.pick.model.vo.PickResult;
+import com.point.model.vo.Point;
 import com.profile.model.dao.ProfileDao;
 import com.profile.model.vo.Category;
 import com.user.model.vo.User;
@@ -197,5 +198,26 @@ public class ProfileService {
 		else rollback(con);
 		
 		return result;
+	}
+
+	public ArrayList<PickMe> browseUserPick(int userNo) {
+		
+		Connection con = getConnection();
+
+		ArrayList<PickMe> userPick = pDao.browseUserPick(con, userNo);
+		
+		close(con);
+		
+		return userPick;
+	}
+
+	public int browsePoint(int userNo) {
+		Connection con = getConnection();
+		
+		int pointResult= pDao.browsePoint(con, userNo);
+		
+		close(con);
+		
+		return pointResult;
 	}
 }

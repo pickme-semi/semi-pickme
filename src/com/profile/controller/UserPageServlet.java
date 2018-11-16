@@ -1,6 +1,7 @@
 package com.profile.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.common.SessionCheck;
+import com.pick.model.vo.PickMe;
 import com.profile.model.service.ProfileService;
 import com.user.model.vo.User;
 
@@ -41,11 +43,16 @@ public class UserPageServlet extends HttpServlet {
 			
 			User user = ps.userPage(userNo); 
 			
+			ArrayList<PickMe> userPick = new ArrayList<PickMe>();
+			
+			userPick = ps.browseUserPick(userNo);
+			
 			String page = " ";
 			if(user != null){
 				
 				page = "views/profile/userPage.jsp";
 				request.setAttribute("user", user);
+				request.setAttribute("userPick", userPick);
 				
 			}else{
 				page = "views/common/errorPage.jsp";
