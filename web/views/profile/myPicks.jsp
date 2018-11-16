@@ -9,9 +9,18 @@ int point = (Integer)request.getAttribute("point");
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
+
 <title>My Pick Page</title>
 
 <style>
+	.attr {
+	
+		height : 150px;
+		position : relative;
+		width : 150px;
+			}
 	.parent {
 		margin-left : auto;
 		margin-right : auto;
@@ -105,24 +114,27 @@ int point = (Integer)request.getAttribute("point");
 	
 	<section class="col-xs-12 col-md-12">
 	
-	<% if(!myPick.isEmpty()) { %>
-	 <% for (int i=0; i<myPick.size(); i++) {%>
-		<div class="parent" align=center>
-			<img class="child1" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_1() %>" />
-			<span class="or">or</span>
-			<img class="child2" src="/pickme/resources/PickUploadFiles/<%=myPick.get(i).getSelect_2() %>" />
-	    <div class="caption-container parent col-sm-5 col-md-4" align=center >
-	    <dl>
+	<%-- <% if(!myPick.isEmpty()) { %>
+	 <% for (int i=0; i<myPick.size(); i++) {%> --%>
+	 
+	 <div class="live-swell xs-12">
+            <div class="live-swell__pics">
+              <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
+              </div>
+              <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b"></div>
+                <div class="live-swell__pics__or">or</div>
+                  </div>
+                 <%--  <dl>
 	    	<dt> <%= myPick.get(i).getTitle() %></dt>
 	    	<dd style ="vertical-align : middle;"> <%= myPick.get(i).getContent() %></dd>
-	    </dl>
-	 	</div>
-	  </div>
+	    </dl> --%>
+              </div>
+	    
 	<br />
-	<% } %>
+	<%-- <% } %>
 		  <% } else{ %>
 		  <div align="center"><h5>작성한 게시글이 없습니다.</h5></div>
-		  <% } %>
+		  <% } %> --%>
 		
 	
 	
