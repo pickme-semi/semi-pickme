@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*"%>
-<% ArrayList<Integer> ageList = (ArrayList<Integer>)session.getAttribute("ageList"); %>
+<% ArrayList<Integer> ageList1 = (ArrayList<Integer>)session.getAttribute("ageList1"); %>
+<% ArrayList<Integer> ageList2 = (ArrayList<Integer>)session.getAttribute("ageList2"); %>
+<% ArrayList<Integer> genderList = (ArrayList<Integer>)session.getAttribute("genderList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,11 @@
 
 <!-- Or load different theme style -->
 <link rel="stylesheet" href="../../resources/stats/insight.css">
+<style>
+	.gPie{
+		
+	}
+</style>
 </head>
 <body>
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
@@ -30,8 +37,20 @@
 		<div class="chart">
 		<h5 align="center">연령별 pick</h5>
 		<div id="chart"></div>
-		<h5 align="center">성별 pick</h5>
-		<div id="PieChart"></div>
+		<div class = "genderPie row">
+			<div class = "col" id = "manPie" style = "visibility:hidden">
+			<h5 align="center">성별 pick</h5>
+			<div id="PieChart1" class = "gPie"></div>
+			</div>
+			<div class = "col" id = "mainPie">
+			<h5 align="center">성별 pick</h5>
+			<div id="PieChart2" class = "gPie"></div>
+			</div>
+			<div class = "col" id = "womanPie" style = "visibility:hidden">
+			<h5 align="center">성별 pick</h5>
+			<div id="PieChart3" class = "gPie"></div>
+			</div>
+		</div>
 		
 		</div>
 		
@@ -47,8 +66,8 @@
 		    	bindto: "#chart",
 		    	type:"bar",
 		        columns: [
-		        	
-		           ["pick2", <%= ageList.get(0) %>, <%= ageList.get(1) %>, <%= ageList.get(2) %>, <%= ageList.get(3) %>, <%= ageList.get(4) %>,<%= ageList.get(5) %>]
+		        	["pick1", <%= ageList1.get(0)+ageList1.get(1) %>, <%= ageList1.get(1) %>, <%= ageList1.get(2) %>, <%= ageList1.get(3) %>, <%= ageList1.get(4) %>,<%= ageList1.get(5) %>],
+		            ["pick2", <%= ageList2.get(0)+ageList2.get(1) %>, <%= ageList2.get(1) %>, <%= ageList2.get(2) %>, <%= ageList2.get(3) %>, <%= ageList2.get(4) %>,<%= ageList2.get(5) %>]
 		            
 		        ]
 		},
@@ -72,6 +91,7 @@
 			    ],
 			    type: "pie",
 			    onclick: function(d, i) {
+			    
 				console.log("onclick", d, i);
 			   },
 			    onover: function(d, i) {
@@ -81,9 +101,53 @@
 				console.log("onout", d, i);
 			   }
 			  },
-			  bindto: "#PieChart"
+			  bindto: "#PieChart1"
 			});
 
+		var chartGender = bb.generate({
+			  data: {
+			    columns: [
+				["남성", <%=genderList.get(0)%>],
+				["여성", <%=genderList.get(1)%>]
+			    ],
+			    type: "pie",
+			    onclick: function(d, i) {
+			    if(d.id == "data1"){
+			    $("#PieChart1").attr("style","visibility:visible");
+			    }else{
+			    $("#PieChart3").attr("style","visibility:visible");	
+			    }
+				console.log("onclick", d, i);
+			   },
+			    onover: function(d, i) {
+				console.log("onover", d, i);
+			   },
+			    onout: function(d, i) {
+				console.log("onout", d, i);
+			   }
+			  },
+			  bindto: "#PieChart2"
+			});
+		
+		var chartGender = bb.generate({
+			  data: {
+			    columns: [
+				["data1", 50],
+				["data2", 120]
+			    ],
+			    type: "pie",
+			    onclick: function(d, i) {
+				console.log("onclick", d, i);
+			   },
+			    onover: function(d, i) {
+				console.log("onover", d, i);
+			   },
+			    onout: function(d, i) {
+				console.log("onout", d, i);
+			   }
+			  },
+			  bindto: "#PieChart3"
+			});
 	</script>
 <% } %>
 </body>
