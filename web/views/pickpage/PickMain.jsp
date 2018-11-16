@@ -4,7 +4,8 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<PickMe> plist = (ArrayList<PickMe>)request.getAttribute("list");
-User u = (User)session.getAttribute("user");    
+	User u = (User)session.getAttribute("user");
+	int gg = 0; // 픽 ID
 %>
 <!DOCTYPE html>
 <html>
@@ -115,7 +116,7 @@ img{
 	if(plist != null){
 	for(int i =0; i<plist.size(); i++){
 	    pData = plist.get(i);
-	 	int gg = pData.getId();
+	 	gg = pData.getId();
 	%>
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="resultPickId" class="current" value="<%= gg %>"/> 
@@ -157,6 +158,10 @@ img{
 					hoji : hoji
 				}, success : function(data){
 					console.log("데이터 전달 성공!");
+					
+					// 게시글 내용도 같이 추가해야 함
+					// 예시 : $('.caption-container p').text(data.content);
+					
 				}, error :  function(request, status, error) {
 					console.log("실패!!!");
 					console.log(request);
@@ -186,17 +191,19 @@ img{
 	   </div>  
 	
 	
-		 <% 
-	for(int i =0; i<plist.size(); i++){
-	    pData = plist.get(i);
-	%>
 	
-	  <div class="caption-container" align="center">gggg
-	   
-	    <p><%= pData.getContent() %></p>
-	 
+	
+	  <div class="caption-container" align="center">
+	   <% 
+	for(int i =0; i<plist.size(); i++){
+		if(plist.get(i).getId() == gg){
+			pData = plist.get(i);
+	%>
+		<%-- <img src="/pickme/resources/profileImage/<%= user.getProfile() %>"/> --%>
+	    <p id="content<%=i%>"><%= pData.getContent() %></p>
+	  <% } } %> 	
 	  </div>
-	  <% } %> 	
+	 
 
 	
 			
@@ -208,7 +215,7 @@ img{
 		<div class="col-xs-12 col-md-8" align="center" >
 			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>
 			
-			<button type="button" onclick="location.href='views/pickpage/PickUpdate.jsp'">픽 수정</button>	
+			<button type="button" onclick="location.href='/pickme/pickview.pv'">픽 상세</button>	
 			
 		</div>
 		

@@ -179,7 +179,7 @@ public class PickDao {
 		HashMap<String, Object> hmap = null;
 		PickMe p = null;
 		
-		String sql = prop.getProperty("selectPickMeOne");
+		String sql = prop.getProperty("selectPickdetail");
 		
 		try {
 			pstmt = con.prepareStatement(sql);			
