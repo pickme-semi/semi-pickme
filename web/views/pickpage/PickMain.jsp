@@ -55,6 +55,11 @@ img{
   display: none;
 }
 
+/* 사용자 정보랑 넣기 */
+.alphago {
+  display: none;
+}
+
 /* 썸네일 눌렀을때 손가락으로 나오게하는것 */
 .cursor {
   cursor: pointer;
@@ -64,9 +69,10 @@ img{
 /* Container for image text */
 .caption-container {
   text-align: center;
-  background-color: #222;
+  background-color: lightpink;
   padding: 2px 16px;
   color: white;
+ 
 }
 
 .row:after {
@@ -126,11 +132,11 @@ img{
 	   <div class="mySlides" style="background-color : blue">          
 	        <div class="row" align="center">
 		<div class="col-md-6" align="center" style="background-color : pink" >
-			<img id="pick1" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
+			<img id="leftPick<%=i+1 %>" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
 			style="height:auto" onclick="plusSlides(<%=i+1%>);checkNumber(<%=gg %>);"  />
 		</div>	
 		<div class="col-md-6" align="center" style="background-color : green"> 
-			<img id="pick2" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
+			<img id="rightPick<%=i+1 %>" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
 			style="width:100%"onclick="checkNumber(<%=gg %>);plusSlides(<%=i+1%>);"/>
 		</div>
 		</div> 
@@ -139,25 +145,31 @@ img{
 	<% } %>
 	 
 	 <script>
-	 		
-	 	var countLeft = 2;
-		var hoji = "dddd";
-	
-	 $("#pick1").click(function(){
-		 console.log(countLeft);
-		    alert("The paragraph was clicked.");
+	 var checkN;
+	 function checkNumber(a)
+		{
+			checkN =a;
+			console.log('%d는 숫자 %d는 다음숫자', a, checkN);
+		}	
+	 	var countLeft = 1;
+	 	var countRight =2;
+		// img의 id에 pick 있으면 선택하기 
+	 $('img[id^="leftPick"]').click(function(){
+		 console.log("수정값"+checkN);
+		    alert("왼쪽클릭");
 		});
-	 $("#pick1").click(function(){
+	 $('img[id^="leftPick"]').click(function(){
 			$.ajax({
 				url : "/pickme/pickresult.pr",
 				type : "get",
 				data : {
 					selectUserNo : $('#selectUserNo').val(),
-					resultPickId : $('#resultPickId').val(),
-					selectResult : countLeft,
-					hoji : hoji
+					resultPickId : checkN,
+					selectResult : countLeft
+					
 				}, success : function(data){
-					console.log("데이터 전달 성공!");
+					// 선택한후 몇%의 값인지 우선 전달완료
+					console.log("데이터 전달 성공!"+data);
 					
 					// 게시글 내용도 같이 추가해야 함
 					// 예시 : $('.caption-container p').text(data.content);
@@ -172,13 +184,41 @@ img{
 				}
 			});
 		});
-	 
+	 $('img[id^="rightPick"]').click(function(){
+		 console.log("수정값"+checkN);
+		    alert("오른쪽클릭");
+		});
+	 $('img[id^="rightPick"]').click(function(){
+			$.ajax({
+				url : "/pickme/pickresult.pr",
+				type : "get",
+				data : {
+					selectUserNo : $('#selectUserNo').val(),
+					resultPickId : checkN,
+					selectResult : countRight
+					
+				}, success : function(data){
+					// 선택한후 몇%의 값인지 우선 전달완료
+					console.log("데이터 전달 성공!"+data);
+					
+					// 게시글 내용도 같이 추가해야 함
+					// 예시 : $('.caption-container p').text(data.content);
+					
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
 	 </script>
 	
 	
 	  <div class="row" >
-	   <% for(int i =0; i<plist.size(); i++){
-	    pData = plist.get(i);%> 
+	   <% for(int i =0; i<plist.size(); i++){   pData = plist.get(i); %> 
 	    <div class="column">
       <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>"
        style="width:200%"  onclick="currentSlide(<%=i+1 %>)">
@@ -196,12 +236,22 @@ img{
 	  <div class="caption-container" align="center">
 	   <% 
 	for(int i =0; i<plist.size(); i++){
-		if(plist.get(i).getId() == gg){
+
 			pData = plist.get(i);
 	%>
-		<%-- <img src="/pickme/resources/profileImage/<%= user.getProfile() %>"/> --%>
+	  	<div class="alphago">
+	  	
+	  	<% //유저 사진 %>	
+		<img src="/pickme/resources/profileImage/<%= user.getProfile() %>"/>
+		<% //PM_PICK_TB을 수정해서 UserId도 가져와야 여기다 넣을수 있을것같다. %>
+	    <p id="contentId<%=i%>">Pick등록IDNO = <%= pData.getUserno() %></p>
+	    
+	    <% //내용만 우선넣기 %>
 	    <p id="content<%=i%>"><%= pData.getContent() %></p>
-	  <% } } %> 	
+	  	
+	  	</div>
+	    
+	  <% } %> 	
 	  </div>
 	 
 
@@ -256,11 +306,7 @@ img{
 	
 	
 		<script>
-		function checkNumber(a)
-		{
-			var checkN =a;
-			console.log('%d는 숫자 %d는 다음숫자', a, checkN);
-		}
+		
 		// 처음은 1로 시작해놓는다	
 		var slideIndex = 1;
 		showSlides(slideIndex);
@@ -274,21 +320,50 @@ img{
 		}
 
 		function showSlides(n) {
-		  var i;
-		  var slides = document.getElementsByClassName("mySlides");
-		  var dots = document.getElementsByClassName("demo");
-		  var captionText = document.getElementById("caption");
-		  if (n > slides.length) {slideIndex = 1}
-		  if (n < 1) {slideIndex = slides.length}
-		  for (i = 0; i < slides.length; i++) {
-		      slides[i].style.display = "none";
-		  }
-		  for (i = 0; i < dots.length; i++) {
-		      dots[i].className = dots[i].className.replace(" active", "");
-		  }
-		  slides[slideIndex-1].style.display = "block";
-		  dots[slideIndex-1].className += " active";
-		  captionText.innerHTML = dots[slideIndex-1].alt;
+			var i;
+	        // 슬라이드
+	        var slides = document.getElementsByClassName("mySlides");
+	        // 썸네일
+	        var dots = document.getElementsByClassName("demo");
+	        // 사용자정보 내가할것
+	        var alphago = document.getElementsByClassName("alphago");
+	        
+	        // 무한이 아니니깐 아직 6이나온다.
+	        console.log('slides길이'+slides.length);
+	        
+	        // 캡션의 길이도 우선 6이다.
+	        console.log('captionText길이'+alphago.length);
+	        
+	        // 우선 12개 나온다 이거 수정해야한다
+	       // console.log('dots길이'+dots.length);
+	        
+	        // 6보다 크면 원래로 보내느건데 아직 사용 안함 
+	        if (n > slides.length) {slideIndex = 1}
+	        
+	        // 이런경우도 없음
+	        if (n < 1) {slideIndex = slides.length}
+	        
+	        // 슬라이드지정된거 이외 안보이게하기
+	        for (i = 0; i < slides.length; i++) {
+	            slides[i].style.display = "none";
+	        }
+	        // 캡선도지정된거 이외는 안보이게
+	        for (i = 0; i < alphago.length; i++) {
+	        	alphago[i].style.display = "none";
+	        }
+	        // 이거 사진 모두 비 활성화
+	        for (i = 0; i < dots.length; i++) {
+	            dots[i].className = dots[i].className.replace(" active", "");
+	        }
+	        // 슬라이드 전에꺼 안보이게 하기
+	        slides[slideIndex-1].style.display = "block";
+	        
+	        // 캡션 전에꺼 안보이게 하기
+	        alphago[slideIndex-1].style.display = "block";
+	        
+	        //섬네일 두개다 활성화시키기
+	        dots[(slideIndex-1)*2].className += " active";
+	        dots[(slideIndex*2)-1].className += " active";
 		}
 		
 		</script>
