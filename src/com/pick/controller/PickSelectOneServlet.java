@@ -37,7 +37,8 @@ public class PickSelectOneServlet extends HttpServlet {
 		if( !SessionCheck.login(request)) {
 			response.sendRedirect("views/common/NotLogin.jsp");
 		}else {
-			int pid = Integer.parseInt(request.getParameter("resultPickId"));
+			System.out.println(request.getParameter("Pid"));
+			int pid = Integer.parseInt(request.getParameter("Pid"));			
 			
 			HashMap<String, Object> Pick = new PickService().selectPickMeMap(pid);
 			
@@ -45,7 +46,7 @@ public class PickSelectOneServlet extends HttpServlet {
 			
 			String page ="";
 			if(Pick != null){
-				page = "views/Pickpage/PickSub.jsp";
+				page = "views/pickpage/PickSub.jsp";
 				request.setAttribute("PickMe", Pick.get("PickMe"));
 				
 			}else {

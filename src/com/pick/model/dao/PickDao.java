@@ -15,7 +15,7 @@ import java.util.Properties;
 import com.pick.model.vo.Attachment;
 import com.pick.model.vo.PickCategory;
 import com.pick.model.vo.PickMe;
-
+import com.user.model.vo.User;
 
 import static com.common.JDBCTemplate.*;
 
@@ -177,27 +177,34 @@ public class PickDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		HashMap<String, Object> hmap = null;
-		PickMe p = null;
+		PickMe p = new PickMe();
+		User u = new User();
 		
 		String sql = prop.getProperty("selectPickdetail");
 		
 		try {
-			pstmt = con.prepareStatement(sql);			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pid);
 			
 			rset = pstmt.executeQuery();
 			
+			
 		while(rset.next()){
+			
 			p.setId(pid);
 			p.setTitle(rset.getString("title"));
 			p.setContent(rset.getString("content"));
 			p.setSelect_1(rset.getString("select_1"));
 			p.setSelect_2(rset.getString("select_2"));
-						
+			
+			
+			//p.setUserid(rset.getString("userId"));
+			//p.setUserEmail(rset.getString("userEmail"));
+		//	p.setProfile(rset.getString("profile"));
 			System.out.println(p);
 		}
 		hmap = new HashMap<String, Object>();
 		hmap.put("PickMe", p);	
-		
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
