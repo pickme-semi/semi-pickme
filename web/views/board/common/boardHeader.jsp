@@ -17,10 +17,15 @@
 a{
  	color : black;
 }
- 
- *{
- 	font-family: '';
- }
+
+@font-face {
+	font-family : 'GODOM.TTF';
+	src : url('/pickme/resources/font/GODOM.TTF') format("truetype");
+}
+	
+* {
+	font-family : 'GODOM.TTF'
+}
  
 .pm-section{
 	background : ;
