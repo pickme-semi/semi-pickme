@@ -6,21 +6,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.common.SessionCheck;
 import com.profile.model.service.ProfileService;
+import com.user.encrypt.EncryptWrapper;
+import com.user.model.vo.User;
 
 /**
- * Servlet implementation class FollowerCheckServlet
+ * Servlet implementation class MyPageUpdate2Servlet
  */
-@WebServlet("/fCheck.pr")
-public class FollowerCheckServlet extends HttpServlet {
+@WebServlet("/mPageUpdate2.au")
+public class MyPageUpdate2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowerCheckServlet() {
+    public MyPageUpdate2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,25 +32,40 @@ public class FollowerCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int result = 0;
-		// 세션에 유저 정보 체크
-		// 로그인 유저만 접근가능
+		
 		if( !SessionCheck.login(request)) {
 			response.sendRedirect("views/common/NotLogin.jsp");
+			
 		}else {
-			if(request.getParameter("uno1") != null){
-				// 팔로우 끊을 사람의 번호
-				int userNo1 = Integer.parseInt(request.getParameter("uno1"));
-				// 내 번호 
-				int userNo2 = Integer.parseInt(request.getParameter("uno2"));
+			
+			String password = request.getParameter("userPass");
+			
+			System.out.println("servlet pwd : " + password);
+			
+			ProfileService ps = new ProfileService();
+			HttpSession session =  request.getSession(false);
+			User user = (User)session.getAttribute("user");
+			
+			if(!password.equals("")){
 				
-				ProfileService ps = new ProfileService();
+				user.setUserPass(password);
+			}else{
+				System.out.println("null일때 :" +user.getUserPass());
+				user.setUserPass(user.getUserPass());
+			}
+			
+			try{
+				ps.updateMyPage2(user);
+				response.sendRedirect("/pickme/mPicks.pr?uno=" + user.getUserNo());
 				
-				result = ps.followCheck(userNo1, userNo2);
+			} catch(Exception e) {
 				
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().println(result);
-				}
+			request.setAttribute("msg", "회원 정보 수정 실패!");
+			request.setAttribute("exception", e);
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
+			
+			
 		}
 	}
 

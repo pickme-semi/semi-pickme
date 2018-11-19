@@ -74,7 +74,7 @@
 	<h2><%= users.getUserId() %></h2>
 	<h5>한 줄 소개</h5>
 	<button id="fbtn" value="<%=users.getUserNo() %>">follow</button>
-	<button id="fbtn2"style="display:none" value="<%=user.getUserNo() %>">follow 취소</button>
+	<button id="fbtn2" style="display:none" value="<%=user.getUserNo() %>">follow 취소</button>
 	
 	<br />
 	<br />

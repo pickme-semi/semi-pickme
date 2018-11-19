@@ -220,4 +220,19 @@ public class ProfileService {
 		
 		return pointResult;
 	}
+
+	public int updateMyPage2(User user) {
+		Connection con = getConnection();
+		
+		int result = pDao.updateMyPage2(con, user);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+		
+		
+	}
 }
