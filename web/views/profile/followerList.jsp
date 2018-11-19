@@ -46,7 +46,7 @@
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%> 
-	<h2><%= user.getUserId() %> <i id="user" class="fas fa-cogs"></i></h2>
+	<h2><%= user.getUserId() %><i id="user" class="fas fa-cogs"></i></h2>
 	<h5>comment<i class="fas fa-pencil-alt"></i></h5>
 	
 	<ul class="nav justify-content-center" >
