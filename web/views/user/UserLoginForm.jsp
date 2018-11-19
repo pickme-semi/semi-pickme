@@ -10,11 +10,6 @@
 	.outer{
 		width : auto;
 		height : auto;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:100px;
-		margin-bottom:100px;
-	
 	}
 	
 	.form_input{
@@ -30,13 +25,42 @@
 		font-size : 10px;
 	}
 	
+	.login-bg{
+		background-image: url(/pickme/resources/images/bg/login-bg-img.jpg);
+		background-position: center center;
+		background-size: cover;
+		min-height: 100vh;
+		overflow: hidden;
+		position: absolute;
+		width: 100%;
+	}
+	
+	.login-top-p{
+		margin-left:200px;
+		margin-right:auto;
+		margin-top:auto;
+		margin-bottom:auto;
+	}
+	
 </style>
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
 
-<div class="outer col-xs-12 col-sm-8 col-md-6 col-lg-4 pm-section pm-input-form">
-<div class = "outer pm-input-form">
+<div class="outer col-xs-12 col-sm-12 col-md-12 col-lg-12 pm-section">
+
+<div class="row">
+	<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 login-bg"  style="height:300px">
+		<p class="login-top-p">test pick</p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-7" style="background:red;">
+		testrow-col
+	</div>
+	
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-5 pm-input-form">
 <br>
 <h2 align = "center"> 로그인 </h2>
 
@@ -79,6 +103,19 @@
 	</div>
 	
 </form>
+</div>
+</div>
+
+<div class="row">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-12" style="background:blue;height:600px" >
+		testrow
+	</div>
+</div>
+
+<div class="row">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-12" style="background:green;height:600px" >
+		testrow
+	</div>
 </div>
 <br><br>
 <script>
