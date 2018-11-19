@@ -14,13 +14,19 @@
 <script src="/pickme/resources/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 
 <style>
+	
  a{
  	color : black;
  }
  
- *{
- 	font-family: '';
- }
+	@font-face {
+		font-family : 'GODOM.TTF';
+		src : url('/pickme/resources/font/GODOM.TTF') format("truetype");
+	}
+	
+	* {
+		font-family : 'GODOM.TTF'
+	}
  
 .pm-section{
 	margin-left: auto;

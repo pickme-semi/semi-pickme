@@ -18,6 +18,19 @@
 		position : relative;
 		width : 50px;
 			}
+			
+		li {
+		padding-left : 15px;
+		padding-right : 15px;
+			}
+	
+		.nav-item:hover {
+			
+			border-bottom : 5px solid blue;
+			color : none;
+			text-decoration : none;
+			
+		}
 </style>
 </head>
 <body>
@@ -33,14 +46,27 @@
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%> 
-	<h2><%= user.getUserId() %></h2>
-	<h5>한 줄 소개</h5>
-	<a href="/pickme/fList.pr">Follower</a>
-	<a href="/pickme/fiList.pr">Following</a>
-	<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">My Picks</a>
-	<a href="/pickme/mPage.pr">My Page</a>
+	<h2><%= user.getUserId() %> <i id="user" class="fas fa-cogs"></i></h2>
+	<h5>comment<i class="fas fa-pencil-alt"></i></h5>
 	
+	<ul class="nav justify-content-center" >
+	  <li class="nav-item active">
+	    <a href="/pickme/fList.pr" style="color : none;
+		text-decoration : none;">팔로워</a>
+	  </li>
+	  <li class="nav-item">
+	    <a href="/pickme/fiList.pr" style="color : none;
+		text-decoration : none;">팔로잉</a>
+	  </li>
+	  <li class="nav-item">
+	    <a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>" style="color : none;
+		text-decoration : none;">나의 픽's</a>
+	  </li>
+	</ul>
 	</div>
+	<hr />
+	<br />
+	<br />
 	
 	<section class="works text-center">
 	

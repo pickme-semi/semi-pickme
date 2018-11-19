@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.*, com.pick.model.vo.*"%>
 <%
@@ -11,12 +12,19 @@ int point = (Integer)request.getAttribute("point");
 <meta charset="UTF-8">
 
 <link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+
 <title>My Pick Page</title>
 
 <style>
-	.live-swell-img{
-	padding : 0px;
+
+	@font-face {
+		font-family : 'GODOM.TTF';
+		src : url('/pickme/resources/font/GODOM.TTF') format("truetype");
+	}
+	
+	div, a {
+		font-family : 'GODOM.TTF'
 	}
 	
 	.attr {
@@ -105,15 +113,17 @@ int point = (Integer)request.getAttribute("point");
 	.nav-item:hover {
 		
 		border-bottom : 5px solid blue;
+		color : none;
+		text-decoration : none;
 		
 	}
 	
+
 	
 	
 </style>
 </head>
 <body>
-
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
 <% if( session.getAttribute("user") == null){ %>
 	<%@ include file="../common/NotLogin.jsp" %>
@@ -140,15 +150,19 @@ int point = (Integer)request.getAttribute("point");
 	</div>
 	<br /><br /><br />
 	
+	
 	<ul class="nav justify-content-center" >
 	  <li class="nav-item active">
-	    <a href="/pickme/fList.pr">팔로워</a>
+	    <a href="/pickme/fList.pr" style="color : none;
+		text-decoration : none;">팔로워</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="/pickme/fiList.pr">팔로잉</a>
+	    <a href="/pickme/fiList.pr" style="color : none;
+		text-decoration : none;">팔로잉</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">나의 픽's</a>
+	    <a href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>" style="color : none;
+		text-decoration : none;">나의 픽's</a>
 	  </li>
 	</ul>
 	</div>
@@ -172,7 +186,6 @@ int point = (Integer)request.getAttribute("point");
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_2() %>" alt="" />
-
               </div>
                 <div class="live-swell__pics__or">or</div>
                   </div>
