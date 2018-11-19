@@ -29,12 +29,14 @@
 		color : red;
 		font-size : 10px;
 	}
+	
 </style>
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
-<div class="col-xs-12 col-md-8 pm-section">
-<div class = "outer">
+
+<div class="outer col-xs-12 col-sm-8 col-md-6 col-lg-4 pm-section pm-input-form">
+<div class = "outer pm-input-form">
 <br>
 <h2 align = "center"> 로그인 </h2>
 
@@ -163,6 +165,7 @@
 </script>
 
 </div>
+
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

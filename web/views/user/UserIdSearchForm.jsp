@@ -14,13 +14,10 @@
     <!-- Bootstrap core CSS -->
     <link href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
-    
    	<style>
 	.outer{
-		width : 500px;
-		height : 350px;
+		width : auto;
+		height : auto;
 		background : mistyrose;
 		padding : 10px;
 		margin-left : auto;
@@ -39,55 +36,43 @@
 
 <%@ include file="../common/header.jsp" %>
 
-<div class="outer">
+<div class="outer col-lg-4 col-md-6 col-sm-8 col-xs-12 pm-input-form">
 	<form action="/pickme/idSearch.au" method="post">
+	<div>
 	<br />
 	<h2 align="center"> 아이디 찾기 </h2>
 	<br />	
-	<table align="center">
-		<tr>
-			<td>이름</td>
-			<td><input type="text" id="userName" name="userName" placeholder="이름"></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span></td>
-		</tr>
-		<tr>
-			<td>이메일</td>
-			<td><input type="text" id="userEmail" name="userEmail" placeholder="이메일"></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span></td>
-		</tr>
-	</table>
+		<div class="col-md-12" align="center">
+			<div class="form-group" style="width:300px">
+				<input class="form-control" type="text" id="userName" name="userName" placeholder="이름">
+				<span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span>
+			</div>
+			
+			<div class="form-group" style="width:300px">
+				<input class="form-control" type="text" id="userEmail" name="userEmail" placeholder="이메일">
+				<span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span>
+			</div>	
+		</div>
 	<div align="center"><span id = "showId" style="diaplay:none"></span></div>
 	<br />
 	<div class="btndiv" align="center">
-		<button type="button" id="searchId">아이디 찾기</button>
+		<button class="btn btn-primary" type="button" id="searchId">아이디 찾기</button>
 		<br><br>
 		<p id="p1">
 			비밀번호가 기억나지 않으신가요? <a href="/pickme/views/user/UserPassSearchForm.jsp">비밀번호 찾기</a>
 		</p>
-		
-		
 		<a href="/pickme/views/user/UserLoginForm.jsp">로그인</a>
 		/
 		<a href="/pickme/views/user/UserJoinForm.jsp">가입</a>
 	</div>
-	
+	</div>
 </form>
 </div>
-
+<br /><br /><br />
 
 <script>
-
 var nameFlag = false;
 var emailFlag = false;
-
 $(document).ready(function(){
 	
 	$("#userName").blur(function() {
@@ -102,7 +87,6 @@ $(document).ready(function(){
     
 	
 });
-
 function checkName(){
 	var oMsg = $("#nameMsg");
 	var name = $("#userName").val();
@@ -117,13 +101,10 @@ function checkName(){
     }
     
     return true;
-
 }
-
 function checkEmail() {
     var email = $("#userEmail").val();
     var oMsg = $("#emailMsg");
-
     if (email == "") {
     	showMsg(oMsg,"필수 정보입니다.","red");
         emailFlag = false;
@@ -134,7 +115,6 @@ function checkEmail() {
     
     return true;
 }
-
 $("#searchId").click(function(){
 	
 	if( emailFlag && nameFlag){
@@ -163,17 +143,14 @@ $("#searchId").click(function(){
 	}
 	
 });
-
 function showMsg(obj, msg) {
     obj.attr("style", "display:");
     obj.html(msg);
     obj.show();
 }
-
 function hideMsg(obj){
 	obj.attr("style","display:none");
 }
-
 </script>
 
 <%@ include file="../common/footer.jsp" %>

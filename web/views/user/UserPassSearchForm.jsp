@@ -7,8 +7,8 @@
 <title>비밀번호 찾기_[Pick Me]</title>
 <style>
 	.outer{
-		width : 500px;
-		height : 400px;
+		width : auto;
+		height : auto ;
 		background : mistyrose;
 		padding : 10px;
 		margin-left : auto;
@@ -20,40 +20,36 @@
 		
 		color: darkgrey;
 	}
-
 </style>
 </head>
 <body>
 
 <%@ include file="../common/header.jsp" %>
 
-<div class="outer">
+<div class="outer col-xs-12 col-md-6 col-sm-8 col-lg-4 pm-input-form" align="center">
 <br />
 <h2 align="center"> 비밀번호 찾기 </h2>
 <br />
 <form id="passSearch" action="/pickme/passSearch.au" method="post">
 	<table align="center">
 	<tr>
-		<td width="70px"> 아이디 </td>
-		<td><input type="text" name="userId" id ="userId" required="required" ></td>
+		<td><input placeholder="아이디" class="form-control"  type="text" name="userId" id ="userId" required="required" ></td>
 		<td></td>
 	</tr>
 	
 	<tr>
-		<td> 이메일</td>
-		<td><input type="text" name="userEmail" id="userEmail" required="required"></td>
-		<td><button type="button" id="sendAuCode">발송</button></td>
+		<td><input placeholder="이메일" class="form-control" type="text" name="userEmail" id="userEmail" required="required"></td>
+		<td><button type="button" id="sendAuCode" class="btn btn-primary">발송</button></td>
 	</tr>
 	<tr>
-		<td>인증코드</td>
-		<td><input type="text" name="userAuCode" id="sendCode"> </td>
-		<td><button type="button" id="checkCode">확인</button></td>
+		<td><input placeholder="인증코드" class="form-control"  type="text" name="userAuCode" id="sendCode"> </td>
+		<td><button type="button" id="checkCode" class="btn btn-primary">확인</button></td>
 		
 	</tr>
 	</table>
 	<br />
 	<div class="btndiv" align="center">
-		<button type="button" id="reissuePass">비밀번호 재설정</button>
+		<button type="button" id="reissuePass" class="btn btn-primary">비밀번호 재설정</button>
 		<br><br>
 		
 		<p id="p1">아이디가 기억나지 않으신가요? <a href="/pickme/views/user/UserIdSearchForm.jsp">아이디 찾기</a></p>
