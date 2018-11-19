@@ -74,8 +74,6 @@ div.inner {
 	%>
 	<%@ include file="../common/header.jsp"%>
 
-
-
 	<div class="container-fluid col-md-8 col-xs-12" align="center">
 		<h1><%=p.getTitle()%></h1>
 		<br><br>
@@ -83,16 +81,13 @@ div.inner {
 			<div class="outer" align="center">
 				<div class="inner" align="center">
 					<div class="">
-						<img alt="pick1" id="pick1"
+						<img alt="pick1" id="pick1" onerror="imgError(this);" 
 							src="<%=request.getContextPath()%>/resources/PickUploadFiles/<%=p.getSelect_1()%>" />
-						<img alt="pick2" id="pick2"
+						<img alt="pick2" id="pick2" onerror="imgError(this);" 
 							src="<%=request.getContextPath()%>/resources/PickUploadFiles/<%=p.getSelect_2()%>" />
 					</div>					
 				</div>
-				
 				<br><br>
-				
-				
 			<div class="row userprofile">				
 				<div class="col-md-3" >
 					<% if(p.getProfile() != null) {%>

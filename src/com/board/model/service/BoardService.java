@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.board.model.dao.BoardDao;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAnswer;
 import com.board.model.vo.BoardCategory;
 
 import static com.common.JDBCTemplate.*;
@@ -98,12 +99,12 @@ public class BoardService {
 		return list;
 	}
 
-	public Board selectReOne(int id) {
+	public BoardAnswer selectReOne(int id) {
 		Connection con = getConnection();
-		Board br = bDao.selectReOne(con, id);
+		BoardAnswer ba = bDao.selectReOne(con, id);
 		close(con);
 		
-		return br;
+		return ba;
 
 	}
 

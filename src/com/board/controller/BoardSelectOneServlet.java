@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAnswer;
 import com.common.SessionCheck;
 
 /**
@@ -40,17 +41,17 @@ public class BoardSelectOneServlet extends HttpServlet {
 			System.out.println(id);
 			
 			Board b = new BoardService().selectOne(id);
-			Board br = new BoardService().selectReOne(id);
-			
-
-			
+			BoardAnswer ba = new BoardService().selectReOne(id);
 			
 			String page = "";
 			
 			if(b != null){
 				page = "views/board/boardDetail.jsp";
 				request.setAttribute("board", b);
-				if(b.getStatus() == "BOT002") request.setAttribute("boardRe", br);
+				if(b.getStatus().equals("STA002")) request.setAttribute("answer", ba);
+				
+				System.out.println("b : " + b);
+				System.out.println("ba : " + ba);
 				
 			} else {		
 				page = "views/commcon/errorPage.jsp";

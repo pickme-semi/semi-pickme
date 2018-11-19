@@ -26,3 +26,12 @@
 	position: absolute;
 	width: 100%;	
 } 
+
+@font-face{
+	font-family: 'NanumSquareRound',sans-serif;
+	src : url(/pickme/resources/font/NANUMSQUAREROUNDEB.TTF) format('truetype');
+}
+
+*{
+	background: ;
+}

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAnswer;
 import com.board.model.vo.BoardCategory;
 
 import static com.common.JDBCTemplate.*;
@@ -376,10 +377,10 @@ public class BoardDao {
 		return list;
 	}
 
-	public Board selectReOne(Connection con, int id) {
+	public BoardAnswer selectReOne(Connection con, int id) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Board br = null;
+		BoardAnswer ba = null;
 		String sql = prop.getProperty("selectReOne");
 		
 		try {
@@ -388,17 +389,14 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				br = new Board();
+				ba = new BoardAnswer();
 				
-				br.setId(rset.getInt("ID"));
-				br.setCategoryId(rset.getInt("BOARD_ID"));
-				br.setUserNo(rset.getInt("USER_NO"));
-				br.setContent(rset.getString("CONTENT"));
-				br.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				
+				ba.setId(rset.getInt(1));
+				ba.setbId(rset.getInt(2));
+				ba.setUserNo(rset.getInt(3));
+				ba.setContent(rset.getString(4));
+				ba.setEnrollDate(rset.getDate(5));
 			}
-					
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -406,7 +404,7 @@ public class BoardDao {
 			close(rset);
 			close(pstmt);
 		}
-		return br;
+		return ba;
 	}
 	
 

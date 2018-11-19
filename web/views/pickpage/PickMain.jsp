@@ -139,7 +139,7 @@ img{
 	   <div class="mySlides" style="background-color : blue">          
 	        <div class="row" align="center">
 		<div class="col-md-6" align="center" style="background-color : #64D6FF" >
-			<img id="leftPick<%=i+1 %>" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
+			<img id="leftPick<%=i+1 %>" onerror="imgError(this);" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
 			style="height:auto" onclick="plusSlides(<%=i+1%>);checkNumber(<%=gg %>);"  />
 		</div>	
 		<div class="col-md-6" align="center" style="background-color : #64D6FF"> 
@@ -228,11 +228,11 @@ img{
 	   <% for(int i =0; i<plist.size(); i++){   pData = plist.get(i); %> 
 	    <div class="column">
       <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>"
-       style="width:200%"  onclick="currentSlide(<%=i+1 %>)">
+       style="width:200%" onerror="imgError(this);"  onclick="currentSlide(<%=i+1 %>)">
     </div>
     <div class="column">
       <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
-       style="width:200%" onclick="currentSlide(<%=i+1 %>)" >
+       style="width:200%" onerror="imgError(this);" onclick="currentSlide(<%=i+1 %>)" >
     </div>
 	    <% } %>	    
 	   </div>  

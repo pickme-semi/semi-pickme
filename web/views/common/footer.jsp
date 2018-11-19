@@ -261,6 +261,14 @@ For further information regarding JS Foundation licensing and intellectual prope
 	  </div>
 	</div>
 </div>
+
+<script>
+function imgError(image) {
+    image.onerror = "";
+    image.src = "/pickme/resources/images/noimg.png";
+    return true;
+}
+</script>
 </body>
 
 </html>

@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.board.model.vo.Board" %>
+<%@ page import="com.board.model.vo.BoardAnswer" %>
 <%
 	String type = (String)session.getAttribute("bType");
 	Board b = (Board)request.getAttribute("board");
-	Board br = (Board)request.getAttribute("boredRe");
+	BoardAnswer ba = ((BoardAnswer)request.getAttribute("answer") != null)? (BoardAnswer)request.getAttribute("answer") : null;
 	
 %>
 <!DOCTYPE html>
@@ -21,65 +22,54 @@
 <% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	
-	
 	<div class="pm-section col-xs-12 col-md-8">
 		
-		<table>
-
-
-				<tr>
-					<td>문의 유형</td>
-					<td><span><%= b.getCategoryId() %></span></td>
-					<td>문의 제목</td>
-					<td><span><%= b.getTitle() %></span></td>								
-					<td>작성일</td>
-					<td><span><%= b.getEnrollDate() %></span>
-				</tr>
-														
-									
+		<table class="table table-bordered">
+				<thead class="thead-light">
+					<tr>
+						<th>문의 유형</th>
+						<th><span><%= b.getCategoryId() %></span></th>
+						<th>문의 제목</th>
+						<th><span><%= b.getTitle() %></span></th>								
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<th><span><%= b.getUserNo() %></span></th>								
+						<th>작성일</th>
+						<th><span><%= b.getEnrollDate() %></span></th>
+					</tr>
+				</thead>
 				<tr> 
-					<td colspan="2" class="answer" >
-					<div class="inner"><br><br>
-												
-					<p id="content"><%= b.getContent() %></p>
-					
-					
-									
-					</div>
+					<td colspan="4" class="answer" style="height:300px">
+						<div class="inner">
+							<p id="content"><%= b.getContent() %></p>
+						</div>
 					</td>
 				</tr>
-						
-										
-				</tbody>
-			</table>
-			
-			<% if(br.getContent() != null){ %>
-			<table>
-				<hr><br><br>
-				<h5>답변</h5>
-				
+			<% if(ba != null){ %>
+				<tr>
+					<td colspan="4" align="center">답변</td>
+				</tr>
 				<tr>							
 					<td>작성일</td>
-					<td><span><%= br.getEnrollDate() %></span>
+					<td><span><%= ba.getEnrollDate() %></span>
 					<td>담당자</td>
-					<td><span><%= br.getUserNo() %></span>
+					<td><span><%= ba.getUserNo() %></span>
 				</tr>
-														
-									
 				<tr> 
-					<td colspan="2" class="answer" >
+					<td colspan="4" class="answer" >
 					<div class="inner"><br><br>
-												
-					<p id="content"><%= br.getContent() %></p>
-									
+					<p id="content"><%= ba.getContent() %></p>
 					</div>
 					</td>
 				</tr>		
-			
+			<% }else{ %>
+				<tr>
+					<td colspan="4" align="center">등록된 답변이 없습니다.</td>
+				</tr>
+			<% } %>
+			</tbody>
 			</table>
-			<%} %>
-			
-			
 			
 		<div align="center">
 			
