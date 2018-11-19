@@ -124,9 +124,11 @@ img{
 	    pData = plist.get(i);
 	 	gg = pData.getId();
 	%>
+	<form method="post" action="<%= request.getContextPath() %>/pickview.pv">
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
-	      	<input type="hidden" id="resultPickId" class="current" value="<%= gg %>"/> 
-	
+	      	<input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
+	      	<input type="submit" value="픽 상세 <%= gg %>" />	
+	</form>
 	  <!-- Full-width images with number text -->
 	<div class="container " >	 
 	   <div class="mySlides" style="background-color : blue">          
@@ -248,7 +250,7 @@ img{
 	    
 	    <% //내용만 우선넣기 %>
 	    <p id="content<%=i%>"><%= pData.getContent() %></p>
-	  	
+	  	<input type="hidden" id="resultPickId" name="pid" class="current" value="<%= gg %>"/> 
 	  	</div>
 	    
 	  <% } %> 	
@@ -263,9 +265,7 @@ img{
 		
 		
 		<div class="col-xs-12 col-md-8" align="center" >
-			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>
-			
-			<button type="button" onclick="location.href='/pickme/pickview.pv'">픽 상세</button>	
+			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>			
 			
 		</div>
 		
