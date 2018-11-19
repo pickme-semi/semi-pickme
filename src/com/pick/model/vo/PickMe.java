@@ -12,7 +12,7 @@ public class PickMe implements Serializable{
 	private String select_2; // 2번 pick
 	private String title; // pick 제목
 	private String content; // pick 게시글 내용
-	private int category; // pick 카테고리
+	// private int category; // pick 카테고리
 	private Date edate; // pick 업로드 일자
 	private int viewcount; // pick 상세 조회수
 	private Date ddate; // pick 마감일자.
@@ -20,7 +20,7 @@ public class PickMe implements Serializable{
 	private int userno; // pick 작성자 id
 	
 	// pick 상세페이지용 user data 받기
-	private String userId;
+	private String userId;  
 	private String userEmail;
 	private Date birthdate;
 	private String gender;
@@ -31,19 +31,19 @@ public class PickMe implements Serializable{
 	public PickMe(){}	
 	
 
-	public PickMe(String select_1, String select_2, String title, int category, Date ddate) {
+	public PickMe(String select_1, String select_2, String title, /*int category,*/ Date ddate) {
 		super();
 		this.select_1 = select_1;
 		this.select_2 = select_2;
 		this.title = title;
-		this.category = category;		
+	//	this.category = category;		
 		this.ddate = ddate;
 		// pick 메인 페이지용 객체
 		
 	}
 
 
-	public PickMe(int id, String select_1, String select_2, String title, String content, int category, Date edate,
+	public PickMe(int id, String select_1, String select_2, String title, String content, /*int category,*/ Date edate,
 			int viewcount, Date ddate, String type, int userno) {
 		super();
 		this.id = id;
@@ -51,7 +51,7 @@ public class PickMe implements Serializable{
 		this.select_2 = select_2;
 		this.title = title;
 		this.content = content;
-		this.category = category;
+		//this.category = category;
 		this.edate = edate;
 		this.viewcount = viewcount;
 		this.ddate = ddate;
@@ -64,7 +64,7 @@ public class PickMe implements Serializable{
 	
 	
 	
-	public PickMe(int id, String select_1, String select_2, String title, String content, int category, Date edate,
+	public PickMe(int id, String select_1, String select_2, String title, String content, /*int category,*/ Date edate,
 			int viewcount, Date ddate, String type, int userno, String userId, String userEmail, Date birthdate,
 			String gender, String profile) {
 		super();
@@ -73,7 +73,7 @@ public class PickMe implements Serializable{
 		this.select_2 = select_2;
 		this.title = title;
 		this.content = content;
-		this.category = category;
+		//this.category = category;
 		this.edate = edate;
 		this.viewcount = viewcount;
 		this.ddate = ddate;
@@ -92,12 +92,16 @@ public class PickMe implements Serializable{
 	
 
 
+	
+	
+
+
 	@Override
 	public String toString() {
 		return "PickMe [id=" + id + ", select_1=" + select_1 + ", select_2=" + select_2 + ", title=" + title
-				+ ", content=" + content + ", category=" + category + ", edate=" + edate + ", viewcount=" + viewcount
-				+ ", ddate=" + ddate + ", type=" + type + ", userno=" + userno + ", userid=" + userId + ", userEmail="
-				+ userEmail + ", birthdate=" + birthdate + ", gender=" + gender + ", profile=" + profile + "]";
+				+ ", content=" + content + ", edate=" + edate + ", viewcount=" + viewcount + ", ddate=" + ddate
+				+ ", type=" + type + ", userno=" + userno + ", userId=" + userId + ", userEmail=" + userEmail
+				+ ", birthdate=" + birthdate + ", gender=" + gender + ", profile=" + profile + "]";
 	}
 
 
@@ -148,16 +152,6 @@ public class PickMe implements Serializable{
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-
-	public int getCategory() {
-		return category;
-	}
-
-
-	public void setCategory(int category) {
-		this.category = category;
 	}
 
 
@@ -214,12 +208,12 @@ public class PickMe implements Serializable{
 
 
 
-	public String getUserid() {
+	public String getUserId() {
 		return userId;
 	}
 
 
-	public void setUserid(String userid) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
