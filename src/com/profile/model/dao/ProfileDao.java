@@ -439,6 +439,8 @@ public class ProfileDao {
 			
 			pstmt = con.prepareStatement(sql);
 
+			
+			
 			pstmt.setInt(1, userNo2);
 			pstmt.setInt(2, userNo1);
 			
@@ -483,6 +485,8 @@ public class ProfileDao {
 				
 				myPick.add(pm);
 			}
+			
+			System.out.println("myPick : " + myPick);
 		
 		} catch (SQLException e) {
 			
@@ -609,5 +613,32 @@ public class ProfileDao {
 		
 		return pointResult;
 	}
+
+	public int updateMyPage2(Connection con, User user) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMyPage2");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user.getUserPass());
+			pstmt.setInt(2, user.getUserNo());
+			result = pstmt.executeUpdate();
+			
+			System.out.println(user.getUserPass());
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 }

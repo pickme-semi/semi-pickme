@@ -39,7 +39,6 @@
 	border: 5px solid rgb(1, 5, 0);
 	border-radius: 5px;
 	margin: 0 auto;
-	padding: 3px;
 	position: relative;
 	width: 300px
 }
@@ -62,10 +61,6 @@
 	/* background-image: url(/img/live-swells/food-a-604e817829.jpg); */
 	border-bottom: 3px solid rgb(1, 5, 0);
 	height: 185px
-}
-
-.live-swell__pics__pic--b {
-	/* background-image: url(/img/live-swells/food-b-d1adfeb4ca.jpg) */
 }
 
 .live-swell__pics__or {

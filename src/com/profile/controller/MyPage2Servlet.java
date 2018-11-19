@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.common.SessionCheck;
-import com.profile.model.service.ProfileService;
-
 /**
- * Servlet implementation class FollowerCheckServlet
+ * Servlet implementation class MyPage2Servlet
  */
-@WebServlet("/fCheck.pr")
-public class FollowerCheckServlet extends HttpServlet {
+@WebServlet("/mPage2.pr")
+public class MyPage2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowerCheckServlet() {
+    public MyPage2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,26 +26,7 @@ public class FollowerCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int result = 0;
-		// 세션에 유저 정보 체크
-		// 로그인 유저만 접근가능
-		if( !SessionCheck.login(request)) {
-			response.sendRedirect("views/common/NotLogin.jsp");
-		}else {
-			if(request.getParameter("uno1") != null){
-				// 팔로우 끊을 사람의 번호
-				int userNo1 = Integer.parseInt(request.getParameter("uno1"));
-				// 내 번호 
-				int userNo2 = Integer.parseInt(request.getParameter("uno2"));
-				
-				ProfileService ps = new ProfileService();
-				
-				result = ps.followCheck(userNo1, userNo2);
-				
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().println(result);
-				}
-		}
+		request.getRequestDispatcher("views/profile/myPage2.jsp").forward(request, response);
 	}
 
 	/**
