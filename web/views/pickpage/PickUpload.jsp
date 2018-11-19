@@ -172,10 +172,10 @@
 		<div class="container-fluid" align="center">
 	<div class="row col-md-8 col-xs-12" align="center" >
 		<div class="col-md-6" id="upfile1" >
-			<img alt="upload1" id="pick1" src="#" alt="" />
+			<img onerror="imgError(this);" alt="upload1" id="pick1" src="#" alt="" />
 		</div>
 		<div class="col-md-6" id="upfile2" >
-			<img alt="upload2" id="pick2" src="#" alt=""  />
+			<img onerror="imgError(this);" alt="upload2" id="pick2" src="#" alt=""  />
 		</div>
 	</div>
 </div>
