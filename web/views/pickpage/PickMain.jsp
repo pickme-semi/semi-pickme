@@ -69,7 +69,8 @@ img{
 /* Container for image text */
 .caption-container {
   text-align: center;
-  background-color: lightpink;
+  background-color: #64D6FF;
+
   padding: 2px 16px;
   color: white;
  
@@ -94,7 +95,11 @@ img{
   max-width: 100%;
   height: auto !important;
 }
-
+.attr {
+    height: 50px;
+    position: relative;
+    width: 50px;
+}
 .active,
 .demo:hover {
   opacity:5;
@@ -133,11 +138,11 @@ img{
 	<div class="container " >	 
 	   <div class="mySlides" style="background-color : blue">          
 	        <div class="row" align="center">
-		<div class="col-md-6" align="center" style="background-color : pink" >
+		<div class="col-md-6" align="center" style="background-color : #64D6FF" >
 			<img id="leftPick<%=i+1 %>" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
 			style="height:auto" onclick="plusSlides(<%=i+1%>);checkNumber(<%=gg %>);"  />
 		</div>	
-		<div class="col-md-6" align="center" style="background-color : green"> 
+		<div class="col-md-6" align="center" style="background-color : #64D6FF"> 
 			<img id="rightPick<%=i+1 %>" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
 			style="width:100%"onclick="checkNumber(<%=gg %>);plusSlides(<%=i+1%>);"/>
 		</div>
@@ -244,9 +249,9 @@ img{
 	  	<div class="alphago">
 	  	
 	  	<% //유저 사진 %>	
-		<img src="/pickme/resources/profileImage/<%= user.getProfile() %>"/>
+		<img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr"/>
 		<% //PM_PICK_TB을 수정해서 UserId도 가져와야 여기다 넣을수 있을것같다. %>
-	    <p id="contentId<%=i%>">Pick등록IDNO = <%= pData.getUserno() %></p>
+		 <p id="contentId<%=i%>">Pick등록ID = <%= pData.getUserId() %></p>
 	    
 	    <% //내용만 우선넣기 %>
 	    <p id="content<%=i%>"><%= pData.getContent() %></p>
