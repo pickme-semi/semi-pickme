@@ -43,7 +43,7 @@ public class SearchServlet extends HttpServlet {
 			// @유저 검색,
 			// #카테고리 검색,
 			// 아무것도 없을때 픽검색
-			String search = request.getParameter("userSearch");
+			String search = (request.getParameter("userSearch") == null)? "" : " ";
 			String option = "";
 			
 			SearchService ss = new SearchService();
