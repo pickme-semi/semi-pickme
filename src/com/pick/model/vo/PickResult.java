@@ -12,6 +12,12 @@ public class PickResult {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public PickResult(int id, int result) {
+		super();
+		this.id = id;
+		this.result = result;
+	}
+	
 	public PickResult(int id, int result, Date ddate, int userno) {
 		super();
 		this.id = id;
