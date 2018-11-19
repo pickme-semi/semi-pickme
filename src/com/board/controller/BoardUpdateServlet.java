@@ -6,22 +6,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
 import com.common.SessionCheck;
 
 /**
- * Servlet implementation class BoardDetailServlet
+ * Servlet implementation class BoardUpdateServlet
  */
-@WebServlet("/selectOne.bo")
-public class BoardSelectOneServlet extends HttpServlet {
+@WebServlet("/bUpdate.bo")
+public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSelectOneServlet() {
+    public BoardUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,36 +31,42 @@ public class BoardSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션에 유저 정보 체크
-		// 로그인 유저만 접근가능
+
 		if( !SessionCheck.login(request)) {
 			response.sendRedirect("views/common/NotLogin.jsp");
+		
 		}else {
 			int id = Integer.parseInt(request.getParameter("id"));
-			
-			System.out.println(id);
-			
-			Board b = new BoardService().selectOne(id);
-			Board br = new BoardService().selectReOne(id);
-			
-
+			BoardService bs = new BoardService();
+			Board b = bs.selectOne(id);
 			
 			
-			String page = "";
+			String content = request.getParameter("content");
+			int pickId = (request.getParameter("pickId") != null)? Integer.parseInt(request.getParameter("pickId")) : 0; 
 			
-			if(b != null){
-				page = "views/board/boardDetail.jsp";
+			
+			
+			System.out.println("content : " + content);
+			System.out.println("id : " + id);
+			System.out.println("pickid : " + pickId);
+			
+			b.setId(id);
+			b.setContent(content);
+			b.setPickId(pickId);
+			
+			int result = bs.updateBoard(b);
+			
+			if(result > 0){
 				request.setAttribute("board", b);
-				if(b.getStatus() == "BOT002") request.setAttribute("boardRe", br);
-				
-			} else {		
-				page = "views/commcon/errorPage.jsp";
-				
+				request.getRequestDispatcher("views/board/boardDetail.jsp");
+			}else{
+				request.getRequestDispatcher("views/common/errorPage.jsp");
 			}
-			request.getRequestDispatcher(page).forward(request, response);
+			
+			
 		}
-
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

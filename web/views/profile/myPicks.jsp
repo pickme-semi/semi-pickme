@@ -120,6 +120,8 @@ int point = (Integer)request.getAttribute("point");
 	 <div class="live-swell xs-12">
             <div class="live-swell__pics">
               <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
+              		
+              
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b"></div>
                 <div class="live-swell__pics__or">or</div>

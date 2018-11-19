@@ -53,17 +53,23 @@ public class PickDao {
 			while(rset.next()){
 				PickMe pm = new PickMe();
 				
-				pm.setId(rset.getInt("id"));
-				pm.setSelect_1(rset.getString("select_1"));
-				pm.setSelect_2(rset.getString("select_2"));
-				pm.setTitle(rset.getString("title"));
-				pm.setContent(rset.getString("content"));
-				pm.setEdate(rset.getDate("enroll_date"));
-				pm.setViewcount(rset.getInt("view_count"));
-				pm.setDdate(rset.getDate("due_date"));
-				pm.setType(rset.getString("type"));
-				pm.setUserno(rset.getInt("userno"));
-				//pm.setCategory(0);				
+				pm.setId(rset.getInt(1));
+				pm.setSelect_1(rset.getString(2));
+				pm.setSelect_2(rset.getString(3));
+				pm.setTitle(rset.getString(4));
+				pm.setContent(rset.getString(5));
+				pm.setEdate(rset.getDate(6));
+				pm.setViewcount(rset.getInt(7));
+				pm.setDdate(rset.getDate(8));
+				pm.setType(rset.getString(9));
+				pm.setUserno(rset.getInt(10));
+				pm.setUserId(rset.getString(12));
+				pm.setUserEmail(rset.getString(14));
+				pm.setBirthdate(rset.getDate(16));
+				pm.setGender(rset.getString(17));
+				pm.setProfile(rset.getString(19));
+				System.out.println(pm);
+				//				pm.setCategory(0);
 				list.add(pm);
 			}
 			

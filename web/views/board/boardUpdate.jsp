@@ -3,9 +3,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.board.model.vo.*" %>
 
-<%
-	
+<%	
 	String type = (String)session.getAttribute("bType");
+	ArrayList<BoardCategory> categoryList = (ArrayList<BoardCategory>)session.getAttribute("cateList");
 	Board b = (Board)request.getAttribute("board");
 	
 %>
@@ -23,48 +23,48 @@
 
 	<%@ include file="common/boardHeader.jsp" %>
 	<div class="pm-section col-xs-12 col-md-8" align="center">
-		<form id="insertForm" style="width : 50%" enctype="multipart/form-data">
-			
-			
+		<form id="insertForm" action="/pickme/insert.bo" style="width : 50%;">
 			<h1>입력폼</h1>
 			
-			<table>
-			<tr>
-					<td>  카테고리 :</td>
-					<td><span><%= b.getCategoryId() %>&nbsp;&nbsp;</span></td>
-					<td>  제목 : </td>
-					<td><span><%= b.getTitle() %>&nbsp;&nbsp;</span></td>
-					<td>  작성일 :</td>
-					<td><span><%= b.getEnrollDate() %>&nbsp;&nbsp;</span>
-			</tr>							
-			<tr> 
-					<td colspan="2" class="answer" >
-					<div class="inner"><br><br>
-												
-					<p><%= b.getContent() %></p>
 					
-					</div>
-				</td>
-			</tr>
-			</table>		
 
-			<div class="row">
-				
+				<div class="row">
+				<label for="">카테고리&nbsp; : &nbsp;&nbsp;</label>
+									
+					<% for(int i = 0; i< categoryList.size(); i++){
+						if(categoryList.get(i).getId() == b.getCategoryId()){ %>		
+						<p> <%= categoryList.get(i).getConetent() %></p>		
+					<% 	}						
+					}%>
+			
 			</div>
 
 
+			
+			<div class="row">
+				<p><%= b.getTitle() %></p>
+			</div>
 			<br />
 			<div class="row">
-				<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required"></textarea>
+				<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required"><%= b.getContent() %>
+				</textarea>
 				<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p>
 			</div>
 			
 			
+			
+			<!-- 신고-->
+			<% if(type.equals("report")){ %>
+				<div class="row">
+					<input type="text" value="pickid" name="pickId"/><%= b.getPickId() %>
+				</div>
+			<% } %>
+			<br />
 			<div class="" align="center">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#successModal" id="succcessBtn">작성</button>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">취소</button>
 			</div>
-		
+			<input type="hidden" id="bType" name="bType" value="<%=type%>" />
 		</form>
 	</div>
 	<%@ include file="../common/footer.jsp" %>
@@ -121,37 +121,32 @@
 	$("#content").keypress(function(){
 		$("#errorContent").attr("style", "display:none;color:red;");
 	});
-
-
-	
+		
 	$("#btnCancle").click(function(){
 		cancelBoard();
 		location.href = "/pickme/list.bo";
 	});
-
 		
 	function cancelBoard(){
 		$("input").val("");
 		$("textarea").val("");
 	}
 	
-	
 	 $("#btnSuccess").click(function(){
 	      var reData = new Object();
 	      
-	      reData.bid = '<%=b.getId()%>';
+	      reData.id = '<%=b.getId()%>';
 	      reData.content = $('#content').val();
+	      reData.pickId = $('#pickId').val();
 	      
 	      $.ajax({
-	         url : "/pickme/reInsert.bo",
+	         url : "/pickme/bUpdate.bo",
 	         rype : "get",
 	         data : reData,
-	         success : function(data) { location.href="list.bo?bType=admin";},
+	         success : function(data) { location.href="/pickme/selectOne.bo?id=" + "<%=b.getId()%>";},
 	         error    : function(data) { console.log("오류"); }
 	      });
 	   });
-	      
-	
 </script>
 	
 <% } %>

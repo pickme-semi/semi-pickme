@@ -68,4 +68,43 @@ public class BoardService {
 		return result;
 	}
 
+	public int updateBoard(Board b) {
+		Connection con = getConnection();
+		int result = bDao.updateBoard(con, b);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		close(con);
+		return result;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		
+		int listCount = bDao.getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> selectList(int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<Board> list = bDao.selectList(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public Board selectReOne(int id) {
+		Connection con = getConnection();
+		Board br = bDao.selectReOne(con, id);
+		close(con);
+		
+		return br;
+
+	}
+
 }

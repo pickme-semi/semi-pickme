@@ -16,11 +16,11 @@
 	}
 	
 	.form_field{
-		width : 400px;
+		width : 300px;
 	}
 	
 	.form_label{
-		align : left;
+		align : ;
 	}
 	
 	.error_next_box{
@@ -31,76 +31,56 @@
 	#p1{
 	 color : grey;
 	}
-
 </style>
 </head>
-
-
-
 <body>
 <%@ include file="../common/header.jsp" %>
-<section class="pm-section col-xs-12 col-md-8">
-<div class = "outer">
+<div class="outer col-xs-12 col-sm-8 col-md-6 col-lg-4 pm-input-form">
 <br>
 <h2 align = "center"> 회원가입 </h2>
 <br />
 <form id = "joinform" action="/pickme/userJoin.au" method="post">
 
-	<div align="center">
-		<div class = "form_field">
-			<div align="left">
-				<label class = "form_label" for="userId">아이디</label>
-			</div>
-			<div class = "form_input">
-				<input type="text" name="userId" id ="userId" class="form-control" required="required" maxlength="20" >
+	<div class="col-md-12" align="center">
+		<div class = "form_field form-group">
+			<div class = "form_input" style="width:300px">
+				<input placeholder="아이디" type="text" name="userId" id ="userId" class="form-control" required="required" maxlength="20" >
 			</div>
 			<div>
 				<span class="error_next_box" id="idMsg" style="display:none" role="alert"></span>
 			</div>
 		</div>
 		<br />
-		<div class = "form_field">
-			<div align="left">
-				<label class = "form_label" for="userPwd">비밀번호</label>
-			</div>
-			<div class="form_input">
-				<input type="password" class="form-control" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20">			
+		<div class = "form_field form-group">
+			<div class="form_input" style="width:300px">
+				<input placeholder="비밀번호" type="password" class="form-control" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20">			
 			</div>
 			<div>
 				<span class="error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
 			</div>
 		</div>
 		<br />
-		<div class = "form_field">
-			<div align="left">
-				<label class = "form_label" for="userPwd2">비밀번호 확인</label>
-			</div>
-			<div class="form_input">
-				<input type="password" class="form-control" id="userPwd2" name="userPass2" required="required" aria-describedby="pswd1Msg" maxlength="20">			
+		<div class = "form_field form-group">
+			<div class="form_input" style="width:300px">
+				<input placeholder="비밀번호" type="password" class="form-control" id="userPwd2" name="userPass2" required="required" aria-describedby="pswd1Msg" maxlength="20">			
 			</div>
 			<div>
 				<span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span>
 			</div>
 		</div>
 		<br />
-		<div class = "form_field">
-			<div align="left">
-				<label class = "form_label" for="userName">이름</label>
-			</div>
-			<div class="form_input">
-				<input type="text" class="form-control" maxlength="5" id="userName" name="userName" required="required" >			
+		<div class = "form_field form-group">
+			<div class="form_input" style="width:300px">
+				<input placeholder="이름" type="text" class="form-control" maxlength="5" id="userName" name="userName" required="required" >			
 			</div>
 			<div>
 				<span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span>
 			</div>
 		</div>
 		<br />
-		<div class = "form_field">
-			<div align="left">
-				<label class = "form_label" for="userEmail">이메일</label>
-			</div>
-			<div class="form_input">
-				<input type="email" class="form-control" id="userEmail" name="userEmail" required="required" >			
+		<div class = "form_field form-group">
+			<div class="form_input" style="width:300px">
+				<input placeholder="이메일" type="email" class="form-control" id="userEmail" name="userEmail" required="required" >			
 			</div>
 			<div>
 				<span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span>
@@ -114,9 +94,6 @@
 	<p id="p1">이미 계정이 있으신가요? <a href="/pickme/views/user/UserLoginForm.jsp">로그인</a></p>
 
 	<br>
-	
-	</div>
-
 	
 </form>
 
@@ -138,15 +115,12 @@
 	            idFlag = false;
 	            checkId();
 	        });
-
 	        $("#userPwd").blur(function() {
 	            checkPswd1();
 	        });
-
 	        $("#userPwd2").blur(function() {
 	            checkPswd2();
 	        });
-
 	        $("#userName").blur(function() {
 	            checkName();
 	        });
@@ -207,9 +181,7 @@
 				}
 				
 			});
-
 	        return true;
-
 			
 			
 		}
@@ -258,9 +230,7 @@
 	            pw2Flag = true;
 	            return true;
 	        }
-
 	        return true;
-
 			
 		}
 		
@@ -281,7 +251,6 @@
 	            nameFlag = false;
 	            return false;
 	        }
-
 	        hideMsg(oMsg);
 	        nameFlag = true;
 	        return true;
@@ -292,7 +261,6 @@
 		function checkEmail() {
 	        var email = $("#userEmail").val();
 	        var oMsg = $("#emailMsg");
-
 	        if (email == "") {
 	        	showErrorMsg(oMsg,"필수 정보입니다.","red");
 	            emailFlag = false;
@@ -340,7 +308,6 @@
 	        
 	        return true;
 	    }
-
 		
 		// 에러메시지 함수 표출
 		function showErrorMsg(obj, msg, color) {
@@ -389,11 +356,9 @@
 		}
 		
 		
-
 	
-
 </script>
-</section>
+</div>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

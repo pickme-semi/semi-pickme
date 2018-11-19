@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.board.model.vo.Board" %>
+<%@ page import="com.board.model.vo.*" %>
 <%@ page import="com.user.model.vo.User" %>
 <%
 	String type = (String)session.getAttribute("bType");
@@ -9,6 +9,9 @@
 	ArrayList<Board> commonBoardList = (ArrayList<Board>)session.getAttribute("commonBoardList");
 	ArrayList<Board> boardListQ = (ArrayList<Board>)session.getAttribute("boardListQ");
 	ArrayList<Board> commonBoardListQ = (ArrayList<Board>)session.getAttribute("commonBoardListQ");
+
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -44,12 +47,16 @@
 						<input type="hidden" value="<%= boardListQ.get(i).getId() %>">
 						<td><%=boardListQ.get(i).getTitle() %></td>
 						</tr>
+						
 					<% } %>
 					</table>
 				</div>	
 				<hr />
 				<% } %>
 				
+			
+			
+	
 				
 			<br><br>
 			
@@ -69,6 +76,9 @@
 					
 					</table>
 				</div>	
+			
+
+					
 				<hr />
 				<% } %>
 	

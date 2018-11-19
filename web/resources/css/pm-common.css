@@ -1,0 +1,28 @@
+@charset "UTF-8";
+ .pm-bg{
+	background-image: url(/pickme/resources/paperkit/assets/paper_img/landscape.jpg);
+	background-position: center center;
+	background-size: cover;
+	min-height: 100vh;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+}
+ .pm-err-404{
+	background-image: url(/pickme/resources/paperkit/assets/paper_img/landscape.jpg);
+	background-position: center center;
+	background-size: cover;
+	min-height: 100vh;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;	
+}
+ .pm-err-500{
+	background-image: url(/pickme/resources/paperkit/assets/paper_img/landscape.jpg);
+	background-position: center center;
+	background-size: cover;
+	min-height: 100vh;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;	
+} 

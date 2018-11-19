@@ -5,6 +5,8 @@
 <%
 	String type = (String)session.getAttribute("bType");
 	Board b = (Board)request.getAttribute("board");
+	Board br = (Board)request.getAttribute("boredRe");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -40,20 +42,53 @@
 					<div class="inner"><br><br>
 												
 					<p id="content"><%= b.getContent() %></p>
-
+					
+					
+									
 					</div>
 					</td>
 				</tr>
-								
-									
-										
+						
 										
 				</tbody>
 			</table>
+			
+			<% if(br.getContent() != null){ %>
+			<table>
+				<hr><br><br>
+				<h5>답변</h5>
+				
+				<tr>							
+					<td>작성일</td>
+					<td><span><%= br.getEnrollDate() %></span>
+					<td>담당자</td>
+					<td><span><%= br.getUserNo() %></span>
+				</tr>
+														
+									
+				<tr> 
+					<td colspan="2" class="answer" >
+					<div class="inner"><br><br>
+												
+					<p id="content"><%= br.getContent() %></p>
+									
+					</div>
+					</td>
+				</tr>		
+			
+			</table>
+			<%} %>
+			
+			
+			
 		<div align="center">
 			
 			<% if(type.equals("admin")){ %>
 			<button class="btn btn-primary" id="boardReInsert">답변하기</button>
+			
+			<% }else if(user.getUserNo() == b.getUserNo()){ %>
+			<button class="btn btn-primary" id="boardUpdate">수정하기</button>
+			
 			<%}else{ %>
 			<button class="btn btn-primary" onclick="boardInsert();"><%= (type.equals("report"))? "신고" : "질문" %>하기</button>
 			<%} %>
@@ -69,10 +104,19 @@
 		function boardInsert(){
 			location.href = "/pickme/InsertView.bo?bType=" + "<%=type%>";
 		}
+		
+		function boardUpdate(){
+			location.href = "/pickme/UpdateView.bo?id=" + "<%=b.getId()%>";
+		}
 	
+		
 		function list(){
 			location.href = "/pickme/list.bo?bType=" + "<%=type%>";
 		}
+		
+		$('#boardUpdate').click(function(){
+			location.href = "/pickme/bUpView.bo?id=" + "<%=b.getId()%>";
+		})
 		
 		$('#boardReInsert').click(function(){
 			location.href = "/pickme/InsertReView.bo?id=" + "<%=b.getId()%>";

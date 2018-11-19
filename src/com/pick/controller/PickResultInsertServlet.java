@@ -39,28 +39,42 @@ public class PickResultInsertServlet extends HttpServlet {
 			response.sendRedirect("views/common/NotLogin.jsp");
 		}else {
 			
-	//		int selectUserNo = Integer.parseInt(request.getParameter("selectUserNo"));
-	//		Date selectDdate =  Date.valueOf(request.getParameter("selectDdate"));
-	//		System.out.println("결과"+selectResult);
+			// Pick 결과 넣기 
 			int selectUserNo = Integer.parseInt(request.getParameter("selectUserNo"));
 			int resultPickId = Integer.parseInt(request.getParameter("resultPickId"));
 			int selectResult = Integer.parseInt(request.getParameter("selectResult"));
 			Date selectDdate =  new Date(new GregorianCalendar().getTimeInMillis());
 	
-	
+			// print 
 			System.out.println("selectUserNo  : " + selectUserNo);
 			System.out.println("resultPickId  : " + resultPickId);
 			System.out.println("selectResult  : " + selectResult);
 			System.out.println(selectDdate);
 			
-		
+		   
 			PickResult pr = new PickResult();
+			PickResult pr2 = new PickResult();
+			
 			pr.setId(resultPickId);
 			pr.setUserno(selectUserNo);
 			pr.setResult(selectResult);
 			pr.setDdate(selectDdate);
 			
+			pr2.setId(resultPickId);
+			pr2.setResult(selectResult);
+			
 			int result = new PickResultService().updatePick(pr);
+			
+			// 선택 결과값 보여주기 
+			PickResultService prs = new PickResultService();
+			int result2= prs.getCurrentPick(pr2);
+			
+			System.out.println("최종 PickResultServlet="+result2);
+
+			// 전송하기 
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().print(result2);
+		
 		}
 	
 	}
