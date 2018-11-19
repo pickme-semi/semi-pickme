@@ -59,9 +59,10 @@
 				<% } %></td>
 			      <td></td>
 			    </tr>
+			    <% } %>
 			</tbody>
 			</table>
-			<% } %>
+			
 			<% }else { %>
 				<div class="result-none">
 					<h1>검색 결과 없음</h1>
