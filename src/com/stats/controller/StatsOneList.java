@@ -1,6 +1,8 @@
 package com.stats.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.pick.model.vo.PickResult;
 import com.stats.model.service.StatsService;
+import com.stats.model.vo.ResultVo;
 import com.common.SessionCheck;
 
 /**
@@ -49,6 +52,29 @@ public class StatsOneList extends HttpServlet {
 			
 			StatsService ss = new StatsService();
 			HttpSession session = request.getSession();
+			
+			// 이 픽을 선택한 사람의 픽통계
+			
+			HashMap<Integer,Integer> totalMap = new HashMap<Integer, Integer>();
+			ArrayList<Integer> totalList = new ArrayList<Integer>();
+			
+			totalMap = ss.countTotal(pr);
+			
+			if(totalMap.get(1)==null){
+				totalList.add(0);
+			}else{
+				totalList.add(totalMap.get(1));
+			}
+			
+			if(totalMap.get(2)==null){
+				totalList.add(0);
+			}else{
+				totalList.add(totalMap.get(2));
+			}
+				
+			response.getWriter().print(totalList);
+			session.setAttribute("totalList", totalList);
+			System.out.println("totalList : " +totalList);
 			
 			// pick 1을 선택한 사람의 나이 통계
 			HashMap<Integer,Integer> hmap1 = new HashMap<Integer,Integer>();
@@ -116,17 +142,10 @@ public class StatsOneList extends HttpServlet {
 				genderList.add(genderMap.get("F"));
 			}
 				
-			
-			
 			response.getWriter().print(genderList);
-
-			
 			session.setAttribute("genderList", genderList);
-			
 			System.out.println("genderList : " +genderList);
 			
-			
-			/* 여기 오류나서 일단 막아놓음 미완성... 
 			
 			// 성별통계 남자
 			HashMap<Integer, Integer> genderMap1 = new HashMap<Integer,Integer>();
@@ -134,24 +153,102 @@ public class StatsOneList extends HttpServlet {
 			
 			genderMap1 = ss.countGender1(pr);
 			
-			
-			
-			
-				
-			
-			
+			for(int i = 1; i<=2; i++){
+			if(genderMap1.get(i)==null){
+				genderList1.add(0);
+			}else{
+				genderList1.add(genderMap1.get(i));
+			}
+			}
 			response.getWriter().print(genderList1);
+			session.setAttribute("genderList1", genderList1);
+			System.out.println("genderList1 : " + genderList1);
+			
+			// 성별통계 여자
+			HashMap<Integer, Integer> genderMap2 = new HashMap<Integer,Integer>();
+			ArrayList<Integer> genderList2 = new ArrayList<Integer>();
+			
+			genderMap2 = ss.countGender2(pr);
+			
+			for(int i = 1; i<=2; i++){
+			if(genderMap2.get(i)==null){
+				genderList2.add(0);
+			}else{
+				genderList2.add(genderMap2.get(i));
+			}
+			}
+			response.getWriter().print(genderList2);
 
 			
-			session.setAttribute("genderList", genderList1);
+			session.setAttribute("genderList2", genderList2);
+			System.out.println("genderList2 : " + genderList2);
+
+
+			// 카테고리 일치 여부 통계
 			
-			//System.out.println("genderList : " +genderList);
-			*/
+			ArrayList<Integer> catList = new ArrayList<Integer>();
 			
 			
+			catList = ss.countCat(pr);
+			
+			response.getWriter().println(catList);
+			session.setAttribute("catList", catList);
+			System.out.println("catList : " + catList);
 			
 			
+			// 일자별 전체 통계
 			
+			ArrayList<ResultVo> dayList = new ArrayList<ResultVo>();
+			
+			dayList = ss.countDate(pr);
+			
+			response.getWriter().println(dayList);
+			session.setAttribute("dayList", dayList);
+			System.out.println("dayList : " + dayList);
+			
+			// 일자별 pick1 통계
+			ArrayList<ResultVo> pick1List = new ArrayList<ResultVo>();
+			ArrayList<ResultVo> dayPick1List = new ArrayList<ResultVo>();
+			
+			pick1List = ss.countPick1Date(pr);
+			System.out.println(pick1List);
+			int pick1Count = 0;
+			for(int i = 0; i<dayList.size(); i++){
+				System.out.println(dayList.get(i).getDate());
+				System.out.println(pick1List.get(pick1Count).getDate());
+				if(dayList.get(i).getDate().equals(pick1List.get(pick1Count).getDate())){
+					dayPick1List.add(pick1List.get(pick1Count));
+					pick1Count++;
+				}else{
+					dayPick1List.add(new ResultVo(dayList.get(i).getDate(),0));
+				}
+			}
+			response.getWriter().println(dayPick1List);
+			session.setAttribute("dayPick1List", dayPick1List);
+			System.out.println("dayPick1List : " + dayPick1List);
+			
+			// 일자별 pick2 통계
+			
+			ArrayList<ResultVo> pick2List = new ArrayList<ResultVo>();
+			ArrayList<ResultVo> dayPick2List = new ArrayList<ResultVo>();
+			
+			pick2List = ss.countPick2Date(pr);
+			System.out.println(pick2List);
+			int pick2Count = 0;
+			for(int i = 0; i<dayList.size(); i++){
+				System.out.println(dayList.get(i).getDate());
+				System.out.println(pick2List.get(pick2Count).getDate());
+				if(dayList.get(i).getDate().equals(pick2List.get(pick2Count).getDate())){
+					dayPick2List.add(pick2List.get(pick2Count));
+					pick2Count++;
+				}else{
+					dayPick2List.add(new ResultVo(dayList.get(i).getDate(),0));
+				}
+			}
+			response.getWriter().println(dayPick2List);
+			session.setAttribute("dayPick2List", dayPick2List);
+			System.out.println("dayPick2List : " + dayPick2List);
+
 			response.sendRedirect("views/stats/statsOneList.jsp");
 		}
 	}
