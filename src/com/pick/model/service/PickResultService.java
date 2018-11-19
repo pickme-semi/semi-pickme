@@ -11,12 +11,14 @@ public class PickResultService {
 		
 		
 		// 현재 픽의 정보 받아오기
-		public int getCurrentPick()
+		public int getCurrentPick(PickResult pr2)
 		{
 			Connection con = getConnection();
 			
-			int currentPick = prDao.getCurrentPick(con);
+			int currentPick = prDao.getCurrentPick(con,pr2);
 			
+			if(currentPick > 0) commit(con);
+			else rollback(con);
 			close(con);
 			
 			return currentPick;
@@ -36,4 +38,6 @@ public class PickResultService {
 			
 			return result;
 		}
+
+	
 }

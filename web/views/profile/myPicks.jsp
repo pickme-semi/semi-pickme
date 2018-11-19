@@ -172,6 +172,7 @@ int point = (Integer)request.getAttribute("point");
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_2() %>" alt="" />
+
               </div>
                 <div class="live-swell__pics__or">or</div>
                   </div>

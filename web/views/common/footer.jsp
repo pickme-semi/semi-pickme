@@ -260,6 +260,7 @@ For further information regarding JS Foundation licensing and intellectual prope
 	    </div>
 	  </div>
 	</div>
+</div>
 </body>
 
 </html>

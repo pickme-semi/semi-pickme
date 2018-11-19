@@ -16,6 +16,7 @@ import com.board.model.vo.BoardCategory;
 
 import static com.common.JDBCTemplate.*;
 
+
 public class BoardDao {
 	
 	private Properties prop = new Properties();
@@ -230,8 +231,10 @@ public class BoardDao {
 				b.setContent(rset.getString("CONTENT"));
 				b.setEnrollDate(rset.getDate("ENROLL_DATE"));
 				b.setTitle(rset.getString("TITLE"));
+				b.setUserNo(rset.getInt("USER_NO"));
+				b.setStatus(rset.getString("STATUS"));
 				
-				
+
 			}
 					
 			
@@ -247,15 +250,50 @@ public class BoardDao {
 
 	public int reInsertBoard(Connection con, Board b) {
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmts = null;
 		int result = 0;
 		String sql = prop.getProperty("reInsert");
+		String sqls = prop.getProperty("statusFn");
+		
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmts = con.prepareStatement(sqls);
+			
 			
 			pstmt.setInt(1, b.getId());
 			pstmt.setInt(2, b.getUserNo());
 			pstmt.setString(3, b.getContent());
+			
+			pstmts.setInt(1, b.getId());
+			
+			
+			result = pstmts.executeUpdate();
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmts);
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int updateBoard(Connection con, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateBoard");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, b.getContent());
+			
+			pstmt.setInt(2, b.getId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -265,9 +303,144 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
-		
-		
 		return result;
 	}
 
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		try {
+			
+			stmt = con.createStatement();		
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()){			
+				listCount = rset.getInt(1);
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
+		ArrayList<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()){
+				Board b = new Board();
+				
+				b.setId(rset.getInt("ID"));
+				b.setTitle(rset.getString("TITLE"));
+				b.setContent(rset.getString("CONTENT"));
+				b.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				b.setStatus(rset.getString("STATUS"));
+				b.setCategoryId(rset.getInt("CATEGORY_ID"));
+				b.setUserNo(rset.getInt("USER_NO"));
+				b.setPickId(rset.getInt("PICK_ID"));
+				b.setType(rset.getString("TYPE"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public Board selectReOne(Connection con, int id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board br = null;
+		String sql = prop.getProperty("selectReOne");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				br = new Board();
+				
+				br.setId(rset.getInt("ID"));
+				br.setCategoryId(rset.getInt("BOARD_ID"));
+				br.setUserNo(rset.getInt("USER_NO"));
+				br.setContent(rset.getString("CONTENT"));
+				br.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				
+			}
+					
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return br;
+	}
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

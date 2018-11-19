@@ -45,26 +45,25 @@ public class BoardReInsertServlet extends HttpServlet {
 			int bid = Integer.parseInt(request.getParameter("bid"));	// 게시물 아이디
 			String content = request.getParameter("content");			// 답변 내용
 			int userNo = user.getUserNo();								// 답변인
+
 			
 			BoardService bs = new BoardService();
 			Board b = new Board(bid, content, userNo);
+			
+
 			int result = bs.reInsertBoard(b);
-			
-			
+
 			
 			if(result > 0){
-				response.sendRedirect("/pickme/list.bo?bType=admin");
+				request.getRequestDispatcher("list.bo?bType=admin");
+			}else {
+				request.getRequestDispatcher("views/common/errorPage.jsp");
 			}
 			
 		}
 	}
 
 	
-//	ID
-//	BOARD_ID
-//	USER_NO
-//	CONTENT
-//	ENROLL_DATE
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

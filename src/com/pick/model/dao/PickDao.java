@@ -53,18 +53,23 @@ public class PickDao {
 			while(rset.next()){
 				PickMe pm = new PickMe();
 				
-				pm.setId(rset.getInt("id"));
-				pm.setSelect_1(rset.getString("select_1"));
-				pm.setSelect_2(rset.getString("select_2"));
-				pm.setTitle(rset.getString("title"));
-				pm.setContent(rset.getString("content"));
-				pm.setEdate(rset.getDate("enroll_date"));
-				pm.setViewcount(rset.getInt("view_count"));
-				pm.setDdate(rset.getDate("due_date"));
-				pm.setType(rset.getString("type"));
-				pm.setUserno(rset.getInt("userno"));
-				pm.setCategory(0);
-				
+				pm.setId(rset.getInt(1));
+				pm.setSelect_1(rset.getString(2));
+				pm.setSelect_2(rset.getString(3));
+				pm.setTitle(rset.getString(4));
+				pm.setContent(rset.getString(5));
+				pm.setEdate(rset.getDate(6));
+				pm.setViewcount(rset.getInt(7));
+				pm.setDdate(rset.getDate(8));
+				pm.setType(rset.getString(9));
+				pm.setUserno(rset.getInt(10));
+				pm.setUserId(rset.getString(12));
+				pm.setUserEmail(rset.getString(14));
+				pm.setBirthdate(rset.getDate(16));
+				pm.setGender(rset.getString(17));
+				pm.setProfile(rset.getString(19));
+				System.out.println(pm);
+				//				pm.setCategory(0);
 				list.add(pm);
 			}
 			
@@ -189,18 +194,25 @@ public class PickDao {
 			rset = pstmt.executeQuery();
 			
 			
+			
+			
 		while(rset.next()){
 			
-			p.setId(pid);
-			p.setTitle(rset.getString("title"));
-			p.setContent(rset.getString("content"));
-			p.setSelect_1(rset.getString("select_1"));
-			p.setSelect_2(rset.getString("select_2"));
-			
-			
-			//p.setUserid(rset.getString("userId"));
-			//p.setUserEmail(rset.getString("userEmail"));
-		//	p.setProfile(rset.getString("profile"));
+			p.setId(pid);  // pick id
+			p.setSelect_1(rset.getString(2));   // pick 사진 1
+			p.setSelect_2(rset.getString(3));   // pick 사진 2			
+			p.setTitle(rset.getString(4));	    // pick 제목
+			p.setContent(rset.getString(5));    // pick 내용			
+			p.setEdate(rset.getDate(6));        // pick 업로드 날짜
+			p.setViewcount(rset.getInt(7));     // pick 조회수
+			p.setDdate(rset.getDate(8));	    // pick 마감날짜 	
+			p.setType(rset.getString(9));		// pick 업로드 회원 타입
+			p.setUserno(rset.getInt(10));		// pick 업로드 회원 번호			
+			p.setUserId(rset.getString(11));	// pick 업로드 회원 id
+			p.setUserEmail(rset.getString(12)); // pick 업로드 회원 email			
+			p.setGender(rset.getString(13));	// pick 업로드 회원 성별
+			p.setBirthdate(rset.getDate(14));	// pick 업로드 회원 생일
+			p.setProfile(rset.getString(15));	// pick 업로드 회원 프로필 사진.
 			System.out.println(p);
 		}
 		hmap = new HashMap<String, Object>();

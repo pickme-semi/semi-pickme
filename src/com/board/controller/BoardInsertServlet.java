@@ -17,13 +17,13 @@ import com.user.model.vo.User;
  * Servlet implementation class BoardInserServlet
  */
 @WebServlet("/insert.bo")
-public class BoardInserServlet extends HttpServlet {
+public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInserServlet() {
+    public BoardInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

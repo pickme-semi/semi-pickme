@@ -114,26 +114,34 @@
 <style>
 #pick1 {
 	/*픽 이미지 1 크기 조절 */
-	width: 160px;
-	height: 160px;
+	max-width: 100%;
+	width: 200px;
+	height : 200px;
+	max-height : 100%;	
 }
 
 #pick2 {
 	/*픽 이미지 2 크기 조절 */
-	width: 160px;
-	height: 160px;
+	max-width: 100%;
+	width: 200px;
+	height : 200px;
+	max-height : 100%;	
 }
 
 #upfile1 {
 	background : lightskyblue;
-	width: 165px;
-	height: 165px;
+	max-width: 100%;
+	width: 200px;
+	height : 200px;
+	max-height : 100%;	
 }
 
 #upfile2 {
 	background : lightgreen;
-	width: 165px;
-	height: 165px;
+	max-width: 100%;
+	width: 200px;
+	height : 200px;
+	max-height : 100%;	
 }
 
 .pickform {

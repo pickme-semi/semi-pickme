@@ -4,26 +4,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/pickme/resources/css/pm-common.css" />
 <style>
-	section{
-		background : lightgreen;
-		margin-left: auto;
-		margin-right: auto;
-	}
+*{
+	background : ;
+}
+h1{
+	font-size :  80px;
+	color : red;
+}
+h2{
+	font-size :  40px;
+	color : red;
+}
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp" %>
-	<section class="col-xs-12 col-md-8">
+<div class="pm-err-404">
 		<div align="center">
-			<br><br><br><br><br><br><br><br><br><br><br>
-			<h2>죄송합니다. 페이지를 사용할 수 없습니다.</h2>
-			<h4>클릭하신 링크가 잘못되었거나 페이지가 삭제되었습니다.</h4>
-			<h4><a href="/pickme">메인페이지로 돌아가기</a></h4>
+			<br><br><br><br><br><br>
+			<h1>404</h1>
+			<h2>Sorry, this URL does not exist or is no longer available.</h2>
+			<div align="center">
+			<div style="align:left;">방문하시려는 페이지의 주소가 잘못 입력되었거나, <br>
+				페이지의 주소가 변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다. <br />
+				<br />
+				입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다. <br />
+				관련 문의사항은  <a href="/pickme/list.bo">고객센터</a>에 알려주시면 친절하게 안내해 드리겠습니다. <br />
+				<br />
+				감사합니다.
+			</div>
+			</div>
+			<h4><a href="/pickme/pickmain.pm">메인페이지로 돌아가기</a></h4>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
-	</section>
-	
-	<%@ include file="footer.jsp" %>
+	</div>
 </body>
 </html>
