@@ -31,6 +31,16 @@ public class Point implements Serializable {
 		this.pointContentId = pointContentId;
 		this.status = status;
 	}
+	
+	
+
+	public Point(int userId, int point, int pointContentId, String status) {
+		super();
+		this.userId = userId;
+		this.point = point;
+		this.pointContentId = pointContentId;
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;

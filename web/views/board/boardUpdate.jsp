@@ -14,6 +14,14 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 작성</title>
+
+<style>
+.btnTest{ background-color: white; border: 1px solid #DEE2E6; border-radius:0px;
+			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
+
+
+</style>
+
 </head>
 <body>
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
@@ -22,51 +30,61 @@
 <% }else{ %>
 
 	<%@ include file="common/boardHeader.jsp" %>
+	
+	
+	
+	
 	<div class="pm-section col-xs-12 col-md-8" align="center">
-		<form id="insertForm" action="/pickme/insert.bo" style="width : 50%;">
-			<h1>입력폼</h1>
-			
-					
+		<form id="insertForm" action="/pickme/insert.bo">
 
-				<div class="row">
-				<label for="">카테고리&nbsp; : &nbsp;&nbsp;</label>
-									
-					<% for(int i = 0; i< categoryList.size(); i++){
+			<div>
+				<table class="table table-bordered" style="text-align: center;">
+					<tr>
+						<th width="140px">카테고리</th>
+						<th>
+						<% for(int i = 0; i< categoryList.size(); i++){
 						if(categoryList.get(i).getId() == b.getCategoryId()){ %>		
-						<p> <%= categoryList.get(i).getConetent() %></p>		
-					<% 	}						
-					}%>
-			
-			</div>
+						<%= categoryList.get(i).getConetent() %>		
+						<% 	}						
+						}%>
+						</th>
+					</tr>
+					
+					<tr>
+						<th width="140px">제목</th>
+						<th><%= b.getTitle() %></th>
+					</tr>
+					
+					<tr>
+						<th width="140px">내용</th>
+						<th>
+						<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required" style="border: none;"><%= b.getContent() %></textarea>
+						<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p></th>
+					</tr>
+					
+					<!-- 신고-->
+					<% if(type.equals("report")){ %>
+					<tr>
+						<th width="140px">신고 pick</th>
+						<th style="text-align: left;"><input type="text" value="<%= b.getPickId() %>" name="pickId" style="border: none;"/></th>
+					</tr>
+					<% } %>
+				</table>
 
+			</div>
+			
+			
+			
 
 			
-			<div class="row">
-				<p><%= b.getTitle() %></p>
-			</div>
-			<br />
-			<div class="row">
-				<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required"><%= b.getContent() %>
-				</textarea>
-				<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p>
-			</div>
-			
-			
-			
-			<!-- 신고-->
-			<% if(type.equals("report")){ %>
-				<div class="row">
-					<input type="text" value="pickid" name="pickId"/><%= b.getPickId() %>
-				</div>
-			<% } %>
 			<br />
 			<div class="" align="center">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#successModal" id="succcessBtn">작성</button>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">취소</button>
+				<button type="button" class="btnTest" data-toggle="modal" data-target="#successModal" id="succcessBtn">작성</button> &nbsp;&nbsp;&nbsp;
+				<button type="button" class="btnTest" data-toggle="modal" data-target="#cancelModal">취소</button>
 			</div>
 			<input type="hidden" id="bType" name="bType" value="<%=type%>" />
 		</form>
-	</div>
+	</div><br><br>
 	<%@ include file="../common/footer.jsp" %>
 
 

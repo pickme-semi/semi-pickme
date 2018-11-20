@@ -12,6 +12,16 @@
 <head>
 <meta charset="UTF-8">
 <title><%= (type.equals("report"))? "신고" : "질문" %>게시판</title>
+
+<style>
+.btnTest{ background-color: white; border: 1px solid #DEE2E6; border-radius:0px;
+			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
+			
+#testli{ background-color: white; border-radius:0px; text-align:center;
+		 font-size: 14px; font-weight:bold; }
+
+.testa{text-align: center; width: 50px;}
+</style>
 </head>
 <body>
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
@@ -27,10 +37,10 @@
 		<% if(!type.equals("report")){ %>
 			<div id="divArea">
 				<p class="h3">자주 하는 질문</p>
-				<table id = "commonBoardList" class="table table-striped">
+				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
 				<% if( commonBoardList.size() != 0){ %>
 					<% for(int i = 0; i < commonBoardList.size(); i++) { %>
-						<tr>
+						<tr style="background-color: #FAFAFA">
 						<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
 						<td><%=commonBoardList.get(i).getTitle() %></td>
 						</tr>
@@ -39,24 +49,55 @@
 				</table>
 			</div>
 		<% } %>
+		
+		
+				<div class="list" align="center" >
+					<div class="col-md-12" align="center">
+						<nav align="center">
+							<ul class="pagination" id="testli">
+								<li class="page-item" >
+									<a class="testa" href="#">previous</a>
+								</li>
+								<li class="page-item">
+									<a class="testa" href="#">1</a>
+								</li>
+								<li class="page-item">
+									<a class="testa" href="#">2</a>
+								</li>
+								<li class="page-item">
+									<a class="testa" href="#">3</a>
+								</li>
+								<li class="page-item">
+									<a class="testa" href="#">4</a>
+								</li>
+								<li class="page-item">
+									<a class="testa" href="#">last</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+		
+		
+		
 		<br><br>
-		<table id = "boardList" class="table table-striped">
+		<table id = "boardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
 			<thead class="thead-light">
 				<tr>
-					<th>No.</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
+					<th width="80px">No.</th>
+					<th width="403px">제목</th>
+					<th width="120px">작성자</th>
+					<th width="120px">작성일</th>
 				</tr>				
 			</thead>
 			<tbody>
 		<% if( boardList.size() != 0){ %>
 			<% for (int i = 0 ; i < boardList.size(); i++){ %>
 					<% if(type.equals("report")){ %>
-						<tr>	
+						<tr style="background-color: #FAFAFA">	
 						<% if(user.getUserId().equals("admin") || (user.getUserNo() == boardList.get(i).getUserNo())){ %>
 							<input type="hidden" value="<%= boardList.get(i).getId() %>">
-							<td><%=boardList.get(i).getId()%></td>
+							<td ><%=boardList.get(i).getId()%></td>
 							<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></a></td>
 							<td><%=boardList.get(i).getUserNo() %></td>
 							<td><%=boardList.get(i).getEnrollDate() %></td>
@@ -65,7 +106,7 @@
 						<% } %>
 						</tr>
 					<% } else { %>
-						<tr>
+						<tr style="background-color: #FAFAFA">
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></a></td>
@@ -83,8 +124,39 @@
 		<% } %>
 			</tbody>
 		</table>
+		
+		
+			<div class="list" align="center">
+						<div class="col-md-12" align="center">
+						<nav >
+							<ul class="pagination">
+								<li class="page-item">
+									<a class="page-link" href="#">previous</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">1</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">2</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">3</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">4</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="#">last</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+		
+		
+		
 		<div align="center">
-			<button class="btn btn-primary" onclick="boardInsert();"><%= (type.equals("report"))? "신고" : "질문" %>하기</button>
+			<button class="btnTest" onclick="boardInsert();"><%= (type.equals("report"))? "신고" : "질문" %>하기</button>
 		</div>
 	</div>
 	<%@ include file="../common/footer.jsp" %>

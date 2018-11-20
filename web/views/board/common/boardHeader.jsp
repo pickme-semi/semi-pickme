@@ -17,10 +17,15 @@
 a{
  	color : black;
 }
- 
- *{
- 	font-family: '';
- }
+
+@font-face {
+	font-family : 'NANUMBARUNGOTHIC.TTF';
+	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");
+}
+	
+* {
+	font-family : 'NANUMBARUNGOTHIC.TTF'
+}
  
 .pm-section{
 	background : ;
@@ -34,36 +39,55 @@ a{
 header.board{
 	background : ;
 }
+
+#test a{ text-align: center; 		 
+		 font-size: 16px;}
+		 
+.navbar-brand{
+ font-family : 'NANUMSQUAREEB.TTF';
+ src : url('/pickme/resources/font/NANUMSQUAREEB.TTF') fomat("truetype");
+}
+		 
+
+
+
+
 </style>
 </head>
-<body>
+<body >
 	<div class="pm-bg">
-	<header class="board">
-	<nav class="navbar navbar-expand-lg">
+	<header class="board" >
+	<nav class="navbar navbar-expand-lg" style="height: 100px;">
 	  
 	  <div class="container">
 	  <%if(user==null) {%>
-		  <div class="login" align="center">
+		  <div class="login" align="center" id="test">
 		  	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme">PICK ME</a> 고객센터
+	        	<a class="navbar-brand" href="/pickme" 
+	        	style=" font-size:50px; padding-top: 50px">PICK ME</a> 고객센터
+	        	
 	        </div>
 		  </div>
 	  <%}else{ %>
-	      	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme/pickmain.pm">PICK ME</a> 고객센터
+	      	<div class="logo" style="width:33%" id="test">
+	        	<a class="navbar-brand" href="/pickme/pickmain.pm" 
+	        	style="font-size: 50px; padding-top: 50px">PICK ME</a> 고객센터
+	        	
 	        </div>
-			<div class="search" style="width:33%" text-align="center">
+			<div class="search" style="width:33%">
 
 	        </div>
-	        <div class="logo" style="width:33%" align="right">
-				<a href="/pickme/list.bo?bType=qna">질문하기</a> /
-				<a href="/pickme/list.bo?bType=report">신고하기</a> /
+	        <div class="logo" style="align:right; padding-top: 80px" id="test">
+				<a href="/pickme/list.bo?bType=qna">질문하기</a> &nbsp; | &nbsp; 
+				<a href="/pickme/list.bo?bType=report">신고하기</a> &nbsp; | &nbsp; 
 				<a href="/pickme/list.bo?bType=admin">관리자 페이지</a>
 	        </div>
       <%} %>
       </div>
     </nav>
     <hr />
+    <br>
+    <br><br>
 	</header>
 </body>
 

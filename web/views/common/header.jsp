@@ -44,15 +44,33 @@
 <body>
 	<div class="pm-bg">
 	<header>
-	<nav class="navbar navbar-expand-lg navbar-white">
-	  
+	<nav class="navbar navbar-expand-lg">
 	  <div class="container">
 	  <%if(user==null) {%>
-		  <div class="login" align="center">
 		  	<div class="logo" style="width:33%">
 	        	<a class="navbar-brand" href="/pickme">PICK ME</a>
 	        </div>
-		  </div>
+	        <div class="logo" style="width:33%" align="right">
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"><i class="fa fa-bars fa-1x">메뉴</i></span>
+	  		</button>
+	  		 <div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="nav justify-content-end">
+				  <li class="nav-item">
+				    <a class="nav-link active" href="#infomain">픽미란?</a>
+				  </li>
+				  <li class="nav-item">$("#" + id + '"')
+				    <a class="nav-link" href="#infodev">비즈니스</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" href="#infodev">개발자</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link disabled" href="#">인재채용</a>
+				  </li>
+				</ul>
+				</div>
+	        </div>
 	  <%}else{ %>
 	      	<div class="logo" style="width:33%">
 	        	<a class="navbar-brand" href="/pickme/pickmain.pm">PICK ME</a>
@@ -79,7 +97,6 @@
 				<a class="dropdown-item" href="/pickme/logout.au">로그아웃</a>
 			  </div>
 			</div>
-			
 	        </div>
       <%} %>
       </div>
