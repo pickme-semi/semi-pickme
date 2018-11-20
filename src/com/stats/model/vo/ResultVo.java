@@ -5,6 +5,8 @@ import java.sql.Date;
 public class ResultVo {
 	private Date date;
 	private int result;
+	private String category;
+	private int catCount;
 	
 	
 	public ResultVo() {
@@ -17,6 +19,32 @@ public class ResultVo {
 		super();
 		this.date = date;
 		this.result = result;
+	}
+	
+	public ResultVo(String category, int catCount){
+		super();
+		this.category = category;
+		this.catCount = catCount;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public int getCatCount() {
+		return catCount;
+	}
+
+
+	public void setCatCount(int catCount) {
+		this.catCount = catCount;
 	}
 
 
@@ -42,9 +70,11 @@ public class ResultVo {
 
 	@Override
 	public String toString() {
-		return "ResultVo [date=" + date + ", result=" + result + "]";
+		return "ResultVo [date=" + date + ", result=" + result + ", category=" + category + ", catCount=" + catCount
+				+ "]";
 	}
-	
+
+
 	
 	
 	

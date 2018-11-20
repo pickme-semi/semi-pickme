@@ -10,6 +10,9 @@
 <% ArrayList<ResultVo> dayPick1List = (ArrayList<ResultVo>)session.getAttribute("dayPick1List"); %>
 <% ArrayList<ResultVo> dayPick2List = (ArrayList<ResultVo>)session.getAttribute("dayPick2List"); %>
 <% ArrayList<Integer> totalList = (ArrayList<Integer>)session.getAttribute("totalList"); %>
+<% ArrayList<ResultVo> cat5List = (ArrayList<ResultVo>)session.getAttribute("cat5List"); %>
+<% ArrayList<ResultVo> cat5Pick1List = (ArrayList<ResultVo>)session.getAttribute("cat5Pick1List"); %>
+<% ArrayList<ResultVo> cat5Pick2List = (ArrayList<ResultVo>)session.getAttribute("cat5Pick2List"); %>
 
 
 <!DOCTYPE html>
@@ -30,7 +33,34 @@
 <link rel="stylesheet" href="../../resources/stats/insight.css">
 <style>
 	.gPie{
+		width : 30%;
+	}
+	
+	.nav>li>a{
+	
+		font-size: 12px;
+	    color: black;
+	    text-transform: uppercase;
+	    text-decoration: none;
+	    margin: 0 15px;
+	
+	}
+	
+	.nav>li>a.active {
+	
+		border-bottom:5px solid pink;
 		
+	}
+	
+	.nav-item:hover {
+		border-bottom : 5px solid blue;
+		color : none;
+		text-decoration : none;
+		
+	}
+	
+	.catClass {
+		width : 900px;
 	}
 </style>
 </head>
@@ -40,30 +70,80 @@
 	<%@ include file="../common/NotLogin.jsp" %>
 <% }else { %>
 	<%@ include file="../common/header.jsp" %>
-
+	
 	<div class="pm-section col-xs-12 col-md-8">
 		<h1>pick1 세부 통계</h1>
-		<div id="DonutChart1"></div>
+		<br />
+		<ul class="nav justify-content-left" >
+		  <li class="nav-item active">
+		    <a onclick="showDiv(total);" style="color : none;
+			text-decoration : none;">전체</a>
+		  </li>
+		  <li class="nav-item">
+		    <a onclick="showDiv(age);" style="color : none;
+			text-decoration : none;">연령별 </a>
+		  </li>
+		  <li class="nav-item">
+		    <a onclick="showDiv(gender);" style="color : none;
+			text-decoration : none;">성별</a>
+		  </li>
+		  <li class="nav-item">
+		    <a onclick="showDiv(category);" style="color : none;
+			text-decoration : none;">카테고리별</a>
+		  </li>
+		  <li class="nav-item">
+		    <a onclick="showDiv(date);" style="color : none;
+			text-decoration : none;">일자별</a>
+		  </li>
+		</ul>
+		<hr />
+		
+		
 		<br />
 		<div class="chart">
-		<h5 align="center">연령별 pick</h5>
+		<div id = "age" class = "divShow" style = "display:none">
+		<h5 >연령별 pick</h5>
 		<div id="chart"></div>
+		</div>
+		<div id = "gender" class = "divShow" style = "display:none">
 		<div class = "genderPie row">
-			<div class = "col" id = "manPie" style = "visibility:hidden">
-			<h5 align="center">성별 pick</h5>
-			<div id="PieChart1" class = "gPie"></div>
-			</div>
-			<div class = "col" id = "mainPie">
+			<div class = "col gPie" id = "mainPie">
 			<h5 align="center">성별 pick</h5>
 			<div id="PieChart2" class = "gPie"></div>
 			</div>
-			<div class = "col" id = "womanPie" style = "visibility:hidden">
-			<h5 align="center">성별 pick</h5>
+			<div class = "col gPie" id = "manPie" style = "display:none">
+			<h5 align="center">남성 pick</h5>
+			<div id="PieChart1" class = "gPie"></div>
+			</div>
+			<div class = "col gPie" id = "womanPie" style = "display:none">
+			<h5 align="center">여성 pick</h5>
 			<div id="PieChart3" class = "gPie"></div>
 			</div>
 		</div>
-		<div id="DonutChart"></div>
-		<div id="AreaChart"></div>
+		</div>
+		<div id = "total" class = "divShow" style = "display:">
+			<h5>전체 통계</h5>
+			<div id="DonutChart1"></div>
+		</div>
+		<div id = "date" class = "divShow" style = "display:none">
+			<h5>일자별 통계</h5>
+			<div id="AreaChart"></div>
+		</div>
+		<div id = "category" class = "divShow" style = "display:none">
+			<h5>카테고리별 통계</h5>
+			<div class = "catClass row col-sm-12">
+				<br />
+				<div class ="col col-sm-8">
+				<p align="center">카테고리 일치 여부</p>
+				<div id="DonutChart"></div>
+				</div>
+				<br />
+				<div class="col col-sm-8">
+				<p align="center">카테고리 Top 5</p>
+				<div id="RadarChart"></div>
+				</div>
+			</div>
+		</div>
 		</div>
 		
 		
@@ -125,20 +205,8 @@
 				["pick2", <%=genderList1.get(1)%>]
 			    ],
 			    type: "pie",
-			    onclick: function(d, i) {
-			    
-				console.log("onclick", d, i);
-			   },
-			    onover: function(d, i) {
-				console.log("onover", d, i);
-			   },
-			    onout: function(d, i) {
-				console.log("onout", d, i);
-			   }
 			  },
-			  legend: {
-				    show: false
-				  },
+			  
 			  bindto: "#PieChart1"
 			});
 
@@ -152,19 +220,13 @@
 			    onclick: function(d, i) {
 			    	console.log("data" + d);
 			    if(d.id == "남성"){
-			    $("#PieChart1").attr("style","visibility:visible");
-			    $("#PieChart3").attr("style","visibility:hidden");
+			    $("#manPie").attr("style","display:");
+			    $("#womanPie").attr("style","display:none");
 			    }else{
-			    $("#PieChart3").attr("style","visibility:visible");
-			    $("#PieChart1").attr("style","visibility:hidden");
+			    $("#womanPie").attr("style","display:");
+			    $("#manPie").attr("style","display:none");
 			    }
 				console.log("onclick", d, i);
-			   },
-			    onover: function(d, i) {
-				console.log("onover", d, i);
-			   },
-			    onout: function(d, i) {
-				console.log("onout", d, i);
 			   }
 			  },
 			  bindto: "#PieChart2"
@@ -179,17 +241,8 @@
 			    type: "pie",
 			    onclick: function(d, i) {
 				console.log("onclick", d, i);
-			   },
-			    onover: function(d, i) {
-				console.log("onover", d, i);
-			   },
-			    onout: function(d, i) {
-				console.log("onout", d, i);
 			   }
 			  },
-			  legend: {
-				    show: false
-				  },
 			  bindto: "#PieChart3"
 			});
 		
@@ -203,12 +256,6 @@
 			    type: "donut",
 			    onclick: function(d, i) {
 				console.log("onclick", d, i);
-			   },
-			    onover: function(d, i) {
-				console.log("onover", d, i);
-			   },
-			    onout: function(d, i) {
-				console.log("onout", d, i);
 			   }
 			  },
 			  donut: {
@@ -258,7 +305,53 @@
 			    
 			});
 		
+		//카테고리 top5
+		var chart = bb.generate({
+		  data: {
+		    x: "x",
+		    columns: [
+			["x", 
+				<%for(int i = 0 ; i<cat5List.size(); i++){%>
+    			"<%=cat5List.get(i).getCategory()%>",
+    			<%}%>
+				],
+			["전체",
+				<%for(int i = 0 ; i<cat5List.size(); i++){%>
+    			"<%=cat5List.get(i).getCatCount()%>",
+    			<%}%>
+				],
+			<%-- ["pick1", 
+				<%for(int i = 0 ; i<cat5Pick1List.size(); i++){%>
+    			"<%=cat5Pick1List.get(i).getCatCount()%>",
+    			<%}%>
+				],
+			["pick2", 
+				<%for(int i = 0 ; i<cat5Pick2List.size(); i++){%>
+    			"<%=cat5Pick2List.get(i).getCatCount()%>",
+    			<%}%>
+    			] --%>
+		    ],
+		    type: "radar",
+		    labels: true
+		  },
+		  radar: {
+			  
+		    
+		    level: {
+		      depth: 4
+		    },
+		    direction: {
+		      clockwise: true
+		    }
+		  },
+		  bindto: "#RadarChart"
+		});
 		
+		
+		function showDiv(id){
+			$(".divShow").attr("style","display:none");
+			$(id).attr("style","display:");
+		}
 	</script>
 <% } %>
 </body>

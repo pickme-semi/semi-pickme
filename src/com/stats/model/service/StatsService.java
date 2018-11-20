@@ -127,6 +127,39 @@ public class StatsService {
 	}
 
 
+	public ArrayList<ResultVo> cat5Count(PickResult pr) {
+		Connection con = getConnection();
+		
+		ArrayList<ResultVo> list = sDao.cat5Count(con, pr);
+		
+		close(con);
+		
+		return list;
+	}
+
+
+	public ArrayList<ResultVo> cat5Pick1Count(PickResult pr, ArrayList<ResultVo> cat5List) {
+		Connection con = getConnection();
+		
+		ArrayList<ResultVo> list = sDao.cat5Pick1Count(con, pr ,cat5List);
+		
+		close(con);
+		
+		return list;
+	}
+
+
+	public ArrayList<ResultVo> cat5Pick2Count(PickResult pr, ArrayList<ResultVo> cat5List) {
+		Connection con = getConnection();
+		
+		ArrayList<ResultVo> list = sDao.cat5Pick2Count(con, pr ,cat5List);
+		
+		close(con);
+		
+		return list;
+	}
+
+
 
 
 }

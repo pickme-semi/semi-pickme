@@ -379,5 +379,127 @@ public class StatsDao {
 
 
 
+	public ArrayList<ResultVo> cat5Count(Connection con, PickResult pr) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("cat5Count");
+
+		ArrayList<ResultVo> list = new ArrayList<ResultVo>();
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pr.getId());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				ResultVo rv = new ResultVo();
+				String category = rset.getString(1);
+				int catCount = rset.getInt(2);
+				rv.setCategory(category);
+				rv.setCatCount(catCount);
+				list.add(rv);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+	public ArrayList<ResultVo> cat5Pick1Count(Connection con, PickResult pr, ArrayList<ResultVo> list2) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("cat5Pick1Count");
+
+		ArrayList<ResultVo> list = new ArrayList<ResultVo>();
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pr.getId());
+			pstmt.setString(2, list2.get(0).getCategory());
+			pstmt.setString(3, list2.get(1).getCategory());
+			pstmt.setString(4, list2.get(2).getCategory());
+			pstmt.setString(5, list2.get(3).getCategory());
+			pstmt.setString(6, list2.get(4).getCategory());
+			for(int i = 0; i<5; i++){
+				System.out.println(list2.get(i).getCategory());
+			}
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				ResultVo rv = new ResultVo();
+				String category = rset.getString(1);
+				int catCount = rset.getInt(2);
+				rv.setCategory(category);
+				rv.setCatCount(catCount);
+				list.add(rv);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+	public ArrayList<ResultVo> cat5Pick2Count(Connection con, PickResult pr, ArrayList<ResultVo> cat5List) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("cat5Pick2Count");
+
+		ArrayList<ResultVo> list = new ArrayList<ResultVo>();
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pr.getId());
+			pstmt.setString(2, cat5List.get(0).getCategory());
+			pstmt.setString(3, cat5List.get(1).getCategory());
+			pstmt.setString(4, cat5List.get(2).getCategory());
+			pstmt.setString(5, cat5List.get(3).getCategory());
+			pstmt.setString(6, cat5List.get(4).getCategory());
+			for(int i = 0; i<5; i++){
+				System.out.println(cat5List.get(i).getCategory());
+			}
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				ResultVo rv = new ResultVo();
+				String category = rset.getString(1);
+				int catCount = rset.getInt(2);
+				rv.setCategory(category);
+				rv.setCatCount(catCount);
+				list.add(rv);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
 
 }
