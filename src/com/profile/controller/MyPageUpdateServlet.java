@@ -68,7 +68,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 					new MyRenamePolicy());
 			
 			
-			
 			String email = mrequest.getParameter("userEmail");
 			String gender = mrequest.getParameter("gender");
 			
@@ -94,7 +93,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 			HttpSession session =  request.getSession(false);
 			User user = (User)session.getAttribute("user");
 			
-			
 			user.setUserEmail(email);
 			user.setProfile(profile);
 			user.setGender(gender);
@@ -104,7 +102,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 			
 			System.out.println("회원 기존 정보 : " + session.getAttribute("user"));
 			System.out.println("회원 정보 수정 시 전달 받은 값 : " + user);
-			
 			
 			
 			try{

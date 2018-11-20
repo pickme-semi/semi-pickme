@@ -19,6 +19,7 @@ public class User implements Serializable{
 	private String gender;
 	private String type;
 	private String profile;
+	private String comment;
 	
 	
 	public User() {
@@ -171,14 +172,27 @@ public class User implements Serializable{
 		this.profile = profile;
 	}
 
+	
+
+	public String getComment() {
+		return comment;
+	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", userId=" + userId + ", userPass=" + userPass + ", userEmail=" + userEmail
 				+ ", userName=" + userName + ", birthdate=" + birthdate + ", gender=" + gender + ", type=" + type
-				+ ", profile=" + profile + "]";
+				+ ", profile=" + profile + ", comment=" + comment + "]";
 	}
+
+
+	
 
 
 

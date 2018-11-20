@@ -50,7 +50,7 @@
 	   <img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
 	<h2><%= user.getUserId() %> <i id="user" class="fas fa-cogs"></i></h2>
-	<h5>comment<i class="fas fa-pencil-alt"></i></h5>
+	<h5>comment</h5>
 	
 	<ul class="nav justify-content-center" >
 	  <li class="nav-item active">
@@ -84,7 +84,7 @@
 	         <div class="row">
 	            <div class="following-list col" align="center" 
 	            onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followingList.getUserNo() %>">
-	 				  <% if(user.getProfile() != null) {%>
+	 				  <% if(followingList.getProfile() != null) {%>
 	                 <img src="/pickme/resources/profileImage/<%= followingList.getProfile() %>" alt="Me" class="rounded-circle attr">
 	               <% } else{ %>
 	               <img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
@@ -145,7 +145,7 @@
 			
 			if(data > 0){
 				
-			$("i").toggle()
+			$('i').toggle()
 			}else{
 				alert("불러오기 실패")
 			}
@@ -168,7 +168,7 @@
 			
 			if(data > 0){
 				
-			$("i").toggle();
+			$('i').toggle()
 			
 			}else{
 				alert("불러오기 실패!")

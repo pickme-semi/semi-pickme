@@ -1,8 +1,8 @@
 <%@page import="com.profile.controller.FollowerListServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, com.user.model.vo.User"%>
+    pageEncoding="UTF-8" import="java.util.*, com.profile.model.vo.*"%>
 <%
-	ArrayList<User> list = (ArrayList<User>)request.getAttribute("list");
+	ArrayList<Follow> list = (ArrayList<Follow>)request.getAttribute("list");
 	int followerCount = (Integer)request.getAttribute("followerCount");
 	int userNo = (Integer)request.getAttribute("userNo");
 %>
@@ -46,8 +46,9 @@
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%> 
-	<h2><%= user.getUserId() %><i id="user" class="fas fa-cogs"></i></h2>
-	<h5>comment<i class="fas fa-pencil-alt"></i></h5>
+	<h2><%= user.getUserId() %></h2>
+	<h5>comment</h5>
+	<input type="hidden" id="userNo" value="<%=user.getUserNo() %>" />
 	
 	<ul class="nav justify-content-center" >
 	  <li class="nav-item active">
@@ -78,12 +79,12 @@
 			
 			<div class="followerArea container col-sm-4">
 			
-				<% for (User followerList : list) { %>
+				<% for (Follow followerList : list) { %>
 				
 			<div class="row">
 				<div class="follower-list col" align="center" 
 				onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followerList.getUserNo() %>">
-					<% if(user.getProfile() != null) {%>
+					<% if(followerList.getProfile() != null) {%>
 					<img src="/pickme/resources/profileImage/<%=followerList.getProfile() %>" class="rounded-circle" width="100px" height="50px" /> &nbsp;
 					<% } else{ %>
 					<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
@@ -93,54 +94,44 @@
 					<%= followerList.getUserId() %>
 					</div>
 					 <div class="col">
-	           		<input id="i1" type="hidden" value="<%= followerList.getUserNo()%>"/><i id="circle1" class="far fa-circle fa-2x" ></i>
-	           		<input id="i2" type="hidden" value="<%= user.getUserNo()%>" /><i id="circle2" class="far fa-check-circle fa-2x" style="display:none"></i>
+					 <% if(followerList.getFollowingChk().equals("Y")) { %>
+	           		<input id="i1_<%=followerList.getUserNo() %>" type="hidden" value="<%= followerList.getUserNo()%>"/>
+	           		<i class="far fa-check-circle fa-2x" ></i> <i class="far fa-circle fa-2x" style="display:none"></i>
+	           		<% }else { %>
+	           		<input id="i1_<%=followerList.getUserNo() %>" type="hidden" value="<%= followerList.getUserNo()%>"/>
+	           		<i class="far fa-circle fa-2x" ></i><i class="far fa-check-circle fa-2x" style="display:none"></i>
+	            	<% } %>
 	            </div>
-				</div>
+			</div>
+				
 	         <% } %>
 		</div>
 	</div>
 	</section>
 	
 		<%@ include file="../common/footer.jsp" %>
-		
-	
+			
 	<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
 	
 	<script>
-	// 팔로우 확인
-	$(function (){
-		
-		$.ajax({
-			url : '/pickme/fCheck.pr',
-			type : 'get',
-			data :  {
-				uno1 : $('#i1').val(),
-				uno2 : $('#i2').val()
-			},success : function(data){
-				if(data > 0){
-					$("i").toggle()
-				}
-			}
-			
-		});
-	});
 	
 	//팔로우 버튼
-	$("#circle1").click(function(){
 	
+	$(".fa-circle").click(function(){
+		
 	$.ajax({
 		url : '/pickme/fInsert.pr',
 		type : 'get',
 		data : {
-			uno1 : $('#i1').val(),
-			uno2 : $('#i2').val()
+			uno1 : $(this).siblings('input').val(),
+			uno2 : $('#userNo').val()
 		},
 		success : function(data){
-			
+			console.log(data);
 			if(data > 0){
 				
-			$("i").toggle()
+				$(this).siblings('i').toggle();
+				
 			}else{
 				alert("불러오기 실패")
 			}
@@ -154,35 +145,34 @@
 	});
 	
 	// 팔로우 취소 버튼
-	$("#circle2").click(function(){
-	
-	$.ajax({
-		url : '/pickme/fDelete.pr',
-		type : 'get',
-		data : {
-			uno1 : $('#i1').val(),
-			uno2 : $('#i2').val()
-		},
-		success : function(data){
-			
-			if(data > 0){
+	$('.fa-check-circle').click(function(){
+
+		$.ajax({
+			url : '/pickme/fDelete.pr',
+			type : 'get',
+			data : {
+				uno1 : $(this).siblings('input').val(),
+				uno2 : $('#userNo').val()
+			},
+			success : function(data){
 				
-			$("i").toggle();
-			
-			}else{
-				alert("불러오기 실패!")
+				if(data > 0){
+
+					$(this).siblings('i').toggle();
+					
+				}else{
+					alert("불러오기 실패!")
+				}
+				
+			},error : function(request, status, error){
+				alert(request + "\n"
+					  + status + "\n"
+					  + error);
 			}
 			
-		},error : function(request, status, error){
-			alert(request + "\n"
-				  + status + "\n"
-				  + error);
-		}
+		});
 		
 	});
-});
-		
-	
 	
 	
 	</script>

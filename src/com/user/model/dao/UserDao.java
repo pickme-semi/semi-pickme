@@ -98,6 +98,7 @@ public class UserDao {
 				result.setGender(rset.getString(7));
 				result.setType(rset.getString(8));
 				result.setProfile(rset.getString(9));
+				result.setComment(rset.getString(10));
 				
 				
 				System.out.println(" userdao " +result);

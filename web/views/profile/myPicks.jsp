@@ -6,6 +6,8 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 int point = (Integer)request.getAttribute("point");
 
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,7 @@ int point = (Integer)request.getAttribute("point");
 <title>My Pick Page</title>
 
 <style>
-
+	
 	@font-face {
 		font-family : 'GODOM.TTF';
 		src : url('/pickme/resources/font/GODOM.TTF') format("truetype");
@@ -118,6 +120,13 @@ int point = (Integer)request.getAttribute("point");
 		
 	}
 	
+	.comment {
+		border : none;
+		width : auto;
+		text-align : center;
+		padding-top : 5px;
+	}
+	
 
 	
 	
@@ -138,8 +147,23 @@ int point = (Integer)request.getAttribute("point");
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
-	<h2><%= user.getUserId() %> <i id="user" class="fas fa-cogs"></i> </h2>
-	<h5>comment<i class="fas fa-pencil-alt"></i></h5>
+	<h2><%= user.getUserId() %><i id="user" class="fas fa-cogs"></i> </h2>
+	<!-- 아이디 전송을 위한 input 박스 -->
+	<input type="hidden" id="getNo" value="<%= user.getUserNo() %>" />
+	
+	<% if(user.getComment() != null) {%>
+	
+	<input type="text" class="comment" value="<%= user.getComment()%>"/>
+	<i id="check" class="fas fa-chevron-circle-down fa-2x" style="display:none"></i>
+	<i id="pencil1" class="fas fa-pencil-alt"></i>
+	<br /><br />
+	
+	<% }else { %>
+	<h5>
+	<input type="hidden" class="comment"/><i id="pencil2" class="fas fa-pencil-alt"></i>
+	<i id="check" class="fas fa-chevron-circle-down fa-2x" style="display:none"></i></h5>
+	<% } %>
+	
 	
 	<div class="card bg-light md-4 text-center user">
   	<div class="card-header">포인트 내역</div>
@@ -169,8 +193,6 @@ int point = (Integer)request.getAttribute("point");
 	<hr />
 	<br />
 	<br />
-	
-	
 	
 	<section class="col-xs-12 col-md-12">
 	 
@@ -208,7 +230,54 @@ int point = (Integer)request.getAttribute("point");
 	
 		$('#user').click(function(){
 			 location.href="/pickme/mPage.pr";
-		})
+		});
+		
+		$('#pencil1').click(function(){
+			
+			$('.comment').val("");
+			$('.comment').attr("style", "border : 1px dashed black");
+			$('#pencil1').attr("style", "display:none");
+			$('#check').attr("style","display:block");
+			
+			
+		});
+		
+		$('#pencil2').click(function(){
+
+			$('.comment').attr("type","text");
+			$('#pencil2').attr("style", "display:none");
+			$('#check').attr("style","display:block");
+			
+			
+		});
+		
+		$('#check').click(function(){
+			
+			$.ajax({
+				url : "/pickme/comment.pr",
+				type : "get",
+				data : {
+				 comment : $('.comment').val(),
+				 uno : $('#getNo').val()
+				 
+				}, success : function(data){
+					if(data > 0 ){
+						alert("성공!")
+					}
+				},
+				error : function(request, status, error){
+					console.log("실패 !!!")
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				},
+				complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
+		
+		
 	
 	</script>
 
