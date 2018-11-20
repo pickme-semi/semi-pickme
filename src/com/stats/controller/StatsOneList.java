@@ -214,18 +214,22 @@ public class StatsOneList extends HttpServlet {
 			System.out.println(pick1List);
 			int pick1Count = 0;
 			for(int i = 0; i<dayList.size(); i++){
-				System.out.println(dayList.get(i).getDate());
-				System.out.println(pick1List.get(pick1Count).getDate());
+				if(pick1Count>=pick1List.size()){
+					dayPick1List.add(new ResultVo(dayList.get(i).getCategory(),0));
+				}else{
 				if(dayList.get(i).getDate().equals(pick1List.get(pick1Count).getDate())){
 					dayPick1List.add(pick1List.get(pick1Count));
 					pick1Count++;
 				}else{
 					dayPick1List.add(new ResultVo(dayList.get(i).getDate(),0));
 				}
+				}
 			}
 			response.getWriter().println(dayPick1List);
 			session.setAttribute("dayPick1List", dayPick1List);
 			System.out.println("dayPick1List : " + dayPick1List);
+			
+			
 			
 			// 일자별 pick2 통계
 			
@@ -236,19 +240,98 @@ public class StatsOneList extends HttpServlet {
 			System.out.println(pick2List);
 			int pick2Count = 0;
 			for(int i = 0; i<dayList.size(); i++){
-				System.out.println(dayList.get(i).getDate());
-				System.out.println(pick2List.get(pick2Count).getDate());
+				if(pick2Count>=pick2List.size()){
+					dayPick2List.add(new ResultVo(dayList.get(i).getCategory(),0));
+				}else{
 				if(dayList.get(i).getDate().equals(pick2List.get(pick2Count).getDate())){
 					dayPick2List.add(pick2List.get(pick2Count));
 					pick2Count++;
 				}else{
 					dayPick2List.add(new ResultVo(dayList.get(i).getDate(),0));
 				}
+				}
 			}
 			response.getWriter().println(dayPick2List);
 			session.setAttribute("dayPick2List", dayPick2List);
 			System.out.println("dayPick2List : " + dayPick2List);
-
+			
+			
+			
+			// 카테고리별 전체 TOP5
+			ArrayList<ResultVo> cat5List = new ArrayList<ResultVo>();
+			
+			cat5List = ss.cat5Count(pr);
+			
+			response.getWriter().println(cat5List);
+			session.setAttribute("cat5List", cat5List);
+			System.out.println("cat5List : " + cat5List);
+			
+			
+			
+			// 카테고리 별 pick1 TOP5
+			ArrayList<ResultVo> c5Pick1List = new ArrayList<ResultVo>();
+			ArrayList<ResultVo> cat5Pick1List = new ArrayList<ResultVo>();
+			
+			c5Pick1List = ss.cat5Pick1Count(pr,cat5List);
+			
+			int cat1Count = 0;
+			for(int i= 0; i<cat5List.size(); i++){
+				if(cat1Count>=c5Pick1List.size()){
+					cat5Pick1List.add(new ResultVo(cat5List.get(i).getCategory(),0));
+				}else{
+				if(cat5List.get(i).getCategory().equals(c5Pick1List.get(cat1Count).getCategory())){
+					cat5Pick1List.add(c5Pick1List.get(cat1Count));
+					cat1Count++;
+				}else{
+					cat5Pick1List.add(new ResultVo(cat5List.get(i).getCategory(),0));
+				}
+				}
+			}
+			response.getWriter().println(cat5Pick1List);
+			session.setAttribute("cat5Pick1List", cat5Pick1List);
+			System.out.println("cat5Pick1List : " + cat5Pick1List);
+			
+			
+			// 카테고리 별 pick2 TOP5
+			ArrayList<ResultVo> c5Pick2List = new ArrayList<ResultVo>();
+			ArrayList<ResultVo> cat5Pick2List = new ArrayList<ResultVo>();
+			
+			c5Pick2List = ss.cat5Pick2Count(pr,cat5List);
+			System.out.println(c5Pick2List);
+			int cat2Count = 0;
+//			for(int i= 0; i<cat5List.size(); i++){
+//				if(cat2Count>=c5Pick2List.size()){
+//					cat5Pick2List.add(new ResultVo(cat5List.get(i).getCategory(),0));
+//				}else{
+//				if(cat5List.get(i).getCategory().equals(c5Pick2List.get(cat2Count).getCategory())){
+//					cat5Pick2List.add(c5Pick2List.get(cat2Count));
+//					cat2Count++;
+//				}else{
+//					cat5Pick2List.add(new ResultVo(cat5List.get(i).getCategory(),0));
+//				}
+//				}
+//			}
+			
+			for(int i = 0 ; i<cat5List.size();i++){
+				if(cat2Count>=c5Pick2List.size()){
+					cat5Pick2List.add(new ResultVo(cat5List.get(i).getCategory(),0));
+				}else{
+					for(int j = 0; j<cat5List.size();j++){
+						if(cat2Count>=c5Pick2List.size()){
+							break;
+						}else if(cat5List.get(j).getCategory().equals(c5Pick2List.get(cat2Count).getCategory())){
+							cat5Pick2List.add(c5Pick2List.get(cat2Count));
+							cat2Count++;
+							break;
+						}
+					}
+				
+				}
+			}
+			
+			response.getWriter().println(cat5Pick2List);
+			session.setAttribute("cat5Pick2List", cat5Pick2List);
+			System.out.println("cat5Pick2List : " + cat5Pick2List);
 			response.sendRedirect("views/stats/statsOneList.jsp");
 		}
 	}
