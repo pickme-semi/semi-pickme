@@ -94,6 +94,7 @@ img{
   opacity: 0.6;
   max-width: 100%;
   height: auto !important;
+  display : none;
 }
 .attr {
     height: 50px;
@@ -128,22 +129,23 @@ img{
 	for(int i =0; i<plist.size(); i++){
 	    pData = plist.get(i);
 	 	gg = pData.getId();
+		System.out.println("plist.size()==="+plist.size());
 	%>
-	<form method="post" action="<%= request.getContextPath() %>/pickview.pv">
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
-	      	<input type="submit" value="픽 상세 <%= gg %>" />	
-	</form>
+
 	  <!-- Full-width images with number text -->
 	<div class="container " >	 
 	   <div class="mySlides" style="background-color : blue">          
 	        <div class="row" align="center">
 		<div class="col-md-6" align="center" style="background-color : #64D6FF" >
-			<img id="leftPick<%=i+1 %>" onerror="imgError(this);" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
-			style="height:auto" onclick="plusSlides(<%=i+1%>);checkNumber(<%=gg %>);"  />
+			<img id="leftPick<%=i+1 %>" onerror="imgError(this);" 
+			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
+			style="width:100%" onclick="plusSlides(<%=i+1%>);checkNumber(<%=gg %>);"  />
 		</div>	
 		<div class="col-md-6" align="center" style="background-color : #64D6FF"> 
-			<img id="rightPick<%=i+1 %>" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
+			<img id="rightPick<%=i+1 %>" 
+			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
 			style="width:100%"onclick="checkNumber(<%=gg %>);plusSlides(<%=i+1%>);"/>
 		</div>
 		</div> 
@@ -223,7 +225,7 @@ img{
 		});
 	 </script>
 	
-	
+		<div class="kingsMan">
 	  <div class="row" >
 	   <% for(int i =0; i<plist.size(); i++){   pData = plist.get(i); %> 
 	    <div class="column">
@@ -245,6 +247,7 @@ img{
 	for(int i =0; i<plist.size(); i++){
 
 			pData = plist.get(i);
+			gg = pData.getId();
 	%>
 	  	<div class="alphago">
 	  	
@@ -256,6 +259,12 @@ img{
 	    <% //내용만 우선넣기 %>
 	    <p id="content<%=i%>"><%= pData.getContent() %></p>
 	  	<input type="hidden" id="resultPickId" name="pid" class="current" value="<%= gg %>"/> 
+	  	
+	  		<form method="post" action="<%= request.getContextPath() %>/pickview.pv">
+	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
+	      	<input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
+	      	<input type="submit" value="픽 상세 <%= gg %>" />	
+	</form>
 	  	</div>
 	    
 	  <% } %> 	
@@ -314,6 +323,7 @@ img{
 		
 		// 처음은 1로 시작해놓는다	
 		var slideIndex = 1;
+		var checkNum = 0;
 		showSlides(slideIndex);
 	
 		function plusSlides(n) {
@@ -333,16 +343,46 @@ img{
 	        // 사용자정보 내가할것
 	        var alphago = document.getElementsByClassName("alphago");
 	        
+	        
+	        // 우선 하드코딩해놓긴했지만 알고리즘으로 작성해보겠습니다.. 조만간.   
+	        var checkLength = dots.length;
+	        
+	      //  console.log("n의 올림 값 = "+Math.floor(n/6));
+	      //  console.log("n의 기본 값 = "+n);
+	        checkNum = (Math.ceil(n/6)-1)*12;
+	        	//console.log("checkNum 의 값 0 = "+ checkNum)
+	        if( checkNum !=0)
+	        {
+	        	console.log("checkNum 의 값 1 = "+ checkNum)
+	        	for (i =checkNum-12; i < checkNum; i++) {
+	 	        	dots[i].style.display = "none";
+	 	        }
+	        }
+	        // 12개만 보이게 하기
+	        for (i =checkNum; i < checkNum+12; i++) {
+	             if( i>= checkLength)
+	            	 {
+	            	 	break;
+	            	 }
+	        	//console.log("checkNum 의 값 3333333 = "+ i)
+	        	dots[i].style.display = "block";
+	        }
+	     
+	        
 	        // 무한이 아니니깐 아직 6이나온다.
-	        console.log('slides길이'+slides.length);
+	       // console.log('slides길이 = '+slides.length);
 	        
 	        // 캡션의 길이도 우선 6이다.
-	        console.log('captionText길이'+alphago.length);
+	       // console.log('captionText길이 = '+alphago.length);
 	        
 	        // 우선 12개 나온다 이거 수정해야한다
-	       // console.log('dots길이'+dots.length);
+	      
+	       // console.log('dots길이 = '+dots.length);
 	        
-	        // 6보다 크면 원래로 보내느건데 아직 사용 안함 
+	        // 우선 썸네일의 12개 길이먼저 뽑아보자
+	      //  console.log('betago길이 = '+betago.length)
+	        
+	        // 슬라이드 끝에가면 다시 처음으로 보내기 
 	        if (n > slides.length) {slideIndex = 1}
 	        
 	        // 이런경우도 없음
@@ -356,14 +396,19 @@ img{
 	        for (i = 0; i < alphago.length; i++) {
 	        	alphago[i].style.display = "none";
 	        }
+	      
+	        
 	        // 이거 사진 모두 비 활성화
 	        for (i = 0; i < dots.length; i++) {
 	            dots[i].className = dots[i].className.replace(" active", "");
+	           // dots[i].style.display = "block";
+	            
 	        }
-	        // 슬라이드 전에꺼 안보이게 하기
-	        slides[slideIndex-1].style.display = "block";
 	        
-	        // 캡션 전에꺼 안보이게 하기
+	        // 슬라이드  보이게하기
+	        slides[slideIndex-1].style.display = "block";
+	       
+	        // 캡션 보이게하기
 	        alphago[slideIndex-1].style.display = "block";
 	        
 	        //섬네일 두개다 활성화시키기
@@ -372,6 +417,7 @@ img{
 		}
 		
 		</script>
+		
 		
 	
 	
