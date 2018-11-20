@@ -38,7 +38,7 @@ public class PickCommentDao {
 		int result = 0;
 		
 		String sql = prop.getProperty("insertComment");
-		System.out.println(pc);
+		System.out.println("댓글 dao : " + pc);
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -89,6 +89,7 @@ public class PickCommentDao {
 				pc.setCcontent(rset.getString(4));
 				pc.setClevel(rset.getInt(5));
 				pc.setEdate(rset.getDate(6));
+				pc.setRefcno(rset.getInt(7));
 				pc.setName(rset.getString(8));
 				
 				clist.add(pc);

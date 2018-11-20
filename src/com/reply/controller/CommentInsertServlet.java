@@ -51,14 +51,16 @@ public class CommentInsertServlet extends HttpServlet {
 		System.out.println("result : " + result);
 		System.out.println("result pc : " + pc);
 		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath()
-					+"/pickview.pv?Pid="+pid);
-		} else {
-			request.setAttribute("msg", "댓글 작성 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp")
-			.forward(request, response);
-		}
+//		if(result > 0) {
+//			response.sendRedirect(request.getContextPath()
+//					+"/pickview.pv?Pid="+pid);
+//		} else {
+//			request.setAttribute("msg", "댓글 작성 실패!");
+//			request.getRequestDispatcher("views/common/errorPage.jsp")
+//			.forward(request, response);
+//		}
+		
+		response.getWriter().println(result);
 		
 	}
 

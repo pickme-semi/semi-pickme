@@ -68,6 +68,14 @@ div.inner {
 	resize: none;
 }
 
+.com-main{
+	background : blue;
+}
+
+.com-sub{
+	background : red;
+}
+
 
 
 </style>
@@ -130,74 +138,49 @@ div.inner {
 				
 				<br><br><br><br>
 				
-				<div class="replyArea">
-					<div class="replyWriteArea">
-						<form role="form" class="form-inline" action="/pickme/reply.pm">
-						<input type="hidden" name="writer" value="<%= u.getUserNo()%>"/>
-						<input type="hidden" name="writerid" value="<%= u.getUserId() %>"/>
-						<input type="hidden" name="Pid" value="<%=p.getId() %>" />
-						<input type="hidden" name="refcno" value="0" />
-						<input type="hidden" name="clevel" value="1" />
-							<table style="width: 100%; height: 100%;">
-								<tr>									
-									<td><textArea rows="2" cols="50" id="replyContent" name="replyContent"></textArea></td>									
-									<td><button type="submit" id="addReply">댓글 등록</button></td>										
-								</tr>								
-							</table>		
-						</form>
+				<div class="row comment-total-div" style="border:1px solid green">
+					<div>
+							<input type="hidden" name="writer" value="<%= u.getUserNo()%>"/>
+							<input type="hidden" name="writerid" value="<%= u.getUserId() %>"/>
+							<input type="hidden" name="Pid" value="<%=p.getId() %>" />
+							<input type="hidden" name="refcno" value="0" />
+							<input type="hidden" name="clevel" value="1" />
+							<textarea class="form-control" name="replyContent" id="" cols="30" rows="3"></textarea>
+							<p class="text-right" style="height:auto"><button type="submit"  onclick="InsertComment()">등록</button></p>
 					</div>
+					<% if(pclist != null) { %>
+						
+						<div class="pm-comment-set-div">
+						<% for( int i = 0 ; i < pclist.size(); i++){ %>
+								
+								<% if(pclist.get(i).getClevel() <= 1) { %>
+								<div class="pm-comment-div" style="background:lightgreen; border:1px solid red">
+									<p class="text-left"><%= pclist.get(i).getName() %> [<%= pclist.get(i).getEdate() %>]</p>
+									<p class="text-left"><%= pclist.get(i).getCcontent() %></p>
+									<p class="text-left">
+										<button onclick="recommentOpen(this, <%=pclist.get(i).getCid()%>);">답글 달기</button>
+										<input type="hidden" value="open" />
+									</p>
+								</div>
+								
+								<% } else { %>
+								<div class="pm-re-comment-div" style="border:1px solid blue;background:gray;">
+									<div style="border:1px solid black;">
+										<div class="pm-re-comment" style="border:1px solid gold">
+											<p class="text-left" style="margin-left:20px;">ㄴ<%= pclist.get(i).getName() %> [<%= pclist.get(i).getEdate() %>]</p>
+											<p class="text-left" style="margin-left:20px;">&nbsp;&nbsp;<%= pclist.get(i).getCcontent() %></p>
+											<input type="hidden" name="refcno" value="<%= pclist.get(i).getRefcno() %>" />
+											<input type="hidden" name="clevel" value="2" />
+										</div>
+									</div>
+								</div>
+								<% } %>
+							<% }%>
+						</div>	
+					<% } %>
 					
-				<div id="replySelectArea">
-	     		 <% if( pclist != null ) { %>
-			      	<% for(PickComment pc : pclist) { %>
-			      	<table id="replySelectTable"
-			      	 style="margin-left : <%= (pc.getClevel()-1) * 35 %>px;
-	    		  	 		width : <%= 400 - ((pc.getClevel()-1) * 15)%>px;"
-	      			 class="replyList<%=pc.getClevel()%>">
-		  				<tr>
-		 		 			<td rowspan="2"> </td>
-							<td><b><%=pc.getName()%></b></td>
-							<td><%= pc.getEdate() %></td>
-							<td align="center">
-							<%if(u.getUserNo() == pc.getUserno()) { %>
-								<input type="hidden" name="cno" value="<%=pc.getCid()%>"/>
-									  
-								<button type="button" class="updateBtn" 
-									onclick="updateReply(this);">수정하기</button>
-							
-								<button type="button" class="updateConfirm"
-									onclick="updateConfirm(this);"
-									style="display:none;" >수정완료</button> &nbsp;&nbsp;
-							
-								<button type="button" class="deleteBtn"
-									onclick="deleteReply(this);">삭제하기</button>
-							
-							<% } else if( pc.getClevel() < 3) { %>
-								<input type="hidden" name="writer" value="<%=u.getUserNo()%>"/>
-								<input type="hidden" name="refcno" value="<%= pc.getCid()%>" />
-								<input type="hidden" name="clevel" value="<%=pc.getClevel() %>" />
-								<button type="button" class="insertBtn" 
-									  onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp; 
-							 
-								<button type="button" class="insertConfirm"
-									onclick="reConfirm(this);"
-									style="display:none;" >댓글 추가 완료</button> 
-							
-							<% } else {%>
-								<span> 마지막 레벨입니다.</span>
-							<% } %>
-							</td>
-						</tr>
-						<tr class="comment replyList<%=pc.getClevel()%>">
-							<td colspan="3" style="background : transparent;">
-							<textarea class="reply-content" cols="75" rows="3"
-							 readonly="readonly"><%= pc.getCcontent() %></textarea>
-							</td>
-						</tr>
-					</table>
-			  		<% } } %>
-				</div>					
 				</div>
+
 			</div>
 		</div>
 		
@@ -205,7 +188,165 @@ div.inner {
 		
 	</div>
 	
-	<script>
+
+	<%@ include file="../common/footer.jsp"%>
+	<%
+		}
+	%>
+		<script>
+		$(function(){
+			//$("div.pm-re-comment-div").attr("style", "display:");
+			console.log("시작");
+			
+		});
+		
+		
+		function recommentOpen(obj, cid){
+			console.log("cid : " + cid);
+			$(obj).parent().parent().append('<div class="pm-re-comment-div" style="border:1px solid blue;background:gray;display:;">' + 
+					'<div style="border:1px solid black;">' + 
+					'<p class="text-left" style="margin-left:20px;"></p>' + 
+					'<p class="text-left" style="margin-left:20px;"></p>' + 
+				'</div>' + 
+				'<textarea class="form-control" name="reCommentContent" id="" cols="30" rows="3"></textarea>' + 
+				'<p class="text-right"><button onclick="InsertReComment(this,' +  cid +')">등록</button></p>' + 
+			'</div>');				
+		}
+		
+		
+		function InsertComment(){
+			var writer = $("input[name=writer]").val();
+			var writerid = $("input[name=writerid]").val();
+			var replyContent = $("textarea[name=replyContent]").val();
+			var Pid = $("input[name=Pid]").val();
+			var refcno = $("input[name=refcno]").val();
+			var clevel = $("input[name=clevel]").val();
+			
+			console.log("userno : " + writerid);
+			
+			var d = new Date();
+
+			var month = d.getMonth()+1;
+			var day = d.getDate();
+
+			var output = d.getFullYear() + '/' +
+			    (month<10 ? '0' : '') + month + '/' +
+			    (day<10 ? '0' : '') + day;
+			
+			console.log("replyContent : " + replyContent);
+			
+			$.ajax({
+				url : "/pickme/reply.pm",
+				type : "post",
+				data : {"writer" : writer,
+						"writerid" : writerid,
+						"Pid" : Pid,
+						"replyContent" : replyContent,
+						"refcno" : refcno,
+						"clevel" : clevel
+				},success : function(data){
+					console.log(data);
+					
+					if(data > 0){
+						$("textarea[name=replyContent]").val("");
+						$(".comment-total-div").append('<div class="pm-comment-set-div">' +
+								'<div class="pm-comment-div" style="background:lightgreen; border:1px solid red">' + 
+								'<p class="text-left">' +  writerid + '[' + output + ']</p>' +
+								'<p class="text-left">' +  replyContent + '</p>' +
+								'<p class="text-left">' +
+									'<button onclick="recommentToggle(this);">답글 열기</button>' + 
+									'<input type="hidden" value="close" />' + 
+								'</p>' + 
+							'</div>' +
+							'<div class="pm-re-comment-div" style="border:1px solid blue;background:gray;display:none;">' + 
+								'<div style="border:1px solid black;">' + 
+									'<p class="text-left" style="margin-left:20px;"></p>' + 
+									'<p class="text-left" style="margin-left:20px;"></p>' + 
+								'</div>' + 
+								'<textarea class="form-control" name="" id="" cols="30" rows="3"></textarea>' + 
+								'<p class="text-right"><button>등록</button></p>' + 
+							'</div>' +
+						'</div>');
+					}else{
+						alert("댓글 등록 실패");
+					}
+				},error : function(data){
+					console.log("error : " + data);
+				}
+				
+			});
+		}
+		
+		function InsertReComment(obj, refcno){
+			var writer = $("input[name=writer]").val();
+			var writerid = $("input[name=writerid]").val();
+			var replyContent = $("textarea[name=reCommentContent]").val();
+			var Pid = $("input[name=Pid]").val();
+			var refcno = refcno;
+			var clevel = 2;
+			
+			console.log("userno : " + writerid);
+			
+			console.log("refcno : " + refcno);
+			
+			var d = new Date();
+
+			var month = d.getMonth()+1;
+			var day = d.getDate();
+
+			var output = d.getFullYear() + '/' +
+			    (month<10 ? '0' : '') + month + '/' +
+			    (day<10 ? '0' : '') + day;
+			
+			console.log("replyContent : " + replyContent);
+			
+			$.ajax({
+				url : "/pickme/reply.pm",
+				type : "post",
+				data : {"writer" : writer,
+						"writerid" : writerid,
+						"Pid" : Pid,
+						"replyContent" : replyContent,
+						"refcno" : refcno,
+						"clevel" : clevel
+				},success : function(data){
+					console.log(data);
+					
+					if(data > 0){
+						$("textarea[name=reCommentContent]").val("");
+						$(obj).parent().parent().parent("div").siblings(".pm-re-comment-div:last()").append('<div class="pm-re-comment" style="border:1px solid gold">' +
+								'<p class="text-left" style="margin-left:20px;">ㄴ' + writer + ' [' + output + ']</p>' +
+								'<p class="text-left" style="margin-left:20px;">&nbsp;&nbsp;' + replyContent + '</p>' + 
+								'<input type="hidden" name="refcno" value="' +  refcno + '" />' + 
+								'<input type="hidden" name="clevel" value="2" />' + 
+								'</div>');
+						
+						
+						
+						
+						
+					}else{
+						alert("댓글 등록 실패");
+					}
+				},error : function(data){
+					console.log("error : " + data);
+				}
+				
+			});
+		}
+		
+		
+		function recommentToggle(obj){
+			console.log(obj);
+			if($(obj).siblings("input").val() == "close"){
+				$(obj).siblings("input").val("open");
+				$(obj).parent().parent().parent().siblings("div").children(".pm-re-comment-div").attr("style", "background:gray;display:");
+			}else{
+				$(obj).siblings("input").val("close");
+				$(obj).parent().parent().parent().siblings("div").children(".pm-re-comment-div").attr("style", "background:gray;display:none");				
+			}
+		}
+		
 		function updateReply(obj) {
 			// 현재 위치와 가장 근접한 textarea 접근하기
 			$(obj).parent().parent().next().find('textarea')
@@ -299,11 +440,5 @@ div.inner {
 			           + '&clevel=' + level;
 		}
 	</script>
-	
-
-	<%@ include file="../common/footer.jsp"%>
-	<%
-		}
-	%>
 </body>
 </html>
