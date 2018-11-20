@@ -14,6 +14,13 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 작성</title>
+
+<style>
+#name{background-color: #F0F0F0; font-weight:bold;}
+#textBox{padding: 10px;}
+.btnTest{ background-color: white; border: 1px solid #DEE2E6; border-radius:0px;
+			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
+</style>
 </head>
 <body>
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
@@ -22,48 +29,63 @@
 <% }else{ %>
 
 	<%@ include file="common/boardHeader.jsp" %>
-	<div class="pm-section col-xs-12 col-md-8" align="center">
-		<form id="insertForm" style="width : 50%" enctype="multipart/form-data">
-			
-			
-			<h1>입력폼</h1>
-			
-			<table>
-			<tr>
-					<td>  카테고리 :</td>
-					<td><span><%= b.getCategoryId() %>&nbsp;&nbsp;</span></td>
-					<td>  제목 : </td>
-					<td><span><%= b.getTitle() %>&nbsp;&nbsp;</span></td>
-					<td>  작성일 :</td>
-					<td><span><%= b.getEnrollDate() %>&nbsp;&nbsp;</span>
-			</tr>							
-			<tr> 
-					<td colspan="2" class="answer" >
-					<div class="inner"><br><br>
-												
-					<p><%= b.getContent() %></p>
-					
-					</div>
-				</td>
-			</tr>
-			</table>		
+	
+	
+	
+<div class="pm-section col-xs-12 col-md-8" align="center">
+    <form id="insertForm" enctype="multipart/form-data">
+        
+    
+        
+        <table class="table table-bordered" style="text-align: center; font-weight:bold;">
+         <thead class="thead-light">
+        <tr>
+             <td id="name" style="width: 120px">카테고리 </td>
+             <td style="width: 160px"><span><%= b.getCategoryId() %></span></td>
+             <td id="name" style="width: 120px">글쓴이</td>
+             <td style="width: 160px"><span><%= b.getUserNo() %></span></td>  
+             <td id="name" style="width: 120px">작성일</td>
+             <td><span><%= b.getEnrollDate() %></span>
+        </tr>
+        
+        <tr>
+        
+             <td id="name" >제목 </td>
+             <td colspan="5"> <span><%= b.getTitle() %></span></td>
 
-			<div class="row">
-				
-			</div>
-
+        </tr>							
+        <tr> 
+             <td colspan="6" class="answer" style="text-align: left;" >
+             <div class="inner" >            
+             <p id="textBox"><%= b.getContent() %></p>
+             </div>
+           	 </td>
+        </tr>
+        </thead>
+        </table>	
 
 			<br />
-			<div class="row">
-				<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required"></textarea>
+		
+        
+			
+		<div align="center">
+		<table class="table table-bordered">
+         <thead class="thead-light">		
+			<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required"></textarea>
 				<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p>
-			</div>
+		</thead>
+		</table>	
 			
+		</div>
 			
-			<div class="" align="center">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#successModal" id="succcessBtn">작성</button>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelModal">취소</button>
-			</div>
+		<br>	
+		<div class="" align="center">
+			<button type="button" class=" btnTest" data-toggle="modal" data-target="#successModal" id="succcessBtn">작성</button>&nbsp;&nbsp;
+			<button type="button" class="btnTest" data-toggle="modal" data-target="#cancelModal">취소</button>
+		</div>
+		<br><br>
+		
+		
 		
 		</form>
 	</div>
