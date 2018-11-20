@@ -102,7 +102,7 @@
 							<td><%=boardList.get(i).getUserNo() %></td>
 							<td><%=boardList.get(i).getEnrollDate() %></td>
 						<% }else{ %>
-							<td>관리자와 작성자만 볼 수 있습니다.</td>
+							<td colspan="4">관리자와 작성자만 볼 수 있습니다.</td>
 						<% } %>
 						</tr>
 					<% } else { %>
