@@ -59,7 +59,7 @@
 				  <li class="nav-item">
 				    <a class="nav-link active" href="#infomain">픽미란?</a>
 				  </li>
-				  <li class="nav-item">$("#" + id + '"')
+				  <li class="nav-item">
 				    <a class="nav-link" href="#infodev">비즈니스</a>
 				  </li>
 				  <li class="nav-item">
