@@ -36,7 +36,7 @@
 }
 
 .live-swell__pics {
-	border: 5px solid rgb(1, 5, 0);
+	border: solid rgb(1, 5, 0);
 	border-radius: 5px;
 	margin: 0 auto;
 	position: relative;
@@ -59,7 +59,7 @@
 
 .live-swell__pics__pic--a {
 	/* background-image: url(/img/live-swells/food-a-604e817829.jpg); */
-	border-bottom: 3px solid rgb(1, 5, 0);
+	border-bottom: 10px solid rgb(1, 5, 0);
 	height: 185px
 }
 

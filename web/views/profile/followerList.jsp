@@ -31,6 +31,20 @@
 			text-decoration : none;
 			
 		}
+		
+		.comment {
+		
+			border : none;
+			width : auto;
+			text-align : center;
+			padding-top : 5px;
+		}
+		
+		.col {
+			
+			margin-top : auto;
+			margin-bottom : auto;
+		}
 </style>
 </head>
 <body>
@@ -47,7 +61,10 @@
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%> 
 	<h2><%= user.getUserId() %></h2>
-	<h5>comment</h5>
+	
+	<input type="text" class="comment" value=""/>
+	<br /><br />
+	
 	<input type="hidden" id="userNo" value="<%=user.getUserNo() %>" />
 	
 	<ul class="nav justify-content-center" >
@@ -82,15 +99,14 @@
 				<% for (Follow followerList : list) { %>
 				
 			<div class="row">
-				<div class="follower-list col" align="center" 
-				onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followerList.getUserNo() %>">
+				<div class="follower-list col" align="center">
 					<% if(followerList.getProfile() != null) {%>
 					<img src="/pickme/resources/profileImage/<%=followerList.getProfile() %>" class="rounded-circle" width="100px" height="50px" /> &nbsp;
 					<% } else{ %>
 					<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 					<% }%> 
 					</div>
-					<div class="col">
+					<div class="col" onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followerList.getUserNo() %>">
 					<%= followerList.getUserId() %>
 					</div>
 					 <div class="col">
@@ -115,6 +131,36 @@
 	
 	<script>
 	
+	// comment 불러오기
+	$(function(){
+		$.ajax({
+			url : '/pickme/cBrowse.pr',
+			type : 'get',
+			data :  {
+				uno : $('#userNo').val()
+			},success : function(data){
+				$('.comment').val(data);
+			}
+			
+		});
+	});
+
+	// 마이페이지로 이동
+	$('#user').click(function(){
+		 location.href="/pickme/mPage.pr";
+	});
+	
+	// comment 수정
+	$('#pencil').click(function(){
+		
+		$('.comment').val("");
+		$('.comment').attr("style", "border : 1px solid black");
+		$('#pencil').attr("style", "display:none");
+		$('#check').attr("style","display:block");
+		
+		
+	});
+	
 	//팔로우 버튼
 	
 	$(".fa-circle").click(function(){
@@ -129,8 +175,7 @@
 		success : function(data){
 			console.log(data);
 			if(data > 0){
-				
-				$(this).siblings('i').toggle();
+				window.location.reload()
 				
 			}else{
 				alert("불러오기 실패")
@@ -158,7 +203,7 @@
 				
 				if(data > 0){
 
-					$(this).siblings('i').toggle();
+					window.location.reload()
 					
 				}else{
 					alert("불러오기 실패!")

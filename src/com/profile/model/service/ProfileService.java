@@ -258,4 +258,14 @@ public class ProfileService {
 		
 		return result;
 	}
+
+	public String browseComment(int uno) {
+		Connection con = getConnection();
+		
+		String pointResult= pDao.browseComment(con, uno);
+		
+		close(con);
+		
+		return pointResult;
+	}
 }

@@ -693,6 +693,34 @@ public class ProfileDao {
 		
 		return result;
 	}
+
+	public String browseComment(Connection con, int uno) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		String commentResult = null;
+		
+		String sql = prop.getProperty("browseComment");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, uno);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				
+				commentResult = rset.getString(1);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return commentResult;
+	}
 	
 	
 }

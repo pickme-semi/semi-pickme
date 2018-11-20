@@ -11,36 +11,12 @@
 <meta charset="UTF-8">
 <title>User Page</title>
 <style>
-	.parent {
-		margin-left : auto;
-		margin-right : auto;
-	}
-	.child1 {
-		z-index : 5;
-		position: relative;
-		border : 1px solid black;
-		width: 200px;
-		height : 200px;
-		margin: auto; 
-	}
-	.child2 {
-		z-index : 1;
-		position: relative;
-		border : 1px solid black;
-		width: 200px;
-		height : 200px;
-		margin: auto; 
-	}
-	.caption-container{
-		margin-left : auto;
-		margin-right : auto;
-		border : 1px solid red;
-		position: absoulte;
-		width : auto;
-		height : auto;
-		word-break:break-all;
-	}
+	.attr {
 	
+		height : 150px;
+		position : relative;
+		width : 150px;
+			}
 	.or {
 	z-index : 3;
 	background-color: rgb(1, 5, 0);
@@ -53,7 +29,32 @@
 	text-transform: uppercase;
 	top: calc(50% - 25px);
 	vertical-align: middle;
-	width: 50px
+	width: 50px }
+	
+	#live-swell-img {
+    max-width: 400px;
+    overflow: hidden;
+	}
+	
+	img {
+	    width: 100%;
+	    height : 100%;
+	    object-fit: contain;
+	} 
+	
+	.live-swell__pics{
+	margin-left : 25px;
+	margin-right : 25px;
+	padding-left : 0px;
+	padding-right : 0px;
+	}
+	
+	.comment {
+			border : none;
+			width : auto;
+			text-align : center;
+			padding-top : 5px;
+		}
 </style>
 
 </head>
@@ -72,32 +73,45 @@
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
 	<h2><%= users.getUserId() %></h2>
-	<h5>한 줄 소개</h5>
-	<button id="fbtn" value="<%=users.getUserNo() %>">follow</button>
-	<button id="fbtn2" style="display:none" value="<%=user.getUserNo() %>">follow 취소</button>
+	<input type="text" class="comment" value=""/>
+	<br />
+	<button id="fbtn" value="<%=users.getUserNo() %>" class="btn btn-danger">follow</button>
+	<button id="fbtn2" style="display:none" value="<%=user.getUserNo() %>" class="btn btn-danger">follow 취소</button>
 	
 	<br />
 	<br />
 	
 	</div>
 	
-	<section class="col-xs-12 col-md-12">
-	 <% for (int i=0; i<userPick.size(); i++) {%>
+	<hr />
+	
+	<section class="col-xs-12 col-md-12"  >
+	 
+	 <div class="live-swell xs-12 container" >
+	 <div class="row">
+	 
+	 <% if(!userPick.isEmpty()) { %>
+	 <% for (int i=0; i<userPick.size(); i++) {%> 
+	 
+            <div class="live-swell__pics col-sm" style="padding:0px; flex-grow : 0">
+              <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
+              <img src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_1() %>" alt="" />
+              </div>
+              <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
+              <img src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_2() %>" alt="" />
+              </div>
+                <div class="live-swell__pics__or">or</div>
+                  </div>
+                   <% } %>
+     </div>
+              </div>
+	    
+	
+		  <% } else{ %>
+		  <div align="center" style = "margin-top : 100px; margin-bottom : 300px; margin-left : auto; margin-right : auto;" ><h5>작성한 게시글이 없습니다.</h5></div>
+		  <% } %> 
 		
-		<div class="parent" align=center>
-			<img class="child1" src="/pickme/resources/PickUploadFiles/<%=userPick.get(i).getSelect_1() %>" />
-			<span class="or">or</span>
-			<img class="child2" src="/pickme/resources/PickUploadFiles/<%=userPick.get(i).getSelect_2() %>" />
-	    <div class="caption-container parent col-sm-5 col-md-4" align=center >
-	    <dl>
-	    	<dt> <%= userPick.get(i).getTitle() %></dt>
-	    	<dd style ="vertical-align : middle;"> <%= userPick.get(i).getContent() %></dd>
-	    </dl>
-	 	</div>
-	  </div>
-		
-	<br />
-	<% } %>
+	
 	
 	</section>
 	
@@ -105,6 +119,25 @@
 	<%@ include file="../common/footer.jsp" %>
 	
 	<script>
+	
+		// comment 불러오기
+		$(function(){
+			$.ajax({
+				url : '/pickme/cBrowse.pr',
+				type : 'get',
+				data :  {
+					uno : $('#fbtn').val()
+				},success : function(data){
+					if(data = null ){
+						$('.comment').val("");
+					}else{
+					$('.comment').val(data);
+					}
+				}
+				
+			});
+		});
+	
 		// 팔로우 확인
 		$(function (){
 			
