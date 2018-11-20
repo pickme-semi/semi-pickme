@@ -1,6 +1,7 @@
 package com.pick.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.common.SessionCheck;
 import com.pick.model.service.PickService;
+import com.reply.model.service.PickCommentService;
+import com.reply.model.vo.PickComment;
 
 /**
  * Servlet implementation class PickSelectOne
@@ -42,12 +45,17 @@ public class PickSelectOneServlet extends HttpServlet {
 			
 			HashMap<String, Object> Pick = new PickService().selectPickMeMap(pid);
 			
+			ArrayList<PickComment> clist = 
+					new PickCommentService().selectList(pid);
+			
 			System.out.println(Pick);
+			System.out.println(clist);
 			
 			String page ="";
 			if(Pick != null){
 				page = "views/pickpage/PickSub.jsp";
 				request.setAttribute("PickMe", Pick.get("PickMe"));
+				request.setAttribute("clist", clist);
 				
 			}else {
 				page = "views/common/errorPage.jsp";
