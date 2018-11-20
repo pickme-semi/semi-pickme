@@ -24,51 +24,91 @@
 
 
 <style>
-#pick1 {
-	/*픽 이미지 1 크기 조절 */
-	max-width: 100%;
-	width: 230px;
-	height : 230px;
-	max-height : 100%;
-}
-
-#pick2 {
-	/*픽 이미지 2 크기 조절 */
-	max-width: 100%;
-	width: 230px;
-	height : 230px;
-	max-height : 100%;	
-}
-
 #profile {
 	height: 80px;
 	position: relative;
 	width: 80px;
 	max-width: 100%;
-	max-height : 100%;	
+	max-height : 100%;
+	margin-left: 20px;		
 }
 
-textarea {
-	height: auto;
-	overflow: visible;
-}
+.replyArea {
 
-div {
- width: 100%;
- text-align: center;
-}
+width:90%;
+height:90%;
 
-div.inner {
- width: 100%;
- text-align: center;
 }
 
 .replyArea textArea {
 	border-radius: 10px;
 	resize: none;
+	width:100%;
+	height:100%;	 
+	
 }
 
+section{
+		background : white;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
+body {
+  font-family: Arial;  /*글꼴 수정 Arial 고딕체 계열 */
+  margin: 0; 
+  overflow-x:scroll;
+   
+}
+
+* {
+  box-sizing: border-box;   /* 테두리를 포함한 크기를 지정할 수 있다 */
+}
+
+img{
+  vertical-align: bottom;   /* 인라인요소의 수직 정렬 */
+   width: 100%;
+    object-fit: contain;
+    
+}
+
+.arrow_box {
+	position: relative;
+	background: #ebfff4;
+	border: 4px solid #c7eaff;
+	width:90%;
+	height:90%;
+	
+	
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 10%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(235, 255, 244, 0);
+	border-bottom-color: #ebfff4;
+	border-width: 20px;
+	margin-left: -20px;
+}
+.arrow_box:before {
+	border-color: rgba(199, 234, 255, 0);
+	border-bottom-color: #c7eaff;
+	border-width: 26px;
+	margin-left: -26px;
+}
+.replyarea{
+ 	margin-left: 80px;
+	margin-right : 80px;
+
+}
 
 </style>
 
@@ -82,93 +122,172 @@ div.inner {
 		} else { 
 	%>
 	<%@ include file="../common/header.jsp"%>
-
-
 	
-	<div class="container-fluid col-md-8 col-xs-12" align="center">
+	<div class="container-fluid col-md-12 col-xs-12" align="center">
 		<h1><%=p.getTitle()%></h1>
-		<br><br>
-		<div class="container col-md-8 col-xs-12" align="center">
-			<div class="outer" align="center">
-				<div class="inner" align="center">
-					<div class="">
-						<img alt="pick1" id="pick1" onerror="imgError(this);" 
-							src="<%=request.getContextPath()%>/resources/PickUploadFiles/<%=p.getSelect_1()%>" />
-						<img alt="pick2" id="pick2" onerror="imgError(this);" 
-							src="<%=request.getContextPath()%>/resources/PickUploadFiles/<%=p.getSelect_2()%>" />
-					</div>					
-				</div>
+		<button type="button">신고하기</button>
+		<br>		
+		<br>
+		
+		<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
+	    <input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= p.getId() %>"/> 
+	    
+	    
+		<div class="container " >	 
+	   <div class="mySlides" style="background-color : blue">          
+	        <div class="row" align="center">
+		<div class="col-md-6" align="center" style="background-color : aliceblue" >
+			<img id="leftPick" onerror="imgError(this);" 
+			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=p.getSelect_1() %>" 
+			style="width:100%" onclick="checkNumber(<%=p.getId() %>);"  />
+		</div>	
+		<div class="col-md-6" align="center" style="background-color : aliceblue"> 
+			<img id="rightPick" 
+			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=p.getSelect_2() %>" 
+			style="width:100%"onclick="checkNumber(<%=p.getId() %>);"/>
+		</div>
+		</div> 
+	    </div>
+	  </div>
+	  	 <script>
+	 var checkN;
+	 function checkNumber(a)
+		{
+			checkN =a;
+			console.log('%d는 숫자 %d는 다음숫자', a, checkN);
+		}	
+	 	var countLeft = 1;
+	 	var countRight =2;
+		// img의 id에 pick 있으면 선택하기 
+	 $('img[id^="leftPick"]').click(function(){
+		 console.log("수정값"+checkN);
+		    alert("왼쪽클릭");
+		});
+	 $('img[id^="leftPick"]').click(function(){
+			$.ajax({
+				url : "/pickme/pickresult.pr",
+				type : "get",
+				data : {
+					selectUserNo : $('#selectUserNo').val(),
+					resultPickId : checkN,
+					selectResult : countLeft
+					
+				}, success : function(data){
+					// 선택한후 몇%의 값인지 우선 전달완료
+					console.log("데이터 전달 성공!"+data);
+					
+					// 게시글 내용도 같이 추가해야 함
+					// 예시 : $('.caption-container p').text(data.content);
+					
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
+	 $('img[id^="rightPick"]').click(function(){
+		 console.log("수정값"+checkN);
+		    alert("오른쪽클릭");
+		});
+	 $('img[id^="rightPick"]').click(function(){
+			$.ajax({
+				url : "/pickme/pickresult.pr",
+				type : "get",
+				data : {
+					selectUserNo : $('#selectUserNo').val(),
+					resultPickId : checkN,
+					selectResult : countRight
+					
+				}, success : function(data){
+					// 선택한후 몇%의 값인지 우선 전달완료
+					console.log("데이터 전달 성공!"+data);
+					
+					// 게시글 내용도 같이 추가해야 함
+					// 예시 : $('.caption-container p').text(data.content);
+					
+				}, error :  function(request, status, error) {
+					console.log("실패!!!");
+					console.log(request);
+					console.log(status);
+					console.log(error);
+				}, complete : function(){
+					console.log("무조건 실행하는 함수");
+				}
+			});
+		});
+	 </script>
+	  
+	  
+	  
 				<br><br>
-			<div class="row userprofile">				
-				<div class="col-md-3" >
+			<div class="row userprofile">
+			    <div class="col-md-1"></div>				
+				<div class="col-md-7" align="left" >
 					<% if(p.getProfile() != null) {%>
 		 		   <img src="/pickme/resources/profileImage/<%= p.getProfile() %>" alt="Me" 
 				    class="" id="profile">
 					<% } else{ %>
 					<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" 
 					class="" id="profile">
-					<% }%>					
-				</div>
-				<div class="col-md-2">
-					<br>				
-					<h3><%=p.getUserId()%></h3>
-				</div>
-				<div class="col-md-4"></div>						
-				<div class="col-md-3" style:align="right">
-				<br>
-					<button>팔로우 </button>
-				</div>
+					<% }%>				
+					&emsp;&emsp;
+					<b><%=p.getUserId()%></b>
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					<button >팔로우 </button>
+				</div>		
+				
 			</div>			
 								
-				<br><br>
-				
-				<div class="content">
-					<div class="">					
-						<p><%=p.getContent()%></p>
-					</div>
+				<br><br>				
+				<div class="content arrow_box">								
+					<p><%=p.getContent()%></p>					
 				</div>
 				
-				<br><br><br><br>
+				<br><br>
 				
-				<div class="replyArea">
-					<div class="replyWriteArea">
-						<form role="form" class="form-inline" action="/pickme/reply.pm">
-						<input type="hidden" name="writer" value="<%= u.getUserNo()%>"/>
-						<input type="hidden" name="writerid" value="<%= u.getUserId() %>"/>
-						<input type="hidden" name="Pid" value="<%=p.getId() %>" />
-						<input type="hidden" name="refcno" value="0" />
-						<input type="hidden" name="clevel" value="1" />
-							<table style="width: 100%; height: 100%;">
-								<tr>									
-									<td><textArea rows="2" cols="50" id="replyContent" name="replyContent"></textArea></td>									
-									<td><button type="submit" id="addReply">댓글 등록</button></td>										
-								</tr>								
-							</table>		
-						</form>
-					</div>
-					
-				<div id="replySelectArea">
-	     		 <% if( pclist != null ) { %>
-			      	<% for(PickComment pc : pclist) { %>
-			      	<table id="replySelectTable"
-			      	 style="margin-left : <%= (pc.getClevel()-1) * 35 %>px;
-	    		  	 		width : <%= 400 - ((pc.getClevel()-1) * 15)%>px;"
-	      			 class="replyList<%=pc.getClevel()%>">
-		  				<tr>
-		 		 			<td rowspan="2"> </td>
-							<td><b><%=pc.getName()%></b></td>
-							<td><%= pc.getEdate() %></td>
-							<td align="center">
-							<%if(u.getUserNo() == pc.getUserno()) { %>
+	<div class="replyArea">
+		<div id="replySelectArea">
+    	    <table border="1" bordercolor="lightgray">
+    		<!-- 댓글 목록 -->    
+   		    <% if( pclist != null ) { %>
+		  		<% for(PickComment pc : pclist) { %>
+           		<tr>
+                <!-- 아이디, 작성날짜 -->
+                <td width="150">
+                    <div>   
+	      			 <% if(pc.getClevel() > 1) {%>                        
+                            &nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
+                            <p>ㄴ re </p>
+                            <img src="img/reply_icon.gif">
+                     <% } %>                    
+                       <b><%=pc.getName()%></b><br>
+                        <font size="2" color="lightgray"><%= pc.getEdate() %></font>
+                    </div>
+                </td>
+                <!-- 본문내용 -->
+                <td width="550">
+                    <div class="text_wrapper">
+                       <textarea class="reply-content" 
+							 readonly="readonly"><%= pc.getCcontent() %></textarea>
+                    </div>
+                </td>
+                <!-- 버튼 -->
+                <td width="100">
+                    <div id="btn" style="text-align:center;" align="center">
+                       <%if(u.getUserNo() == pc.getUserno()) { %>
 								<input type="hidden" name="cno" value="<%=pc.getCid()%>"/>
-									  
+								&nbsp;	  
 								<button type="button" class="updateBtn" 
-									onclick="updateReply(this);">수정하기</button>
+									onclick="updateReply(this);">수정하기</button> 
 							
 								<button type="button" class="updateConfirm"
 									onclick="updateConfirm(this);"
-									style="display:none;" >수정완료</button> &nbsp;&nbsp;
-							
+									style="display:none;" >수정완료</button> &nbsp;
+																	
 								<button type="button" class="deleteBtn"
 									onclick="deleteReply(this);">삭제하기</button>
 							
@@ -177,7 +296,7 @@ div.inner {
 								<input type="hidden" name="refcno" value="<%= pc.getCid()%>" />
 								<input type="hidden" name="clevel" value="<%=pc.getClevel() %>" />
 								<button type="button" class="insertBtn" 
-									  onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp; 
+									  onclick="reComment(this);">댓글 달기</button> 
 							 
 								<button type="button" class="insertConfirm"
 									onclick="reConfirm(this);"
@@ -186,24 +305,50 @@ div.inner {
 							<% } else {%>
 								<span> 마지막 레벨입니다.</span>
 							<% } %>
-							</td>
-						</tr>
-						<tr class="comment replyList<%=pc.getClevel()%>">
-							<td colspan="3" style="background : transparent;">
-							<textarea class="reply-content" cols="75" rows="3"
-							 readonly="readonly"><%= pc.getCcontent() %></textarea>
-							</td>
-						</tr>
-					</table>
-			  		<% } } %>
-				</div>					
-				</div>
-			</div>
-		</div>
+                    </div>
+                </td>
+            </tr>         
+       		<% } %>
+       
+            
+            <!-- 로그인 했을 경우만 댓글 작성가능 -->
+            <div class="replyWriteArea">
+            <tr bgcolor="#F5F5F5">
+             <form role="form" class="form-inline" action="/pickme/reply.pm">
+             <input type="hidden" name="writer" value="<%= u.getUserNo()%>"/>
+			 <input type="hidden" name="writerid" value="<%= u.getUserId() %>"/>
+			 <input type="hidden" name="Pid" value="<%=p.getId() %>" />
+			 <input type="hidden" name="refcno" value="0" />
+			 <input type="hidden" name="clevel" value="1" />
+                <!-- 아이디-->
+                <td width="150">
+                    <div>
+                       <b><%= u.getUserId()%></b>
+                    </div>
+                </td>
+                <!-- 본문 작성-->             
+                <td width="550">
+                    <div>
+                        <textarea id="replyContent" name="replyContent"  ></textarea>
+                    </div>
+                </td>
+                <!-- 댓글 등록 버튼 -->
+                <td width="100">
+                    <div id="btn" style="text-align:center;">
+                        <button type="submit" id="addReply">댓글 등록</button>    
+                    </div>
+                </td>
+            </form>
+            </tr>    
+        </table>
+        </div>
+    </div>
+    <% } %>			
+	</div>
 		
 		<br><br>
 		
-	</div>
+	
 	
 	<script>
 		function updateReply(obj) {
@@ -256,7 +401,7 @@ div.inner {
 			var htmlForm = 
 				'<tr class="comment"><td></td>'
 					+'<td colspan="3" style="background : transparent;">'
-						+ '<textarea class="reply-content" style="background : ivory;" cols="105" rows="3"></textarea>'
+						+ '<textarea class="reply-content" style="background : ivory;" cols="75" rows="3"></textarea>'
 					+ '</td>'
 				+ '</tr>';
 			
@@ -299,6 +444,7 @@ div.inner {
 			           + '&clevel=' + level;
 		}
 	</script>
+
 	
 
 	<%@ include file="../common/footer.jsp"%>

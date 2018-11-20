@@ -109,6 +109,19 @@
         		return false;
         	}
      }
+    /*  
+     function imgup(obj){   // 업로드시 사진 업로드 여부 체크용.
+    	 
+    	 var file = $(obj).val();
+    	 
+    	 if(file!=null){
+    		 return true;    		
+    	 }else{
+    		 alert("사진을 등록해주세요");
+    		 return false;
+    	 }
+     }     */
+      
     </script>
 
 <style>
@@ -229,9 +242,7 @@
 						<select class="form-control interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
 						style= "width:" > 
 						<% for(int i=0; i< category.size(); i++) {%>
-				  			<option value="<%=category.get(i
-				  					
-				  					).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
+				  			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
 				  		<% } %> 
 						</select>
 						</td>
@@ -285,7 +296,7 @@
 			<br>
 			<br>
 			<div align="center">
-				<button type="submit" class="btn btn-primary">작성완료</button>
+				<button type="submit" class="btn btn-primary" onclick="imgup()">작성완료</button>
 				<button type="button" class="btn btn-defailt" data-toggle="modal" data-target="#cancelModal">취소</button>
 			</div>
 
