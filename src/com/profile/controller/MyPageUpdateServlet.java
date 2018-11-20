@@ -69,9 +69,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 			
 			
 			
-			String password = mrequest.getParameter("userPass");
-			// 수정해야할 것
-			password = EncryptWrapper.getSHA512(password);
 			String email = mrequest.getParameter("userEmail");
 			String gender = mrequest.getParameter("gender");
 			
@@ -98,13 +95,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 			User user = (User)session.getAttribute("user");
 			
 			
-			if(!password.equals("")){
-				System.out.println("password:"+ password);
-				user.setUserPass(password);
-			}else{
-				System.out.println("null일때 :" +user.getUserPass());
-				user.setUserPass(user.getUserPass());
-			}
 			user.setUserEmail(email);
 			user.setProfile(profile);
 			user.setGender(gender);
