@@ -235,4 +235,27 @@ public class ProfileService {
 		
 		
 	}
+
+	public int followingCheck(int userNo1, int userNo2) {
+		Connection con = getConnection();
+		
+		int result = pDao.followingCheck(con, userNo1, userNo2);
+		
+		if(result > 0 ) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
+
+	public int commentUpdate(int uno, String comment) {
+		Connection con = getConnection();
+		int result = pDao.commentUpdate(con, uno, comment);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 }

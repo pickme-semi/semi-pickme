@@ -68,10 +68,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 					new MyRenamePolicy());
 			
 			
-			
-			String password = mrequest.getParameter("userPass");
-			// 수정해야할 것
-			password = EncryptWrapper.getSHA512(password);
 			String email = mrequest.getParameter("userEmail");
 			String gender = mrequest.getParameter("gender");
 			
@@ -97,14 +93,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 			HttpSession session =  request.getSession(false);
 			User user = (User)session.getAttribute("user");
 			
-			
-			if(!password.equals("")){
-				System.out.println("password:"+ password);
-				user.setUserPass(password);
-			}else{
-				System.out.println("null일때 :" +user.getUserPass());
-				user.setUserPass(user.getUserPass());
-			}
 			user.setUserEmail(email);
 			user.setProfile(profile);
 			user.setGender(gender);
@@ -114,7 +102,6 @@ public class MyPageUpdateServlet extends HttpServlet {
 			
 			System.out.println("회원 기존 정보 : " + session.getAttribute("user"));
 			System.out.println("회원 정보 수정 시 전달 받은 값 : " + user);
-			
 			
 			
 			try{

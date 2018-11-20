@@ -17,6 +17,7 @@ import com.pick.model.vo.PickMe;
 import com.pick.model.vo.PickResult;
 import com.point.model.vo.Point;
 import com.profile.model.vo.Category;
+import com.profile.model.vo.Follow;
 import com.user.model.vo.User;
 
 public class ProfileDao {
@@ -53,17 +54,19 @@ public class ProfileDao {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
 			
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<User>();
 			
 			while(rset.next()){
-				User u = new User();
+				Follow u = new Follow();
 				
 				u.setUserNo(rset.getInt(1));
 				u.setUserId(rset.getString("ID"));
 				u.setProfile(rset.getString("PROFILE"));
+				u.setFollowingChk(rset.getString("CHK"));
 				
 				list.add(u);
 				
@@ -440,7 +443,6 @@ public class ProfileDao {
 			pstmt = con.prepareStatement(sql);
 
 			
-			
 			pstmt.setInt(1, userNo2);
 			pstmt.setInt(2, userNo1);
 			
@@ -628,6 +630,58 @@ public class ProfileDao {
 			result = pstmt.executeUpdate();
 			
 			System.out.println(user.getUserPass());
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int followingCheck(Connection con, int userNo1, int userNo2) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("followingCheck");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, userNo1);
+			pstmt.setInt(2, userNo2);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int commentUpdate(Connection con, int uno, String comment) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("commentUpdate");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, comment);
+			pstmt.setInt(2, uno);
+			
+			result = pstmt.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			
