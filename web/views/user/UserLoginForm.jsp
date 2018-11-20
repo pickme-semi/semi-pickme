@@ -35,6 +35,16 @@
 		width: 100%;
 	}
 	
+	.login-bg-2{
+		background-image: url(/pickme/resources/images/bg/login2.jpeg);
+		background-position: center center;
+		background-size: cover;
+		min-height: 100vh;
+		overflow: hidden;
+		position: absolute;
+		width: 100%;
+	}
+	
 	.login-top-p{
 		margin-left:200px;
 		margin-right:auto;
@@ -57,7 +67,11 @@
 
 <div class="row">
 	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-7" style="background:red;">
-		testrow-col
+			<div id="infomain" style="margin-top:auto;margin-bottom:auto" align="center">
+				<h1>프로젝트 소개칸</h1>
+				<h3>우리 프로젝트는 이렇다, 저렇다. <br />사용법은 아래 이미지로 블라블라 ~~~~</h3>
+			</div>
+		
 	</div>
 	
 	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-5 pm-input-form">
@@ -107,13 +121,13 @@
 </div>
 
 <div class="row">
-	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-12" style="background:blue;height:600px" >
+	<div id="infodev" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 login-bg-2" style="height:600px" >
 		testrow
 	</div>
 </div>
 
 <div class="row">
-	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-12" style="background:green;height:600px" >
+	<div id="infopickme" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:green;height:600px" >
 		testrow
 	</div>
 </div>
