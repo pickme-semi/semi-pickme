@@ -31,6 +31,20 @@
 			text-decoration : none;
 			
 		}
+		
+		.comment {
+		
+			border : none;
+			width : auto;
+			text-align : center;
+			padding-top : 5px;
+		}
+		
+		.col {
+			
+			margin-top : auto;
+			margin-bottom : auto;
+		}
 </style>
 </head>
 <body>
@@ -49,8 +63,12 @@
 	<% } else{ %>
 	   <img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
-	<h2><%= user.getUserId() %> <i id="user" class="fas fa-cogs"></i></h2>
-	<h5>comment</h5>
+	<h2><%= user.getUserId() %></h2>
+	
+	<input type="text" class="comment" value=""/>
+	<br /><br />
+	
+	<input type="hidden" id="userNo" value="<%=user.getUserNo() %>" />
 	
 	<ul class="nav justify-content-center" >
 	  <li class="nav-item active">
@@ -82,15 +100,14 @@
 	         
 	         <% for (User followingList : list) { %>
 	         <div class="row">
-	            <div class="following-list col" align="center" 
-	            onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followingList.getUserNo() %>">
+	            <div class="following-list col" align="center">
 	 				  <% if(followingList.getProfile() != null) {%>
 	                 <img src="/pickme/resources/profileImage/<%= followingList.getProfile() %>" alt="Me" class="rounded-circle attr">
 	               <% } else{ %>
 	               <img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	               <% }%>
 	            </div>
-	            <div class="col">
+	            <div class="col" onclick="location.href='<%= request.getContextPath() %>/uPage.pr?uno='+<%=followingList.getUserNo() %>">
 	               <%= followingList.getUserId() %> 
 	            </div>
 	            <div class="col">
@@ -113,6 +130,21 @@
 	<script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
 	
 	<script>
+	
+	// comment 불러오기
+	$(function(){
+		$.ajax({
+			url : '/pickme/cBrowse.pr',
+			type : 'get',
+			data :  {
+				uno : $('#userNo').val()
+			},success : function(data){
+				$('.comment').val(data);
+			}
+			
+		});
+	});
+	
 	// 팔로우 확인
 	$(function (){
 		

@@ -19,52 +19,13 @@ int point = (Integer)request.getAttribute("point");
 <title>My Pick Page</title>
 
 <style>
-	
-	@font-face {
-		font-family : 'GODOM.TTF';
-		src : url('/pickme/resources/font/GODOM.TTF') format("truetype");
-	}
-	
-	div, a {
-		font-family : 'GODOM.TTF'
-	}
-	
+
 	.attr {
 	
 		height : 150px;
 		position : relative;
 		width : 150px;
 			}
-	.parent {
-		margin-left : auto;
-		margin-right : auto;
-	}
-	.child1 {
-		z-index : 5;
-		position: relative;
-		border : 1px solid black;
-		width: 200px;
-		height : 200px;
-		margin: auto; 
-	}
-	.child2 {
-		z-index : 1;
-		position: relative;
-		border : 1px solid black;
-		width: 200px;
-		height : 200px;
-		margin: auto; 
-	}
-	.caption-container{
-		margin-left : auto;
-		margin-right : auto;
-		border : 1px solid red;
-		position: absoulte;
-		width : auto;
-		height : auto;
-		word-break:break-all;
-	}
-	
 	.or {
 	z-index : 3;
 	background-color: rgb(1, 5, 0);
@@ -90,20 +51,23 @@ int point = (Integer)request.getAttribute("point");
 	}
 	
 	#live-swell-img {
-    max-width: 400px;
+     max-width: 100px;
     overflow: hidden;
 	}
 	
 	img {
 	    width: 100%;
+	    height : 100%;
 	    object-fit: contain;
 	} 
 	
 	.live-swell__pics{
-	margin-left : 25px;
-	margin-right : 25px;
-	padding-left : 0px;
-	padding-right : 0px;
+		margin-left : 25px;
+		margin-right : 25px;
+		margin-top : 25px;
+		margin-bottom : 25px;
+		padding-left : 0px;
+		padding-right : 0px;
 	}
 	
 
@@ -126,6 +90,12 @@ int point = (Integer)request.getAttribute("point");
 		text-align : center;
 		padding-top : 5px;
 	}
+	
+	.col-sm {
+
+	flex-grow : 0;
+	
+ 	}
 	
 
 	
@@ -151,18 +121,10 @@ int point = (Integer)request.getAttribute("point");
 	<!-- 아이디 전송을 위한 input 박스 -->
 	<input type="hidden" id="getNo" value="<%= user.getUserNo() %>" />
 	
-	<% if(user.getComment() != null) {%>
-	
-	<input type="text" class="comment" value="<%= user.getComment()%>"/>
+	<input type="text" class="comment" value=""/>
 	<i id="check" class="fas fa-chevron-circle-down fa-2x" style="display:none"></i>
-	<i id="pencil1" class="fas fa-pencil-alt"></i>
+	<i id="pencil" class="fas fa-pencil-alt"></i>
 	<br /><br />
-	
-	<% }else { %>
-	<h5>
-	<input type="hidden" class="comment"/><i id="pencil2" class="fas fa-pencil-alt"></i>
-	<i id="check" class="fas fa-chevron-circle-down fa-2x" style="display:none"></i></h5>
-	<% } %>
 	
 	
 	<div class="card bg-light md-4 text-center user">
@@ -202,7 +164,7 @@ int point = (Integer)request.getAttribute("point");
 	 <% if(!myPick.isEmpty()) { %>
 	 <% for (int i=0; i<myPick.size(); i++) {%> 
 	 
-            <div class="live-swell__pics col-sm" style="padding:0px">
+            <div class="live-swell__pics col-sm" style="padding:0px; flex-grow : 0">
               <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_1() %>" alt="" />
               </div>
@@ -217,7 +179,7 @@ int point = (Integer)request.getAttribute("point");
 	    
 	
 		  <% } else{ %>
-		  <div align="center"><h5>작성한 게시글이 없습니다.</h5></div>
+		  <div align="center" style = "margin-top : 100px; margin-bottom : 300px; margin-left : auto; margin-right : auto;"><h5>작성한 게시글이 없습니다.</h5></div>
 		  <% } %> 
 		
 	
@@ -228,29 +190,35 @@ int point = (Integer)request.getAttribute("point");
 	<% } %>
 	<script>
 	
+	// comment 불러오기
+		$(function(){
+			$.ajax({
+				url : '/pickme/cBrowse.pr',
+				type : 'get',
+				data :  {
+					uno : $('#getNo').val()
+				},success : function(data){
+					$('.comment').val(data);
+				}
+				
+			});
+		});
+	
 		$('#user').click(function(){
 			 location.href="/pickme/mPage.pr";
 		});
 		
-		$('#pencil1').click(function(){
+		$('#pencil').click(function(){
 			
 			$('.comment').val("");
-			$('.comment').attr("style", "border : 1px dashed black");
-			$('#pencil1').attr("style", "display:none");
+			$('.comment').attr("style", "border : 1px solid black");
+			$('#pencil').attr("style", "display:none");
 			$('#check').attr("style","display:block");
 			
 			
 		});
 		
-		$('#pencil2').click(function(){
-
-			$('.comment').attr("type","text");
-			$('#pencil2').attr("style", "display:none");
-			$('#check').attr("style","display:block");
-			
-			
-		});
-		
+		// comment 수정하기위한 ajax
 		$('#check').click(function(){
 			
 			$.ajax({
@@ -262,7 +230,7 @@ int point = (Integer)request.getAttribute("point");
 				 
 				}, success : function(data){
 					if(data > 0 ){
-						alert("성공!")
+						window.location.reload()
 					}
 				},
 				error : function(request, status, error){
