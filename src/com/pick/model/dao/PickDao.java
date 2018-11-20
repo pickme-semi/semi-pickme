@@ -82,7 +82,7 @@ public class PickDao {
 		}
 		
 		
-		return null;
+		return list;
 	}
 
 	public int insertPick(Connection con, PickMe pm) {
