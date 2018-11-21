@@ -43,7 +43,11 @@ public class BoardInsertViewServlet extends HttpServlet {
 				session.setAttribute("bType", "qna");
 			}
 			
-			request.getRequestDispatcher("views/board/boardInsert.jsp").forward(request, response);
+			if((type.equals("report") && (request.getParameter("pickid") == null)) || (type.equals("report") && (request.getParameter("pickid") == ""))){
+				response.sendRedirect("views/common/errorPage.jsp");
+			}else{
+				request.getRequestDispatcher("views/board/boardInsert.jsp").forward(request, response);
+			}
 		}
 	}
 

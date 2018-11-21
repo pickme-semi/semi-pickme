@@ -102,7 +102,9 @@
 			<button class="btnTest" id="boardUpdate">수정하기</button> &nbsp;&nbsp;
 			
 			<%}else{ %>
-			<button class="btnTest" onclick="boardInsert();"><%= (type.equals("report"))? "신고" : "질문" %>하기</button> &nbsp;&nbsp;
+				<% if(type.equals("qna")){ %>
+					<button class="btnTest" onclick="boardInsert();">질문하기</button> &nbsp;&nbsp;
+				<% } %>
 			<%} %>
 			
 			<button class="btnTest" onclick="list();">목록으로</button> &nbsp;&nbsp;
@@ -114,7 +116,7 @@
 	
 	<script>
 		function boardInsert(){
-			location.href = "/pickme/InsertView.bo?bType=" + "<%=type%>";
+			location.href = "/pickme/InsertView.bo?bType=qna";
 		}
 		
 		function boardUpdate(){

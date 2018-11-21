@@ -106,7 +106,7 @@
 	<div class="btns" align="center">
 	<button type="button" id="loginBtn" value="로그인" class="btn btn-primary">로그인</button>
 	<br><br>
-	<p id="p1">아직 계정이 없으신가요? <a href="/pickme/views/user/UserTerms.jsp">회원가입</a></p>
+	<p id="p1">아직 계정이 없으신가요? <a href="/pickme/views/user/UserJoinForm.jsp">회원가입</a></p>
 
 	<br>
 	

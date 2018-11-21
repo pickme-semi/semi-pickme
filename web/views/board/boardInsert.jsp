@@ -72,7 +72,7 @@
 				<tr>
 					<th id="wSet">신고 pick</th>
 					<th><div class="divArea" align="left" >
-					<input type="text" value="pickid" name="pickId" style="border: none;"/>	
+					<input type="hidden" value="<%=request.getParameter("pickid") %>" name="pickId" style="border: none;"/>	
 				</div></th>
 				</tr>
 				<% } %>

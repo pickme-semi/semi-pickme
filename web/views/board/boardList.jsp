@@ -40,9 +40,19 @@
 				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
 				<% if( commonBoardList.size() != 0){ %>
 					<% for(int i = 0; i < commonBoardList.size(); i++) { %>
-						<tr style="background-color: #FAFAFA">
-						<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
-						<td><%=commonBoardList.get(i).getTitle() %></td>
+						<tr class="row" style="background-color: RED">
+							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
+							<td class="col"><%=commonBoardList.get(i).getTitle() %></td>
+						</tr>
+						
+						<tr class="row common-answer" style="background-color: BLUE">
+							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
+							<td class="col"><%=commonBoardList.get(i).getTitle() %></td>
+						</tr>
+						
+						<tr class="row common-answer" style="background-color: BLUE">
+							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
+							<td class="col"><%=commonBoardList.get(i).getTitle() %></td>
 						</tr>
 					<% } %>
 				<% } %>
@@ -156,14 +166,16 @@
 		
 		
 		<div align="center">
-			<button class="btnTest" onclick="boardInsert();"><%= (type.equals("report"))? "신고" : "질문" %>하기</button>
+			<% if(!type.equals("report")){ %>
+				<button class="btnTest" onclick="boardInsert();">질문하기</button>
+			<% } %>
 		</div>
 	</div>
 	<%@ include file="../common/footer.jsp" %>
 	
 	<script>
 		function boardInsert(){
-			location.href = "/pickme/InsertView.bo?bType=" + "<%=type%>";
+			location.href = "/pickme/InsertView.bo?bType=qna";
 		}
 		
 		
