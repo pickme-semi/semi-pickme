@@ -5,8 +5,7 @@
 <%@page import="com.reply.model.vo.*" %>
 <%
 	PickMe p = (PickMe) request.getAttribute("PickMe");
-	User u = (User) session.getAttribute("user");
-	
+	User u = (User) session.getAttribute("user");	
 	ArrayList<PickComment> pclist = (ArrayList<PickComment>)request.getAttribute("clist"); 
 %>
 
@@ -24,28 +23,40 @@
 
 
 <style>
-#profile {
+#profile { /* 프로필 사진 크기 고정. */
 	height: 80px;
 	position: relative;
 	width: 80px;
 	max-width: 100%;
+	max-height : 100%;		
+}
+
+.icon{
+	height: 32px;
+	position: relative;
+	width: 32px;
+	max-width: 100%;
 	max-height : 100%;
-	margin-left: 20px;		
+}
+
+.userprofile{
+width:95%;
+height:95%;
 }
 
 .replyArea {
 
-width:90%;
-height:90%;
-
+width:100%;
+height:100%;
+border:3px solid #F8E5D0;
 }
 
 .replyArea textArea {
-	border-radius: 10px;
+	border-radius: 5px;
 	resize: none;
 	width:100%;
-	height:100%;	 
-	
+	height:100%;
+		
 }
 
 section{
@@ -53,33 +64,36 @@ section{
 		margin-left: auto;
 		margin-right: auto;
 	}
-
 body {
   font-family: Arial;  /*글꼴 수정 Arial 고딕체 계열 */
   margin: 0; 
   overflow-x:scroll;
-   
+}
+#leftPick {
+	height: 250px;
+	position: relative;
+	width: 250px;
+	max-width: 100%;
+	max-height : 100%;
+	border: 3px solid lightskyblue;
+}
+#rightPick {
+	height: 250px;
+	position: relative;
+	width: 250px;
+	max-width: 100%;
+	max-height : 100%;
+	border: 3px solid lightskyblue;
 }
 
-* {
-  box-sizing: border-box;   /* 테두리를 포함한 크기를 지정할 수 있다 */
-}
-
-img{
-  vertical-align: bottom;   /* 인라인요소의 수직 정렬 */
-   width: 100%;
-    object-fit: contain;
-    
-}
-
+/* pick 게시글 내용 말풍선 스타일. */
 .arrow_box {
 	position: relative;
 	background: #ebfff4;
-	border: 4px solid #c7eaff;
-	width:90%;
-	height:90%;
-	
-	
+	border: 3px solid #c7eaff;
+	border-radius: 10px;
+	width:100%;
+	height:100%;		
 }
 .arrow_box:after, .arrow_box:before {
 	bottom: 100%;
@@ -91,7 +105,6 @@ img{
 	position: absolute;
 	pointer-events: none;
 }
-
 .arrow_box:after {
 	border-color: rgba(235, 255, 244, 0);
 	border-bottom-color: #ebfff4;
@@ -104,11 +117,41 @@ img{
 	border-width: 26px;
 	margin-left: -26px;
 }
-.replyarea{
- 	margin-left: 80px;
-	margin-right : 80px;
+
+
+/*댓글 등록, 수정, 삭제 버튼 아이콘으로 변경 아이콘 출처 http://icooon-mono.com*/
+#addReply {
+	background: url( "<%= request.getContextPath() %>/resources/icons/insert.png" ) no-repeat;
+	border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+#updateBtn{
+background: url( "<%= request.getContextPath() %>/resources/icons/update.png" ) no-repeat;
+	border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
 
 }
+
+#updateBtn2 {
+	background: url( "<%= request.getContextPath() %>/resources/icons/insert.png" ) no-repeat;
+	border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+#delteBtn {
+	background: url( "<%= request.getContextPath() %>/resources/icons/delete.png" ) no-repeat;
+	border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
 
 </style>
 
@@ -123,9 +166,26 @@ img{
 	%>
 	<%@ include file="../common/header.jsp"%>
 	
-	<div class="container-fluid col-md-12 col-xs-12" align="center">
+	<div class="container-fluid col-md-8 col-xs-12" align="center" style="background-color : aliceblue">
 		<h1><%=p.getTitle()%></h1>
-		<button type="button">신고하기</button>
+		
+		<form method="post" action="<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>" align="right">
+	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
+	      	<input type="hidden" id="pickid" name="pickid"  class="current" value="<%= p.getId() %>"/>
+	      	<b><a href=""  style="color : none; text-decoration : none;">
+	      			   		    
+			<img src="<%= request.getContextPath() %>/resources/icons/share.png" id="shareicon"
+			 name="shareicon" class="icon">
+			</a></b>
+			&nbsp;&nbsp;				      			
+		    <b><a href="/pickme/InsertView.bo?bType=report&pickid=<%=p.getId()%>"
+		   		  style="color : none; text-decoration : none;">
+		   		  		   		    
+			<img src="<%= request.getContextPath() %>/resources/icons/report.png" id="reporticon"
+			 name="reporticon" class="icon">
+			</a></b>
+		</form>
+		
 		<br>		
 		<br>
 		
@@ -133,8 +193,8 @@ img{
 	    <input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= p.getId() %>"/> 
 	    
 	    
-		<div class="container " >	 
-	   <div class="mySlides" style="background-color : blue">          
+		<div class="container col-xs-12" >	 
+	   <div class="mySlides">          
 	        <div class="row" align="center">
 		<div class="col-md-6" align="center" style="background-color : aliceblue" >
 			<img id="leftPick" onerror="imgError(this);" 
@@ -224,9 +284,8 @@ img{
 	  
 	  
 				<br><br>
-			<div class="row userprofile">
-			    <div class="col-md-1"></div>				
-				<div class="col-md-7" align="left" >
+			<div class="row userprofile col-xs-12" >			    				
+				<div class="col-xs-12" align="left" >
 					<% if(p.getProfile() != null) {%>
 		 		   <img src="/pickme/resources/profileImage/<%= p.getProfile() %>" alt="Me" 
 				    class="" id="profile">
@@ -234,23 +293,24 @@ img{
 					<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" 
 					class="" id="profile">
 					<% }%>				
-					&emsp;&emsp;
-					<b><%=p.getUserId()%></b>
-					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-					<button >팔로우 </button>
+					&emsp;&emsp;&emsp;
+					
+					<b><a href="/pickme/uPage.pr?uno=<%= p.getUserno()%>" style="color : none;
+					text-decoration : none;"><%=p.getUserId()%></a></b>
+					
 				</div>		
 				
 			</div>			
 								
-				<br><br>				
-				<div class="content arrow_box">								
+				<br>				
+				<div class="content arrow_box col-xs-12" align="left">												
 					<p><%=p.getContent()%></p>					
 				</div>
 				
 				<br><br>
 				
-	<div class="replyArea">
-		<div id="replySelectArea">
+	<div class="replyArea col-xs-12" >
+		<div id="replySelectArea" style="background-color : aliceblue">
     	    <table border="1" bordercolor="lightgray">
     		<!-- 댓글 목록 -->    
    		    <% if( pclist != null ) { %>
@@ -260,9 +320,8 @@ img{
                 <td width="150">
                     <div>   
 	      			 <% if(pc.getClevel() > 1) {%>                        
-                            &nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->
-                            <p>ㄴ re </p>
-                            <img src="img/reply_icon.gif">
+                            &nbsp;&nbsp;&nbsp;&nbsp; <!-- 답변글일경우 아이디 앞에 공백을 준다. -->                            
+                         	 ㄴ Re <img src="img/reply_icon.gif"> 
                      <% } %>                    
                        <b><%=pc.getName()%></b><br>
                         <font size="2" color="lightgray"><%= pc.getEdate() %></font>
@@ -271,8 +330,8 @@ img{
                 <!-- 본문내용 -->
                 <td width="550">
                     <div class="text_wrapper">
-                       <textarea class="reply-content" 
-							 readonly="readonly"><%= pc.getCcontent() %></textarea>
+                       <textarea class="reply-content" readonly="readonly"
+                       style="background-color : aliceblue"><%= pc.getCcontent() %></textarea>
                     </div>
                 </td>
                 <!-- 버튼 -->
@@ -281,23 +340,22 @@ img{
                        <%if(u.getUserNo() == pc.getUserno()) { %>
 								<input type="hidden" name="cno" value="<%=pc.getCid()%>"/>
 								&nbsp;	  
-								<button type="button" class="updateBtn" 
-									onclick="updateReply(this);">수정하기</button> 
+								<button type="button" class="updateBtn" id="updateBtn" 
+									onclick="updateReply(this);"></button> 
 							
-								<button type="button" class="updateConfirm"
+								<button type="button" class="updateConfirm" id="updateBtn2"
 									onclick="updateConfirm(this);"
-									style="display:none;" >수정완료</button> &nbsp;
+									style="display:none;" ></button> &nbsp;
 																	
-								<button type="button" class="deleteBtn"
-									onclick="deleteReply(this);">삭제하기</button>
+								<button type="button" class="deleteBtn" id="delteBtn"
+									onclick="deleteReply(this);"></button>
 							
 							<% } else if( pc.getClevel() < 3) { %>
 								<input type="hidden" name="writer" value="<%=u.getUserNo()%>"/>
 								<input type="hidden" name="refcno" value="<%= pc.getCid()%>" />
 								<input type="hidden" name="clevel" value="<%=pc.getClevel() %>" />
-								<button type="button" class="insertBtn" 
-									  onclick="reComment(this);">댓글 달기</button> 
-							 
+								<!-- <button type="button" class="insertBtn" 
+									  onclick="reComment(this);">댓글 달기</button>  -->							 
 								<button type="button" class="insertConfirm"
 									onclick="reConfirm(this);"
 									style="display:none;" >댓글 추가 완료</button> 
@@ -334,8 +392,8 @@ img{
                 </td>
                 <!-- 댓글 등록 버튼 -->
                 <td width="100">
-                    <div id="btn" style="text-align:center;">
-                        <button type="submit" id="addReply">댓글 등록</button>    
+                    <div id="btn" style="text-align:center;">                    
+                        <button type="submit" id="addReply"></button>                            
                     </div>
                 </td>
             </form>
@@ -353,10 +411,9 @@ img{
 	<script>
 		function updateReply(obj) {
 			// 현재 위치와 가장 근접한 textarea 접근하기
-			$(obj).parent().parent().next().find('textarea')
-			.removeAttr('readonly');
-			
-			
+			$(obj).parent().parent().prev().find('textarea')
+			.removeAttr('readonly');			
+			$(obj).parent().parent().prev().find('textarea').css('background-color', 'white');
 			// 수정 완료 버튼을 화면 보이게 하기
 			$(obj).siblings('.updateConfirm').css('display','inline');
 			
@@ -367,7 +424,7 @@ img{
 		function updateConfirm(obj) {
 			// 댓글의 내용 가져오기
 			var content
-			  = $(obj).parent().parent().next().find('textarea').val();
+			  = $(obj).parent().parent().prev().find('textarea').val();
 			
 			// 댓글의 번호 가져오기
 			var cno = $(obj).siblings('input').val();
@@ -443,6 +500,11 @@ img{
 			           + '&refcno=' + refcno
 			           + '&clevel=' + level;
 		}
+		
+		$('#inserticon').click(function(){
+			 location.href="/pickme/reply.pm";
+		});
+		
 	</script>
 
 	

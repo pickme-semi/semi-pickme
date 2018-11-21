@@ -260,7 +260,7 @@ img{
 	    <p id="content<%=i%>"><%= pData.getContent() %></p>
 	  	<input type="hidden" id="resultPickId" name="pid" class="current" value="<%= gg %>"/> 
 	  	
-	  		<form method="post" action="<%= request.getContextPath() %>/pickview.pv">
+	  		<form method="post" action="<%= request.getContextPath() %>/pickview.pv?Pid=<%=gg %>">
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
 	      	<input type="submit" value="픽 상세 <%= gg %>" />	
@@ -270,6 +270,9 @@ img{
 	  <% } %> 	
 	  </div>
 	 
+	 <div class="col-xs-12 col-md-8" >
+			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>				
+		</div>
 
 	
 			
@@ -278,40 +281,12 @@ img{
 		<br><br><br>
 		
 		
-		<div class="col-xs-12 col-md-8" align="center" >
-			<button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>			
-			
-		</div>
+		
 		
 		
 		<br><br><br>
 		
-		<div class="list" align="center">
-			<div class="col-md-12" align="center">
-				<nav align="center">
-					<ul class="pagination">
-						<li class="page-item">
-							<a class="page-link" href="#">previous</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">1</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">2</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">3</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">4</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">last</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+	
 	</section>
 	
 	<% }else { %>
