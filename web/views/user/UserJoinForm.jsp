@@ -45,21 +45,15 @@
 		<div class = "form_field form-group">
 			<div class = "form_input" style="width:300px">
 				<input placeholder="아이디" type="text" name="userId" id ="userId" class="form-control" required="required" maxlength="20" >
-			</div>
-			<div>
 				<span class="error_next_box" id="idMsg" style="display:none" role="alert"></span>
 			</div>
 		</div>
-		<br />
 		<div class = "form_field form-group">
 			<div class="form_input" style="width:300px">
-				<input placeholder="비밀번호" type="password" class="form-control" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20">			
-			</div>
-			<div>
-				<span class="error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+				<input placeholder="비밀번호" type="password" class="form-control" id="userPwd" name="userPass" required="required" aria-describedby="pswd1Msg" maxlength="20">
+				<span class="error_next_box" id="pswd1Msg" style="display:none" role="alert">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>			
 			</div>
 		</div>
-		<br />
 		<div class = "form_field form-group">
 			<div class="form_input" style="width:300px">
 				<input placeholder="비밀번호" type="password" class="form-control" id="userPwd2" name="userPass2" required="required" aria-describedby="pswd1Msg" maxlength="20">			
@@ -68,36 +62,29 @@
 				<span class="error_next_box" id="pswd2Msg" style="display:none" role="alert"></span>
 			</div>
 		</div>
-		<br />
 		<div class = "form_field form-group">
 			<div class="form_input" style="width:300px">
-				<input placeholder="이름" type="text" class="form-control" maxlength="5" id="userName" name="userName" required="required" >			
-			</div>
-			<div>
-				<span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span>
+				<input placeholder="이름" type="text" class="form-control" maxlength="5" id="userName" name="userName" required="required" >
+				<span class="error_next_box" id="nameMsg" style="display:none" role="alert"></span>			
 			</div>
 		</div>
-		<br />
 		<div class = "form_field form-group">
 			<div class="form_input" style="width:300px">
-				<input placeholder="이메일" type="email" class="form-control" id="userEmail" name="userEmail" required="required" >			
-			</div>
-			<div>
-				<span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span>
+				<input placeholder="이메일" type="email" class="form-control" id="userEmail" name="userEmail" required="required" >
+				<span class="error_next_box" id="emailMsg" style="display:none" role="alert"></span>			
 			</div>
 		</div>
 	</div>
 	<br />
 	<div class="btns" align="center">
 	<button type="button" id= "btnJoin" class="btn btn-primary" > 가입하기 </button>
+	<div class="row">
+		<p class="col text-center">가입하면 Pickme의 <a href="#">약관</a>, <a href="#">데이터 정책 및 쿠키 정책에</a> 동의하게 됩니다.</p>
+	</div>
 	<br><br>
 	<p id="p1">이미 계정이 있으신가요? <a href="/pickme/views/user/UserLoginForm.jsp">로그인</a></p>
 
-	<br>
-	
 </form>
-
-<br>
 
 </div>
 
