@@ -62,7 +62,31 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="passResetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">비밀번호 재설정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="passResetBtn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+	function modal(message){
+		$(".modal-body").text(message);
+		$("#passResetModal").modal();
+	}
 	var pwFlag = false;
 	var pw2Flag = false;
 	
@@ -141,7 +165,7 @@
 			$("#passReset").submit();
 		
 		}else{
-			alert("비밀번호를 정확하게 입력해주세요.")
+			modal("비밀번호를 정확하게 입력해주세요.")
 		}
 	
 	});

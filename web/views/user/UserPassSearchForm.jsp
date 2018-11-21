@@ -67,7 +67,32 @@
 </div>
 <%@ include file="../common/footer.jsp" %>
 
+
+<!-- Modal -->
+<div class="modal fade" id="passSearchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="passSearchBtn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+	function modal(message){
+		$(".modal-body").text(message);
+		$("#passSearchModal").modal();
+	}
 	$("#sendAuCode").click(function(){
 		$.ajax({
 			url : "/pickme/passSearch.au",
@@ -76,7 +101,7 @@
 				   userEmail : $('#userEmail').val()},
 			success : function(data){
 				if(data == "fail"){
-					alert("아이디와 이메일이 일치하지 않습니다.");
+					modal("아이디와 이메일이 일치하지 않습니다.");
 				} else{
 					$.ajax({
 						url:"/pickme/sendmail.do",
@@ -87,12 +112,12 @@
 						success : function(data){
 							console.log(data);
 							if(data=="true"){
-								alert("이메일 발송 성공");
+								modal("이메일 발송 성공");
 							}else{
-								alert("실패");
+								modal("실패");
 							}
 						}, error : function(request, status, error){
-							alert(request+"\n" 
+							modal(request+"\n" 
 									  + status+"\n"
 									  + error);
 								console.log("에러 발생!");
@@ -102,7 +127,7 @@
 					});
 				}
 			}, error : function(request, status, error){
-				alert(request+"\n" 
+				modal(request+"\n" 
 						  + status+"\n"
 						  + error);
 					console.log("에러 발생!");
@@ -124,10 +149,10 @@
 			},
 			success : function(data){
 				if(data=="true"){
-				alert("인증에 성공하였습니다.");
+				modal("인증에 성공하였습니다.");
 				issueFlag = true;
 				}else{
-					alert("인증에 실패하였습니다. 인증코드를 다시 확인해 주세요.");
+					modal("인증에 실패하였습니다. 인증코드를 다시 확인해 주세요.");
 				}
 			}
 		});
@@ -137,11 +162,8 @@
 		if(issueFlag){
 			location.href="/pickme/repassVeiw.au?id=" + $("#userId").val();
 		}else{
-			alert("인증을 완료해주세요");
+			modal("인증을 완료해주세요");
 		}
-		
-		
-		
 		
 	});
 </script>

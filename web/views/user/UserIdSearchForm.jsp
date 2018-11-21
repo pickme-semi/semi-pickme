@@ -70,7 +70,32 @@
 </div>
 <br /><br /><br />
 
+<!-- Modal -->
+<div class="modal fade" id="idSearchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">아이디 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="idSearchBtn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
+
+function modal(message){
+	$(".modal-body").text(message);
+	$("#idSearchModal").modal();
+}
+
 var nameFlag = false;
 var emailFlag = false;
 $(document).ready(function(){
@@ -131,7 +156,7 @@ $("#searchId").click(function(){
 			}
 			
 		}, error : function(request, status, error){
-			alert(request+"\n" 
+			modal(request+"\n" 
 					  + status+"\n"
 					  + error);
 				console.log("에러 발생!");
@@ -139,7 +164,7 @@ $("#searchId").click(function(){
 			}
 	});
 	}else{
-		alert("값을 정확하게 입력해 주세요.");
+		modal("값을 정확하게 입력해 주세요.");
 	}
 	
 });

@@ -88,6 +88,48 @@
 
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="joinConfirmBtn">확인</button>
+        <button type="button" class="btn btn-primary" id="reportYesBtn">예</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="joinSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	회원가입완료
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="joinYesBtn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 		//회원가입 유효성 검사
 		var idFlag = false;
@@ -160,7 +202,7 @@
 					
 					
 				}, error : function(request, status, error){
-					alert(request+"\n" 
+					modal(request+"\n" 
 						  + status+"\n"
 						  + error);
 					console.log("에러 발생!");
@@ -280,7 +322,7 @@
 					
 					
 				}, error : function(request, status, error){
-					alert(request+"\n" 
+					modal(request+"\n" 
 						  + status+"\n"
 						  + error);
 					console.log("에러 발생!");
@@ -314,23 +356,23 @@
 			
 			if(!idFlag){
 				$("#userId").focus();
-				alert("아이디를 정확하게 입력해주세요.");
+				modal("아이디를 정확하게 입력해주세요.");
 			}
 			else if(!pwFlag){
 				$("#userPwd").focus();
-				alert("비밀번호를 정확하게 입력해주세요.");
+				modal("비밀번호를 정확하게 입력해주세요.");
 			}
 			else if(!pw2Flag){
 				$("#userPwd2").focus();
-				alert("비밀번호와 확인이 일치하지 않습니다.");
+				modal("비밀번호와 확인이 일치하지 않습니다.");
 			}
 			else if(!nameFlag){
 				$("#userName").focus();
-				alert("이름을 정확하게 입력해주세요.");
+				modal("이름을 정확하게 입력해주세요.");
 			}
 			else if(!emailFlag){
 				$("#userEmail").focus();
-				alert("이메일을 정확하게 입력해주세요.")
+				modal("이메일을 정확하게 입력해주세요.")
 			}else{
 				insertMember();
 			}
@@ -338,14 +380,26 @@
 		});
 		
 		function insertMember() {
-				alert("회원가입 완료!");
-				$("#joinform").submit();
+			$("#joinSuccessModal").modal();
 		}
 		
+		function joinSubmit(){
+			$("#joinform").submit();
+		}
 		
+		function modal(message){
+			$(".modal-body").text(message);
+			$("#joinModal").modal();
+		}
+		
+		$("#joinYesBtn").on('click', function(){
+			joinSubmit();
+		});
 	
 </script>
 </div>
 <%@ include file="../common/footer.jsp" %>
+
+
 </body>
 </html>
