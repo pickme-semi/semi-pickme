@@ -72,7 +72,7 @@
 				<tr>
 					<th id="wSet">신고 pick</th>
 					<th><div class="divArea" align="left" >
-					<input type="hidden" value="<%=request.getParameter("pickid") %>" name="pickId" style="border: none;"/>	
+					<input type="text" value="<%=request.getParameter("pickid") %>" name="pickId" style="border: none;" readonly/>	
 				</div></th>
 				</tr>
 				<% } %>
@@ -161,7 +161,8 @@
 		
 	$("#btnCancle").click(function(){
 		cancelBoard();
-		location.href = "/pickme/list.bo";
+		history.back(-1);
+		//location.href = "/pickme/list.bo";
 	});
 
 	function insertBoard(){

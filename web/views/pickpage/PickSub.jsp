@@ -172,14 +172,16 @@ background: url( "<%= request.getContextPath() %>/resources/icons/update.png" ) 
 		<form method="post" action="<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>" align="right">
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="pickid" name="pickid"  class="current" value="<%= p.getId() %>"/>
-	      	<b><a href=""  style="color : none; text-decoration : none;">
+	      	<b><a id="shareBtn" href="#" data-toggle="modal" data-target="#shareModal" 
+	      	style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 공유하기">
 	      			   		    
 			<img src="<%= request.getContextPath() %>/resources/icons/share.png" id="shareicon"
 			 name="shareicon" class="icon">
 			</a></b>
-			&nbsp;&nbsp;				      			
-		    <b><a href="/pickme/InsertView.bo?bType=report&pickid=<%=p.getId()%>"
-		   		  style="color : none; text-decoration : none;">
+			&nbsp;&nbsp;
+			
+		    <b><a href="#" data-toggle="modal" data-target="#reportModal"
+		   		  style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 신고하기">
 		   		  		   		    
 			<img src="<%= request.getContextPath() %>/resources/icons/report.png" id="reporticon"
 			 name="reporticon" class="icon">
@@ -506,9 +508,85 @@ background: url( "<%= request.getContextPath() %>/resources/icons/update.png" ) 
 		});
 		
 	</script>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportModal">
+  Launch demo modal
+</button>
 
 	
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">게시물 신고</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	게시물을 신고하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="reportYesBtn">예</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="reportNoBtn">아니오</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">게시물 공유</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<input type="text" value="" id="shareinput" />
+      	&nbsp;&nbsp;클립보드에 복사 
+      	<span class="glyphicon glyphicon-plus"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="shareYesBtn">복사</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="shareNoBtn">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	$("#reportYesBtn").on('click', function(){
+		location.href= "<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>";
+	});
+	
+	$("#shareBtn").click(function(){
+		var url = window.location.href;     // Returns full URL
+		
+		$.ajax({
+			type : "post",
+			url : "/pickme/shorturl.sh",
+			data : {"url" : url},
+			success : function(data){
+				$("#shareinput").val(data);
+			},error : function(data){
+				console.log(data);				
+			}
+			
+		});
+	});
+	
+	$("#shareYesBtn").on('click', function(){
+		var copyText = $("#shareinput");
+		copyText.select();
+		document.execCommand("copy");
+		
+	});
+
+</script>
 	<%@ include file="../common/footer.jsp"%>
 	<%
 		}
