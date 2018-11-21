@@ -117,7 +117,7 @@ int point = (Integer)request.getAttribute("point");
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
-	<h2><%= user.getUserId() %><i id="user" class="fas fa-cogs"></i> </h2>
+	<h2><%= user.getUserId() %><i id="user" class="fas fa-cog"></i> </h2>
 	<!-- 아이디 전송을 위한 input 박스 -->
 	<input type="hidden" id="getNo" value="<%= user.getUserNo() %>" />
 	
@@ -230,6 +230,7 @@ int point = (Integer)request.getAttribute("point");
 				 
 				}, success : function(data){
 					if(data > 0 ){
+						$('.comment').val(data);
 						window.location.reload()
 					}
 				},

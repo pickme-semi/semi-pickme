@@ -84,7 +84,7 @@ public class SearchDao {
 		ResultSet rset = null;
 		ArrayList<PickMe> list = null;
 		
-		String sql = prop.getProperty("searchPick");
+		String sql = prop.getProperty("searchCategoryPick");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -98,9 +98,10 @@ public class SearchDao {
 				PickMe pm = new PickMe();
 				
 				pm.setTitle(rset.getString(1));
-				pm.setUserno(rset.getInt(2));
+				pm.setUserId(rset.getString(2));
 				pm.setSelect_1(rset.getString(3));
 				pm.setSelect_2(rset.getString(4));
+				pm.setUserno(rset.getInt(5));
 				
 				list.add(pm);
 				
@@ -135,9 +136,10 @@ public class SearchDao {
 				PickMe pm = new PickMe();
 				
 				pm.setTitle(rset.getString(1));
-				pm.setUserno(rset.getInt(2));
+				pm.setUserId(rset.getString(2));
 				pm.setSelect_1(rset.getString(3));
 				pm.setSelect_2(rset.getString(4));
+				pm.setUserno(rset.getInt(5));
 				
 				list.add(pm);
 				

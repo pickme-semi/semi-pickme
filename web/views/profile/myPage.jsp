@@ -14,6 +14,8 @@
 <!-- select2 소스  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+
 <title>회원 정보 수정 페이지</title>
 
 <style>
@@ -87,7 +89,8 @@
 
 <% if( user != null) { %>
 <div class = "outer">
-<h2 align = "center"> 회원 정보  </h2>
+<i class="fas fa-reply fa-3x"></i>
+<h2 align = "center">회원 정보  </h2>
 <br />
 
 <form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.au?uno=<%=user.getUserNo() %>"
@@ -122,7 +125,7 @@ encType="multipart/form-data">
 		<% }%>
 		</td>
 		<td></td>
-	</tr>
+				</tr>
 	<tr>
 		<td> 성별 <br /></td>
 	
@@ -358,6 +361,12 @@ encType="multipart/form-data">
 	function hideMsg(obj){
 		obj.attr("style","display:none");
 	}
+	
+	$('.fa-reply').click(function(){
+		
+		location.href="/pickme/mPicks.pr?uno=<%=user.getUserNo()%>";
+	});
+	
 
 </script>
 <% } %>

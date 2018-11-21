@@ -81,9 +81,12 @@ public class SearchServlet extends HttpServlet {
 			if(option == "user") {
 				System.out.println("user");
 				response.sendRedirect("views/search/SearchUserList.jsp");
-			}else {
-				System.out.println("pick & cate");
+			}else if(option == "pick"){
+				System.out.println("pick");
 				response.sendRedirect("views/search/SearchPickList.jsp");
+			}else {
+				System.out.println("category");
+				response.sendRedirect("views/search/SearchCategory.jsp");
 			}
 		}
 	}
