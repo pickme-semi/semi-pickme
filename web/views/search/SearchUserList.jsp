@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <title>유저 검색결과</title>
 <style>
 
@@ -29,6 +29,7 @@
 	
 		<div class="pm-section col-xs-12 col-md-8">
 		
+			<%if(uList.size() != 0){ %>
 			<h1>유저 검색 결과 리스트 창</h1>
 			
 			<br /><br />
@@ -41,7 +42,6 @@
 			      <th scope="col"></th>
 			    </tr>
 			  </thead>
-			<%if(uList.size() != 0){ %>
 			<% for(int i = 0 ; i < uList.size(); i++){ %>
 			 <tbody>
 			    <tr class="table-primary">
@@ -64,9 +64,20 @@
 			</table>
 			
 			<% }else { %>
-				<div class="result-none">
-					<h1>검색 결과 없음</h1>
-				</div>
+				<h1>픽&카테고리 검색 결과 리스트 창</h1>
+			<br /><br />
+			<table class="table table-hover" >
+			  <thead>
+			    <tr>
+			      <th scope="col"><i class="fas fa-search"></i></th>
+			      <th scope="col"></th>
+			      <th scope="col"></th>
+			      <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  </table>
+			  
+			  	<div align="center" style="margin-top: 50px; margin-bottom : 500px;"><h5>검색결과가 없습니다.</h5></div>
 			<% } %>
 		</div>
 	

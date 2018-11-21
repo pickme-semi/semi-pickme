@@ -11,6 +11,7 @@ public class Category implements Serializable {
 	private int userNo;
 	private Date enrolldate;
 	
+	
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub

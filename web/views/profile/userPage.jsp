@@ -9,6 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="preload" href="/pickme/resources/css/swell-2472ebd5fc.css" as="style" onload="this.rel='stylesheet'">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
+
 <title>User Page</title>
 <style>
 	.attr {
