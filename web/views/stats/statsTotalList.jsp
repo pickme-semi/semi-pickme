@@ -22,6 +22,24 @@
 		height : 150px;
 	}
 	
+	td{
+		margin-top : auto;
+		margin-botton : auto;
+		align : center;
+	}
+	
+	span{
+		margin-top : 50px;
+		margin-botton : 50px;
+		align : center;
+	}
+	
+	.tdDiv{
+		margin-top : 50px;
+		margin-botton : 50px;
+		align : center;
+	
+	}
 
 </style>
 </head>
@@ -36,7 +54,6 @@
 	<h1>pick list</h1>
 	<div class="pm-div">
 	
-		
 		<table class="table">
 			<thead>
 			    <tr>
@@ -47,16 +64,20 @@
 			    </tr>
 			  </thead>
 			<tbody>
-			<% for(int i = 0 ; i < list.size() ;i++){ %>
+			<%-- <%int count = 5; %> --%>
+			<% for(int i = 0 ; i <list.size();i++){ %>
 			<tr class="table-primary">
 				<th scope="row"><%= i+1 %></th>
-				<td><span class="title"><a href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>"> <%= list.get(i).getTitle() %> </a></span></td>
-				<td><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_1() %>" alt="select1-img" onError ="imgError(this)" /><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_2() %>" alt="select2-img" onError ="imgError(this)"  />
+				<td width="15%" align="center" >
+				<div class="tdDiv"><span class="title"><a href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>"> <%= list.get(i).getTitle() %> </a></span></div>
 				</td>
-				<td><span class="name"><a href="">작성자</a></span></td>
+				<td align="center"><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_1() %>" alt="select1-img" onError ="imgError(this)" /><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_2() %>" alt="select2-img" onError ="imgError(this)"  />
+				</td>
+				<td><div class="tdDiv"><span class="name"><a href="/pickme/uPage.pr?uno=<%=list.get(i).getUserno()%>"><%=list.get(i).getUserId()%></a></span></div></td> <!-- 이부분 안됨 -->
 			</tr>
 			<% } %>
 			</tbody>
+			
 		</table>
 		
 		<%-- <div>
@@ -74,10 +95,53 @@
 	
 	
 	<script>
-		$(window).scroll(function(){
+		
+		 /* function test(){
+			$.ajax({
+				url : "/pickme/getData.st",
+				type : "get",
+				success :function(data){
+					console.log("data: " +data);
+					console.log("data[1] "+data.get(1).pickId);
+				}, error : function(request, status, error){
+					alert(request+"\n" 
+							  + status+"\n"
+							  + error);
+						console.log("에러 발생!");
+						
+					}
+			})
+		}  */
+		
+		<%-- $(window).scroll(function(){
 				if($(window).scrollTop() == $(document).height() - $(window).height()){
 					// ajax 
-					$(".pm-div").append("<div>" +
+					$.ajax({
+						url : "/pickme/sTotalList.st",
+						type : "post",
+						success : function(data){
+							console.log(data);
+							$(".pm-div").append("<div>" +
+									'<tr class="table-primary">'+
+										'<th scope="row">'+<%=  %>+'</th>'+
+										'<td width="15%" align="center" >'+
+										'<div class="tdDiv"><span class="title"><a href="/pickme/statsOneList.st?pickno='+<%=%>+'">'+ <%=  %>+ '</a></span></div>'+
+										'</td>'+
+										'<td align="center"><img class="img_size" src="'+<%= request.getContextPath() %>+'/resources/PickUploadFiles/'+<%= %>+'" alt="select1-img" onError ="imgError(this)" /><img class="img_size" src="'+<%= request.getContextPath() %>+'/resources/PickUploadFiles/'+<%=%>+'" alt="select2-img" onError ="imgError(this)"  />'+
+										'</td>'+
+										'<td><div class="tdDiv"><span class="name"><a href="/pickme/uPage.pr?uno='+<%=%>+'">'+<%=%>+'</a></span></div></td>'+
+									'</tr>'+
+											"</div>" +	
+									"<hr />");
+						}, error : function(request, status, error){
+							alert(request+"\n" 
+									  + status+"\n"
+									  + error);
+								console.log("에러 발생!");
+								
+							}
+					}); 
+					/* $(".pm-div").append("<div>" +
 							"<span class='title'><a href='/pickme/statsOneList.st?pickno=''>picktitle</a></span>" +
 							"<img src='' alt='select1-img' />" +
 							"<img src='' alt='select2-img' />" +
@@ -90,9 +154,34 @@
 							"<img src='' alt='select2-img' />" +
 							"<span class='name'><a href=''>작성자 </a></span>" +
 							"</div>" +	
-							"<hr />");
+							"<hr />"); */
 				}
-		});
+		});--%>
+		<%-- var index = <%=count%>;
+		<%int idx = count;%>
+		var max = <%=list.size()%>;
+		$(window).scroll(function(){
+			if($(window).scrollTop() == $(document).height() - $(window).height()){
+				if(index<=max){
+				<%for(int i = idx; i<idx+3; i++){%>
+				$("tbody").append('<tr class="table-primary">'+
+							'<th scope="row">'+<%=i+1%>+'</th>'+
+							'<td width="15%" align="center" >'+
+							'<div class="tdDiv"><span class="title"><a href="/pickme/statsOneList.st?pickno='+<%=list.get(i).getId()%>+'"> <%= list.get(i).getTitle() %> </a></span></div>'+
+							'</td>'+
+							'<td align="center"><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_1() %>" alt="select1-img" onError ="imgError(this)" />'+
+							'<img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_2() %>" alt="select2-img" onError ="imgError(this)"  />'+
+							'</td>'+
+							'<td><div class="tdDiv"><span class="name"><a href="/pickme/uPage.pr?uno="></a></span></div></td>'+
+						'</tr>');
+				
+								<%}%>
+				<%count++;%>
+				}
+			}
+	}); --%>
+		 
+		 
 	</script>
 <% } %>
 </body>
