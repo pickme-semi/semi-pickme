@@ -66,36 +66,6 @@
 			</div>
 		<% } %>
 		
-		
-				<div class="list" >
-					<div class="col-md-12" style="display:block; align:center">
-						<nav style="display:block;">
-							<ul class="pagination" id="testli" >
-								<li class="page-item" >
-									<a class="testa" href="#">previous</a>
-								</li>
-								<li class="page-item">
-									<a class="testa" href="#">1</a>
-								</li>
-								<li class="page-item">
-									<a class="testa" href="#">2</a>
-								</li>
-								<li class="page-item">
-									<a class="testa" href="#">3</a>
-								</li>
-								<li class="page-item">
-									<a class="testa" href="#">4</a>
-								</li>
-								<li class="page-item">
-									<a class="testa" href="#">last</a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-		
-		
-		
 		<br><br>
 		<table id = "boardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
 			<thead class="thead-light">
@@ -115,7 +85,7 @@
 							<input type="hidden" value="<%= boardList.get(i).getId() %>">
 							<td ><%=boardList.get(i).getId()%></td>
 							<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></a></td>
-							<td><%=boardList.get(i).getUserNo() %></td>
+							<td><%=boardList.get(i).getUserName() %></td>
 							<td><%=boardList.get(i).getEnrollDate() %></td>
 						<% }else{ %>
 							<td colspan="4">관리자와 작성자만 볼 수 있습니다.</td>
@@ -126,7 +96,7 @@
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></a></td>
-						<td><%=boardList.get(i).getUserNo() %></td>
+						<td><%=boardList.get(i).getUserName()%></td>
 						<td><%=boardList.get(i).getEnrollDate() %></td>
 						</tr>
 					<% } %>

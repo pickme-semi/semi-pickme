@@ -43,7 +43,7 @@
 						<th width="100px">문의 유형</th>
 						<th id = "sub" width="120px"><span><%= b.getCategoryId() %></span></th>
 						<th width="100px">작성자</th>
-						<th id = "sub" width="130px"> <span><%= b.getUserNo() %></span></th>
+						<th id = "sub" width="130px"> <span><%= b.getUserName() %></span></th>
 						<th width="100px">작성일</th>
 						<th id = "sub" width="150px"><span><%= b.getEnrollDate() %></span></th>							
 					</tr>
@@ -69,7 +69,7 @@
 				</tr>
 				<tr class="areafont">		
 					<td width="100px" id="testarea">담당자</td>
-					<td width="300px"><span><%= ba.getUserNo() %></span>
+					<td width="300px"><span><%= ba.getUserName() %></span>
 									
 					<td width="100px" id="testarea">작성일</td>
 					<td ><span><%= ba.getEnrollDate() %></span>

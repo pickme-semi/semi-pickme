@@ -15,6 +15,7 @@ public class BoardAnswer implements Serializable{
 	private int userNo;
 	private String content;
 	private Date enrollDate;
+	private String userName;
 	
 	public BoardAnswer() {
 		super();
@@ -27,6 +28,14 @@ public class BoardAnswer implements Serializable{
 		this.userNo = userNo;
 		this.content = content;
 		this.enrollDate = enrollDate;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public int getId() {

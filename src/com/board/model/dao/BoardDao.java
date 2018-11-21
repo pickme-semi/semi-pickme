@@ -110,6 +110,7 @@ public class BoardDao {
 				bo.setUserNo(rset.getInt(7));
 				bo.setPickId(rset.getInt(8));
 				bo.setType(rset.getString(9));
+				bo.setUserName(rset.getString(10));
 				
 				boardList.add(bo);
 			}
@@ -234,8 +235,7 @@ public class BoardDao {
 				b.setTitle(rset.getString("TITLE"));
 				b.setUserNo(rset.getInt("USER_NO"));
 				b.setStatus(rset.getString("STATUS"));
-				
-
+				b.setUserName(rset.getString("NAME"));
 			}
 					
 			
@@ -396,6 +396,7 @@ public class BoardDao {
 				ba.setUserNo(rset.getInt(3));
 				ba.setContent(rset.getString(4));
 				ba.setEnrollDate(rset.getDate(5));
+				ba.setUserName(rset.getString(6));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -51,7 +51,7 @@
 						<input type="hidden" value="<%= boardListQ.get(i).getId() %>">
 						<td><%=boardListQ.get(i).getId() %></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardListQ.get(i).getId()%>"><%=boardListQ.get(i).getTitle() %></a></td>
-						<td><%=boardListQ.get(i).getUserNo() %></td>
+						<td><%=boardListQ.get(i).getUserName() %></td>
 						<td><%=boardListQ.get(i).getEnrollDate() %></td>
 						</tr>
 					<% } %>
@@ -106,7 +106,7 @@
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></td>
-						<td><%=boardList.get(i).getUserNo() %></td>
+						<td><%=boardList.get(i).getUserName() %></td>
 						<td><%=boardList.get(i).getEnrollDate()%></td>
 						</tr>
 				<% } %>

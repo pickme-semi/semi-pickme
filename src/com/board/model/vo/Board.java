@@ -18,6 +18,7 @@ public class Board implements Serializable{
 	private int userNo;
 	private int pickId;
 	private String type;
+	private String userName;
 	
 	public Board() {
 		super();
@@ -65,6 +66,14 @@ public class Board implements Serializable{
 		this.userNo = userNo;
 		this.pickId = pickId;
 		this.type = type;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public int getId() {
@@ -143,6 +152,6 @@ public class Board implements Serializable{
 	public String toString() {
 		return "Board [id=" + id + ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate
 				+ ", status=" + status + ", categoryId=" + categoryId + ", userNo=" + userNo + ", pickId=" + pickId
-				+ ", type=" + type + "]";
+				+ ", type=" + type + ", name="+ userName + "]";
 	}
 }
