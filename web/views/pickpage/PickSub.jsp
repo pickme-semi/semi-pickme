@@ -152,6 +152,10 @@ background: url( "<%= request.getContextPath() %>/resources/icons/update.png" ) 
     cursor: pointer;
 }
 
+textarea{
+	border : none;
+}
+
 
 </style>
 
@@ -508,11 +512,6 @@ background: url( "<%= request.getContextPath() %>/resources/icons/update.png" ) 
 		});
 		
 	</script>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportModal">
-  Launch demo modal
-</button>
-
 	
 <!-- Modal -->
 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
