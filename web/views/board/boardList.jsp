@@ -18,9 +18,14 @@
 			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
 			
 #testli{ background-color: white; border-radius:0px; text-align:center;
-		 font-size: 14px; font-weight:bold; }
+		 font-size: 14px; font-weight:bold;  }
 
 .testa{text-align: center; width: 50px;}
+
+.page-item{ float: left;
+   			position: relative;
+    		left: 50%;
+    		}
 </style>
 </head>
 <body>
@@ -61,10 +66,10 @@
 		<% } %>
 		
 		
-				<div class="list" align="center" >
-					<div class="col-md-12" align="center">
-						<nav align="center">
-							<ul class="pagination" id="testli">
+				<div class="list" >
+					<div class="col-md-12" style="display:block; align:center">
+						<nav style="display:block;">
+							<ul class="pagination" id="testli" >
 								<li class="page-item" >
 									<a class="testa" href="#">previous</a>
 								</li>
