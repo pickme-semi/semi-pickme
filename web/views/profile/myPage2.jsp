@@ -53,7 +53,7 @@
 	  </ul>
 	<hr />
 	<% if( user != null) { %>
-<div class = "outer">
+<div class = "outer pm-section">
 <h2 align = "center"> 비밀번호 변경  </h2>
 <br />
 <ul class="content">
