@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.board.model.vo.Board" %>
+<%@ page import="com.board.model.vo.BoardAnswer" %>
 <%
 	String type = (String)session.getAttribute("bType");
 	ArrayList<Board> boardList = (ArrayList<Board>)session.getAttribute("boardList");
 	ArrayList<Board> commonBoardList = (ArrayList<Board>)session.getAttribute("commonBoardList");
+	ArrayList<BoardAnswer> commonAnswerList = (ArrayList<BoardAnswer>)session.getAttribute("commonAnswerList");
 %>
 <!DOCTYPE html>
 <html>
@@ -45,19 +47,18 @@
 				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
 				<% if( commonBoardList.size() != 0){ %>
 					<% for(int i = 0; i < commonBoardList.size(); i++) { %>
-						<tr class="row" style="background-color: RED">
+						<tr class="" style="background-color: " data-toggle="collapse" data-target="#demo<%=i%>">
 							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
-							<td class="col"><%=commonBoardList.get(i).getTitle() %></td>
+							<td class=""><%=commonBoardList.get(i).getTitle() %></td>
 						</tr>
-						
-						<tr class="row common-answer" style="background-color: BLUE">
-							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
-							<td class="col"><%=commonBoardList.get(i).getTitle() %></td>
-						</tr>
-						
-						<tr class="row common-answer" style="background-color: BLUE">
-							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
-							<td class="col"><%=commonBoardList.get(i).getTitle() %></td>
+						<tr>
+							<td>
+								<div id="demo<%=i%>" class="collapse">
+									<p class="text-left"><%=commonBoardList.get(i).getContent() %></p>
+								<hr />
+									<p class="text-left">[답변] <%=commonAnswerList.get(i).getContent() %></p>
+								</div>
+							</td>
 						</tr>
 					<% } %>
 				<% } %>

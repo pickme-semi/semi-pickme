@@ -406,6 +406,44 @@ public class BoardDao {
 		}
 		return ba;
 	}
+
+	public ArrayList<BoardAnswer> getCommonAnswerList(Connection con) {
+		PreparedStatement pstmt = null;
+		ArrayList<BoardAnswer> commonAnswerList = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getCommonAnswerList");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			commonAnswerList = new ArrayList<BoardAnswer>();
+			
+			while(rset.next()){
+				BoardAnswer ba = new BoardAnswer();
+				
+				ba.setId(rset.getInt(1));
+				ba.setbId(rset.getInt(2));
+				ba.setUserNo(rset.getInt(3));
+				ba.setContent(rset.getString(4));
+				ba.setEnrollDate(rset.getDate(5));
+				
+				System.out.println("DAO : " + ba);
+				
+				commonAnswerList.add(ba);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return commonAnswerList;
+	}
 	
 
 }

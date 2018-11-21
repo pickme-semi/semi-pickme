@@ -108,4 +108,12 @@ public class BoardService {
 
 	}
 
+	public ArrayList<BoardAnswer> getCommonAnswerList() {
+		Connection con = getConnection();
+		
+		ArrayList<BoardAnswer> commonAnswerList = bDao.getCommonAnswerList(con);
+		
+		return commonAnswerList;
+	}
+
 }

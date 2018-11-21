@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.board.model.service.BoardService;
 import com.board.model.vo.Board;
+import com.board.model.vo.BoardAnswer;
 import com.board.model.vo.BoardCategory;
 import com.common.SessionCheck;
 
@@ -45,6 +46,7 @@ public class BoardListServlet extends HttpServlet {
 			ArrayList<BoardCategory> cateList = null;
 			ArrayList<Board> boardList = null;
 			ArrayList<Board> commonBoardList = null;
+			ArrayList<BoardAnswer> commonAnswerList = null;
 			
 			ArrayList<BoardCategory> cateListQ = null;
 			ArrayList<Board> boardListQ = null;
@@ -66,11 +68,14 @@ public class BoardListServlet extends HttpServlet {
 				cateList = bs.getBoardCategory("qna");
 				boardList = bs.getBoardList("qna");
 				commonBoardList = bs.getCommonBoardList();
+				commonAnswerList = bs.getCommonAnswerList();
 				
 				System.out.println("컴먼 : " + commonBoardList);
 				
 				session.setAttribute("bType", "qna");
 				session.setAttribute("commonBoardList", commonBoardList);
+				session.setAttribute("commonAnswerList", commonAnswerList);
+				
 			}
 			
 			session.setAttribute("cateList", cateList);
