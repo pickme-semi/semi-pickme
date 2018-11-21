@@ -3,11 +3,19 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.board.model.vo.Board" %>
 <%@ page import="com.board.model.vo.BoardAnswer" %>
+<%@ page import="com.board.model.vo.PageInfo" %>
 <%
 	String type = (String)session.getAttribute("bType");
 	ArrayList<Board> boardList = (ArrayList<Board>)session.getAttribute("boardList");
+	ArrayList<Board> boardQnaList = (ArrayList<Board>)session.getAttribute("boardQnaList");
 	ArrayList<Board> commonBoardList = (ArrayList<Board>)session.getAttribute("commonBoardList");
 	ArrayList<BoardAnswer> commonAnswerList = (ArrayList<BoardAnswer>)session.getAttribute("commonAnswerList");
+	PageInfo pi = (PageInfo)session.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -110,35 +118,33 @@
 		<% } %>
 			</tbody>
 		</table>
-		
-		
-			<div class="list" align="center">
-						<div class="col-md-12" align="center">
-						<nav >
-							<ul class="pagination">
-								<li class="page-item">
-									<a class="page-link" href="#">previous</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">1</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">2</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">3</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">4</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">last</a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-		
+					<nav>
+						<ul class="pagination">
+							<li class="page-item">
+							<% if(currentPage <= 1){ %>
+								<a class="page-link" href="#" readonly>previous</a>
+							<% }else{ %>							
+								<a class="page-link" onclick="location.href='/pickme/list.bo?bType=<%=type%>&currentPage=<%=currentPage - 1 %>'">previous</a>
+							<% } %>
+							</li>
+							<% for (int p = startPage; p <= endPage; p++){ 
+									if(p == currentPage){
+							%>
+									<li class="page-item">
+										<a class="page-link" href="#" readonly><%=p %></a>
+									</li>
+							<% 		}else{ %>
+									<li class="page-item">
+										<a class="page-link" onclick="location.href='/pickme/list.bo?bType=<%=type%>&currentPage=<%= p %>'"><%=p %></a>
+									</li>										
+							<% 		} %>
+								
+							<% } %>
+									<li class="page-item">
+										<a class="page-link" href="#">last</a>
+									</li>
+						</ul>
+					</nav>
 		
 		
 		<div align="center">

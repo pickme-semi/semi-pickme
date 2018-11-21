@@ -307,13 +307,22 @@ public class BoardDao {
 		return result;
 	}
 
-	public int getListCount(Connection con) {
+	public int getListCount(Connection con, String type) {
 		Statement stmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("listCount");
+		String sql = "";
 		
+		System.out.println("타입 : "  + type);
+		
+		if(type.equals("report")) {
+			sql = prop.getProperty("listReportCount");
+		}else {
+			sql = prop.getProperty("listQnaCount");
+		}
+		
+		System.out.println("sql : " + sql);
 		try {
 			
 			stmt = con.createStatement();		
@@ -321,7 +330,7 @@ public class BoardDao {
 			
 			if(rset.next()){			
 				listCount = rset.getInt(1);
-				}
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -334,12 +343,17 @@ public class BoardDao {
 		return listCount;
 	}
 
-	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
+	public ArrayList<Board> selectList(Connection con, int currentPage, int limit, String type) {
 		ArrayList<Board> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectList");
+		String sql = "";
+		if(type.equals("report")) {
+			sql = prop.getProperty("selectReportList");
+		}else {
+			sql = prop.getProperty("selectQnaList");
+		}
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -365,6 +379,7 @@ public class BoardDao {
 				b.setUserNo(rset.getInt("USER_NO"));
 				b.setPickId(rset.getInt("PICK_ID"));
 				b.setType(rset.getString("TYPE"));
+				b.setUserName(rset.getString("USERNAME"));
 				
 				list.add(b);
 			}

@@ -79,20 +79,20 @@ public class BoardService {
 		return result;
 	}
 
-	public int getListCount() {
+	public int getListCount(String type) {
 		Connection con = getConnection();
 		
-		int listCount = bDao.getListCount(con);
+		int listCount = bDao.getListCount(con, type);
 		
 		close(con);
 		
 		return listCount;
 	}
 
-	public ArrayList<Board> selectList(int currentPage, int limit) {
+	public ArrayList<Board> selectList(int currentPage, int limit, String type) {
 		Connection con = getConnection();
 		
-		ArrayList<Board> list = bDao.selectList(con, currentPage, limit);
+		ArrayList<Board> list = bDao.selectList(con, currentPage, limit, type);
 		
 		close(con);
 		
