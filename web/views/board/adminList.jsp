@@ -34,11 +34,11 @@
 	<% }else{ %>
 		<%@ include file="common/boardHeader.jsp" %>
 		<div class="pm-section col-xs-12 col-md-8">
-			<h1>	관리자 전용 QNA 페이지 </h1>
+			<br><h1 style="font-size:28pt; font-weight:bold;">관리자 전용 QNA 페이지 </h1>
 			<br><br>
 			<% if( boardListQ.size() != 0){ %>
 			
-			<h3> 질문  </h3>
+			<h3 style="font-size:24pt; font-weight:bold;"> Qusetion  </h3>
 				<table id = "boardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold; ">
 				<thead >
 					<th width="80px">No.</th>
@@ -60,7 +60,7 @@
 						
 				</table>
 				
-				<table >
+				<table align="center" >
 				<div class="col-md-12" align="center" >
 						<nav align="center" >
 							<ul class="pagination">
@@ -90,10 +90,10 @@
 				</table>
 				
 				
-			<br><br>
+			<br><br><br><br>
 			
 			<% if( boardList.size() != 0){ %>
-			<h3> 신고 </h3>
+			<h3 style="font-size:24pt; font-weight:bold;">Report</h3>
 			<table id = "boardList" class="table table-striped" style="text-align:center; border: 1px solid #E6E6E6; font-weight:bold;">
 				<thead>
 					<th width="80px">No.</th>
@@ -143,8 +143,8 @@
 					</div>
 	
 	
-	
-		</div>
+		<br><br>
+		</div><br><br><br>
 		<%@ include file="../common/footer.jsp" %>
 		
 		<script>

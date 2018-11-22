@@ -45,14 +45,15 @@
 <% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	<div class="pm-section col-xs-12 col-md-8">
-		<h1><%= (type.equals("report"))? "신고" : "질문" %> 게시판</h1>
-		<br />
+		<h1 style="font-size:42pt; font-weight:bold;"><%= (type.equals("report"))? "Report" : "Question" %></h1>
+		
 		
 		<!-- 질문일때만 자주하는 질문 보여주기 -->
 		<% if(!type.equals("report")){ %>
+		<br><br><br>
 			<div id="divArea">
-				<p class="h3">자주 하는 질문</p>
-				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
+				<p class="h3" style="font-size: 18pt; font-weight:bold;">자주 하는 질문</p>
+				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid white; font-weight:bold;">
 				<% if( commonBoardList.size() != 0){ %>
 					<% for(int i = 0; i < commonBoardList.size(); i++) { %>
 						<tr class="" style="background-color: " data-toggle="collapse" data-target="#demo<%=i%>">
