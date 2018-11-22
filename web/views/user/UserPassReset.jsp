@@ -9,7 +9,7 @@
 	.outer{
 		width : 500px;
 		height : 300px;
-		background : mistyrose;
+		background : ;
 		padding : 10px;
 		margin-left : auto;
 		margin-right : auto;

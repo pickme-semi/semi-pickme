@@ -27,7 +27,7 @@
 <% }else { %>
 	<%@ include file="../common/header.jsp" %>
 	
-		<div class="pm-section col-xs-12 col-md-8">
+		<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
 		
 			<%if(uList.size() != 0){ %>
 			<h1>유저 검색 결과 리스트 창</h1>

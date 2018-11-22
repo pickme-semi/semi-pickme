@@ -50,7 +50,7 @@
 <% } else { %>
 	<%@ include file="../common/header.jsp" %>
 	
-	<div class="pm-section col-xs-12 col-md-8">
+	<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
 	<h1>pick list</h1>
 	<div class="pm-div">
 	

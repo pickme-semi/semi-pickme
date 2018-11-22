@@ -59,25 +59,6 @@
 	        	<a class="navbar-brand" href="/pickme" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px; "></a>
 	        </div>
 	        <div class="logo" style="width:33%" align="right">
-			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-	    		<span class="navbar-toggler-icon"><i class="fa fa-bars fa-1x">메뉴</i></span>
-	  		</button>
-	  		 <div class="collapse navbar-collapse" id="navbarNavDropdown" style="align:right; padding-top: 90px" id="test">
-				<ul class="nav justify-content-end" style="font-weight:bold; font-size: 10pt;">
-				  <li class="nav-item">
-				    <a class="nav-link active" href="#infomain" style="color: #505050;">픽미란?</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="#infodev">비즈니스</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="#infodev">개발자</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link disabled" href="#">인재채용</a>
-				  </li>
-				</ul>
-				</div>
 	        </div>
 	  <%}else{ %>
 	      	<div class="logo" style="width:33%">

@@ -27,7 +27,7 @@ ArrayList<PickMe> cList = (ArrayList<PickMe>)session.getAttribute("searchList");
 <% }else { %>
 	<%@ include file="../common/header.jsp" %>
 	
-	<div class="pm-section col-xs-12 col-md-8">
+	<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
 		
 			
 			<% if(cList.size() != 0){ %>
