@@ -177,7 +177,7 @@ textarea{
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="pickid" name="pickid"  class="current" value="<%= p.getId() %>"/>
 	      	<b>
-	      		<a id="statsBtn" href="#" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
+	      		<a id="statsBtn" href="/pickme/statsOneList.st?pickno=<%= p.getId() %>" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
 		    		 <i class="fas fa-chart-bar fa-2x"></i>
 				</a>
 			</b>
