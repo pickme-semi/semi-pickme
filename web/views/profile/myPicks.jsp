@@ -16,23 +16,13 @@ int point = (Integer)request.getAttribute("point");
 <title>My Pick Page</title>
 
 <style>
-
-@font-face {
-	font-family : 'NANUMBARUNGOTHIC.TTF';
-	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");}
-	
-
-* {	font-family : 'NANUMBARUNGOTHIC.TTF';
-	color: #505050;
-	}
-	
-	
 	.attr {
 	
 		height : 150px;
 		position : relative;
 		width : 150px;
 			}
+			
 	.or {
 	z-index : 3;
 	background-color: rgb(1, 5, 0);
@@ -59,7 +49,7 @@ int point = (Integer)request.getAttribute("point");
 	
 	#live-swell-img {
      max-width: 100px;
-    overflow: hidden;
+     overflow: hidden;
 	}
 	
 	
@@ -117,13 +107,13 @@ int point = (Integer)request.getAttribute("point");
 	<%@ include file="../common/header.jsp" %>
 	
 	<div class="col-md-12 text-center user" id="divImg">
-	 
 	<% if(user.getProfile() != null) {%>
 	  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%><br>
 	<h2 style="font-size:24pt; font-weight:bold;"><%= user.getUserId() %>&nbsp;<i id="user" class="fas fa-cog" ></i></h2>
+	
 	<!-- 아이디 전송을 위한 input 박스 -->
 	<input type="hidden" id="getNo" value="<%= user.getUserNo() %>" />
 	
