@@ -178,17 +178,6 @@
 </div>
 </div>
 
-<div class="row">
-	<div id="infodev" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 login-bg-2" style="height:600px; background-color: beige" >
-		
-	</div>
-</div>
-
-<div class="row">
-	<div id="infopickme" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:green;height:600px" >
-		
-	</div>
-</div>
 <br><br>
 	<script type="text/javascript">
 	var slogan = document.querySelector('.hero__slogan div:nth-child(1)');
