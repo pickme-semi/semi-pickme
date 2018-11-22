@@ -13,15 +13,24 @@
 		word-wrap: break-all; /* Internet Explorer 5.5+ */ 
 		padding = 1px;
 	}
+	
+	@font-face {
+	font-family : 'NANUMBARUNGOTHIC.TTF';
+	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");}
+	
+
+* {	font-family : 'NANUMBARUNGOTHIC.TTF';
+	color: #505050;
+	}
 </style>
 </head>
 <body>
-	<footer align="center">
+	<footer align="center" style="font-size:10pt">
 		<hr />
 		<a href="http://www.iei.or.kr" target="blank">회사소개 </a> &nbsp;|&nbsp; <a href="#" data-toggle="modal" data-target="#modal1">이용약관 </a> &nbsp;|&nbsp; <a href="#" data-toggle="modal" data-target="#modal2">개인정보 처리방침 </a> &nbsp;| &nbsp;  <a href="#" data-toggle="modal" data-target="#modal3">라이센스</a> &nbsp;| &nbsp;  <a href="/pickme/list.bo?bType=qna">고객센터</a>
 		<br /><br />
-		<h4>Copyright © 뽑아조. All rights reserved.</h4>
-		<h6>서울특별시 강남구 테헤란로14길 6 남도빌딩 3층<br> H Class</h6>
+		<h4 style="font-weight:bold; font-size:14pt;">Copyright © 뽑아조. All rights reserved.</h4>
+		<h6 style="font-size:9pt">서울특별시 강남구 테헤란로14길 6 남도빌딩 3층<br> H Class</h6>
 	</footer>
 	
 	<!-- Modal -->

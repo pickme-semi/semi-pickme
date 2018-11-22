@@ -17,16 +17,16 @@
 <style>
 	
  a{
- 	color : black;
+ 	color : #505050;
  }
  
-	@font-face {
-		font-family : 'GODOM.TTF';
-		src : url('/pickme/resources/font/GODOM.TTF') format("truetype");
-	}
+@font-face {
+	font-family : 'NANUMBARUNGOTHIC.TTF';
+	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");
 	
-	* {
-		font-family : 'GODOM.TTF'
+
+* {	font-family : 'NANUMBARUNGOTHIC.TTF';
+	color: #505050;
 	}
  
 .pm-section{
@@ -34,31 +34,39 @@
 	margin-right: auto;
 }
 .result-none{
-	height : 500px;
+	height : 350px;
 	background : pink;
 }
 .pm-input-form{
-	background : #D8D8D8;
+	background : #505050;
 }
+
+#test a{ text-align: center; 		 
+		 font-size: 14px;
+		 font-color: #505050;
+		 
+		 
+		 
+		 }
 </style>
 </head>
 <body>
 	<div class="pm-bg">
 	<header>
-	<nav class="navbar navbar-expand-lg">
+	<nav class="navbar navbar-expand-lg" style="height: 130px;border-bottom: 2px solid #ffcce3;">
 	  <div class="container">
 	  <%if(user==null) {%>
 		  	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme">PICK ME</a>
+	        	<a class="navbar-brand" href="/pickme" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px; "></a>
 	        </div>
 	        <div class="logo" style="width:33%" align="right">
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 	    		<span class="navbar-toggler-icon"><i class="fa fa-bars fa-1x">메뉴</i></span>
 	  		</button>
-	  		 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="nav justify-content-end">
+	  		 <div class="collapse navbar-collapse" id="navbarNavDropdown" style="align:right; padding-top: 90px" id="test">
+				<ul class="nav justify-content-end" style="font-weight:bold; font-size: 10pt;">
 				  <li class="nav-item">
-				    <a class="nav-link active" href="#infomain">픽미란?</a>
+				    <a class="nav-link active" href="#infomain" style="color: #505050;">픽미란?</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" href="#infodev">비즈니스</a>
@@ -74,23 +82,24 @@
 	        </div>
 	  <%}else{ %>
 	      	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme/pickmain.pm">PICK ME</a>
+	        	<a class="navbar-brand" href="/pickme/pickmain.pm" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png"  width="240px" height="105px;"></a>
 	        </div>
-			<div class="search" style="width:33%" text-align="center">
-		        <div class="navbar-collapse" id="navbarsExample07">
-		          <form class="form-inline my-2 my-md-0" style="margin-left:auto;margin-right:auto;" action="/pickme/search.se" method="get">
-		            <input class="form-control" type="text" name="userSearch" placeholder="@user #category" aria-label="Search">
+			<div class="search" style="width:%" align="right">
+		        <div class="navbar-collapse" id="navbarsExample07" style="content: center;">
+		          <form class="form-inline my-2 my-md-0" style="margin-left:auto;margin-right:auto; padding-left: 20%;" action="/pickme/search.se" method="get">
+		            <input class="form-control" type="text" name="userSearch" placeholder="@user #category" aria-label="Search" style="width: 350px;">
 		          </form>
 		        </div>
 	        </div>
-	        <div class="logo" style="width:33%" align="right">
+	        <div class="logo" style="width:33%; align:right; padding-right: 90px" >
 			<div class="dropdown show" align="right" style="diplay:block;float:right">
-			  <a class="dropdown-toggle" href="#" role="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  <a class="dropdown-toggle" href="#" role="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+			  style="font-size:14px; font-weight:bold;">
 			    <%= user.getUserName() %>
 			  </a>
 			
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="right" style="width:100%;margin-left:-100px">
-				<a class="dropdown-item" href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>">내정보</a>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="right" style="width:100%;margin-left:-100px; font-size:10pt;">
+				<a class="dropdown-item" href="/pickme/mPicks.pr?uno=<%= user.getUserNo() %>" style="padding-top: 15px; color: #505050 ">내정보</a>
 				<a class="dropdown-item" href="/pickme/pickmain.pm">픽</a>
 				<a class="dropdown-item" href="/pickme/sTotalList.st">통계</a> 
 				<a class="dropdown-item" href="/pickme/list.bo">고객센터</a>
@@ -102,5 +111,6 @@
       <%} %>
       </div>
     </nav>
-    <hr />
+    <br><br>
+    
 	</header>
