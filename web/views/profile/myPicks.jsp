@@ -6,19 +6,6 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 int point = (Integer)request.getAttribute("point");
 
 %>
-
-
-<!-- 
-
-		img {
-	    width: 100%;
-	    height : 100%; 
-	    object-fit: contain;
-	    
-	    ~ 샘플링 후 크기 재조정 ~
-	} 
- -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,11 +99,13 @@ int point = (Integer)request.getAttribute("point");
 	
  	}
  	
- 
-	
-
-	
-	
+ 	img {
+	    width: 100%;
+	    height : 100%; 
+	    object-fit: contain;
+	    
+	} 
+ 	
 </style>
 </head>
 <body>
@@ -247,8 +236,6 @@ int point = (Integer)request.getAttribute("point");
 					if(data != null ){
 						$('.comment').val(data);
 						window.location.reload()
-					}else{
-						$('.comment').val("");
 					}
 				},
 				error : function(request, status, error){

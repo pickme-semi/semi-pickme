@@ -91,7 +91,7 @@
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
 	<h2 class=""><%= users.getUserId() %></h2>
-	<input type="text" class="comment" value=""/>
+	<input type="hidden" class="comment" value=""/>
 	<br />
 	<button id="fbtn" value="<%=users.getUserNo() %>" class="btn btn-danger">follow</button>
 	<button id="fbtn2" style="display:none" value="<%=user.getUserNo() %>" class="btn btn-danger">follow 취소</button>
@@ -147,8 +147,9 @@
 					uno : $('#fbtn').val()
 				},success : function(data){
 					if(data = null ){
-						$('.comment').val("");
+						$('.comment').attr("type","hidden");
 					}else{
+					$('.comment').attr("type","text");
 					$('.comment').val(data);
 					}
 				}
