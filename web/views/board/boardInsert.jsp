@@ -45,7 +45,7 @@
 					<th id="wSet">카테고리</th>
 					<th>
 					<select name="category" id="category" class="form-control" style="border: none;">
-					<% if ( false){ %>
+					<% if ( categoryList.size() != 0){ %>
 					<% for (int i = 0 ; i < categoryList.size(); i++){%>
 						<option value="<%=categoryList.get(i).getId()%>"> <%=categoryList.get(i).getConetent() %></option>
 					<% } %>
