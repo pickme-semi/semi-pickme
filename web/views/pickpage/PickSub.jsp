@@ -176,20 +176,22 @@ textarea{
 		<form method="post" action="<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>" align="right">
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="pickid" name="pickid"  class="current" value="<%= p.getId() %>"/>
-	      	<b><a id="shareBtn" href="#" data-toggle="modal" data-target="#shareModal" 
-	      	style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 공유하기">
-	      			   		    
-			<img src="<%= request.getContextPath() %>/resources/icons/share.png" id="shareicon"
-			 name="shareicon" class="icon">
-			</a></b>
-			&nbsp;&nbsp;
-			
-		    <b><a href="#" data-toggle="modal" data-target="#reportModal"
-		   		  style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 신고하기">
-		   		  		   		    
-			<img src="<%= request.getContextPath() %>/resources/icons/report.png" id="reporticon"
-			 name="reporticon" class="icon">
-			</a></b>
+	      	<b>
+	      		<a id="statsBtn" href="#" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
+		    		 <i class="fas fa-chart-bar fa-2x"></i>
+				</a>
+			</b>
+	      	
+	      	<b>
+	      		<a id="shareBtn" href="#" data-toggle="modal" data-target="#shareModal" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 공유하기">
+					<i class="fas fa-share-alt fa-2x"></i>
+				</a>
+			</b>
+			<b>
+		    	<a href="#" data-toggle="modal" data-target="#reportModal" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 신고하기">
+					<i class="fas fa-exclamation-triangle fa-2x"></i>	
+				</a>
+			</b>
 		</form>
 		
 		<br>		
@@ -550,17 +552,16 @@ textarea{
       </div>
       <div class="modal-body">
       	<input type="text" value="" id="shareinput" />
-      	&nbsp;&nbsp;클립보드에 복사 
+      	<i class="fas fa-copy fa-2x" id="shareYesBtn"></i>
       	<span class="glyphicon glyphicon-plus"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="shareYesBtn">복사</button>
+        <button type="button" class="btn btn-primary" id="">복사</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="shareNoBtn">취소</button>
       </div>
     </div>
   </div>
 </div>
-
 <script>
 	$("#reportYesBtn").on('click', function(){
 		location.href= "<%=request.getContextPath()%>/InsertView.bo?bType=report&pickid=<%=p.getId()%>";
