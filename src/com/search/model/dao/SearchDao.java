@@ -102,6 +102,7 @@ public class SearchDao {
 				pm.setSelect_1(rset.getString(3));
 				pm.setSelect_2(rset.getString(4));
 				pm.setUserno(rset.getInt(5));
+				pm.setId(rset.getInt(6));
 				
 				list.add(pm);
 				
@@ -140,6 +141,7 @@ public class SearchDao {
 				pm.setSelect_1(rset.getString(3));
 				pm.setSelect_2(rset.getString(4));
 				pm.setUserno(rset.getInt(5));
+				pm.setId(rset.getInt(6));
 				
 				list.add(pm);
 				

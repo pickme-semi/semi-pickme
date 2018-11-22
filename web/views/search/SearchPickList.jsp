@@ -35,7 +35,7 @@
 				<tbody>
 					<tr class="table-primary">
 					<th scope="row"><%= i+1 %></th>
-					<td><a href="/pickme/pickview.pv?Pid=<%=pList.get(i).getUserno()%>"><%=pList.get(i).getTitle()%></a></td>
+					<td><a href="/pickme/pickview.pv?Pid=<%=pList.get(i).getId()%>"><%=pList.get(i).getTitle()%></a></td>
 					<td></td>
 					<td></td>
 					</tr>

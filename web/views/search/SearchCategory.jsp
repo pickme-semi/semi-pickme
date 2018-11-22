@@ -53,7 +53,7 @@ ArrayList<PickMe> cList = (ArrayList<PickMe>)session.getAttribute("searchList");
 				<% } else { %>
 				<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= cList.get(i).getUserId()%></a>
 				<% } %></td>
-			      <td><%= cList.get(i).getTitle() %></td>
+			      <td><a href="/pickme/pickview.pv?Pid=<%=cList.get(i).getId()%>"><%= cList.get(i).getTitle() %></a></td>
 			      <td>
 			      <img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_1() %>" alt="select1-img" />
 			      <img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_2() %>" alt="select2-img" />
