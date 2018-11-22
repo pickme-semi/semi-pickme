@@ -55,6 +55,7 @@
 		margin-bottom:auto;
 	}
 	
+	
 </style>
 </head>
 <body>
@@ -63,21 +64,39 @@
 <div class="outer col-xs-12 col-sm-12 col-md-12 col-lg-12 pm-section">
 
 <div class="row">
-	<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 login-bg"  style="height:300px">
-		<p class="login-top-p">test pick</p>
+	<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 log.in-bg "  style="height:300px;">
+	<div class="hero @@hero">
+	<div class="hero__slogan">
+	<div>What is the best</div>
+	<div>
+	<div class="hero__slogan__words">
+	<ul class="hero__slogan__words__list">
+	<li>photo?</li>
+	<li>outfit?</li>
+	<li>design?</li>
+	<li>food?</li>
+	</ul>
+	</div>
+	</div>
+	</div>
+	</div>
+		<p class="login-top-p"></p>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-7" style="background:beige;">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-7" style="background: #ff82bb;">
 			<div id="infomain" style="margin-top:auto;margin-bottom:auto" align="center">
 				
 				<section class="page-section page-section--vote">
 				<div class="page-section__content">
 				<header class="page-section__header">
-				<h2 class="page-section__header__title page-section__header__title--vote">What's Swelly?</h2>
-				<p class="page-section__header__slogan"></p>
-				</header><div class="live-swell">
+				<h2 class="page-section__header__title page-section__header__title--vote">Try it!</h2>
+				<p class="page-section__header__slogan">
+				1. 자신이 관심있는 카테고리를 선택한다. <br />
+				2. 두개의 사진 중에 마음에 드는 사진을 고른다.</p>
+				</header>
+				<div class="live-swell" style="">
 				<div class="live-swell__pics">
 				<div id="live-swell-img-a" class="live-swell__pics__pic live-swell__pics__pic--a">
 				</div>
@@ -160,17 +179,29 @@
 </div>
 
 <div class="row">
-	<div id="infodev" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 login-bg-2" style="height:600px" >
-		testrow
+	<div id="infodev" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12 login-bg-2" style="height:600px; background-color: beige" >
+		
 	</div>
 </div>
 
 <div class="row">
 	<div id="infopickme" class="col col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:green;height:600px" >
-		testrow
+		
 	</div>
 </div>
 <br><br>
+	<script type="text/javascript">
+	var slogan = document.querySelector('.hero__slogan div:nth-child(1)');
+	  var sloganList = document.querySelector('.hero__slogan__words__list');
+	  window.setInterval(function () {
+	    var height = slogan.offsetHeight;
+	    var top = sloganList.style.top ? parseInt(sloganList.style.top.replace('px', '')) - height : 0;
+	    if (top <= (-4 * height)) {
+	      top = 0;
+	    }
+	    sloganList.style.top = top + 'px';
+	  }, 1500);
+	</script>
 <script>
 
 	// 디자인
@@ -179,32 +210,75 @@
 		$('#live-swell-img-a').attr("style","background-image: url(/pickme/resources/images/sushi.jpg)");
 		$('#live-swell-img-b').attr("style","background-image: url(/pickme/resources/images/chicken.png)");
 		
+		$('#live-swell-result-a').click(function(){
+			
+		});
+		
+		$('#live-swell-result-b').click(function(){
+		
+		});
 	});
 	
 	$('.food').click(function(){
+		
 		$('#live-swell-img-a').attr("style","background-image: url(/pickme/resources/images/sushi.jpg)");
 		$('#live-swell-img-b').attr("style","background-image: url(/pickme/resources/images/chicken.png)");
 		
+		$('#live-swell-result-a').click(function(){
+			
+		});
+		
+		$('#live-swell-result-b').click(function(){
+			
+		});
+	
 	});
+	
+	
 	
 	$('.tech').click(function(){
 		$('#live-swell-img-a').attr("style","background-image: url(/pickme/resources/images/iphone.jpg)");
 		$('#live-swell-img-b').attr("style","background-image: url(/pickme/resources/images/galaxy.jpg)");
+		
+		$('#live-swell-result-a').click(function(){
+		
+		});
+		
+		$('#live-swell-result-b').click(function(){
+			
+		});
 	});
 	
 	$('.fashion').click(function(){
 		$('#live-swell-img-a').attr("style","background-image: url(/pickme/resources/images/1.jpg)");
 		$('#live-swell-img-b').attr("style","background-image: url(/pickme/resources/images/2.jpg)");
+		
+		$('#live-swell-result-a').click(function(){
+			
+		});
+		
+		$('#live-swell-result-b').click(function(){
+			
+		});
+		
 	});
 	
 	$('.travel').click(function(){
 		$('#live-swell-img-a').attr("style","background-image: url(/pickme/resources/images/11.jpg)");
 		$('#live-swell-img-b').attr("style","background-image: url(/pickme/resources/images/22.jpg)");
+		
+		$('#live-swell-result-a').click(function(){
+			
+		});
+		
+		$('#live-swell-result-b').click(function(){
+			
+		});
 	});
 	
-	$('#live-swell-img-a').click(function(){
-		$('#live-swell-result-a')
-	})
+	
+	
+	
 	
 	
 	
