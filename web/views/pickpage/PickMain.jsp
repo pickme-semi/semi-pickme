@@ -2,16 +2,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <% 
    ArrayList<PickMe> plist = (ArrayList<PickMe>)request.getAttribute("list");
    User u = (User)session.getAttribute("user");
    int gg = 0; // 픽 ID
    int leftResult= 0;
+   
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <title>픽 선택 페이지 Main</title>
 </head>
 
@@ -69,10 +72,10 @@ img{
 /* Container for image text */
 .caption-container {
   text-align: center;
-  background-color: #64D6FF;
+  background-color: #ffb8d8;
 
-  padding: 2px 16px;
   color: white;
+   border-radius: 10px;
  
 }
 
@@ -80,7 +83,9 @@ img{
   content: "";
   display: table;
   clear: both;
+  
 }
+
 
 /* Six columns side by side */
 .column {
@@ -111,45 +116,118 @@ img{
 /* 이미지 흐리게 하기 우선 이걸로 */
 
 
+.imgSize{
+   width : 500px;
+   height : 500px;
+   magin-top : auto;
+   magin-bottom: auto;
+}
+
 
 .thetagoLeft{
-   opacity : 0.4;
+   opacity : 0.6;
    position:relative;
    
 
 }
 .hojitextLeft{
 position:absolute;
-    top:150px;
-    left:130px;
-    color:black;
+    top:193px;
+    left:63px;
    font-size: xx-large;
    display:none;
 
 }
 .thetagoRight{
-   opacity : 0.4;
+   opacity : 0.6;
    position:relative;
 
 }
+
 .hojitextRight{
 position:absolute;
-    top:80px;
-    right:130px;
-    color:red;
+    top:193px;
+    left:95px;
    display:none;
  font-size: xx-large;
 }
 
-.imgSize{
-	width : 500px;
-	height : 500px;
-	magin-top : auto;
-	magin-bottom: auto;
+.alphaLeftColor{
+   color : #ff82bb;
+   font-weight:bold;
+   font-size: 200%;
+}
+.alphaRightColor{
+   color :  #ff82bb;
+   font-weight:bold;
+   font-size: 200%;
+}
+.capId{
+color : white;
+font-weight:bold;
+font-size: large;
+}
+.capContent{
+
+font-size: xx-large;
+color : #f2f2f2;
 }
 
-
-
+.capButton{
+   color :  #ff82bb;
+   background-color: white; 
+   border-color: #ff82bb;
+    font-weight:bold;
+      border-radius: 10px;
+}
+.capButton:hover {
+   color :  white;
+   background-color: #ff82bb; 
+   border-color: #ff82bb;
+    font-weight:bold;
+      border-radius: 10px;
+}
+.leftMainImg{
+   border-color: red;
+   
+    border-left: 1px solid #ff82bb;
+}
+.rightMainImg{
+   border-color: red;
+   
+    border-right: 1px solid #ff82bb;
+}
+.thumgnailStyle{
+ border-color: red;
+      border-radius: 10px;
+    border: 1px solid #ff82bb;
+}
+.uploadButton{
+   color :  #ff82bb;
+   background-color: white; 
+   border-color: #ff82bb;
+    font-weight:bold;
+      border-radius: 10px;
+      font-size: -webkit-xxx-large;
+      
+}
+.uploadButton:hover {
+   color :  white;
+   background-color: #ff82bb; 
+   border-color: #ff82bb;
+    font-weight:bold;
+      border-radius: 10px;
+         font-size: -webkit-xxx-large;
+}
+.vsP{
+position:absolute;
+    top:193px;
+    left:60px;
+    font-size: -webkit-xxx-large;
+    font-weight:bold;
+    color : #ff82bb;
+    
+}
 </style>
 
 <link rel="stylesheet" href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css">
@@ -158,6 +236,7 @@ position:absolute;
 
 
 <body>
+   
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
 <% if( session.getAttribute("user") == null){ %>
    <%@ include file="../common/NotLogin.jsp" %>
@@ -175,28 +254,52 @@ position:absolute;
        gg = pData.getId();
       System.out.println("plist.size()==="+plist.size());
    %>
+           <div class="caption-container" align="center">
+   
+        <div class="alphago">
+        
+        <% //유저 사진 %>   
+        <div class="new">
+      <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr"/>
+      <% //PM_PICK_TB을 수정해서 UserId도 가져와야 여기다 넣을수 있을것같다. %>
+       <p class="capId"id="contentId<%=i%>"><%= pData.getUserId() %></p>
+       </div>
+       <% //내용만 우선넣기 %>
+       <p class="capContent" id="content<%=i%>"><%= pData.getContent() %></p>
+        <input type="hidden" id="resultPickId" name="pid" class="current" value="<%= gg %>"/> 
+        
+           <form method="post" action="<%= request.getContextPath() %>/pickview.pv?Pid=<%=gg %>">
             <input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
             <input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
-
+            <input class="capButton" type="submit" value="Pick Detail page" />   
+            <br><br>
+   </form>
+        </div>
+       
+     </div>
+            <input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
+            <input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
+   
      <!-- Full-width images with number text -->
    <div class="container " >    
       <div class="mySlides" style="background-color : white">          
            <div class="row" align="center">
-      <div class="col-md-6" align="center" style="background-color : white" >
+      <div class="leftMainImg col-md-5" align="center" >
          <img class="aaLeft imgSize" id="leftPick<%=i+1%>" onerror="imgError(this);" 
          src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
          style="width:100%" onclick="checkNumber(<%=gg%>, <%= i %>);hojiTestLeft(<%=i%>);
      "/>
 
          <div class="hojitextLeft" >
-         <p id="leftP<%=i%>"></p></div>
+         <p class ="alphaLeftColor" id="leftP<%=i%>"></p></div>
       </div>   
-      <div class="col-md-6" align="center" style="background-color : white"> 
+        <div class="col-md-2" align="center"><p class="vsP">VS</p></div>
+      <div class="rightMainImg col-md-5" align="center" style="background-color : white"> 
          <img class="aaRight imgSize" id="rightPick<%=i+1 %>" 
          src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
          style="width:100%"onclick="checkNumber(<%=gg%>, <%= i %>);hojiTestRight(<%=i%>);"/>
            <div class="hojitextRight" >
-         <p id="rightP<%=i%>"></p></div>
+         <p class ="alphaRightColor" id="rightP<%=i%>"></p></div>
       </div> 
       </div>
       </div> 
@@ -285,6 +388,7 @@ position:absolute;
     </script>
    
      <div class="row" >
+     <div class="thumgnailStyle">
       <% for(int i =0; i<plist.size(); i++){   pData = plist.get(i); %> 
        <div class="column">
       <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>"
@@ -294,42 +398,19 @@ position:absolute;
       <img class="demo cursor" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
        style="width:200%" onerror="imgError(this);" onclick="currentSlide(<%=i+1 %>)" >
     </div>
-       <% } %>       
+       <% } %>   
+       </div>    
       </div>  
    
    
    
    
-     <div class="caption-container" align="center">
-      <% 
-   for(int i =0; i<plist.size(); i++){
-
-         pData = plist.get(i);
-         gg = pData.getId();
-   %>
-        <div class="alphago">
-        
-        <% //유저 사진 %>   
-      <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr"/>
-      <% //PM_PICK_TB을 수정해서 UserId도 가져와야 여기다 넣을수 있을것같다. %>
-       <p id="contentId<%=i%>">Pick등록ID = <%= pData.getUserId() %></p>
-       
-       <% //내용만 우선넣기 %>
-       <p id="content<%=i%>"><%= pData.getContent() %></p>
-        <input type="hidden" id="resultPickId" name="pid" class="current" value="<%= gg %>"/> 
-        
-           <form method="post" action="<%= request.getContextPath() %>/pickview.pv?Pid=<%=gg %>">
-            <input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
-            <input type="hidden" id="resultPickId" name="Pid"  class="current" value="<%= gg %>"/> 
-            <input type="submit" value="픽 상세 <%= gg %>" />   
-   </form>
-        </div>
-       
-     <% } %>    
-     </div>
     
-    <div class="col-xs-12 col-md-8" >
-         <button type="button" onclick="location.href='/pickme/pcate.pm'">픽 업로드</button>            
+    
+    <div  align="center">
+          <br><br>
+         <button class="uploadButton" type="button" onclick="location.href='/pickme/pcate.pm'">Pick Upload</button>            
+            <br><br>
       </div>
 
    
@@ -366,7 +447,7 @@ position:absolute;
               aaLeft[n].className += " thetagoLeft";
               setTimeout(function(){
                  plusSlides(ganziLeft+1);
-               }, 1001);
+               }, 500);
 
 
            }
@@ -378,7 +459,7 @@ position:absolute;
               aaRight[n].className += " thetagoRight";
               setTimeout(function(){
                  plusSlides(ganziRight+1);
-               }, 1001);
+               }, 500);
 
 
            }

@@ -18,6 +18,12 @@ ArrayList<PickMe> cList = (ArrayList<PickMe>)session.getAttribute("searchList");
 		height : 150px;
 	}
 	
+.tdDiv{
+	margin-top : 50px;
+	margin-botton : 50px;
+	align : center;
+}
+	
 </style>
 </head>
 <body>
@@ -31,52 +37,45 @@ ArrayList<PickMe> cList = (ArrayList<PickMe>)session.getAttribute("searchList");
 		
 			
 			<% if(cList.size() != 0){ %>
-			<h1>카테고리 검색 결과 리스트 창</h1>
-			
-			<br /><br />
 		<table class="table table-hover">
 			  <thead>
 			    <tr>
 			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col">아이디</th>
-			      <th scope="col">제목</th>
-			      <th scope="col"></th>
+			      <th scope="col" colspan="3" class="text-center">카테고리 검색</th>
 			    </tr>
 			  </thead>
 			<% for(int i = 0 ; i < cList.size(); i++){ %>
 			 <tbody>
 			    <tr class="table-primary">
 			      <th scope="row"><%= i+1 %></th>
-			      <td><!-- 사용자 정보 페이지로 이동시키기 -->
-				<% if(user.getUserNo() != cList.get(i).getUserno()) { %>
-				<a href="/pickme/uPage.pr?uno=<%= cList.get(i).getUserno()%>"><%= cList.get(i).getUserId()%></a>
-				<% } else { %>
-				<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= cList.get(i).getUserId()%></a>
-				<% } %></td>
-			      <td><a href="/pickme/pickview.pv?Pid=<%=cList.get(i).getId()%>"><%= cList.get(i).getTitle() %></a></td>
-			      <td>
+			      <td width="15%" align="center" ><a href="/pickme/pickview.pv?Pid=<%=cList.get(i).getId()%>"><%= cList.get(i).getTitle() %></a></td>
+			      <td align="center">
 			      <img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_1() %>" alt="select1-img" />
 			      <img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_2() %>" alt="select2-img" />
 			      
 			      </td>
 			      
-			      <td></td>
+			      <td>
+			      	<div class="tdDiv">
+				      	<% if(user.getUserNo() != cList.get(i).getUserno()) { %>
+						<a href="/pickme/uPage.pr?uno=<%= cList.get(i).getUserno()%>"><%= cList.get(i).getUserId()%></a>
+						<% } else { %>
+						<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= cList.get(i).getUserId()%></a>
+						<% } %>
+					</div>
+			      </td>
 			    </tr>
 			    <% } %>
 			</tbody>
 			</table>
 			
 			<% }else { %>
-				
-				<h1>픽&카테고리 검색 결과 리스트 창</h1>
 			<br /><br />
 			<table class="table table-hover" >
 			  <thead>
 			    <tr>
 			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+			      <th scope="col" colspan="3" class="text-center">카테고리 검색</th>
 			    </tr>
 			  </thead>
 			  </table>

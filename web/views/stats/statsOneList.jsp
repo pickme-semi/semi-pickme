@@ -72,7 +72,7 @@
 	<%@ include file="../common/header.jsp" %>
 	
 	<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
-		<h1>pick1 세부 통계</h1>
+		<h1>픽 세부 통계</h1>
 		<br />
 		<ul class="nav justify-content-left" >
 		  <li class="nav-item active">

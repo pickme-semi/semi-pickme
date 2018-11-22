@@ -9,6 +9,17 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <title>픽 검색결과</title>
+<style>
+.img_size {
+		width : 200px;
+		height : 150px;
+	}
+.tdDiv{
+	margin-top : 50px;
+	margin-botton : 50px;
+	align : center;
+}
+</style>
 </head>
 <body>
 <!--  세션에 유저정보 있는 사람만 내용 보여주기 -->
@@ -20,24 +31,31 @@
 		<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
 		
 			<% if(pList.size() != 0){ %>
-			<h1>픽 검색 결과 리스트 창</h1>
-			<br /><br />
 			<table class="table table-hover">
 			  <thead>
 			    <tr>
 			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col">픽 제목</th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+			      <th scope="col" colspan="3" class="text-center">픽 제목 검색</th>
 			    </tr>
 			  </thead>
 			<% for(int i = 0 ; i < pList.size(); i++) { %>
 				<tbody>
 					<tr class="table-primary">
 					<th scope="row"><%= i+1 %></th>
-					<td><a href="/pickme/pickview.pv?Pid=<%=pList.get(i).getId()%>"><%=pList.get(i).getTitle()%></a></td>
-					<td></td>
-					<td></td>
+					<td width="15%" align="center" ><a href="/pickme/pickview.pv?Pid=<%=pList.get(i).getId()%>"><%=pList.get(i).getTitle()%></a></td>
+					<td align="center">
+						<img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pList.get(i).getSelect_1() %>" alt="select1-img" />
+			      		<img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pList.get(i).getSelect_2() %>" alt="select2-img" />
+					</td>
+					<td>
+						<div class="tdDiv">
+						<% if(user.getUserNo() != pList.get(i).getUserno()) { %>
+						<a href="/pickme/uPage.pr?uno=<%= pList.get(i).getUserno()%>"><%= pList.get(i).getUserId()%></a>
+						<% } else { %>
+						<a href="/pickme/mPicks.pr?uno=<%= user.getUserNo()%>"><%= pList.get(i).getUserId()%></a>
+						<% } %>
+						</div>
+					</td>
 					</tr>
 				
 			<% } %>
@@ -45,15 +63,11 @@
 			</table>
 			
 			<% }else{ %>
-				<h1>픽&카테고리 검색 결과 리스트 창</h1>
-			<br /><br />
 			<table class="table table-hover" >
 			  <thead>
 			    <tr>
 			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+				  <th scope="col" colspan="3" class="text-center">픽 제목 검색</th>
 			    </tr>
 			  </thead>
 			  </table>

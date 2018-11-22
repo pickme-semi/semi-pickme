@@ -59,6 +59,19 @@
 						<tr class="" style="background-color: white" data-toggle="collapse" data-target="#demo<%=i%>">
 							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
 							<td class=""><%=commonBoardList.get(i).getTitle() %></td>
+													<tr>
+							<td>
+								<div id="demo<%=i%>" class="collapse">
+									<p class="text-left"><%=commonBoardList.get(i).getContent() %></p>
+								<hr />
+									<% if( commonAnswerList.size() <= i){ %>
+										<p class="text-left">답변이 등록되지 않았습니다.</p>
+									<% } else { %>
+										<p class="text-left">[답변] <%= commonAnswerList.get(i).getContent() %></p>
+									<% } %>
+								</div>
+							</td>
+						</tr>
 						</tr>
 						
 					<% } %>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>result list</title>
+<title>픽 통계 리스트</title>
 
 <style>
 	span.title{
@@ -51,16 +51,12 @@
 	<%@ include file="../common/header.jsp" %>
 	
 	<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
-	<h1>pick list</h1>
 	<div class="pm-div">
-	
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
 			    <tr>
 			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+			      <th scope="col" colspan="3" class="text-center">픽 통계 검색</th>
 			    </tr>
 			  </thead>
 			<tbody>
@@ -69,7 +65,7 @@
 			<tr class="table-primary">
 				<th scope="row"><%= i+1 %></th>
 				<td width="15%" align="center" >
-				<div class="tdDiv"><span class="title"><a onclick="goOneList(<%=list.get(i).getId()%>);" <%-- href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>" --%>> <%= list.get(i).getTitle() %> </a></span></div>
+				<div class="tdDiv"><a href="#" onclick="goOneList(<%=list.get(i).getId()%>);" <%-- href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>" --%>> <%= list.get(i).getTitle() %> </a></div>
 				</td>
 				<td align="center"><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_1() %>" alt="select1-img" onError ="imgError(this)" /><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_2() %>" alt="select2-img" onError ="imgError(this)"  />
 				</td>

@@ -63,7 +63,7 @@
 		</p>
 		<a href="/pickme/views/user/UserLoginForm.jsp">로그인</a>
 		/
-		<a href="/pickme/views/user/UserJoinForm.jsp">가입</a>
+		<a href="/pickme/views/user/UserJoinForm.jsp">회원가입</a>
 	</div>
 	</div>
 </form>

@@ -30,16 +30,11 @@
 		<div class="pm-section col-xs-12 col-md-8" style="margin-left:auto;margin-right:auto">
 		
 			<%if(uList.size() != 0){ %>
-			<h1>유저 검색 결과 리스트 창</h1>
-			
-			<br /><br />
 		<table class="table table-hover">
 			  <thead>
 			    <tr>
-			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+			      	<th scope="col"><i class="fas fa-search"></i></th>
+					<th scope="col" colspan="3" class="text-center">사용자 검색</th>
 			    </tr>
 			  </thead>
 			<% for(int i = 0 ; i < uList.size(); i++){ %>
@@ -64,15 +59,11 @@
 			</table>
 			
 			<% }else { %>
-				<h1>픽&카테고리 검색 결과 리스트 창</h1>
-			<br /><br />
 			<table class="table table-hover" >
 			  <thead>
 			    <tr>
 			      <th scope="col"><i class="fas fa-search"></i></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
-			      <th scope="col"></th>
+			      <th scope="col" colspan="3" class="text-center">사용자 검색</th>
 			    </tr>
 			  </thead>
 			  </table>
