@@ -228,9 +228,11 @@ int point = (Integer)request.getAttribute("point");
 				 uno : $('#getNo').val()
 				 
 				}, success : function(data){
-					if(data > 0 ){
+					if(data != null ){
 						$('.comment').val(data);
 						window.location.reload()
+					}else{
+						$('.comment').val("");
 					}
 				},
 				error : function(request, status, error){

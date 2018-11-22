@@ -85,7 +85,7 @@
 </div>
 
 <div class="row">
-	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-7" style="background: #ff82bb;">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-7" style=" margin-top :100px;">
 			<div id="infomain" style="margin-top:auto;margin-bottom:auto" align="center">
 				
 				<section class="page-section page-section--vote">
@@ -132,7 +132,7 @@
 		
 	</div>
 	
-	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-5 pm-input-form">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-5 pm-input-form" style="margin-top:100px;">
 <br>
 <h2 align = "center"> 로그인 </h2>
 
