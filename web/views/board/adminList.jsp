@@ -30,7 +30,7 @@
 <% }else{ %>
 	<% User u = (User)session.getAttribute("user"); %>
 	<% if(!u.getUserId().equals("admin")){ %>
-		<%@ include file="../common/NotLogin.jsp" %>
+		<%@ include file="../common/NotAdmin.jsp" %>
 	<% }else{ %>
 		<%@ include file="common/boardHeader.jsp" %>
 		<div class="pm-section col-xs-12 col-md-8">

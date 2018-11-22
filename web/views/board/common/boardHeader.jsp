@@ -81,8 +81,11 @@ header.board{
 	        </div>
 	        <div class="logo" style="align:right; padding-top: 120px" id="test">
 				<a href="/pickme/list.bo?bType=qna">질문하기</a> &nbsp; | &nbsp; 
-				<a href="/pickme/list.bo?bType=report">신고하기</a> &nbsp; | &nbsp; 
-				<a href="/pickme/list.bo?bType=admin">관리자 페이지</a>
+				<a href="/pickme/list.bo?bType=report">신고하기</a> &nbsp; 
+				<% if(user.getUserId().equals("admin")){ %>
+					| &nbsp; 
+					<a href="/pickme/list.bo?bType=admin">관리자 페이지</a>
+				<% } %>
 	        </div>
       <%} %>
       </div>

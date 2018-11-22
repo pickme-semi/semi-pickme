@@ -16,6 +16,7 @@ import com.board.model.vo.BoardAnswer;
 import com.board.model.vo.BoardCategory;
 import com.board.model.vo.PageInfo;
 import com.common.SessionCheck;
+import com.user.model.vo.User;
 
 /**
  * Servlet implementation class BoardListServlet
@@ -146,7 +147,14 @@ public class BoardListServlet extends HttpServlet {
 			System.out.println(boardListQ);
 			
 			if(type.equals("admin")){
-				request.getRequestDispatcher("views/board/adminList.jsp").forward(request, response);
+				User u = (User)request.getSession(true).getAttribute("user");
+				
+				if(u.getUserId().equals("admin")){
+					request.getRequestDispatcher("views/board/adminList.jsp").forward(request, response);
+				}else{
+					// not admin
+					request.getRequestDispatcher("views/common/NotAdmin.jsp").forward(request, response);
+				}
 			}else{
 			request.getRequestDispatcher("views/board/boardList.jsp").forward(request, response); }
 		}
