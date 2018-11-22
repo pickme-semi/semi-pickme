@@ -8,7 +8,7 @@
 
 <link rel="preload" href="/pickme/resources/css/swell.css" as="style" onload="this.rel='stylesheet'">
 
-<title>로그인_[Pick Me]</title>
+<title>로그인</title>
 <style>
 	.outer{
 		width : auto;

@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>아이디 찾기</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet">
