@@ -41,7 +41,7 @@
 					<!-- w 733 -->
 					
 						<th width="100px">문의 유형</th>
-						<th id = "sub" width="120px"><span><%= b.getCategoryId() %></span></th>
+						<th id = "sub" width="120px"><span><%= b.getCategory() %></span></th>
 						<th width="100px">작성자</th>
 						<th id = "sub" width="130px"> <span><%= b.getUserName() %></span></th>
 						<th width="100px">작성일</th>
