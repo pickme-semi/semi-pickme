@@ -64,7 +64,11 @@
 								<div id="demo<%=i%>" class="collapse">
 									<p class="text-left"><%=commonBoardList.get(i).getContent() %></p>
 								<hr />
-									<p class="text-left">[답변] <%=commonAnswerList.get(i).getContent() %></p>
+									<% if( commonAnswerList.size() <= i){ %>
+										<p class="text-left">답변이 등록되지 않았습니다.</p>
+									<% } else { %>
+										<p class="text-left">[답변] <%= commonAnswerList.get(i).getContent() %></p>
+									<% } %>
 								</div>
 							</td>
 						</tr>
