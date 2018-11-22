@@ -414,7 +414,7 @@ public class StatsDao {
 	}
 
 
-
+/*
 	public ArrayList<ResultVo> cat5Pick1Count(Connection con, PickResult pr, ArrayList<ResultVo> list2) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -497,6 +497,34 @@ public class StatsDao {
 			close(pstmt);
 		}
 		return list;
+	}
+*/
+
+
+	public int resultCheck(Connection con, String pickId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("isResult");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, pickId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) result = rset.getInt(1);
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

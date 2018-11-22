@@ -137,7 +137,7 @@ public class StatsService {
 		return list;
 	}
 
-
+/*
 	public ArrayList<ResultVo> cat5Pick1Count(PickResult pr, ArrayList<ResultVo> cat5List) {
 		Connection con = getConnection();
 		
@@ -157,6 +157,17 @@ public class StatsService {
 		close(con);
 		
 		return list;
+	}*/
+
+
+	public int resultCheck(String pickId) {
+		Connection con = getConnection();
+		
+		int result = sDao.resultCheck(con,pickId);
+		
+		close(con);
+		
+		return result;
 	}
 
 

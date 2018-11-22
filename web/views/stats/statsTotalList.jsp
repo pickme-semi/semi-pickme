@@ -69,7 +69,7 @@
 			<tr class="table-primary">
 				<th scope="row"><%= i+1 %></th>
 				<td width="15%" align="center" >
-				<div class="tdDiv"><span class="title"><a href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>"> <%= list.get(i).getTitle() %> </a></span></div>
+				<div class="tdDiv"><span class="title"><a onclick="goOneList(<%=list.get(i).getId()%>);" <%-- href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>" --%>> <%= list.get(i).getTitle() %> </a></span></div>
 				</td>
 				<td align="center"><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_1() %>" alt="select1-img" onError ="imgError(this)" /><img class="img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=list.get(i).getSelect_2() %>" alt="select2-img" onError ="imgError(this)"  />
 				</td>
@@ -95,7 +95,21 @@
 	
 	
 	<script>
-		
+		function goOneList(pickId){
+			$.ajax({
+				url : "/pickme/sResult.st",
+				type : "post",
+				data : { id : pickId},
+				success : function(data){
+					console.log(data);
+					if(data == 'no'){
+						alert("통계 값이 없습니다.");
+					}else{
+						location.href = "/pickme/statsOneList.st?pickno="+pickId;
+					}
+				}
+			})
+		}
 		 /* function test(){
 			$.ajax({
 				url : "/pickme/getData.st",

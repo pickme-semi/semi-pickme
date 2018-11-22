@@ -308,18 +308,18 @@
 		//카테고리 top5
 		var chart = bb.generate({
 		  data: {
-		    x: "x",
-		    columns: [
-			["x", 
-				<%for(int i = 0 ; i<cat5List.size(); i++){%>
-    			"<%=cat5List.get(i).getCategory()%>",
-    			<%}%>
-				],
-			["전체",
-				<%for(int i = 0 ; i<cat5List.size(); i++){%>
-    			"<%=cat5List.get(i).getCatCount()%>",
-    			<%}%>
-				],
+			    x: "x",
+			    columns: [
+				["x", 
+					<%for(int i = 0 ; i<cat5List.size(); i++){%>
+	    			"<%=cat5List.get(i).getCategory()%>",
+	    			<%}%>
+					],
+				["전체",
+					<%for(int i = 0 ; i<cat5List.size(); i++){%>
+	    			"<%=cat5List.get(i).getCatCount()%>",
+	    			<%}%>
+					],
 			<%-- ["pick1", 
 				<%for(int i = 0 ; i<cat5Pick1List.size(); i++){%>
     			"<%=cat5Pick1List.get(i).getCatCount()%>",
