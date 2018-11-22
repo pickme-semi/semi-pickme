@@ -39,18 +39,18 @@ public class PickResultDao {
       ResultSet rset2 = null;
       int result1 = 0;
       int result2 = 0;
-      
+      int finalResult = 0;
       // 전체 선택된 수 랑 왼쪽인지 오른쪽인지 확인해서 숫자 파악한다.
       String sqlAll = prop.getProperty("returnAllPickResult");
       String sqlSelect = prop.getProperty("returnPickResult");
       
       
       try {
-         System.out.println("실행되니?");
+        // System.out.println("실행되니?");
          pstmt1 = con.prepareStatement(sqlAll);
          pstmt2 = con.prepareStatement(sqlSelect);
-         System.out.println("pr.getId() = "+pr2.getId());
-         System.out.println("pr.getResult() = "+pr2.getResult());
+         //System.out.println("pr.getId() = "+pr2.getId());
+         //System.out.println("pr.getResult() = "+pr2.getResult());
          pstmt1.setInt(1, pr2.getId());
          pstmt2.setInt(1, pr2.getId());
          pstmt2.setInt(2, pr2.getResult());
@@ -67,8 +67,8 @@ public class PickResultDao {
          int rowCnt1 = rsmd.getColumnCount();
          int rowCnt2 = rsmd2.getColumnCount();
 
-         System.out.println("rowCnt1 = "+rowCnt1);
-         System.out.println("rowCnt2 = "+rowCnt2);
+         //System.out.println("rowCnt1 = "+rowCnt1);
+         //System.out.println("rowCnt2 = "+rowCnt2);
 
          if(rset1.next()){
             
@@ -82,8 +82,11 @@ public class PickResultDao {
          }
          
          
-         System.out.println("result1="+result1);
-         System.out.println("result2="+result2);
+         //System.out.println("result1="+result1);
+         //System.out.println("result2="+result2);
+         //System.out.println("이것만보자 "+((double)result2/(double)result1)*100);
+         finalResult =(int)(((double)result2/(double)result1)*100);
+         //System.out.println("과연   "+ finalResult);
       } catch (SQLException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -94,7 +97,7 @@ public class PickResultDao {
          close(rset1);
          close(rset2);
       }
-      return (result2/result1)*100;
+      return finalResult;
    }
 
    public int updatePick(Connection con, PickResult pr) {

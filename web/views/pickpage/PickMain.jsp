@@ -113,14 +113,14 @@ img{
 
 
 .thetagoLeft{
-   opacity : 0.6;
+   opacity : 0.4;
    position:relative;
    
 
 }
 .hojitextLeft{
 position:absolute;
-    top:80px;
+    top:150px;
     left:130px;
     color:black;
    font-size: xx-large;
