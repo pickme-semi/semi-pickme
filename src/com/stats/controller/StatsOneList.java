@@ -268,7 +268,7 @@ public class StatsOneList extends HttpServlet {
 			
 			
 			
-			// 카테고리 별 pick1 TOP5
+			/*// 카테고리 별 pick1 TOP5
 			ArrayList<ResultVo> c5Pick1List = new ArrayList<ResultVo>();
 			ArrayList<ResultVo> cat5Pick1List = new ArrayList<ResultVo>();
 			
@@ -331,7 +331,7 @@ public class StatsOneList extends HttpServlet {
 			
 			response.getWriter().println(cat5Pick2List);
 			session.setAttribute("cat5Pick2List", cat5Pick2List);
-			System.out.println("cat5Pick2List : " + cat5Pick2List);
+			System.out.println("cat5Pick2List : " + cat5Pick2List);*/
 			response.sendRedirect("views/stats/statsOneList.jsp");
 		}
 	}
