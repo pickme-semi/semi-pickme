@@ -57,7 +57,7 @@ public class BoardListServlet extends HttpServlet {
 			// 게시판은 1페이지부터 시작 한다.
 			currentPage = 1;
 			
-			limit = 2; // 한 번에 보여줄 페이지 수 / 한 페이지에 표시할 게시글 수
+			limit = 10; // 한 번에 보여줄 페이지 수 / 한 페이지에 표시할 게시글 수
 			
 			// 만약에 사용자가 현재 페이지의 현재 접속한 페이지의 정보를 가진다면
 			// 해당 페이지의 정보를 받을 수 있어야 한다.

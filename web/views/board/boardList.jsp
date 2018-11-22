@@ -124,7 +124,9 @@
 		<% } %>
 			</tbody>
 		</table>
-					<nav>
+		<div class="row" align="center">
+			<div class="col">
+					<nav style="margin-left:40%;margin-right:60%">
 						<ul class="pagination">
 							<li class="page-item">
 							<% if(currentPage <= 1){ %>
@@ -151,6 +153,8 @@
 									</li>
 						</ul>
 					</nav>
+					</div>
+			</div>
 		
 		
 		<div align="center">
