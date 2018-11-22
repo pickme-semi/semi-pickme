@@ -13,8 +13,6 @@
 
 <!-- select2 소스  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
 
 <title>회원 정보 수정 페이지</title>
 
