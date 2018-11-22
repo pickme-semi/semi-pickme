@@ -301,8 +301,12 @@ textarea{
 					<% }%>				
 					&emsp;&emsp;&emsp;
 					
-					<b><a href="/pickme/uPage.pr?uno=<%= p.getUserno()%>" style="color : none;
-					text-decoration : none;"><%=p.getUserId()%></a></b>
+				<% if(user.getUserNo() != p.getUserno()) { %>
+					<b><a href="/pickme/uPage.pr?uno=<%= p.getUserno()%>" style="color : none;text-decoration : none;"><%=p.getUserId()%></a>
+				<% } else { %>
+					<b><a href="/pickme/mPicks.pr?uno=<%= p.getUserno()%>" style="color : none;text-decoration : none;"><%=p.getUserId()%></a>
+				<% } %></td>
+					</b>
 					
 				</div>		
 				
