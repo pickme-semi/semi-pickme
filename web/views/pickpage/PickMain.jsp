@@ -141,6 +141,13 @@ position:absolute;
  font-size: xx-large;
 }
 
+.imgSize{
+	width : 500px;
+	height : 500px;
+	magin-top : auto;
+	magin-bottom: auto;
+}
+
 
 
 </style>
@@ -176,7 +183,7 @@ position:absolute;
       <div class="mySlides" style="background-color : white">          
            <div class="row" align="center">
       <div class="col-md-6" align="center" style="background-color : white" >
-         <img class="aaLeft" id="leftPick<%=i+1%>" onerror="imgError(this);" 
+         <img class="aaLeft imgSize" id="leftPick<%=i+1%>" onerror="imgError(this);" 
          src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_1() %>" 
          style="width:100%" onclick="checkNumber(<%=gg%>, <%= i %>);hojiTestLeft(<%=i%>);
      "/>
@@ -185,7 +192,7 @@ position:absolute;
          <p id="leftP<%=i%>"></p></div>
       </div>   
       <div class="col-md-6" align="center" style="background-color : white"> 
-         <img class="aaRight" id="rightPick<%=i+1 %>" 
+         <img class="aaRight imgSize" id="rightPick<%=i+1 %>" 
          src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pData.getSelect_2() %>" 
          style="width:100%"onclick="checkNumber(<%=gg%>, <%= i %>);hojiTestRight(<%=i%>);"/>
            <div class="hojitextRight" >
