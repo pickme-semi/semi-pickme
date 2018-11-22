@@ -8,6 +8,17 @@ int point = (Integer)request.getAttribute("point");
 %>
 
 
+<!-- 
+
+		img {
+	    width: 100%;
+	    height : 100%; 
+	    object-fit: contain;
+	    
+	    ~ 샘플링 후 크기 재조정 ~
+	} 
+ -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +31,16 @@ int point = (Integer)request.getAttribute("point");
 
 <style>
 
+@font-face {
+	font-family : 'NANUMBARUNGOTHIC.TTF';
+	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");}
+	
+
+* {	font-family : 'NANUMBARUNGOTHIC.TTF';
+	color: #505050;
+	}
+	
+	
 	.attr {
 	
 		height : 150px;
@@ -55,11 +76,6 @@ int point = (Integer)request.getAttribute("point");
     overflow: hidden;
 	}
 	
-	img {
-	    width: 100%;
-	    height : 100%;
-	    object-fit: contain;
-	} 
 	
 	.live-swell__pics{
 		margin-left : 25px;
@@ -78,7 +94,7 @@ int point = (Integer)request.getAttribute("point");
 	
 	.nav-item:hover {
 		
-		border-bottom : 5px solid blue;
+		border-bottom : 5px solid #ffb8d8;
 		color : none;
 		text-decoration : none;
 		
@@ -96,6 +112,8 @@ int point = (Integer)request.getAttribute("point");
 	flex-grow : 0;
 	
  	}
+ 	
+ 
 	
 
 	
@@ -110,34 +128,32 @@ int point = (Integer)request.getAttribute("point");
 
 	<%@ include file="../common/header.jsp" %>
 	
-	<div class="col-md-12 text-center user">
+	<div class="col-md-12 text-center user" id="divImg">
 	 
 	<% if(user.getProfile() != null) {%>
 	  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
-	<% }%>
-	<h2><%= user.getUserId() %><i id="user" class="fas fa-cog"></i> </h2>
+	<% }%><br>
+	<h2 style="font-size:24pt; font-weight:bold;"><%= user.getUserId() %>&nbsp;<i id="user" class="fas fa-cog" ></i></h2>
 	<!-- 아이디 전송을 위한 input 박스 -->
 	<input type="hidden" id="getNo" value="<%= user.getUserNo() %>" />
 	
-	<input type="text" class="comment" value=""/>
+	<input type="text" class="comment" value="" style="font-size:11pt;"/>
 	<i id="check" class="fas fa-chevron-circle-down fa-2x" style="display:none"></i>
 	<i id="pencil" class="fas fa-pencil-alt"></i>
 	<br /><br />
 	
 	
-	<div class="card bg-light md-4 text-center user">
-  	<div class="card-header">포인트 내역</div>
-  	<div class="card-body">
-    <h5 class="card-title">포인트</h5>
-    <p class="card-text"><%=point %></p>
-  	</div>
+	<div class="card bg-light md-4 text-center user" style="border: 1px solid white;" >
+
+    <p class="card-text" style="background-color: white; font-weight:bold; font-size:11pt;">My point &nbsp; : &nbsp; <%=point %></p>
+
 	</div>
 	<br /><br /><br />
 	
 	
-	<ul class="nav justify-content-center" >
+	<ul class="nav justify-content-center" style="font-size:12pt; font-weight: bold;">
 	  <li class="nav-item active">
 	    <a href="/pickme/fList.pr" style="color : none;
 		text-decoration : none;">팔로워</a>
@@ -158,7 +174,7 @@ int point = (Integer)request.getAttribute("point");
 	
 	<section class="col-xs-12 col-md-12">
 	 
-	 <div class="live-swell xs-12 container">
+	 <div class="live-swell xs-12 container" id="divImg">
 	 <div class="row">
 	 
 	 <% if(!myPick.isEmpty()) { %>
@@ -179,7 +195,7 @@ int point = (Integer)request.getAttribute("point");
 	    
 	
 		  <% } else{ %>
-		  <div align="center" style = "margin-top : 100px; margin-bottom : 300px; margin-left : auto; margin-right : auto;"><h5>작성한 게시글이 없습니다.</h5></div>
+		  <div align="center" style = "margin-top : 100px; margin-bottom : 300px; margin-left : auto; margin-right : auto;" ><h5 style="text-size:24pt; color: gray; font-weight:bold;">작성한 게시글이 없습니다.</h5></div>
 		  <% } %> 
 		
 	
