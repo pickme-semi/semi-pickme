@@ -264,7 +264,6 @@ textarea{
 		<div class="hojitextRight" >
          <p class ="alphaRightColor" id="rightP"></p></div>
          </div>	
-		</div>
 		</div> 
 	    </div>
 	  </div>

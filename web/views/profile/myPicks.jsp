@@ -169,12 +169,14 @@ int point = (Integer)request.getAttribute("point");
 	 <% for (int i=0; i<myPick.size(); i++) {%> 
 	 
             <div class="live-swell__pics col-sm" style="padding:0px; flex-grow : 0">
+            	<a href="/pickme/pickview.pv?Pid=<%=myPick.get(i).getId()%>" target="_blank">
               <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_1() %>" alt="" />
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_2() %>" alt="" />
               </div>
+              </a>
                 <div class="live-swell__pics__or">or</div>
                   </div>
                    <% } %>
