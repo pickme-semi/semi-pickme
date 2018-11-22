@@ -45,33 +45,22 @@
 <% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	<div class="pm-section col-xs-12 col-md-8">
-		<h1><%= (type.equals("report"))? "신고" : "질문" %> 게시판</h1>
-		<br />
+		<h1 style="font-size:42pt; font-weight:bold;"><%= (type.equals("report"))? "Report" : "Question" %></h1>
+		
 		
 		<!-- 질문일때만 자주하는 질문 보여주기 -->
 		<% if(!type.equals("report")){ %>
+		<br><br><br>
 			<div id="divArea">
-				<p class="h3">자주 하는 질문</p>
-				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
+				<p class="h3" style="font-size: 18pt; font-weight:bold;">자주 하는 질문</p>
+				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid white; font-weight:bold;">
 				<% if( commonBoardList.size() != 0){ %>
 					<% for(int i = 0; i < commonBoardList.size(); i++) { %>
-						<tr class="" style="background-color: " data-toggle="collapse" data-target="#demo<%=i%>">
+						<tr class="" style="background-color: white" data-toggle="collapse" data-target="#demo<%=i%>">
 							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
 							<td class=""><%=commonBoardList.get(i).getTitle() %></td>
 						</tr>
-						<tr>
-							<td>
-								<div id="demo<%=i%>" class="collapse">
-									<p class="text-left"><%=commonBoardList.get(i).getContent() %></p>
-								<hr />
-									<% if( commonAnswerList.size() <= i){ %>
-										<p class="text-left">답변이 등록되지 않았습니다.</p>
-									<% } else { %>
-										<p class="text-left">[답변] <%= commonAnswerList.get(i).getContent() %></p>
-									<% } %>
-								</div>
-							</td>
-						</tr>
+						
 					<% } %>
 				<% } %>
 				</table>
@@ -79,7 +68,7 @@
 		<% } %>
 		
 		<br><br>
-		<table id = "boardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold;">
+		<table id = "boardList" class="table table-striped" style="text-align:center;  border-bottom : 1px solid #E6E6E6; font-weight:bold;">
 			<thead class="thead-light">
 				<tr>
 					<th width="80px">No.</th>
@@ -92,7 +81,7 @@
 		<% if( boardList.size() != 0){ %>
 			<% for (int i = 0 ; i < boardList.size(); i++){ %>
 					<% if(type.equals("report")){ %>
-						<tr style="background-color: #FAFAFA">	
+						<tr style="background-color: white;">	
 						<% if(user.getUserId().equals("admin") || (user.getUserNo() == boardList.get(i).getUserNo())){ %>
 							<input type="hidden" value="<%= boardList.get(i).getId() %>">
 							<td ><%=boardList.get(i).getId()%></td>
@@ -104,7 +93,7 @@
 						<% } %>
 						</tr>
 					<% } else { %>
-						<tr style="background-color: #FAFAFA">
+						<tr style="background-color: white; ">
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></a></td>
