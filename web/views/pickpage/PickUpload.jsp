@@ -128,38 +128,47 @@
 #pick1 {
 	/*픽 이미지 1 크기 조절 */
 	max-width: 100%;
-	width: 200px;
-	height : 200px;
+	width: 100%;
+	height : 100%;
 	max-height : 100%;	
+	
 }
 
 #pick2 {
 	/*픽 이미지 2 크기 조절 */
 	max-width: 100%;
-	width: 200px;
-	height : 200px;
-	max-height : 100%;	
+	width: 100%;
+	height : 100%;
+	max-height : 100%;
+		
 }
 
-#upfile1 {
-	background : lightskyblue;
-	max-width: 100%;
-	width: 200px;
-	height : 200px;
-	max-height : 100%;	
+#upfile1 {	
+	max-width: 70%;
+	width:50%;
+	height:50%;
+	max-height : 70%;	
+	border: 1px solid rgb(0, 188, 173)	
 }
 
 #upfile2 {
-	background : lightgreen;
-	max-width: 100%;
-	width: 200px;
-	height : 200px;
-	max-height : 100%;	
+	
+	max-width: 70%;
+	width:50%;
+	height:50%;
+	max-height : 70%;	
+	border: 1px solid rgb(0, 188, 173)
 }
 
 .pickform {
-	background : ;
+	background: rgb(213, 255, 252);
 }
+
+div {
+border: none;
+}
+
+
 	
 </style>
 
@@ -182,18 +191,18 @@
 		
 		<div class="pickform col-md-8 col-xs-12">
 		
-		<div class="container-fluid" align="center">
-	<div class="row col-md-8 col-xs-12" align="center" >
-		<div class="col-md-6" id="upfile1" >
-			<img onerror="imgError(this);" alt="upload1" id="pick1" src="#" alt="" />
-		</div>
-		<div class="col-md-6" id="upfile2" >
-			<img onerror="imgError(this);" alt="upload2" id="pick2" src="#" alt=""  />
-		</div>
-	</div>
-</div>
+		
+			<div class="row col-md-12 col-xs-12" align="center" >				
+				<div class="col-md-6" id="upfile1" >
+			<img onerror="imgError(this);" alt="upload1" id="pick1" src="<%= request.getContextPath() %>/resources/icons/upload.png" />
+			</div> 
+				<div class="col-md-6" id="upfile2" >
+			<img onerror="imgError(this);" alt="upload2" id="pick2" src="<%= request.getContextPath() %>/resources/icons/upload.png" />
+				</div>
+			</div>
 		
 		
+		<br>
 		<h2 align="center">Pick 올리기</h2>
 			<form name = "uploadpick" id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
 			method="post" encType="multipart/form-data">
@@ -229,7 +238,8 @@
 					<tr class="form-group">
 						<td>내용</td>
 						<td colspan="3">
-						<textarea class="form-control"  name="content" style= "width: 100%; height: 100%;" required="required"></textarea>
+						<textarea class="form-control"  name="content" style= "width: 100%; height: 100%;" 
+						required="required" ></textarea>
 						</td>
 					</tr>
 					<tr class="form-group">
@@ -247,39 +257,7 @@
 						</select>
 						</td>
 					</tr>
-				</table>
-				<!-- <label for="category">카테고리 선택</label> 
-				<br><br> 
-				<input type="radio" name="category" value="tour" checked /><span>여행</span>
-				<input type="radio" name="category" value="sports" /><span>운동</span>
-				<input type="radio" name="category" value="food" /><span>요리</span>
-
-				<br>
-				<br>
-				<span id="viewTourCategory"> 여행 카테고리: 
-				<select	class="form-control tourMainCategory"
-				 name="tourtMainCategory" style="width: 200px">
-				 		<option value="1">전체</option>
-						<option value="2">국내여행</option>
-						<option value="3">해외여행</option>
-				</select>
-				</span>
-				<span id="viewSportCategory" style="display: none"> 스포츠 카테고리: 
-				<select class="form-control sportsMainCategory"
-				 name="sportsMainCategory" style="width: 200px">
-						<option value="1">전체</option>
-						<option value="2">실내운동</option>
-						<option value="3">야외운동</option>
-				</select>
-				</span> <span id="viewFoodCategory" style="display: none"> 음식 카테고리:
-				<select class="form-control foodMainCategory"
-				name="foodMainCategory" style="width: 200px">
-					<option value="1">전체</option>
-					<option value="2">한식</option>
-					<option value="3">일식</option>
-					<option value="4">중식</option>
-				</select>
-				</span> -->
+				</table>				
 			
 				<!-- 
 				<br> <label>보유 포인트</label><input type="text"
@@ -433,8 +411,6 @@
    			$('#up2').click();
    		  });
    	  });
-	
-	
 	
 </script>	 
 <% } %>

@@ -70,20 +70,20 @@ body {
   overflow-x:scroll;
 }
 #leftPick {
-	height: 250px;
+	width: 100%;
+	height : 100%;
 	position: relative;
-	width: 250px;
 	max-width: 100%;
 	max-height : 100%;
-	border: 3px solid lightskyblue;
+	border: 2px solid lightskyblue;
 }
 #rightPick {
-	height: 250px;
+	width: 100%;
+	height : 100%;
 	position: relative;
-	width: 250px;
 	max-width: 100%;
 	max-height : 100%;
-	border: 3px solid lightskyblue;
+	border: 2px solid lightskyblue;
 }
 
 /* pick 게시글 내용 말풍선 스타일. */
@@ -201,13 +201,13 @@ textarea{
 	    
 		<div class="container col-xs-12" >	 
 	   <div class="mySlides">          
-	        <div class="row" align="center">
-		<div class="col-md-6" align="center" style="background-color : aliceblue" >
+	        <div class="row col-xs-12" align="center">
+		<div class="col-md-6 col-xs-6" align="center" style="background-color : aliceblue" >
 			<img id="leftPick" onerror="imgError(this);" 
 			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=p.getSelect_1() %>" 
 			style="width:100%" onclick="checkNumber(<%=p.getId() %>);"  />
 		</div>	
-		<div class="col-md-6" align="center" style="background-color : aliceblue"> 
+		<div class="col-md-6 col-xs-6" align="center" style="background-color : aliceblue"> 
 			<img id="rightPick" 
 			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=p.getSelect_2() %>" 
 			style="width:100%"onclick="checkNumber(<%=p.getId() %>);"/>
@@ -397,7 +397,7 @@ textarea{
                 <!-- 본문 작성-->             
                 <td width="550">
                     <div>
-                        <textarea id="replyContent" name="replyContent"  ></textarea>
+                        <textarea id="replyContent" name="replyContent" ></textarea>
                     </div>
                 </td>
                 <!-- 댓글 등록 버튼 -->
