@@ -39,15 +39,15 @@
 			<% if( boardListQ.size() != 0){ %>
 			
 			<h3 style="font-size:24pt; font-weight:bold;"> Qusetion  </h3>
-				<table id = "boardList" class="table table-striped" style="text-align:center;  border: 1px solid #E6E6E6; font-weight:bold; ">
-				<thead >
+				<table id = "boardList" class="table table-striped" style="text-align:center;  border-bottom: 1px solid #E6E6E6; font-weight:bold; ">
+				<thead style="background-color: rgb(250 250 250);">
 					<th width="80px">No.</th>
 					<th width="403px">제목</th>
 					<th width="120px">작성자</th>
 					<th width="120px">등록일</th>
 				</thead>
 				<% for (int i = 0 ; i < boardListQ.size(); i++){ %>
-						<tr style="background-color: #FAFAFA">
+						<tr style="background-color: white;">
 						<input type="hidden" value="<%= boardListQ.get(i).getId() %>">
 						<td><%=boardListQ.get(i).getId() %></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardListQ.get(i).getId()%>"><%=boardListQ.get(i).getTitle() %></a></td>
@@ -94,15 +94,15 @@
 			
 			<% if( boardList.size() != 0){ %>
 			<h3 style="font-size:24pt; font-weight:bold;">Report</h3>
-			<table id = "boardList" class="table table-striped" style="text-align:center; border: 1px solid #E6E6E6; font-weight:bold;">
-				<thead>
+			<table id = "boardList" class="table table-striped" style="text-align:center; border-bottom: 1px solid #E6E6E6; font-weight:bold;">
+				<thead style="background-color: rgb(250 250 250);">
 					<th width="80px">No.</th>
 					<th width="403px">제목</th>
 					<th width="120px">작성자</th>
 					<th width="120px">등록일</th>
 				</thead>
 				<% for (int i = 0 ; i < boardList.size(); i++){ %>
-						<tr style="background-color: #FAFAFA">
+						<tr style="background-color: white;">
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></td>
