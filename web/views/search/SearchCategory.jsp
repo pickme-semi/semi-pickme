@@ -10,7 +10,7 @@ ArrayList<PickMe> cList = (ArrayList<PickMe>)session.getAttribute("searchList");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-<title>Insert title here</title>
+<title>카테고리 검색 결과</title>
 <style>
 
 .img_size {
