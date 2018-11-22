@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.point.model.service.PointService;
+import com.point.model.vo.Point;
 import com.user.exception.UserException;
 import com.user.model.service.UserService;
 import com.user.model.vo.User;
@@ -46,18 +48,24 @@ public class UserLoginServlet extends HttpServlet {
 		
 		User u = new User(id, pass);
 		
-		System.out.println("전달받은 회원 정보 : " + u );
+//		System.out.println("전달받은 회원 정보 : " + u );
 		
 		try {
 			u = us.loginUser(u);
-			System.out.println("로그인 성공!");
-			System.out.println(u);
+//			System.out.println("로그인 성공!");
+//			System.out.println(u);
 			
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("user", u);
 			result = "ok";
 			response.getWriter().print(result);
+			
+			PointService ps = new PointService();
+			Point p = new Point(u.getUserNo(), 10, 7, "PST001");
+			ps.addPoint(p);
+			
+			System.out.println("테스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 			
 			// response.sendRedirect("views/pickpage/PickMain.jsp");
 			response.sendRedirect("pickmain.pm");

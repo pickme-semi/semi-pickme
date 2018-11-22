@@ -32,6 +32,7 @@ public class PointDao {
 	}
 
 	public int addPoint(Connection con, Point p) {
+		System.out.println("addpoint : " + p);
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -72,10 +73,11 @@ public class PointDao {
 			
 			p = new Point();
 			if(rset.next()){
-				p.setPoint(rset.getInt(1));
+				p.setAfterPoint(rset.getInt(1));
 			}else{
 				p.setPoint(0);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

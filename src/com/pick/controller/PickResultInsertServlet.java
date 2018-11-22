@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.common.SessionCheck;
 import com.pick.model.service.PickResultService;
 import com.pick.model.vo.PickResult;
+import com.point.model.service.PointService;
+import com.point.model.vo.Point;
 
 /**
  * Servlet implementation class PickResultInsertServlet
@@ -70,6 +72,12 @@ public class PickResultInsertServlet extends HttpServlet {
 			int result2= prs.getCurrentPick(pr2);
 			
 			System.out.println("최종 PickResultServlet="+result2);
+			
+			PointService ps = new PointService();
+			Point p = new Point(selectUserNo, 1, 7, "PST001");
+			ps.addPoint(p);
+			
+			System.out.println("픽선택 포인트 증가");
 
 			// 전송하기 
 			response.setCharacterEncoding("UTF-8");
