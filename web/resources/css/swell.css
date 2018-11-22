@@ -262,11 +262,11 @@
 .hero {
 	-ms-flex-align: center;
 	align-items: center;
-	background: url(/img/hero-bg-11ea32273c.jpg) no-repeat center center;
+	background: url(/pickme/resources/images/mainBackground.jpg) no-repeat center center;
 	background-size: cover;
 	display: -ms-flexbox;
 	display: flex;
-	height: 500px;
+	height: 350px;
 	-ms-flex-pack: center;
 	justify-content: center;
 	left: 0;
@@ -275,15 +275,16 @@
 }
 
 @media ( min-width :320px) {
+	
 	.hero {
-		background-image: url(/img/hero-bg-full-f66b7cbb13.jpg)
+		background-image: url(/pickme/resources/images/mainBackground.jpg)
 	}
 }
 
 @media ( -webkit-min-device-pixel-ratio :2) , ( min-resolution :192dpi)
 	{
 	.hero {
-		background-image: url(/img/hero-bg-full@2x-85759ec7ee.jpg)
+		background-image: url(/pickme/resources/images/mainBackground.jpg)
 	}
 }
 
@@ -339,8 +340,9 @@
 
 .page-section--vote {
 	border-bottom: 0;
-	background-color: #00cdb7;
-	color: #fff;
+	background-color: #ffb8d8;
+	opacity : 30%;
+	color: #fd0072;
 	padding-bottom: 50px
 }
 
@@ -500,7 +502,7 @@
 
 .page-section__header__title--store, .page-section__header__title--vote
 	{
-	color: #fff
+	color: #fd0072
 }
 
 .page-section__header__slogan {
@@ -952,7 +954,7 @@
 	width: 274px
 }
 
-.live-swell__results__result:hover {
+.live-swell__results__result:active {
 	background-color: rgba(255, 255, 255, 0)
 }
 
