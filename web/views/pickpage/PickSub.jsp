@@ -215,7 +215,7 @@ textarea{
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="pickid" name="pickid"  class="current" value="<%= p.getId() %>"/>
 	      	<b>
-	      		<a id="statsBtn" href="/pickme/statsOneList.st?pickno=<%= p.getId() %>" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
+	      		<a id="statsBtn" onclick="goOneList('<%=p.getId() %>');" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
 		    		 <i class="fas fa-chart-bar fa-2x"></i>
 				</a>
 			</b>
@@ -300,6 +300,22 @@ textarea{
             }
          });
       });
+    
+        function goOneList(pickId){
+       			$.ajax({
+       				url : "/pickme/sResult.st",
+       				type : "post",
+       				data : { id : pickId},
+       				success : function(data){
+       					console.log(data);
+       					if(data == 'no'){
+       						alert("통계 값이 없습니다.");
+       					}else{
+       						location.href = "/pickme/statsOneList.st?pickno="+pickId;
+       					}
+       				}
+       			})
+       		}
     $('img[id^="rightPick"]').click(function(){
          $.ajax({
             url : "/pickme/pickresult.pr",
