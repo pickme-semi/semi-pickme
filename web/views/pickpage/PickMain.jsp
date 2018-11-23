@@ -259,11 +259,11 @@ position:absolute;
         <div class="alphago">
         
         <% //유저 사진 %>   
-        <div class="new">
+        <div class="new" style="padding:15px;">
         <% if(user.getProfile() != null) {%>
-		     <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr"/>
+		     <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr" / >
       	<% }else { %>
-	      	<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr" id="profile">
+	      	<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr" id="profile" >
       	<% } %>
       <% //PM_PICK_TB을 수정해서 UserId도 가져와야 여기다 넣을수 있을것같다. %>
        <p class="capId"id="contentId<%=i%>"><%= pData.getUserId() %></p>

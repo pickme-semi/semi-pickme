@@ -34,38 +34,34 @@
 	
 	
 	
-	<div class="pm-section col-xs-12 col-md-8" align="center">
+	<div class="pm-section col-xs-12 col-md-8" align="center" style="width: 50%">
 		<form id="insertForm" action="/pickme/insert.bo">
 
 			<div>
-				<table class="table table-bordered" style="text-align: center;">
+				<table class="table table-bordered" style="text-align: center; ">
 					<tr>
-						<th width="140px">카테고리</th>
-						<th>
-						<% for(int i = 0; i< categoryList.size(); i++){
-						if(categoryList.get(i).getId() == b.getCategoryId()){ %>		
-						<%= categoryList.get(i).getConetent() %>		
-						<% 	}						
-						}%>
+						<th width="140px" style="font-size:10pt; padding-top: 15px;">카테고리</th>
+						<th style="font-size:10pt; padding-top: 15px;">
+						<%= b.getCategory()%>
 						</th>
 					</tr>
 					
 					<tr>
-						<th width="140px">제목</th>
-						<th><%= b.getTitle() %></th>
+						<th width="140px" style="font-size:10pt; padding-top: 15px;">제목</th>
+						<th style="font-size:10pt; padding-top: 15px;"><%= b.getTitle() %></th>
 					</tr>
 					
 					<tr>
-						<th width="140px">내용</th>
+						<th width="140px" style="font-size:10pt; padding-top: 15px;">내용</th>
 						<th>
-						<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required" style="border: none;"><%= b.getContent() %></textarea>
+						<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required" style="border: none; font-size:10pt; padding-top: 15px;"><%= b.getContent() %></textarea>
 						<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p></th>
 					</tr>
 					
 					<!-- 신고-->
 					<% if(type.equals("report")){ %>
 					<tr>
-						<th width="140px">신고 pick</th>
+						<th width="140px" style="font-size:10pt; padding-top: 15px;">신고 pick</th>
 						<th style="text-align: left;"><input type="text" value="<%= b.getPickId() %>" name="pickId" style="border: none;"/></th>
 					</tr>
 					<% } %>

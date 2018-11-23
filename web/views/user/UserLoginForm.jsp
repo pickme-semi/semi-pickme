@@ -10,6 +10,17 @@
 
 <title>로그인</title>
 <style>
+
+ @font-face {
+	font-family : 'NANUMBARUNGOTHIC.TTF';
+	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");}
+	
+
+* {	font-family : 'NANUMBARUNGOTHIC.TTF';
+	color: #505050;
+	}
+
+	
 	.outer{
 		width : auto;
 		height : auto;
@@ -92,9 +103,9 @@
 				<div class="page-section__content">
 				<header class="page-section__header">
 				<h2 class="page-section__header__title page-section__header__title--vote">Try it!</h2>
-				<p class="page-section__header__slogan">
+				<p class="page-section__header__slogan" style="font-size:12pt;">
 				1. 자신이 관심있는 카테고리를 선택한다. <br />
-				2. 두개의 사진 중에 마음에 드는 사진을 고른다.</p>
+				2. 두 개의 사진 중 마음에 드는 사진을 고른다.</p>
 				</header>
 				<div class="live-swell" style="">
 				<div class="live-swell__pics">
@@ -132,9 +143,9 @@
 		
 	</div>
 	
-	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-5 pm-input-form" style="margin-top:100px;">
+	<div class="col pm-input-form col-xs-12 col-sm-6 col-md-6 col-lg-5 pm-input-form" style="padding-top: 10%">
 <br>
-<h2 align = "center"> 로그인 </h2>
+<h2 align = "center" style="font-weight:normal;"> 로그인 </h2>
 
 <br />
 
@@ -148,7 +159,7 @@
 			<span class="error_next_box" id="idMsg" style="display:none" role="alert"></span>
 		</div>
 	</div>
-	<div class = "form_field">
+	<div class = "form_field" style="padding-top: 10px;">
 		<div class="form_input">
 			<input name="userPass" class="form-control" id="userPwd" type="password" placeholder="비밀번호" >
 		</div>
@@ -162,7 +173,7 @@
 	<div align ="center"><span class="error_next_box" id = loginMsg style="display:none" role="alert"></span></div>
 	<br>
 	<div class="btns" align="center">
-	<button type="button" id="loginBtn" value="로그인" class="btn btn-primary">로그인</button>
+	<button type="button" id="loginBtn" value="로그인" class="btn btn-primary" style="background-color: white; color: #505050; border-style: 2px solid; border-color:#8ac5ff; font-weight: 200">로그인</button>
 	<br><br>
 	<p id="p1">아직 계정이 없으신가요? <a href="/pickme/views/user/UserJoinForm.jsp">회원가입</a></p>
 

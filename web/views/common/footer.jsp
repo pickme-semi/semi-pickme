@@ -47,7 +47,7 @@
 	        이용 약관 ~~
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">Close</button>
 	      </div>
 	    </div>
 	  </div>
@@ -58,13 +58,13 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLongTitle">개인정보 처리방침</h5>
+	        <h5 class="modal-title" id="exampleModalLongTitle" style="font-weight: bold;">개인정보 처리방침</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      <pre id= "terms">
+	      <pre id= "terms" style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">
  여러분을 환영합니다.
 Pick Me 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 픽미 서비스의 이용과 관련하여 픽미 서비스를 제공하는 뽑아조 주식회사(이하 ‘뽑아조’)와 이를 이용하는 픽미 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 픽미 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 
@@ -170,7 +170,7 @@ Pick Me 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감�
 		</pre>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">Close</button>
 	      </div>
 	    </div>
 	  </div>
@@ -181,18 +181,18 @@ Pick Me 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감�
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLongTitle">라이센스</h5>
+	        <h5 class="modal-title" id="exampleModalLongTitle" style="font-weight: bold;">라이센스</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	       	<strong>billboard.js(chart)</strong>
+	       	<strong style="font-size:12pt;">billboard.js(chart)</strong>
 	       	<hr />
-	       	<a target="blank" href="https://github.com/naver/billboard.js#license">상세보기</a>
+	       	<a target="blank" href="https://github.com/naver/billboard.js#license" style="font-size:11pt;">상세보기</a>
 	       	<hr />
 	       	<hr />
-	       	<p>Copyright (c) 2017 NAVER Corp.
+	       	<p style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">Copyright (c) 2017 NAVER Corp.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -215,10 +215,10 @@ THE SOFTWARE.</p>
 	       	<br />
 	       	<strong>bootstrap</strong>
 	       	<hr />
-	       	<a href="https://github.com/twbs/bootstrap/blob/v4.1.3/LICENSE">상세보기</a>
+	       	<a href="https://github.com/twbs/bootstrap/blob/v4.1.3/LICENSE" style="font-size:11pt;">상세보기</a>
 	       	<hr />
 	       	<hr />
-	       	<p>
+	       	<p style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">
 	       	The MIT License (MIT)
 
 Copyright (c) 2011-2018 Twitter, Inc.
@@ -246,10 +246,10 @@ THE SOFTWARE.
 	       	<br />
 	       	<strong>jquery</strong>
 	       	<hr />
-	       	<a href="https://jquery.org/license/">상세보기</a>
+	       	<a href="https://jquery.org/license/" style="font-size:11pt;">상세보기</a>
 	       	<hr />
 	       	<hr />
-	       	<p>
+	       	<p style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">
 	       	Note: For the purposes of this document, the term "Project" will refer to any JS Foundation project using the MIT license AND referencing this document in the header of the distributed Project code or Project website source code.
 
 link Source Code
@@ -275,7 +275,7 @@ For further information regarding JS Foundation licensing and intellectual prope
 	       	<br />
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size:10pt; font-family:'NANUMBARUNGOTHIC.TTF'">Close</button>
 	      </div>
 	    </div>
 	  </div>

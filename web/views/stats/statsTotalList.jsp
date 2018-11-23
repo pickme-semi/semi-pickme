@@ -59,10 +59,10 @@
 			      <th scope="col" colspan="3" class="text-center">픽 통계 검색</th>
 			    </tr>
 			  </thead>
-			<tbody>
+			<tbody >
 			<%-- <%int count = 5; %> --%>
 			<% for(int i = 0 ; i <list.size();i++){ %>
-			<tr class="table-primary">
+			<tr  >
 				<th scope="row"><%= i+1 %></th>
 				<td width="15%" align="center" >
 				<div class="tdDiv"><a href="#" onclick="goOneList(<%=list.get(i).getId()%>);" <%-- href="/pickme/statsOneList.st?pickno=<%=list.get(i).getId()%>" --%>> <%= list.get(i).getTitle() %> </a></div>

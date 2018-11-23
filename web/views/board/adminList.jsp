@@ -20,7 +20,7 @@
 <title>관리자 전용 QNA 페이지</title>
 <style>
 .btnTest{ background-color: white; border: 1px solid #DEE2E6; border-radius:0px;
-			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
+			width: 80px; height: 40px; font-size: 10pt; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -33,21 +33,21 @@
 		<%@ include file="../common/NotAdmin.jsp" %>
 	<% }else{ %>
 		<%@ include file="common/boardHeader.jsp" %>
-		<div class="pm-section col-xs-12 col-md-8">
-			<br><h1 style="font-size:28pt; font-weight:bold;">관리자 전용 QNA 페이지 </h1>
+		<div class="pm-section col-xs-12 col-md-8" style="width: 50%;">
+			<br><h1 style="font-size:24pt; font-weight:bold;">관리자 전용 QNA 페이지 </h1>
 			<br><br>
 			<% if( boardListQ.size() != 0){ %>
 			
 			<h3 style="font-size:24pt; font-weight:bold;"> Qusetion  </h3>
 				<table id = "boardList" class="table table-striped" style="text-align:center;  border-bottom: 1px solid #E6E6E6; font-weight:bold; ">
-				<thead style="background-color: rgb(250 250 250);">
+				<thead style="background-color: rgb(250 250 250); font-size:10pt;">
 					<th width="80px">No.</th>
 					<th width="403px">제목</th>
 					<th width="120px">작성자</th>
 					<th width="120px">등록일</th>
 				</thead>
 				<% for (int i = 0 ; i < boardListQ.size(); i++){ %>
-						<tr style="background-color: white;">
+						<tr style="background-color: white;font-size:10pt;">
 						<input type="hidden" value="<%= boardListQ.get(i).getId() %>">
 						<td><%=boardListQ.get(i).getId() %></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardListQ.get(i).getId()%>"><%=boardListQ.get(i).getTitle() %></a></td>
@@ -61,26 +61,26 @@
 				</table>
 				
 				<table align="center" >
-				<div class="col-md-12" align="center" >
+				<div class="col-md-12" align="center" style="padding-left: 30%">
 						<nav align="center" >
-							<ul class="pagination">
-								<li class="page-item">
-									<a class="page-link" href="#">previous</a>
+							<ul class="pagination" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">
+								<li class="page-item" >
+									<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">previous</a>
 								</li>
 								<li class="page-item">
-									<a class="page-link" href="#">1</a>
+									<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">1</a>
 								</li>
 								<li class="page-item">
-									<a class="page-link" href="#">2</a>
+									<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">2</a>
 								</li>
 								<li class="page-item">
-									<a class="page-link" href="#">3</a>
+									<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">3</a>
 								</li>
 								<li class="page-item">
-									<a class="page-link" href="#">4</a>
+									<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">4</a>
 								</li>
 								<li class="page-item">
-									<a class="page-link" href="#">last</a>
+									<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">last</a>
 								</li>
 							</ul>
 						</nav>
@@ -95,14 +95,14 @@
 			<% if( boardList.size() != 0){ %>
 			<h3 style="font-size:24pt; font-weight:bold;">Report</h3>
 			<table id = "boardList" class="table table-striped" style="text-align:center; border-bottom: 1px solid #E6E6E6; font-weight:bold;">
-				<thead style="background-color: rgb(250 250 250);">
+				<thead style="background-color: rgb(250 250 250); font-size: 10pt;">
 					<th width="80px">No.</th>
 					<th width="403px">제목</th>
 					<th width="120px">작성자</th>
 					<th width="120px">등록일</th>
 				</thead>
 				<% for (int i = 0 ; i < boardList.size(); i++){ %>
-						<tr style="background-color: white;">
+						<tr style="background-color: white; font-size: 10pt;" >
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></td>
@@ -118,24 +118,24 @@
 									<div class="list" align="center">
 						<div class="col-md-12" align="center">
 							<nav align="center">
-								<ul class="pagination">
+								<ul class="pagination" style="padding-left: 30%">
 									<li class="page-item">
-										<a class="page-link" href="#">previous</a>
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">previous</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="#">1</a>
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">1</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="#">2</a>
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">2</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="#">3</a>
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">3</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="#">4</a>
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">4</a>
 									</li>
 									<li class="page-item">
-										<a class="page-link" href="#">last</a>
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">last</a>
 									</li>
 								</ul>
 							</nav>

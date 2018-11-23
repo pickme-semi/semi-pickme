@@ -35,16 +35,16 @@
 	
 	
 	
-	<div class="pm-section col-xs-12 col-md-8" align="center">
+	<div class="pm-section col-xs-12 col-md-8" align="center" style="width: 50%">
 		<form id="insertForm" action="/pickme/insert.bo" >
 			
 			
 			<div >
-				<table class="table table-bordered">
+				<table class="table table-bordered" style="font-size:10pt;">
 				<tr>
-					<th id="wSet">카테고리</th>
+					<th id="wSet" style="padding-top: 20px;">카테고리</th>
 					<th>
-					<select name="category" id="category" class="form-control" style="border: none;">
+					<select name="category" id="category" class="form-control" style="border: none; font-size:10pt;">
 					<% if ( categoryList.size() != 0){ %>
 					<% for (int i = 0 ; i < categoryList.size(); i++){%>
 						<option value="<%=categoryList.get(i).getId()%>"> <%=categoryList.get(i).getConetent() %></option>
@@ -56,21 +56,21 @@
 				</tr>
 				
 				<tr>
-					<th id="wSet">제목</th>
-					<th><input type="text" placeholder="제목" id="title" name="title" class="form-control" required="required" style="border: none;"/>
+					<th id="wSet" style="padding-top: 20px;">제목</th>
+					<th><input type="text" placeholder="제목" id="title" name="title" class="form-control" required="required" style="border: none;font-size:10pt; padding-top: 10px;"/>
 				<p id="errorTitle" style="display:none;color:red;">제목을 입력하세요</p></th>
 				</tr>
 				
 				<tr>
-					<th id="wSet">내용</th>
-					<th><textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required" style="border: none;"></textarea>
+					<th id="wSet" style="padding-top: 20px;">내용</th>
+					<th><textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required" style="border: none; font-size:10pt;  padding-top: 10px;"></textarea>
 				<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p></th>
 				</tr>
 				
 				<!-- 신고-->
 				<% if(type.equals("report")){ %>
 				<tr>
-					<th id="wSet">신고 pick</th>
+					<th id="wSet" style="padding-top: 20px;">신고 pick</th>
 					<th><div class="divArea" align="left" >
 					<input type="text" value="<%=request.getParameter("pickid") %>" name="pickId" style="border: none;" readonly/>	
 				</div></th>

@@ -56,13 +56,13 @@
 	  <div class="container">
 	  <%if(user==null) {%>
 		  	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px; "></a>
+	        	<a class="navbar-brand" href="/pickme" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo1.png" width="240px" height="105px; "></a>
 	        </div>
 	        <div class="logo" style="width:33%" align="right">
 	        </div>
 	  <%}else{ %>
 	      	<div class="logo" style="width:33%">
-	        	<a class="navbar-brand" href="/pickme/pickmain.pm" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png"  width="240px" height="105px;"></a>
+	        	<a class="navbar-brand" href="/pickme/pickmain.pm" style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo1.png"  width="240px" height="105px;"></a>
 	        </div>
 			<div class="search" style="width:%" align="right">
 		        <div class="navbar-collapse" id="navbarsExample07" style="content: center;">

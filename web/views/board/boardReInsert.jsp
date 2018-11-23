@@ -31,21 +31,21 @@
 	<%@ include file="common/boardHeader.jsp" %>
 	
 	
-	
-<div class="pm-section col-xs-12 col-md-8" align="center">
+	<br><br><br>
+<div class="pm-section col-xs-12 col-md-8" align="center" style="width: 50%">
     <form id="insertForm" enctype="multipart/form-data">
         
     
-        
-        <table class="table table-bordered" style="text-align: center; font-weight:bold;">
+        <h2 style="font-size: 20pt; font-weight: bold; text-align: left;">답변 작성</h2>
+        <table class="table table-bordered" style="text-align: center; font-weight:bold; font-size: 10pt;">
          <thead class="thead-light">
         <tr>
-             <td id="name" style="width: 120px">카테고리 </td>
-             <td style="width: 160px"><span><%= b.getCategoryId() %></span></td>
-             <td id="name" style="width: 120px">글쓴이</td>
-             <td style="width: 160px"><span><%= b.getUserNo() %></span></td>  
-             <td id="name" style="width: 120px">작성일</td>
-             <td><span><%= b.getEnrollDate() %></span>
+             <td id="name" style="width: 12%">카테고리 </td>
+             <td style="width: 20%"><span><%= b.getCategory() %></span></td>
+             <td id="name" style="width: 12%">글쓴이</td>
+             <td style="width: 20%"><span><%= b.getUserName() %></span></td>  
+             <td id="name" style="width: 12%">작성일</td>
+             <td style="width: 20%"><span><%= b.getEnrollDate() %></span>
         </tr>
         
         <tr>
@@ -56,7 +56,7 @@
         </tr>							
         <tr> 
              <td colspan="6" class="answer" style="text-align: left;" >
-             <div class="inner" >            
+             <div class="inner" style="min-height: 200px">            
              <p id="textBox"><%= b.getContent() %></p>
              </div>
            	 </td>
@@ -70,7 +70,7 @@
 			
 		<div align="center">
 		<table class="table table-bordered">
-         <thead class="thead-light">		
+         <thead class="thead-light" >		
 			<textarea name="content" placeholder="내용" id="content" cols="30" rows="10" class="form-control" required="required"></textarea>
 				<p id="errorContent" style="display:none;color:red;">내용을 입력하세요</p>
 		</thead>

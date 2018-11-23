@@ -25,10 +25,10 @@
 
 <style>
 .btnTest{ background-color: white; border: 1px solid #DEE2E6; border-radius:0px;
-			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
+			width: 80px; height: 40px; font-size: 11pt; font-weight:bold; }
 			
 #testli{ background-color: white; border-radius:0px; text-align:center;
-		 font-size: 14px; font-weight:bold;  }
+		 font-size: 10px; font-weight:bold;  }
 
 .testa{text-align: center; width: 50px;}
 
@@ -44,10 +44,10 @@
 	<%@ include file="../common/NotLogin.jsp" %>
 <% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
-	<div class="pm-section col-xs-12 col-md-8">
-		<h1 style="font-size:42pt; font-weight:bold;"><%= (type.equals("report"))? "Report" : "Question" %></h1>
+	<div class="pm-section col-xs-12 col-md-8" style="width: 50%">
+		<% if(type.equals("report")){ %><h1 style="font-size:36pt; font-weight:bold;">Report</h1><%} %>
 		
-		
+
 		<!-- 질문일때만 자주하는 질문 보여주기 -->
 		<% if(!type.equals("report")){ %>
 		<br><br><br>
@@ -56,9 +56,9 @@
 				<table id = "commonBoardList" class="table table-striped" style="text-align:center;  border: 1px solid white; font-weight:bold;">
 				<% if( commonBoardList.size() != 0){ %>
 					<% for(int i = 0; i < commonBoardList.size(); i++) { %>
-						<tr class="" style="background-color: white" data-toggle="collapse" data-target="#demo<%=i%>">
+						<tr class="" style="background-color: white" data-toggle="collapse" data-target="#demo<%=i%>" >
 							<input type="hidden" value="<%= commonBoardList.get(i).getId() %>">
-							<td class=""><%=commonBoardList.get(i).getTitle() %></td>
+							<td class="" style="font-size: 10pt;"><%=commonBoardList.get(i).getTitle() %></td>
 													<tr>
 							<td>
 								<div id="demo<%=i%>" class="collapse">
@@ -74,15 +74,16 @@
 						</tr>
 						</tr>
 						
+						
 					<% } %>
 				<% } %>
 				</table>
-			</div>
+			</div><br><br>
 		<% } %>
 		
-		<br><br>
+		<% if(!type.equals("report")){ %><p class="h3" style="font-size: 18pt; font-weight:bold;">문의 내역</p><%} %>
 		<table id = "boardList" class="table table-striped" style="text-align:center;  border-bottom : 1px solid #E6E6E6; font-weight:bold;">
-			<thead class="thead-light">
+			<thead class="thead-light" style="font-size: 10pt;">
 				<tr>
 					<th width="80px">No.</th>
 					<th width="403px">제목</th>
@@ -94,7 +95,7 @@
 		<% if( boardList.size() != 0){ %>
 			<% for (int i = 0 ; i < boardList.size(); i++){ %>
 					<% if(type.equals("report")){ %>
-						<tr style="background-color: white;">	
+						<tr style="background-color: white; font-size: 10pt;">	
 						<% if(user.getUserId().equals("admin") || (user.getUserNo() == boardList.get(i).getUserNo())){ %>
 							<input type="hidden" value="<%= boardList.get(i).getId() %>">
 							<td ><%=boardList.get(i).getId()%></td>
@@ -106,7 +107,7 @@
 						<% } %>
 						</tr>
 					<% } else { %>
-						<tr style="background-color: white; ">
+						<tr style="background-color: white; font-size: 10pt;">
 						<input type="hidden" value="<%= boardList.get(i).getId() %>">
 						<td><%=boardList.get(i).getId()%></td>
 						<td><a href="/pickme/selectOne.bo?id=<%=boardList.get(i).getId()%>"><%=boardList.get(i).getTitle() %></a></td>
@@ -124,45 +125,47 @@
 		<% } %>
 			</tbody>
 		</table>
-		<div class="row" align="center">
+		<div class="row" >
 			<div class="col">
-					<nav style="margin-left:40%;margin-right:60%">
+					<nav style="padding-right: 200px">
 						<ul class="pagination">
-							<li class="page-item">
+							<li class="page-item" style="border: 1px solid white">
 							<% if(currentPage <= 1){ %>
-								<a class="page-link" href="#" readonly>previous</a>
+								<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold"  readonly>previous</a>
+								
 							<% }else{ %>							
-								<a class="page-link" onclick="location.href='/pickme/list.bo?bType=<%=type%>&currentPage=<%=currentPage - 1 %>'">previous</a>
+								<a class="page-link" onclick="location.href='/pickme/list.bo?bType=<%=type%>&currentPage=<%=currentPage - 1 %>'" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">previous</a>
 							<% } %>
 							</li>
 							<% for (int p = startPage; p <= endPage; p++){ 
 									if(p == currentPage){
 							%>
-									<li class="page-item">
-										<a class="page-link" href="#" readonly><%=p %></a>
+									<li class="page-item" style="border: 1px solid white">
+										<a class="page-link" href="#" style="border: 1px solid white; color: #ff82bb; font-size: 11pt; font-weight: bold" readonly><%=p %></a>
 									</li>
+									
 							<% 		}else{ %>
-									<li class="page-item">
+									<li class="page-item" style="border: 1px solid white; color: #ff82bb; font-size: 11pt; font-weight: bold">
 										<a class="page-link" onclick="location.href='/pickme/list.bo?bType=<%=type%>&currentPage=<%= p %>'"><%=p %></a>
 									</li>										
 							<% 		} %>
 								
 							<% } %>
-									<li class="page-item">
-										<a class="page-link" href="#">last</a>
+									<li class="page-item" style="border: 1px solid white">
+										<a class="page-link" href="#" style="border: 1px solid white;color: #ff82bb; font-size: 11pt; font-weight: bold">last</a>
 									</li>
 						</ul>
 					</nav>
 					</div>
 			</div>
 		
-		
+		<br><br>
 		<div align="center">
 			<% if(!type.equals("report")){ %>
 				<button class="btnTest" onclick="boardInsert();">질문하기</button>
 			<% } %>
 		</div>
-	</div>
+	</div><br><br><br>
 	<%@ include file="../common/footer.jsp" %>
 	
 	<script>
@@ -177,6 +180,7 @@
 			}).click(function(){
 				//var id = $(this).parent().find("input").val();
 				//location.href="<%=request.getContextPath()%>/selectOne.bo?id=" + id;
+				
 			});
 		});
 		

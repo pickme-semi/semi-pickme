@@ -20,7 +20,7 @@
 .areafont{text-align: center; font-weight:bold;}
 #testarea{background: #E9ECEF;}
 .btnTest{ background-color: white; border: 1px solid #DEE2E6; border-radius:0px;
-			width: 80px; height: 40px; font-size: 14px; font-weight:bold; }
+			width: 80px; height: 40px; font-size: 10pt; font-weight:bold; }
 
 
 </style>
@@ -32,11 +32,11 @@
 <% }else{ %>
 	<%@ include file="common/boardHeader.jsp" %>
 	
-	<div class="pm-section col-xs-12 col-md-8">
-		
+	<div class="pm-section col-xs-12 col-md-8" style="width: 50%">
+		<br><br>
 		<table class="table table-bordered">
 				<thead class="thead-light">
-					<tr class="areafont">
+					<tr class="areafont" style="font-size: 10pt;">
 					
 					<!-- w 733 -->
 					
@@ -47,13 +47,13 @@
 						<th width="100px">작성일</th>
 						<th id = "sub" width="150px"><span><%= b.getEnrollDate() %></span></th>							
 					</tr>
-					<tr class="areafont">
-						<th >문의 제목</th>
+					<tr class="areafont" style="font-size: 10pt; ">
+						<th>문의 제목</th>
 						<th id = "sub" colspan="5"><span><%= b.getTitle() %></span></th>
 					</tr>
 				</thead>
 				<tr> 
-					<td colspan="6" class="answer" style="height:300px; font-weight:bold;">
+					<td colspan="6" class="answer" style="height:300px; font-weight:bold; font-size: 10pt;">
 						<div class="inner">
 							<p id="content" style="padding: 10px"><%= b.getContent() %></p>
 						</div>
@@ -62,12 +62,12 @@
 		</table>
 		
 	
-			<% if(ba != null){ %>
+			<% if(ba != null){ %><br><br>
 		<table class="table table-bordered" id="fontColor">
-				<tr class="areafont">
-					<td colspan="6" align="center">답변</td>
+				<tr class="areafont" style="font-size: 10pt;">
+					<td colspan="6" align="center" style="border: 1px solid white; border-bottom: 1px solid #DEE2E6; font-size: 12pt">답변</td>
 				</tr>
-				<tr class="areafont">		
+				<tr class="areafont" style="font-size: 10pt;">		
 					<td width="100px" id="testarea">담당자</td>
 					<td width="300px"><span><%= ba.getUserName() %></span>
 									
@@ -75,7 +75,7 @@
 					<td ><span><%= ba.getEnrollDate() %></span>
 
 				</tr>
-				<tr> 
+				<tr style="font-size: 10pt;"> 
 					<td colspan="6" class="answer" >
 					<div class="inner" style="padding: 10px; font-weight:bold;">
 					<p id="content"><%= ba.getContent() %></p>
@@ -92,7 +92,7 @@
 			<% } %>
 			</tbody>
 			
-			
+		<br>	
 		<div align="center">
 			
 			<% if(type.equals("admin")){ %>
@@ -111,7 +111,7 @@
 			
 		</div>
 	</div>
-	
+	<br><br><br>
 	<%@ include file="../common/footer.jsp" %>
 	
 	<script>

@@ -64,18 +64,16 @@ header.board{
 	  <div class="container" >
 	  <%if(user==null) {%>
 		  <div class="login" align="center" id="test">
-		  	<div class="logo" style="width:33%">
+		  	<div class="logo" style="width:240px">
 	        	<a class="navbar-brand" href="/pickme" 
-	        	style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px;"></a>	
-	        </div>
+	        	style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px;"></a><a style="padding-top:105px">고객센터</a></div>
+	        	<div style="text-align: left; padding-right: 200px; font-weight: bold; padding-top: 95px; font-size:14pt"><a>&nbsp;고객센터</a></div>
 		  </div>
 	  <%}else{ %>
-	      	<div class="logo" style="width:33%" id="test">
+	      	<div class="logo" style="width:240px" id="test">
 	        	<a class="navbar-brand" href="/pickme/pickmain.pm" 
-	        	style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px;"></a>
-	        	
-	        	
-	        </div>
+	        	style="padding-top: 15px; font-weight: bold; font-size:12pt;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px;"></a></div>
+	        <div style="text-align: left; padding-right: 200px; font-weight: bold; padding-top: 95px; font-size:14pt"><a>&nbsp;고객센터</a></div>
 			<div class="search" style="width:33%">
 
 	        </div>
