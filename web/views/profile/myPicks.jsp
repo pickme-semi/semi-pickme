@@ -194,7 +194,15 @@ int point = (Integer)request.getAttribute("point");
 				data :  {
 					uno : $('#getNo').val()
 				},success : function(data){
-					$('.comment').val(data);
+					if(data == "null" ){
+                        
+                        $('.comment').attr("type","text");
+                     }
+                     
+                     else{
+                     $('.comment').attr("type","text");
+                     $('.comment').val(data);
+                     }
 				}
 				
 			});

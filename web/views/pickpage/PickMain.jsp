@@ -260,8 +260,8 @@ position:absolute;
         
         <% //유저 사진 %>   
         <div class="new">
-        <% if(user.getProfile() != null) {%>
-		     <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr"/>
+        <% if(pData.getProfile() != null) {%>
+		     <img src="/pickme/resources/profileImage/<%= pData.getProfile() %>" alt="Me" class="rounded-circle attr"/>
       	<% }else { %>
 	      	<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr" id="profile">
       	<% } %>
