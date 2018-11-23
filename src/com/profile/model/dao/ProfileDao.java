@@ -419,7 +419,7 @@ public class ProfileDao {
 				user.setUserId(rset.getString("ID"));
 				user.setUserEmail(rset.getString("EMAIL"));
 				user.setUserName(rset.getString("NAME"));
-				user.setGender(rset.getString("PROFILE"));
+				user.setProfile(rset.getString("PROFILE"));
 				
 			}
 			
