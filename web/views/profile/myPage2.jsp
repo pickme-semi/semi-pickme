@@ -9,7 +9,7 @@
 
 	.nav>li>a{
 	
-		font-size: 14px;
+		font-size: 12px;
 	    color: black;
 	    text-transform: uppercase;
 	    text-decoration: none;
@@ -34,7 +34,7 @@
 	}
 	.nav>li>a.active {
 	
-		border-bottom:5px solid #ffb8d8;
+		border-bottom:5px solid pink;
 		
 	}
 	
@@ -53,14 +53,14 @@
 	  </ul>
 	<hr />
 	<% if( user != null) { %>
-<div class = "outer pm-section"><br><br>
-<h2 align = "center" style="font-weight:bold; "> 비밀번호 변경  </h2>
+<div class = "outer pm-section">
+<h2 align = "center"> 비밀번호 변경  </h2>
+<br />
 <ul class="content">
 <li>다른 아이디/사이트에서 사용한 적 없는 비밀번호</li>	
 <li>이전에 사용한 적 없는 비밀번호가 안전합니다.</li>	
 </ul>		
 <br />
-<br>
 
 <form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate2.au?uno=<%=user.getUserNo() %>">
 	<table align="center">
@@ -70,13 +70,13 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td style="font-weight:bold; font-size:11pt;">새 비밀번호 &nbsp;&nbsp;</td>
-		<td><input type="password" class="form-control" id="userPwd" name="userPass" placeholder="" style="width: 260px"></td>
+		<td></td>
+		<td><input type="password" class="form-control" id="userPwd" name="userPass" placeholder="새 비밀번호"></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td style="font-weight:bold; font-size:11pt;">새 비밀번호 확인 &nbsp;&nbsp;</td>
-		<td><input type="password" class="form-control" id="userPwd2" name="userPass2" placeholder=""></td>
+		<td></td>
+		<td><input type="password" class="form-control" id="userPwd2" name="userPass2" placeholder="새 비밀번호 확인"></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -88,12 +88,9 @@
 	</form>
 	</div>
 	<br />
-
 		<div align="center">
-			<button onclick="uComplete();" class="btn btn-primary" style="background-color: white; color: #505050; border-style: 2px solid; border-color:#8ac5ff;
-			font-weight: bold;">수정 완료</button>
-			<button onclick="uDelete();" class="btn btn-danger" style="background-color: white; color: #505050; border-style: 2px solid; border-color:#ff82bb;
-			font-weight: bold;">회원 탈퇴</button>
+			<button onclick="uComplete();" class="btn btn-primary">수정 완료</button>
+			<button onclick="uDelete();" class="btn btn-danger">회원 탈퇴</button>
 		</div>
 	<br />
 
@@ -105,7 +102,6 @@
 	}
 	%>
 	
-	<br><br>
 	<%@ include file="../common/footer.jsp" %>
 	
 	<script>

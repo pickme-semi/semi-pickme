@@ -14,17 +14,6 @@
 
 <title>User Page</title>
 <style>
-
-@font-face {
-	font-family : 'NANUMBARUNGOTHIC.TTF';
-	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");
-	
-
-* {	font-family : 'NANUMBARUNGOTHIC.TTF';
-	color: #505050;
-	}
-	
-	
 	.attr {
 	
 		height : 150px;
@@ -50,7 +39,7 @@
     overflow: hidden;
 	}
 	
-	#userp img {
+	img {
 	    width: 100%;
 	    height : 100%;
 	    object-fit: contain;
@@ -69,11 +58,7 @@
 			text-align : center;
 			padding-top : 5px;
 		}
-		
-	
 </style>
-
-
 
 </head>
 <body>
@@ -83,14 +68,14 @@
 <% }else { %>
 	<%@ include file="../common/header.jsp" %>
 	
-	<div class="col-md-12 text-center user" id="userp">
+	<div class="col-md-12 text-center user">
 	 
 	<% if(users.getProfile() != null) {%>
 	  <img src="/pickme/resources/profileImage/<%= users.getProfile() %>" alt="Me" class="rounded-circle attr">
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
-	<h2 class=""><%= users.getUserId() %></h2>
+	<h2><%= users.getUserId() %></h2>
 	<input type="text" class="comment" value=""/>
 	<br />
 	<button id="fbtn" value="<%=users.getUserNo() %>" class="btn btn-danger">follow</button>
@@ -105,7 +90,7 @@
 	
 	<section class="col-xs-12 col-md-12"  >
 	 
-	 <div class="live-swell xs-12 container" id="userp">
+	 <div class="live-swell xs-12 container" >
 	 <div class="row">
 	 
 	 <% if(!userPick.isEmpty()) { %>

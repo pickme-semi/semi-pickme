@@ -43,10 +43,11 @@
 
 #test a{ text-align: center; 		 
 		 font-size: 14px;
-		 font-color: #505050; }
-
-.navbar-brand img{ width:240px; height:105px;}
-
+		 font-color: #505050;
+		 
+		 
+		 
+		 }
 </style>
 </head>
 <body>
@@ -86,7 +87,7 @@
 			<div class="search" style="width:%" align="right">
 		        <div class="navbar-collapse" id="navbarsExample07" style="content: center;">
 		          <form class="form-inline my-2 my-md-0" style="margin-left:auto;margin-right:auto; padding-left: 20%;" action="/pickme/search.se" method="get">
-		            <input class="form-control" type="text" name="userSearch" placeholder="@user #category" aria-label="Search" style="width: 350px; border: 1px solid gray">
+		            <input class="form-control" type="text" name="userSearch" placeholder="@user #category" aria-label="Search" style="width: 350px;">
 		          </form>
 		        </div>
 	        </div>

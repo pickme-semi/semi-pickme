@@ -38,11 +38,6 @@
 	
 	table tr {
 		font-size : 15px;
-		
-	}
-	
-	table td{
-		padding-bottom: 20px;
 	}
 	
 	.outer2{
@@ -57,7 +52,7 @@
 	
 	.nav>li>a{
 	
-		font-size: 14px;
+		font-size: 12px;
 	    color: black;
 	    text-transform: uppercase;
 	    text-decoration: none;
@@ -67,7 +62,7 @@
 	
 	.nav>li>a.active {
 	
-		border-bottom:5px solid #ffb8d8;
+		border-bottom:5px solid pink;
 		
 	}
 </style>
@@ -92,25 +87,23 @@
 
 <% if( user != null) { %>
 <div class = "outer">
-<i class="fas fa-reply fa-3x" style="padding-left: 30px;" ></i>
-<h2 align = "center" style="font-weight:bold;  ">회원 정보 </h2>
+<i class="fas fa-reply fa-3x"></i>
+<h2 align = "center">회원 정보  </h2>
 <br />
 
 <form id = "updateform"  method="post" action="<%= request.getContextPath() %>/mPageUpdate.au?uno=<%=user.getUserNo() %>"
 encType="multipart/form-data">
-	<table align="center" style="font-weight:bold;">
+	<table align="center">
 	<tr>
 		<td width="120px"> 아이디 </td>
 		<td id ="userId" ><%= user.getUserId() %></td>
 		<td><!--   <button id="idCheck"> 중복확인</button> --></td>
 	</tr>
-	
 	<tr>
 		<td> 이름 </td>
 		<td id="userName"><%= user.getUserName() %></td>
 		<td></td>
 	</tr>
-	
 	<tr>
 		<td> 이메일 <br /></td>
 		<td><input type="email" class="form-control" id="userEmail" name="userEmail" onchange="resetEmail();" required="required" value="<%= user.getUserEmail()%>"/></td>
@@ -134,8 +127,8 @@ encType="multipart/form-data">
 	<tr>
 		<td> 성별 <br /></td>
 	
-		<td><input type="radio" name="gender" value="M">&nbsp;남 &nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="gender" value="F">&nbsp;여
+		<td><input type="radio" name="gender" value="M">남
+			<input type="radio" name="gender" value="F">여
 		</td>
 		<td></td>
 	</tr>
@@ -149,7 +142,7 @@ encType="multipart/form-data">
 	<tr>
 		<td> 회원 유형 <br /></td>
 		<td>
-		<input type="radio" name="userType" value="TYP001" /> 일반&nbsp;&nbsp;
+		<input type="radio" name="userType" value="TYP001" /> 일반
 		<input type="radio" name="userType" value="TYP003" /> 기업
 		</td>
 		<td></td>
@@ -175,8 +168,7 @@ encType="multipart/form-data">
 </div>
 <br />
 	<div align="center">
-		<button onclick="uComplete();" class="btn btn-primary" style="background-color: white; color: #505050; border-style: 2px solid; border-color:#8ac5ff;
-			font-weight: bold;">수정 완료</button>
+		<button onclick="uComplete();" class="btn btn-primary">수정 완료</button>
 		
 	</div>
 
@@ -189,7 +181,7 @@ encType="multipart/form-data">
 		request.getRequestDispatcher("../views/common/errorPage.jsp").forward(request, response);
 	}
 	%>
-<br><br>
+
 <%@ include file="../common/footer.jsp" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
