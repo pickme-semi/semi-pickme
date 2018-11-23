@@ -44,8 +44,10 @@ public class StatsTotalList extends HttpServlet {
 			PickService ps = new PickService();
 			list = ps.selectList();
 			// 제목이랑 번호를 뿌려줘라.........
-			response.getWriter().println(list);
+			// response.getWriter().println(list);
+			
 			session.setAttribute("list", list);
+			
 			response.sendRedirect("views/stats/statsTotalList.jsp");
 		}
 	}

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="/pickme/resources/js/jquery-3.3.1.min.js"></script>
-<title>회원가입_[Pick Me]</title>
+<title>회원가입</title>
 <style>
 	.outer{
 		width : auto;
@@ -79,7 +79,7 @@
 	<div class="btns" align="center">
 	<button type="button" id= "btnJoin" class="btn btn-primary" > 가입하기 </button>
 	<div class="row">
-		<p class="col text-center">가입하면 Pickme의 <a href="#">약관</a>, <a href="#">데이터 정책 및 쿠키 정책에</a> 동의하게 됩니다.</p>
+		<p class="col text-center">가입하면 Pickme의 <strong><a href="#" data-toggle="modal" data-target="#modal2">약관</a></strong>에 동의하게 됩니다.</p>
 	</div>
 	<br><br>
 	<p id="p1">이미 계정이 있으신가요? <a href="/pickme/views/user/UserLoginForm.jsp">로그인</a></p>

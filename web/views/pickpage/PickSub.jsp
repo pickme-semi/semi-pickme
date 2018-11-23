@@ -86,6 +86,44 @@ body {
 	border: 2px solid lightskyblue;
 }
 
+.thetagoLeft{
+   opacity : 0.6;
+   position:relative;
+   
+
+}
+.hojitextLeft{
+position:absolute;
+      top:40%;
+    left:28%;
+   font-size: xx-large;
+   display:none;
+
+}
+.thetagoRight{
+   opacity : 0.6;
+   position:relative;
+
+}
+
+.hojitextRight{
+position:absolute;
+    top:40%;
+    left:28%;
+   display:none;
+ font-size: xx-large;
+}
+.alphaLeftColor{
+   color : #ff82bb;
+   font-weight:bold;
+   font-size: 200%;
+}
+.alphaRightColor{
+   color :  #ff82bb;
+   font-weight:bold;
+   font-size: 200%;
+}
+
 /* pick 게시글 내용 말풍선 스타일. */
 .arrow_box {
 	position: relative;
@@ -177,7 +215,7 @@ textarea{
 	      	<input type="hidden" id="selectUserNo" value="<%= u.getUserNo() %>"/> 
 	      	<input type="hidden" id="pickid" name="pickid"  class="current" value="<%= p.getId() %>"/>
 	      	<b>
-	      		<a id="statsBtn" href="#" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
+	      		<a id="statsBtn" href="/pickme/statsOneList.st?pickno=<%= p.getId() %>" style="color : none; text-decoration : none;" data-toggle="tooltip" data-placement="right" title="게시물 통계">
 		    		 <i class="fas fa-chart-bar fa-2x"></i>
 				</a>
 			</b>
@@ -204,90 +242,112 @@ textarea{
 		<div class="container col-xs-12" >	 
 	   <div class="mySlides">          
 	        <div class="row col-xs-12" align="center">
+		
 		<div class="col-md-6 col-xs-6" align="center" style="background-color : aliceblue" >
-			<img id="leftPick" onerror="imgError(this);" 
+			
+			<img class="aaLeft "id="leftPick" onerror="imgError(this);" 
 			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=p.getSelect_1() %>" 
-			style="width:100%" onclick="checkNumber(<%=p.getId() %>);"  />
-		</div>	
+			style="width:100%" onclick="checkNumber(<%=p.getId() %>);hojiTestLeft();"  />
+		
+		<div class="hojitextLeft" >
+         <p class ="alphaLeftColor" id="leftP"></p></div>
+      
+      </div>   
+		
+		
 		<div class="col-md-6 col-xs-6" align="center" style="background-color : aliceblue"> 
-			<img id="rightPick" 
+			
+			<img class="aaRight "id="rightPick" 
 			src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=p.getSelect_2() %>" 
-			style="width:100%"onclick="checkNumber(<%=p.getId() %>);"/>
-		</div>
+			style="width:100%"onclick="checkNumber(<%=p.getId() %>);hojiTestRight();"/>
+		
+		<div class="hojitextRight" >
+         <p class ="alphaRightColor" id="rightP"></p></div>
+         </div>	
 		</div> 
 	    </div>
 	  </div>
-	  	 <script>
-	 var checkN;
-	 function checkNumber(a)
-		{
-			checkN =a;
-			console.log('%d는 숫자 %d는 다음숫자', a, checkN);
-		}	
-	 	var countLeft = 1;
-	 	var countRight =2;
-		// img의 id에 pick 있으면 선택하기 
-	 $('img[id^="leftPick"]').click(function(){
-		 console.log("수정값"+checkN);
-		    alert("왼쪽클릭");
-		});
-	 $('img[id^="leftPick"]').click(function(){
-			$.ajax({
-				url : "/pickme/pickresult.pr",
-				type : "get",
-				data : {
-					selectUserNo : $('#selectUserNo').val(),
-					resultPickId : checkN,
-					selectResult : countLeft
-					
-				}, success : function(data){
-					// 선택한후 몇%의 값인지 우선 전달완료
-					console.log("데이터 전달 성공!"+data);
-					
-					// 게시글 내용도 같이 추가해야 함
-					// 예시 : $('.caption-container p').text(data.content);
-					
-				}, error :  function(request, status, error) {
-					console.log("실패!!!");
-					console.log(request);
-					console.log(status);
-					console.log(error);
-				}, complete : function(){
-					console.log("무조건 실행하는 함수");
-				}
-			});
-		});
-	 $('img[id^="rightPick"]').click(function(){
-		 console.log("수정값"+checkN);
-		    alert("오른쪽클릭");
-		});
-	 $('img[id^="rightPick"]').click(function(){
-			$.ajax({
-				url : "/pickme/pickresult.pr",
-				type : "get",
-				data : {
-					selectUserNo : $('#selectUserNo').val(),
-					resultPickId : checkN,
-					selectResult : countRight
-					
-				}, success : function(data){
-					// 선택한후 몇%의 값인지 우선 전달완료
-					console.log("데이터 전달 성공!"+data);
-					
-					// 게시글 내용도 같이 추가해야 함
-					// 예시 : $('.caption-container p').text(data.content);
-					
-				}, error :  function(request, status, error) {
-					console.log("실패!!!");
-					console.log(request);
-					console.log(status);
-					console.log(error);
-				}, complete : function(){
-					console.log("무조건 실행하는 함수");
-				}
-			});
-		});
-	 </script>
+ <script>
+    var checkN;
+    var index;
+    function checkNumber(a, i)
+      {
+        index = i;
+         checkN =a;
+      }   
+       var countLeft = 1;
+       var countRight =2;
+    $('img[id^="leftPick"]').click(function(){
+         $.ajax({
+            url : "/pickme/pickresult.pr",
+            type : "get",
+            data : {
+               selectUserNo : $('#selectUserNo').val(),
+               resultPickId : checkN,
+               selectResult : countLeft
+               
+            }, success : function(data){
+               leftResult = "♥ "+data+"%";
+               $('#leftP').text(leftResult);
+               
+            }, error :  function(request, status, error) {
+               console.log("실패!!!");
+               console.log(request);
+               console.log(status);
+               console.log(error);
+            }, complete : function(){
+               console.log("무조건 실행하는 함수");
+            }
+         });
+      });
+    $('img[id^="rightPick"]').click(function(){
+         $.ajax({
+            url : "/pickme/pickresult.pr",
+            type : "get",
+            data : {
+               selectUserNo : $('#selectUserNo').val(),
+               resultPickId : checkN,
+               selectResult : countRight
+               
+            }, success : function(data){
+                console.log("데이터 전달 성공!"+data);
+                 rightResult = "♥ "+data+"%";
+                 console.log("right값이 나오는지 봐보자 ="+rightResult);
+                 $('#rightP').text(rightResult);
+                 
+               
+               // 게시글 내용도 같이 추가해야 함
+               // 예시 : $('.caption-container p').text(data.content);
+               
+            }, error :  function(request, status, error) {
+               console.log("실패!!!");
+               console.log(request);
+               console.log(status);
+               console.log(error);
+            }, complete : function(){
+               console.log("무조건 실행하는 함수");
+            }
+         });
+      });
+      
+      
+               function hojiTestLeft(){
+                   var aaLeft = document.getElementsByClassName("aaLeft");
+                   var hojitextLeft = document.getElementsByClassName("hojitextLeft");
+                   hojitextLeft[0].style.display = "block";
+                   aaLeft[0].className += " thetagoLeft";
+
+
+                }
+                function hojiTestRight(){
+                   var aaRight = document.getElementsByClassName("aaRight");
+                   var hojitextRight = document.getElementsByClassName("hojitextRight");
+                   hojitextRight[0].style.display = "block";
+                   aaRight[0].className += " thetagoRight";
+
+                }
+                
+    </script>
 	  
 	  
 	  

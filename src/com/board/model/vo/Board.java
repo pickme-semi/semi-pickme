@@ -19,7 +19,16 @@ public class Board implements Serializable{
 	private int pickId;
 	private String type;
 	private String userName;
+	private String category;
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public Board() {
 		super();
 	}
@@ -152,6 +161,7 @@ public class Board implements Serializable{
 	public String toString() {
 		return "Board [id=" + id + ", title=" + title + ", content=" + content + ", enrollDate=" + enrollDate
 				+ ", status=" + status + ", categoryId=" + categoryId + ", userNo=" + userNo + ", pickId=" + pickId
-				+ ", type=" + type + ", name="+ userName + "]";
+				+ ", type=" + type + ", userName=" + userName + ", category=" + category + "]";
 	}
+	
 }

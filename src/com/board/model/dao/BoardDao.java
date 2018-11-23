@@ -236,6 +236,7 @@ public class BoardDao {
 				b.setUserNo(rset.getInt("USER_NO"));
 				b.setStatus(rset.getString("STATUS"));
 				b.setUserName(rset.getString("NAME"));
+				b.setCategory(rset.getString("CATEGORY"));
 			}
 					
 			

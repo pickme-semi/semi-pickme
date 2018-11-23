@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>아이디 찾기</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/pickme/resources/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 	.outer{
 		width : auto;
 		height : auto;
-		background : mistyrose;
+		background : ;
 		padding : 10px;
 		margin-left : auto;
 		margin-right : auto;
@@ -63,7 +63,7 @@
 		</p>
 		<a href="/pickme/views/user/UserLoginForm.jsp">로그인</a>
 		/
-		<a href="/pickme/views/user/UserJoinForm.jsp">가입</a>
+		<a href="/pickme/views/user/UserJoinForm.jsp">회원가입</a>
 	</div>
 	</div>
 </form>

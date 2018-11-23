@@ -295,7 +295,7 @@ encType="multipart/form-data">
 		 
 		$('#imageUpload').hide();
 		
-		$('img').click(function(){
+		$('img#profileImage').click(function(){
 			
 			$('#profile').click();
 			

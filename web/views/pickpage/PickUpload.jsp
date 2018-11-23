@@ -144,28 +144,32 @@
 }
 
 #upfile1 {	
-	max-width: 70%;
+	max-width: 30%;
 	width:50%;
 	height:50%;
 	max-height : 70%;	
-	border: 1px solid rgb(0, 188, 173)	
+	
 }
 
 #upfile2 {
 	
-	max-width: 70%;
+	max-width: 30%;
 	width:50%;
 	height:50%;
 	max-height : 70%;	
-	border: 1px solid rgb(0, 188, 173)
+	
 }
 
 .pickform {
-	background: rgb(213, 255, 252);
+	
 }
 
 div {
 border: none;
+}
+
+.tdset td{
+	padding-bottom: 20px;
 }
 
 
@@ -186,41 +190,64 @@ border: none;
 	<% if(session.getAttribute("user") != null) { %>
 	<div class="outer" align="center" >
 		<br>
-		
+		<br><br>
 
 		
-		<div class="pickform col-md-8 col-xs-12">
+		<div class="pickform col-md-8 col-xs-12"  align="center">
 		
 		
-			<div class="row col-md-12 col-xs-12" align="center" >				
-				<div class="col-md-6" id="upfile1" >
+			<div class="row col-md-12 col-xs-12" align="center" id="pickimg">	
+						
+				<div class="col-md-6" id="upfile1"  align="center" style="margin-left: 20%">
 			<img onerror="imgError(this);" alt="upload1" id="pick1" src="<%= request.getContextPath() %>/resources/icons/upload.png" />
 			</div> 
-				<div class="col-md-6" id="upfile2" >
+				<div class="col-md-6" id="upfile2"  align="center" >
 			<img onerror="imgError(this);" alt="upload2" id="pick2" src="<%= request.getContextPath() %>/resources/icons/upload.png" />
 				</div>
 			</div>
 		
 		
-		<br>
-		<h2 align="center">Pick 올리기</h2>
+		<br><br>
+		<h2 align="center" style="font-size:24pt; font-weight: bold;">Pick 올리기</h2>
 			<form name = "uploadpick" id="uploadpick" action="<%= request.getContextPath() %>/pickup.pm" 
 			method="post" encType="multipart/form-data">
 			
-				<table>
+				<table class="tdset" style="font-size: 12pt; font-weight: bold;">
 					<tr>
-						<td>제목</td>
-						<td colspan="3"><input class="form-control" type="text"
+						<td>제목 &nbsp;</td>
+						<td colspan="3" width="350px"><input class="form-control" type="text"
 							style="width: 100%; height: 100%;" name="title" required="required"></td>
 					</tr>
 					<tr>
-						<td>작성자 </td>
-						<td colspan="3"> 
-						<%= u.getUserName() %>
-							 <input type="hidden" name="userId"
+						<td>작성자 &nbsp;</td>
+						<td colspan="3"> <%= u.getUserName() %><input type="hidden" name="userId"
 							value="<%= u.getUserNo() %>" />																					
 						</td>
 					</tr>
+
+					<tr class="form-group">
+						<td>내용 &nbsp;</td>
+						<td colspan="3" height="180px">
+						<textarea class="form-control"  name="content" style= "width: 100%; height: 100%;" 
+						required="required" ></textarea>
+						</td>
+					</tr>
+					<tr class="form-group">
+						<td><label>마감일 설정 &nbsp;</label></td>
+						<td><input class="form-control" type="date" id="dday" name="ddate" required="required"></td>
+					</tr>
+					<tr class="form-group">
+						<td > 카테고리 <br /></td>
+						<td style="width : ">		
+						<select class="form-control interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
+						style= "width:" > 
+						<% for(int i=0; i< category.size(); i++) {%>
+				  			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
+				  		<% } %> 
+						</select>
+						</td>
+					</tr>
+					
 					<tr>
 						<!-- <td>첨부파일</td> -->
 						<td colspan="3"><input type="file" name="pick1" id="up1" required="required"
@@ -235,28 +262,6 @@ border: none;
 						
 						<!-- <img id="pick2" src="#" alt="" /> --></td>
 					</tr>
-					<tr class="form-group">
-						<td>내용</td>
-						<td colspan="3">
-						<textarea class="form-control"  name="content" style= "width: 100%; height: 100%;" 
-						required="required" ></textarea>
-						</td>
-					</tr>
-					<tr class="form-group">
-						<td><label>마감일 설정 </label></td>
-						<td><input class="form-control" type="date" id="dday" name="ddate" required="required"></td>
-					</tr>
-					<tr class="form-group">
-						<td > 카테고리 <br /></td>
-						<td style="width : ">		
-						<select class="form-control interest-multiple" name="interest" data-placeholder="Select an option" multiple="multiple"
-						style= "width:" > 
-						<% for(int i=0; i< category.size(); i++) {%>
-				  			<option value="<%=category.get(i).getCategoryid()%>"><%=category.get(i).getCategoryName()%></option>
-				  		<% } %> 
-						</select>
-						</td>
-					</tr>
 				</table>				
 			
 				<!-- 
@@ -270,12 +275,12 @@ border: none;
 				 
 				 포인트 사용구간, 일단 사용하지 않을듯 하여 우선 주석처리해둠.
 				 -->				 
-					
-			<br>
-			<br>
+
 			<div align="center">
-				<button type="submit" class="btn btn-primary" onclick="imgup()">작성완료</button>
-				<button type="button" class="btn btn-defailt" data-toggle="modal" data-target="#cancelModal">취소</button>
+				<button type="submit" class="btn btn-primary" onclick="imgup()"
+				style="background-color: white;  border-color: #8ac5ff; color: #6d6d6d; font-weight:bold; ">작성완료</button>
+				<button type="button" class="btn btn-defailt" data-toggle="modal" data-target="#cancelModal"
+				style="background-color: white;  border-color: gray; color: #6d6d6d; font-weight:bold; ">취소</button>
 			</div>
 
 			</form>

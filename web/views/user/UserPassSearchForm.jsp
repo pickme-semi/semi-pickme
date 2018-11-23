@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 찾기_[Pick Me]</title>
+<title>비밀번호 찾기</title>
 <style>
 	.outer{
 		width : auto;
 		height : auto ;
-		background : mistyrose;
+		background : ;
 		padding : 10px;
 		margin-left : auto;
 		margin-right : auto;
@@ -57,7 +57,7 @@
 		
 		<a href="/pickme/views/user/UserLoginForm.jsp">로그인</a>
 		/
-		<a href="/pickme/views/user/UserTerms.jsp">회원가입</a>
+		<a href="/pickme/views/user/UserJoinForm.jsp">회원가입</a>
 	</div>
 </form>
 
@@ -137,7 +137,7 @@
 		});
 	});
 	//이거 다시 false로 꼭 바꿔주기~~~!
-	var issueFlag = true;
+	var issueFlag = false;
 	$("#checkCode").click(function(){
 			
 		$.ajax({

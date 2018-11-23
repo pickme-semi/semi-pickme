@@ -59,27 +59,27 @@ header.board{
 <body >
 	<div class="pm-bg">
 	<header class="board" >
-	<nav class="navbar navbar-expand-lg" style="height: 160px;border-bottom: 2px solid #ffcce3;">
+	<nav class="navbar navbar-expand-lg" style="height: 130px;border-bottom: 2px solid #ffcce3;">
 	  
 	  <div class="container" >
 	  <%if(user==null) {%>
 		  <div class="login" align="center" id="test">
 		  	<div class="logo" style="width:33%">
 	        	<a class="navbar-brand" href="/pickme" 
-	        	style=" font-size:50px; padding-top: 10px"><img src="/pickme/resources/icons/test13.png" width="310px" height="134px"></a>	
+	        	style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px;"></a>	
 	        </div>
 		  </div>
 	  <%}else{ %>
 	      	<div class="logo" style="width:33%" id="test">
 	        	<a class="navbar-brand" href="/pickme/pickmain.pm" 
-	        	style="font-size: 50px; padding-top: 10px"><img src="/pickme/resources/icons/test13.png" width="310px" height="134px"></a>
+	        	style="padding-top: 15px;"><img src="/pickme/resources/icons/Logo.png" width="240px" height="105px;"></a>
 	        	
 	        	
 	        </div>
 			<div class="search" style="width:33%">
 
 	        </div>
-	        <div class="logo" style="align:right; padding-top: 120px" id="test">
+	        <div class="logo" style="align:right; padding-top: 90px; font-size:10pt; font-weight:bold;" id="test">
 				<a href="/pickme/list.bo?bType=qna">질문하기</a> &nbsp; | &nbsp; 
 				<a href="/pickme/list.bo?bType=report">신고하기</a> &nbsp; 
 				<% if(user.getUserId().equals("admin")){ %>

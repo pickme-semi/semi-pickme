@@ -15,22 +15,13 @@
 <title>User Page</title>
 <style>
 
-@font-face {
-	font-family : 'NANUMBARUNGOTHIC.TTF';
-	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");
-	
-
-* {	font-family : 'NANUMBARUNGOTHIC.TTF';
-	color: #505050;
-	}
-	
-	
 	.attr {
 	
 		height : 150px;
 		position : relative;
 		width : 150px;
 			}
+			
 	.or {
 	z-index : 3;
 	background-color: rgb(1, 5, 0);
@@ -43,33 +34,66 @@
 	text-transform: uppercase;
 	top: calc(50% - 25px);
 	vertical-align: middle;
-	width: 50px }
+	width: 50px
+}
+
+	.card {
 	
-	#live-swell-img {
-    max-width: 400px;
-    overflow: hidden;
+	margin-left : auto;
+	margin-right : auto;
+	max-width: 10rem;
+	max-height : 10rem;
+	
 	}
 	
-	#userp img {
-	    width: 100%;
-	    height : 100%;
-	    object-fit: contain;
-	} 
+	#live-swell-img {
+     max-width: 100px;
+     overflow: hidden;
+	}
+	
 	
 	.live-swell__pics{
-	margin-left : 25px;
-	margin-right : 25px;
-	padding-left : 0px;
-	padding-right : 0px;
+		margin-left : 25px;
+		margin-right : 25px;
+		margin-top : 25px;
+		margin-bottom : 25px;
+		padding-left : 0px;
+		padding-right : 0px;
+	}
+	
+
+	li {
+		padding-left : 15px;
+		padding-right : 15px;
+	}
+	
+	.nav-item:hover {
+		
+		border-bottom : 5px solid #ffb8d8;
+		color : none;
+		text-decoration : none;
+		
 	}
 	
 	.comment {
-			border : none;
-			width : auto;
-			text-align : center;
-			padding-top : 5px;
-		}
-		
+		border : none;
+		width : auto;
+		text-align : center;
+		padding-top : 5px;
+	}
+	
+	.col-sm {
+
+	flex-grow : 0;
+	
+ 	}
+ 	
+ 	img {
+	    width: 100%;
+	    height : 100%; 
+	    object-fit: contain;
+	    
+	} 
 	
 </style>
 
@@ -91,7 +115,7 @@
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%>
 	<h2 class=""><%= users.getUserId() %></h2>
-	<input type="text" class="comment" value=""/>
+	<input type="hidden" class="comment" value=""/>
 	<br />
 	<button id="fbtn" value="<%=users.getUserNo() %>" class="btn btn-danger">follow</button>
 	<button id="fbtn2" style="display:none" value="<%=user.getUserNo() %>" class="btn btn-danger">follow 취소</button>
@@ -105,19 +129,21 @@
 	
 	<section class="col-xs-12 col-md-12"  >
 	 
-	 <div class="live-swell xs-12 container" id="userp">
+	 <div class="live-swell xs-12 container">
 	 <div class="row">
 	 
 	 <% if(!userPick.isEmpty()) { %>
 	 <% for (int i=0; i<userPick.size(); i++) {%> 
 	 
             <div class="live-swell__pics col-sm" style="padding:0px; flex-grow : 0">
+             <a href="/pickme/pickview.pv?Pid=<%=userPick.get(i).getId()%>">
               <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
               <img src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_1() %>" alt="" />
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
               <img src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_2() %>" alt="" />
               </div>
+              </a>
                 <div class="live-swell__pics__or">or</div>
                   </div>
                    <% } %>
@@ -126,7 +152,7 @@
 	    
 	
 		  <% } else{ %>
-		  <div align="center" style = "margin-top : 100px; margin-bottom : 300px; margin-left : auto; margin-right : auto;" ><h5>작성한 게시글이 없습니다.</h5></div>
+		  <div align="center" style = "margin-top : 100px; margin-bottom : 300px; margin-left : auto; margin-right : auto;" ><h5 style="text-size:24pt; color: gray; font-weight:bold;">작성한 게시글이 없습니다.</h5></div>
 		  <% } %> 
 		
 	
@@ -138,24 +164,27 @@
 	
 	<script>
 	
-		// comment 불러오기
-		$(function(){
-			$.ajax({
-				url : '/pickme/cBrowse.pr',
-				type : 'get',
-				data :  {
-					uno : $('#fbtn').val()
-				},success : function(data){
-					if(data = null ){
-						$('.comment').val("");
-					}else{
-					$('.comment').val(data);
-					}
-				}
-				
-			});
+	// comment 불러오기
+	$(function(){
+		$.ajax({
+			url : '/pickme/cBrowse.pr',
+			type : 'get',
+			data :  {
+				uno : $('#fbtn').val()
+			},success : function(data){
+				if(data == "null" ){
+	                  
+	                  $('.comment').attr("type","hidden");
+	               }
+	               
+	               else{
+	               $('.comment').attr("type","text");
+	               $('.comment').val(data);
+	               }
+			
 		});
-	
+	});
+
 		// 팔로우 확인
 		$(function (){
 			

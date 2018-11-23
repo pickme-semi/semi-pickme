@@ -6,19 +6,6 @@ ArrayList<PickMe> myPick = (ArrayList<PickMe>)request.getAttribute("myPick");
 int point = (Integer)request.getAttribute("point");
 
 %>
-
-
-<!-- 
-
-		img {
-	    width: 100%;
-	    height : 100%; 
-	    object-fit: contain;
-	    
-	    ~ 샘플링 후 크기 재조정 ~
-	} 
- -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,23 +16,13 @@ int point = (Integer)request.getAttribute("point");
 <title>My Pick Page</title>
 
 <style>
-
-@font-face {
-	font-family : 'NANUMBARUNGOTHIC.TTF';
-	src : url('/pickme/resources/font/NANUMBARUNGOTHIC.TTF') format("truetype");}
-	
-
-* {	font-family : 'NANUMBARUNGOTHIC.TTF';
-	color: #505050;
-	}
-	
-	
 	.attr {
 	
 		height : 150px;
 		position : relative;
 		width : 150px;
 			}
+			
 	.or {
 	z-index : 3;
 	background-color: rgb(1, 5, 0);
@@ -72,7 +49,7 @@ int point = (Integer)request.getAttribute("point");
 	
 	#live-swell-img {
      max-width: 100px;
-    overflow: hidden;
+     overflow: hidden;
 	}
 	
 	
@@ -112,11 +89,13 @@ int point = (Integer)request.getAttribute("point");
 	
  	}
  	
- 
-	
-
-	
-	
+ 	img {
+	    width: 100%;
+	    height : 100%; 
+	    object-fit: contain;
+	    
+	} 
+ 	
 </style>
 </head>
 <body>
@@ -128,13 +107,13 @@ int point = (Integer)request.getAttribute("point");
 	<%@ include file="../common/header.jsp" %>
 	
 	<div class="col-md-12 text-center user" id="divImg">
-	 
 	<% if(user.getProfile() != null) {%>
 	  <img src="/pickme/resources/profileImage/<%= user.getProfile() %>" alt="Me" class="rounded-circle attr">
 	<% } else{ %>
 		<img src="/pickme/resources/profileImage/generalprofile.jpg" alt="Me" class="rounded-circle attr">
 	<% }%><br>
 	<h2 style="font-size:24pt; font-weight:bold;"><%= user.getUserId() %>&nbsp;<i id="user" class="fas fa-cog" ></i></h2>
+	
 	<!-- 아이디 전송을 위한 input 박스 -->
 	<input type="hidden" id="getNo" value="<%= user.getUserNo() %>" />
 	
@@ -180,12 +159,14 @@ int point = (Integer)request.getAttribute("point");
 	 <% for (int i=0; i<myPick.size(); i++) {%> 
 	 
             <div class="live-swell__pics col-sm" style="padding:0px; flex-grow : 0">
+            	<a href="/pickme/pickview.pv?Pid=<%=myPick.get(i).getId()%>">
               <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_1() %>" alt="" />
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
               <img src="/pickme/resources/PickUploadFiles/<%= myPick.get(i).getSelect_2() %>" alt="" />
               </div>
+              </a>
                 <div class="live-swell__pics__or">or</div>
                   </div>
                    <% } %>
@@ -247,8 +228,6 @@ int point = (Integer)request.getAttribute("point");
 					if(data != null ){
 						$('.comment').val(data);
 						window.location.reload()
-					}else{
-						$('.comment').val("");
 					}
 				},
 				error : function(request, status, error){

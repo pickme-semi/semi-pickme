@@ -9,7 +9,7 @@
 	.outer{
 		width : 500px;
 		height : 300px;
-		background : mistyrose;
+		background : ;
 		padding : 10px;
 		margin-left : auto;
 		margin-right : auto;
@@ -39,7 +39,7 @@
 		<table align = "center">
 			<tr>
 				<td width="120px"> 새 비밀번호 </td>
-				<td><input id="newPass" name = "userPass" type="password" required="required"/></td>
+				<td><input class="form-control" id="newPass" name = "userPass" type="password" required="required"/></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td> 새 비밀번호 확인 </td>
-				<td><input id="newPass2" type="password" required="required"/></td>
+				<td><input class="form-control" id="newPass2" type="password" required="required"/></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -56,7 +56,7 @@
 		</table>
 		<br />
 		<div class = "btnDiv" align="center">		
-		<button type = "button" id= "resetBtn"> 확인 </button>
+		<button class="btn btn-primary" type = "button" id= "resetBtn"> 확인 </button>
 		</div>
 	</form>
 
