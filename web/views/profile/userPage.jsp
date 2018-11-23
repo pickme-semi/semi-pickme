@@ -138,10 +138,10 @@
             <div class="live-swell__pics col-sm" style="padding:0px; flex-grow : 0">
              <a href="/pickme/pickview.pv?Pid=<%=userPick.get(i).getId()%>">
               <div id="live-swell-img-a " class="live-swell__pics__pic live-swell__pics__pic--a">
-              <img src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_1() %>" alt="" />
+              <img onerror="imgError(this);" src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_1() %>" alt="" />
               </div>
               <div id="live-swell-img-b" class="live-swell__pics__pic live-swell__pics__pic--b">
-              <img src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_2() %>" alt="" />
+              <img onerror="imgError(this);" src="/pickme/resources/PickUploadFiles/<%= userPick.get(i).getSelect_2() %>" alt="" />
               </div>
               </a>
                 <div class="live-swell__pics__or">or</div>

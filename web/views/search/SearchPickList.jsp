@@ -44,8 +44,8 @@
 					<th scope="row"><%= i+1 %></th>
 					<td width="15%" align="center" ><a href="/pickme/pickview.pv?Pid=<%=pList.get(i).getId()%>"><%=pList.get(i).getTitle()%></a></td>
 					<td align="center">
-						<img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pList.get(i).getSelect_1() %>" alt="select1-img" />
-			      		<img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pList.get(i).getSelect_2() %>" alt="select2-img" />
+						<img class="rounded img_size" onerror="imgError(this);" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pList.get(i).getSelect_1() %>" alt="select1-img" />
+			      		<img class="rounded img_size" onerror="imgError(this);" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=pList.get(i).getSelect_2() %>" alt="select2-img" />
 					</td>
 					<td>
 						<div class="tdDiv">

@@ -50,8 +50,8 @@ ArrayList<PickMe> cList = (ArrayList<PickMe>)session.getAttribute("searchList");
 			      <th scope="row"><%= i+1 %></th>
 			      <td width="15%" align="center" ><a href="/pickme/pickview.pv?Pid=<%=cList.get(i).getId()%>"><%= cList.get(i).getTitle() %></a></td>
 			      <td align="center">
-			      <img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_1() %>" alt="select1-img" />
-			      <img class="rounded img_size" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_2() %>" alt="select2-img" />
+			      <img class="rounded img_size" onerror="imgError(this);" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_1() %>" alt="select1-img" />
+			      <img class="rounded img_size" onerror="imgError(this);" src="<%= request.getContextPath() %>/resources/PickUploadFiles/<%=cList.get(i).getSelect_2() %>" alt="select2-img" />
 			      
 			      </td>
 			      
